@@ -60,14 +60,11 @@
 @property (nonatomic) Boolean childseat;
 @property (nonatomic) Boolean trailer;
 
-#define ACCERELOMETER_SAMPLES 30
-@property (strong, nonatomic) NSMutableArray <CMAccelerometerData *> *accelerometerDataArray;
-
-#define LOCATION_FREQUENCE 3.0
-
+@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation Trip
+
 - (instancetype)init {
     self = [super init];
     
@@ -376,7 +373,6 @@
     self.positionId = [ad.defaults integerForKey:@"positionId"];
     self.childseat = [ad.defaults integerForKey:@"childseat"];
     self.trailer = [ad.defaults boolForKey:@"trailer"];
-    self.accelerometerDataArray = [[NSMutableArray alloc] init];
     ad.lm.delegate = self;
     if (CLLocationManager.locationServicesEnabled) {
         ad.lm.allowsBackgroundLocationUpdates = TRUE;
@@ -388,36 +384,51 @@
     }
     
     if (ad.mm.isAccelerometerAvailable) {
+        
+#define ACCELEROMETER_SAMPLES 30
+#define ACCELEROMETER_STEPS 5
+
+        static double xa[ACCELEROMETER_SAMPLES];
+        static double ya[ACCELEROMETER_SAMPLES];
+        static double za[ACCELEROMETER_SAMPLES];
+        static int aIndex;
+        static int aFill;
+
+        aIndex = 0;
+        aFill = 0;
         ad.mm.accelerometerUpdateInterval = 1.0 / 50.0;
-        NSOperationQueue *oq = [[NSOperationQueue alloc] init];
-        [ad.mm startAccelerometerUpdatesToQueue:oq withHandler:
-         ^(CMAccelerometerData * _Nullable accelerometerData, NSError * _Nullable error) {
-             if (!error) {
-                 //NSLog(@"CMAccelerometerData %@", accelerometerData);
-                 
-                 [self.accelerometerDataArray addObject:accelerometerData];
-                 if (self.accelerometerDataArray.count == ACCERELOMETER_SAMPLES) {
-                     CMAcceleration avgAcceleration;
-                     avgAcceleration.x = 0;
-                     avgAcceleration.y = 0;
-                     avgAcceleration.z = 0;
-                     for (CMAccelerometerData *accelerometerData in self.accelerometerDataArray) {
-                         avgAcceleration.x += accelerometerData.acceleration.x;
-                         avgAcceleration.y += accelerometerData.acceleration.y;
-                         avgAcceleration.z += accelerometerData.acceleration.z;
+        [ad.mm startAccelerometerUpdates];
+        self.timer =
+        [NSTimer
+         scheduledTimerWithTimeInterval:1.0 / 50.0
+         repeats:TRUE
+         block:^(NSTimer * _Nonnull timer) {
+             CMAccelerometerData *accelerometerData = ad.mm.accelerometerData;
+             if (accelerometerData) {
+                 xa[aIndex] = accelerometerData.acceleration.x;
+                 ya[aIndex] = accelerometerData.acceleration.y;
+                 za[aIndex] = accelerometerData.acceleration.z;
+                 aIndex = (aIndex + 1) % ACCELEROMETER_SAMPLES;
+                 aFill++;
+
+                 if (aFill >= ACCELEROMETER_SAMPLES) {
+                     double x = 0.0;
+                     double y = 0.0;
+                     double z = 0.0;
+                     for (int i = 0; i < ACCELEROMETER_SAMPLES; i++) {
+                         x += xa[i];
+                         y += ya[i];
+                         z += za[i];
                      }
-                     avgAcceleration.x /= ACCERELOMETER_SAMPLES;
-                     avgAcceleration.y /= ACCERELOMETER_SAMPLES;
-                     avgAcceleration.z /= ACCERELOMETER_SAMPLES;
-                     
-                     [self addAccelerationX:avgAcceleration.x
-                                          y:avgAcceleration.y
-                                          z:avgAcceleration.z];
-                     
-                     [self.accelerometerDataArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 5)]];
+                     x /= ACCELEROMETER_SAMPLES;
+                     y /= ACCELEROMETER_SAMPLES;
+                     z /= ACCELEROMETER_SAMPLES;
+
+                     [self addAccelerationX:x y:y z:z];
+                     aFill = ACCELEROMETER_SAMPLES - ACCELEROMETER_STEPS;
                  }
              } else {
-                 NSLog(@"error %@", error);
+                 NSLog(@"error no Data");
              }
          }];
     } else {
@@ -427,6 +438,7 @@
 
 - (void)stopRecording {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [self.timer invalidate];
     [ad.mm stopAccelerometerUpdates];
     [ad.lm stopUpdatingLocation];
     ad.lm.delegate = nil;
@@ -446,6 +458,10 @@
     double secondLargestZ = 0.0;
     
     for (TripLocation *tripLocation in self.tripLocations) {
+        if (tripLocation == self.tripLocations.firstObject ||
+            tripLocation == self.tripLocations.lastObject) {
+            continue;
+        }
         CMAcceleration minMax = tripLocation.minMaxOfMotions;
         if (minMax.x > largestX) {
             secondLargestXMotion = largestXMotion;
@@ -517,6 +533,8 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+#define LOCATION_FREQUENCE 3.0
+
     for (CLLocation *location in locations) {
         NSLog(@"[Trip] didUpdateLocations %f %@", location.timestamp.timeIntervalSince1970, location);
         if (!self.lastLocation ||
