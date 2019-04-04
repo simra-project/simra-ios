@@ -10,11 +10,10 @@
 
 @implementation DSBarChart
 
--(DSBarChart *)initWithFrame:(CGRect)frame
+- (DSBarChart *)initWithFrame:(CGRect)frame
                        color:(UIColor *)theColor
                   references:(NSArray *)references
-                   andValues:(NSArray *)values
-{
+                   andValues:(NSArray *)values {
     self = [super initWithFrame:frame];
     if (self) {
         self.color = theColor;
@@ -24,7 +23,7 @@
     return self;
 }
 
--(void)calculate{
+- (void)calculate{
     self.numberOfBars = self.vals.count;
     for (NSNumber *val in self.vals) {
         float iLen = val.floatValue;
@@ -34,8 +33,8 @@
     }
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
+    // Background
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, UIColor.whiteColor.CGColor);
     CGContextFillRect(context, rect);
@@ -72,7 +71,6 @@
         CGRect barRect = CGRectMake(barCount + x, y, rectWidth, height);
         CGContextFillRect(context, barRect);
     }
-    
 }
 
 @end
