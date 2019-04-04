@@ -8,6 +8,7 @@
 
 #import "TripEditVC.h"
 #import "AnnotationTVC.h"
+#import "AppDelegate.h"
 
 @interface TripPoint : NSObject <MKAnnotation>
 @property (nonatomic, copy) NSString *title;
@@ -136,6 +137,9 @@
 }
 
 - (void)setup {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
+
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
 
@@ -164,7 +168,7 @@
         for (TripLocation *tripLocation in self.trip.tripLocations) {
             if (tripLocation.tripAnnotation) {
                 TripPoint *tripPoint = [[TripPoint alloc] init];
-                tripPoint.title = NSLocalizedString(@"Automatic", @"Automatic");
+                tripPoint.title = incidents[tripLocation.tripAnnotation.incidentId];
                 tripPoint.tripLocation = tripLocation;
                 tripPoint.tripLocations = self.trip.tripLocations;
 
@@ -182,7 +186,7 @@
         if (annotationView) {
             pinAnnotationView = (MKPinAnnotationView *)annotationView;
         } else {
-            pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:self.startPoint
+            pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
                                                                 reuseIdentifier:@"startPoint"];
         }
         pinAnnotationView.pinTintColor = MKPinAnnotationView.greenPinColor;
@@ -198,7 +202,7 @@
         if (annotationView) {
             pinAnnotationView = (MKPinAnnotationView *)annotationView;
         } else {
-            pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:self.endPoint
+            pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
                                                                 reuseIdentifier:@"endPoint"];
         }
         pinAnnotationView.pinTintColor = MKPinAnnotationView.redPinColor;
@@ -210,28 +214,35 @@
 
     } else if ([self.tripPoints containsObject:annotation]) {
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"tripPoint"];
-        MKMarkerAnnotationView *markerAnnotationView;
+        MKPinAnnotationView *pinAnnotationView;
         if (annotationView) {
-            markerAnnotationView = (MKMarkerAnnotationView *)annotationView;
+            pinAnnotationView = (MKPinAnnotationView *)annotationView;
         } else {
-            markerAnnotationView = [[MKMarkerAnnotationView alloc] initWithAnnotation:self.endPoint
-                                                                      reuseIdentifier:@"tripPoint"];
+            pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                                reuseIdentifier:@"tripPoint"];
         }
-        markerAnnotationView.markerTintColor = [UIColor colorWithRed:0.3
-                                                               green:0.3
-                                                                blue:1.0
-                                                               alpha:0.5];
+
+        TripPoint *tripPoint;
+        if ([annotation isKindOfClass:[TripPoint class]]) {
+            tripPoint = (TripPoint *)annotation;
+            if (tripPoint.tripLocation.tripAnnotation.incidentId == 0) {
+                pinAnnotationView.pinTintColor = [UIColor orangeColor];
+            } else {
+                pinAnnotationView.pinTintColor = [UIColor blueColor];
+            }
+        } else {
+            pinAnnotationView.pinTintColor = MKPinAnnotationView.purplePinColor;;
+        }
 
         UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [refreshButton setTitle:NSLocalizedString(@"Delete", @"Delete") forState:UIControlStateNormal];
         [refreshButton sizeToFit];
-        markerAnnotationView.leftCalloutAccessoryView = refreshButton;
-        markerAnnotationView.canShowCallout = YES;
-        markerAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        pinAnnotationView.leftCalloutAccessoryView = refreshButton;
+        pinAnnotationView.canShowCallout = YES;
+        pinAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 
-        [markerAnnotationView setNeedsDisplay];
-
-        return markerAnnotationView;
+        [pinAnnotationView setNeedsDisplay];
+        return pinAnnotationView;
 
     } else {
         return nil;
