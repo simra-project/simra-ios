@@ -51,11 +51,11 @@
 
     NSString *status;
 
-    if (trip.uploaded) {
-        status = NSLocalizedString(@"Uploaded", @"Uploaded");
+    if (trip.edited) {
+        status = NSLocalizedString(@"Edited", @"Edited");
     } else {
-        if (trip.edited) {
-            status = NSLocalizedString(@"Edited", @"Edited");
+        if (trip.uploaded) {
+            status = NSLocalizedString(@"Uploaded", @"Uploaded");
         } else {
             status = NSLocalizedString(@"New", @"New");
         }
@@ -85,14 +85,7 @@
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingSelector:@selector(compare:)][indexPath.row];
-    Trip *trip = ad.trips.trips[key];
-    if (trip.recording) {
-        return NO;
-    } else {
-        return YES;
-    }
+    return YES;
 }
 
 
@@ -122,6 +115,7 @@
         NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingSelector:@selector(compare:)][indexPath.row];
         Trip *trip = ad.trips.trips[key];
         tripEditVC.trip = trip;
+        tripEditVC.changed = FALSE;
     }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
@@ -331,15 +325,6 @@
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
-}
-
-
-- (IBAction)saveTrip:(UIStoryboardSegue *)segue {
-    if ([segue.sourceViewController isKindOfClass:[TripEditVC class]]) {
-        TripEditVC *tripEditVC = (TripEditVC *)segue.sourceViewController;
-        tripEditVC.trip.edited = TRUE;
-        [tripEditVC.trip save];
-    }
 }
 
 @end

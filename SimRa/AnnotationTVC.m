@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *other;
 @property (weak, nonatomic) IBOutlet UITextView *comment;
 
-
 @end
 
 @implementation AnnotationTVC
@@ -41,6 +40,13 @@
     self.incident.array = [ad.constants mutableArrayValueForKey:@"incidents"];
 
     [self update];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    if (self.changed) {
+        [self performSegueWithIdentifier:@"annotationChanged:" sender:self];
+    }
+    [super viewWillDisappear:animated];
 }
 
 - (void)update {
@@ -60,44 +66,67 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     self.tripAnnotation.comment = textView.text;
+    self.changed = TRUE;
 }
 
 - (IBAction)incidentChanged:(IdPicker *)sender {
     self.tripAnnotation.incidentId = sender.arrayIndex;
+    self.changed = TRUE;
 }
 
 - (IBAction)frighteningChanged:(UISwitch *)sender {
     self.tripAnnotation.frightening = sender.on;
+    self.changed = TRUE;
 }
+
 - (IBAction)carChanged:(UISwitch *)sender {
     self.tripAnnotation.car = sender.on;
+    self.changed = TRUE;
 }
+
 - (IBAction)taxiChanged:(UISwitch *)sender {
     self.tripAnnotation.taxi = sender.on;
+    self.changed = TRUE;
 }
+
 - (IBAction)vanChanged:(UISwitch *)sender {
     self.tripAnnotation.delivery = sender.on;
+    self.changed = TRUE;
 }
+
 - (IBAction)busChanged:(UISwitch *)sender {
     self.tripAnnotation.bus = sender.on;
+    self.changed = TRUE;
 }
+
 - (IBAction)lorryChanged:(UISwitch *)sender {
     self.tripAnnotation.commercial = sender.on;
+    self.changed = TRUE;
 }
+
 - (IBAction)pedestrianChanged:(UISwitch *)sender {
     self.tripAnnotation.pedestrian = sender.on;
+    self.changed = TRUE;
 }
+
 - (IBAction)bikeChanged:(UISwitch *)sender {
     self.tripAnnotation.bicycle = sender.on;
+    self.changed = TRUE;
 }
+
 - (IBAction)motorbikeChanged:(UISwitch *)sender {
     self.tripAnnotation.motorcycle = sender.on;
+    self.changed = TRUE;
 }
+
 - (IBAction)otherChanged:(UISwitch *)sender {
     self.tripAnnotation.other = sender.on;
+    self.changed = TRUE;
 }
+
 - (IBAction)commentDonePressed:(UIButton *)sender {
     [self.comment resignFirstResponder];
+    self.changed = TRUE;
 }
 
 @end

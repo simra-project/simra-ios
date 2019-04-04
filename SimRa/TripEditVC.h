@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TripEditVC : UIViewController <MKMapViewDelegate>
 @property (weak, nonatomic) Trip *trip;
+@property (nonatomic) BOOL changed;
 
 @end
 

@@ -106,6 +106,7 @@
                      }
                      self.version++;
                      self.uploaded = TRUE;
+                     self.edited = FALSE;
                      [self performSelectorOnMainThread:@selector(save)
                                             withObject:nil
                                          waitUntilDone:TRUE ];

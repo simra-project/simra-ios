@@ -44,8 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Trip : UploaderObject <CLLocationManagerDelegate>
 @property (nonatomic, readonly) NSInteger identifier;
-@property (nonatomic, readonly) Boolean recording;
-@property (nonatomic) Boolean edited;
 @property (strong, nonatomic, readonly) CLLocation *startLocation;
 @property (strong, nonatomic, readonly) CLLocation *lastLocation;
 @property (strong, nonatomic, readonly) TripMotion *lastTripMotion;

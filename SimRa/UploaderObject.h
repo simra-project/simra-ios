@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UploaderObject : NSObject <NSURLSessionDelegate>
 @property (nonatomic) NSInteger version;
+@property (nonatomic) Boolean edited;
 @property (nonatomic) Boolean uploaded;
 @property (strong, nonatomic) NSString *fileHash;
 @property (strong, nonatomic) NSString *filePasswd;

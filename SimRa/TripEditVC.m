@@ -127,7 +127,13 @@
     [self setup];
 }
 
-
+- (void)viewWillDisappear:(BOOL)animated {
+    if (self.changed) {
+        self.trip.edited = TRUE;
+        [self.trip save];
+    }
+    [super viewWillDisappear:animated];
+}
 
 - (void)setup {
     [self.mapView removeOverlays:self.mapView.overlays];
@@ -167,7 +173,6 @@
             }
         }
     }
-
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -255,6 +260,7 @@ calloutAccessoryControlTapped:(UIControl *)control {
             [mapView removeAnnotation:tripPoint];
             NSLog(@"after %@", mapView.annotations);
             [self.tripPoints removeObject:tripPoint];
+            self.changed = TRUE;
         }
     }
 }
@@ -297,6 +303,7 @@ calloutAccessoryControlTapped:(UIControl *)control {
             i++;
         }
     }
+    self.changed = TRUE;
     [self setup];
 }
 
@@ -309,9 +316,14 @@ calloutAccessoryControlTapped:(UIControl *)control {
         AnnotationTVC *annotationTVC = (AnnotationTVC *)segue.destinationViewController;
         TripPoint *tripPoint = (TripPoint *)sender;
         annotationTVC.tripAnnotation = tripPoint.tripLocation.tripAnnotation;
+        annotationTVC.changed = FALSE;
+
     }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
 
+- (IBAction)annotationChanged:(UIStoryboardSegue *)unwindSegue {
+    self.changed = TRUE;
+}
 @end

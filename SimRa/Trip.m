@@ -50,7 +50,6 @@
 
 @interface Trip ()
 @property (nonatomic) NSInteger identifier;
-@property (nonatomic) Boolean recording;
 @property (strong, nonatomic) CLLocation *startLocation;
 @property (strong, nonatomic) CLLocation *lastLocation;
 @property (strong, nonatomic) TripMotion *lastTripMotion;
@@ -77,9 +76,9 @@
     identifier ++;
     self.identifier = identifier;
     [ad.defaults setInteger:identifier forKey:@"lastTripId"];
-        
-    self.recording = FALSE;
+    
     self.edited = FALSE;
+    self.uploaded = FALSE;
     self.tripLocations = [[NSMutableArray alloc] init];
     return self;
 }
@@ -90,15 +89,13 @@
     self.identifier = identifier.integerValue;
     NSNumber *version = [dict objectForKey:@"version"];
     self.version = version.integerValue;
-    NSNumber *recording = [dict objectForKey:@"recording"];
-    self.recording = recording.boolValue;
     NSNumber *edited = [dict objectForKey:@"edited"];
     self.edited = edited.boolValue;
     NSNumber *uploaded = [dict objectForKey:@"uploaded"];
     self.uploaded = uploaded.boolValue;
     self.fileHash = [dict objectForKey:@"fileHash"];
     self.filePasswd = [dict objectForKey:@"filePasswd"];
-
+    
     NSNumber *bikeTypeId = [dict objectForKey:@"bikeTypeId"];
     self.bikeTypeId = bikeTypeId.integerValue;
     NSNumber *positionId = [dict objectForKey:@"positionId"];
@@ -188,7 +185,6 @@
     NSMutableDictionary *tripDict = [[NSMutableDictionary alloc] init];
     [tripDict setObject:[NSNumber numberWithInteger:self.identifier] forKey:@"identifier"];
     [tripDict setObject:[NSNumber numberWithInteger:self.version] forKey:@"version"];
-    [tripDict setObject:[NSNumber numberWithBool:self.recording] forKey:@"recording"];
     [tripDict setObject:[NSNumber numberWithBool:self.edited] forKey:@"edited"];
     [tripDict setObject:[NSNumber numberWithBool:self.uploaded] forKey:@"uploaded"];
     if (self.fileHash) {
@@ -197,7 +193,7 @@
     if (self.filePasswd) {
         [tripDict setObject:self.filePasswd forKey:@"filePasswd"];
     }
-
+    
     [tripDict setObject:[NSNumber numberWithInteger:self.deferredSecs] forKey:@"deferredSecs"];
     [tripDict setObject:[NSNumber numberWithInteger:self.deferredMeters] forKey:@"deferredMeters"];
     [tripDict setObject:[NSNumber numberWithInteger:self.bikeTypeId] forKey:@"bikeTypeId"];
@@ -373,127 +369,120 @@
 }
 
 - (void)startRecording {
-    if (!self.recording) {
-        AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        self.deferredSecs = [ad.defaults integerForKey:@"deferredSecs"];
-        self.deferredMeters = [ad.defaults integerForKey:@"deferredSecs"];
-        self.bikeTypeId = [ad.defaults integerForKey:@"bikeTypeId"];
-        self.positionId = [ad.defaults integerForKey:@"positionId"];
-        self.childseat = [ad.defaults integerForKey:@"childseat"];
-        self.trailer = [ad.defaults boolForKey:@"trailer"];
-        self.accelerometerDataArray = [[NSMutableArray alloc] init];
-        ad.lm.delegate = self;
-        if (CLLocationManager.locationServicesEnabled) {
-            ad.lm.allowsBackgroundLocationUpdates = TRUE;
-            ad.lm.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-            ad.lm.activityType = CLActivityTypeFitness;
-            [ad.lm startUpdatingLocation];
-        } else {
-            NSLog(@"no locationServicesEnabled");
-        }
-        
-        if (ad.mm.isAccelerometerAvailable) {
-            ad.mm.accelerometerUpdateInterval = 1.0 / 50.0;
-            NSOperationQueue *oq = [[NSOperationQueue alloc] init];
-            [ad.mm startAccelerometerUpdatesToQueue:oq withHandler:
-             ^(CMAccelerometerData * _Nullable accelerometerData, NSError * _Nullable error) {
-                 if (!error) {
-                     //NSLog(@"CMAccelerometerData %@", accelerometerData);
-                     
-                     [self.accelerometerDataArray addObject:accelerometerData];
-                     if (self.accelerometerDataArray.count == ACCERELOMETER_SAMPLES) {
-                         CMAcceleration avgAcceleration;
-                         avgAcceleration.x = 0;
-                         avgAcceleration.y = 0;
-                         avgAcceleration.z = 0;
-                         for (CMAccelerometerData *accelerometerData in self.accelerometerDataArray) {
-                             avgAcceleration.x += accelerometerData.acceleration.x;
-                             avgAcceleration.y += accelerometerData.acceleration.y;
-                             avgAcceleration.z += accelerometerData.acceleration.z;
-                         }
-                         avgAcceleration.x /= ACCERELOMETER_SAMPLES;
-                         avgAcceleration.y /= ACCERELOMETER_SAMPLES;
-                         avgAcceleration.z /= ACCERELOMETER_SAMPLES;
-                         
-                         [self addAccelerationX:avgAcceleration.x
-                                              y:avgAcceleration.y
-                                              z:avgAcceleration.z];
-                         
-                         [self.accelerometerDataArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 5)]];
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    self.deferredSecs = [ad.defaults integerForKey:@"deferredSecs"];
+    self.deferredMeters = [ad.defaults integerForKey:@"deferredSecs"];
+    self.bikeTypeId = [ad.defaults integerForKey:@"bikeTypeId"];
+    self.positionId = [ad.defaults integerForKey:@"positionId"];
+    self.childseat = [ad.defaults integerForKey:@"childseat"];
+    self.trailer = [ad.defaults boolForKey:@"trailer"];
+    self.accelerometerDataArray = [[NSMutableArray alloc] init];
+    ad.lm.delegate = self;
+    if (CLLocationManager.locationServicesEnabled) {
+        ad.lm.allowsBackgroundLocationUpdates = TRUE;
+        ad.lm.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+        ad.lm.activityType = CLActivityTypeFitness;
+        [ad.lm startUpdatingLocation];
+    } else {
+        NSLog(@"no locationServicesEnabled");
+    }
+    
+    if (ad.mm.isAccelerometerAvailable) {
+        ad.mm.accelerometerUpdateInterval = 1.0 / 50.0;
+        NSOperationQueue *oq = [[NSOperationQueue alloc] init];
+        [ad.mm startAccelerometerUpdatesToQueue:oq withHandler:
+         ^(CMAccelerometerData * _Nullable accelerometerData, NSError * _Nullable error) {
+             if (!error) {
+                 //NSLog(@"CMAccelerometerData %@", accelerometerData);
+                 
+                 [self.accelerometerDataArray addObject:accelerometerData];
+                 if (self.accelerometerDataArray.count == ACCERELOMETER_SAMPLES) {
+                     CMAcceleration avgAcceleration;
+                     avgAcceleration.x = 0;
+                     avgAcceleration.y = 0;
+                     avgAcceleration.z = 0;
+                     for (CMAccelerometerData *accelerometerData in self.accelerometerDataArray) {
+                         avgAcceleration.x += accelerometerData.acceleration.x;
+                         avgAcceleration.y += accelerometerData.acceleration.y;
+                         avgAcceleration.z += accelerometerData.acceleration.z;
                      }
-                 } else {
-                     NSLog(@"error %@", error);
+                     avgAcceleration.x /= ACCERELOMETER_SAMPLES;
+                     avgAcceleration.y /= ACCERELOMETER_SAMPLES;
+                     avgAcceleration.z /= ACCERELOMETER_SAMPLES;
+                     
+                     [self addAccelerationX:avgAcceleration.x
+                                          y:avgAcceleration.y
+                                          z:avgAcceleration.z];
+                     
+                     [self.accelerometerDataArray removeObjectsAtIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 5)]];
                  }
-             }];
-        } else {
-            NSLog(@"no isAccelerometerAvailable");
-        }
-        
-        self.recording = TRUE;
+             } else {
+                 NSLog(@"error %@", error);
+             }
+         }];
+    } else {
+        NSLog(@"no isAccelerometerAvailable");
     }
 }
 
 - (void)stopRecording {
-    if (self.recording) {
-        AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        [ad.mm stopAccelerometerUpdates];
-        [ad.lm stopUpdatingLocation];
-        ad.lm.delegate = nil;
-        self.recording = FALSE;
-
-        TripLocation *largestXMotion;
-        TripLocation *secondLargestXMotion;
-        TripLocation *largestYMotion;
-        TripLocation *secondLargestYMotion;
-        TripLocation *largestZMotion;
-        TripLocation *secondLargestZMotion;
-
-        double largestX = 0.0;
-        double secondLargestX = 0.0;
-        double largestY = 0.0;
-        double secondLargestY = 0.0;
-        double largestZ = 0.0;
-        double secondLargestZ = 0.0;
-
-        for (TripLocation *tripLocation in self.tripLocations) {
-            CMAcceleration minMax = tripLocation.minMaxOfMotions;
-            if (minMax.x > largestX) {
-                secondLargestXMotion = largestXMotion;
-                secondLargestX = largestX;
-                largestXMotion = tripLocation;
-                largestX = minMax.x;
-            } else if (minMax.x > secondLargestX) {
-                secondLargestXMotion = tripLocation;
-                secondLargestX = minMax.x;
-            }
-            if (minMax.y > largestY) {
-                secondLargestYMotion = largestYMotion;
-                secondLargestY = largestY;
-                largestYMotion = tripLocation;
-                largestY = minMax.y;
-            } else if (minMax.y > secondLargestY) {
-                secondLargestYMotion = tripLocation;
-                secondLargestY = minMax.y;
-            }
-            if (minMax.z > largestZ) {
-                secondLargestZMotion = largestZMotion;
-                secondLargestZ = largestZ;
-                largestZMotion = tripLocation;
-                largestZ = minMax.z;
-            } else if (minMax.z > secondLargestZ) {
-                secondLargestZMotion = tripLocation;
-                secondLargestZ = minMax.z;
-            }
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ad.mm stopAccelerometerUpdates];
+    [ad.lm stopUpdatingLocation];
+    ad.lm.delegate = nil;
+    
+    TripLocation *largestXMotion;
+    TripLocation *secondLargestXMotion;
+    TripLocation *largestYMotion;
+    TripLocation *secondLargestYMotion;
+    TripLocation *largestZMotion;
+    TripLocation *secondLargestZMotion;
+    
+    double largestX = 0.0;
+    double secondLargestX = 0.0;
+    double largestY = 0.0;
+    double secondLargestY = 0.0;
+    double largestZ = 0.0;
+    double secondLargestZ = 0.0;
+    
+    for (TripLocation *tripLocation in self.tripLocations) {
+        CMAcceleration minMax = tripLocation.minMaxOfMotions;
+        if (minMax.x > largestX) {
+            secondLargestXMotion = largestXMotion;
+            secondLargestX = largestX;
+            largestXMotion = tripLocation;
+            largestX = minMax.x;
+        } else if (minMax.x > secondLargestX) {
+            secondLargestXMotion = tripLocation;
+            secondLargestX = minMax.x;
         }
-        largestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
-        secondLargestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
-        largestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
-        secondLargestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
-        largestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
-        secondLargestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
-
-        [self save];
+        if (minMax.y > largestY) {
+            secondLargestYMotion = largestYMotion;
+            secondLargestY = largestY;
+            largestYMotion = tripLocation;
+            largestY = minMax.y;
+        } else if (minMax.y > secondLargestY) {
+            secondLargestYMotion = tripLocation;
+            secondLargestY = minMax.y;
+        }
+        if (minMax.z > largestZ) {
+            secondLargestZMotion = largestZMotion;
+            secondLargestZ = largestZ;
+            largestZMotion = tripLocation;
+            largestZ = minMax.z;
+        } else if (minMax.z > secondLargestZ) {
+            secondLargestZMotion = tripLocation;
+            secondLargestZ = minMax.z;
+        }
     }
+    largestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    secondLargestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    largestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    secondLargestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    largestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    secondLargestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    
+    [self save];
 }
 
 - (void)addLocation:(CLLocation *)location {
@@ -590,13 +579,8 @@
 - (void)uploadWithController:(id)controller error:(SEL)error completion:(SEL)completion {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.trips addTripToStatistics:self];
-
+    
     [super uploadWithController:controller error:error completion:completion];
-}
-
-- (void)edit {
-    self.edited = TRUE;
-    [self save];
 }
 
 - (void)save {

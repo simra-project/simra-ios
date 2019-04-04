@@ -1035,11 +1035,9 @@
                     <connections>
                         <outlet property="mapView" destination="eWY-ed-XQD" id="9z9-3q-trU"/>
                         <segue destination="Mbe-On-WHO" kind="show" identifier="editAnnotation:" id="nkt-0L-Xb6"/>
-                        <segue destination="oSO-dp-QHb" kind="unwind" identifier="saveTrip:" unwindAction="saveTrip:" id="erK-tp-Acr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pXh-OI-oDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="oSO-dp-QHb" userLabel="Exit" sceneMemberID="exit"/>
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="mpp-Fs-roo">
                     <connections>
                         <action selector="longPressed:" destination="j7e-Gg-2dc" id="Ece-gt-ACR"/>
@@ -1523,9 +1521,11 @@
                         <outlet property="pedestrian" destination="eMr-M8-yXM" id="nKS-vU-xQP"/>
                         <outlet property="taxi" destination="0HL-sN-TJV" id="yiv-wU-L3D"/>
                         <outlet property="van" destination="Qhu-dS-SdC" id="3FY-Us-bNj"/>
+                        <segue destination="H04-hH-OWd" kind="unwind" identifier="annotationChanged:" unwindAction="annotationChanged:" id="egc-Gj-BAh"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Q4-pA-Fmx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="H04-hH-OWd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4066.666666666667" y="-998.4375"/>
         </scene>
