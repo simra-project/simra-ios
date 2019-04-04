@@ -46,7 +46,7 @@
 
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.dateFormat = @"dd.MM.yyyy";
-    NSString *client = [NSString stringWithFormat:@"%@mcc_simra",
+    NSString *client = [NSString stringWithFormat:@"%@KsSFazUyht3yQfKv",
                         [df stringFromDate:[NSDate date]]];
 
     return client.hashString;
