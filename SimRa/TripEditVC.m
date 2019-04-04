@@ -210,25 +210,28 @@
 
     } else if ([self.tripPoints containsObject:annotation]) {
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"tripPoint"];
-        MKPinAnnotationView *pinAnnotationView;
+        MKMarkerAnnotationView *markerAnnotationView;
         if (annotationView) {
-            pinAnnotationView = (MKPinAnnotationView *)annotationView;
+            markerAnnotationView = (MKMarkerAnnotationView *)annotationView;
         } else {
-            pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:self.endPoint
-                                                                reuseIdentifier:@"tripPoint"];
+            markerAnnotationView = [[MKMarkerAnnotationView alloc] initWithAnnotation:self.endPoint
+                                                                      reuseIdentifier:@"tripPoint"];
         }
-        pinAnnotationView.pinTintColor = [UIColor blueColor];
+        markerAnnotationView.markerTintColor = [UIColor colorWithRed:0.3
+                                                               green:0.3
+                                                                blue:1.0
+                                                               alpha:0.5];
 
         UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [refreshButton setTitle:NSLocalizedString(@"Delete", @"Delete") forState:UIControlStateNormal];
         [refreshButton sizeToFit];
-        pinAnnotationView.leftCalloutAccessoryView = refreshButton;
-        pinAnnotationView.canShowCallout = YES;
-        pinAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        markerAnnotationView.leftCalloutAccessoryView = refreshButton;
+        markerAnnotationView.canShowCallout = YES;
+        markerAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 
-        [pinAnnotationView setNeedsDisplay];
+        [markerAnnotationView setNeedsDisplay];
 
-        return pinAnnotationView;
+        return markerAnnotationView;
 
     } else {
         return nil;
