@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:/Users/ckrey/simra/simra/SimRa/Localizable.strings">
+   </FileRef>
+   <FileRef
+      location = "self:/Users/ckrey/simra/simra/SimRa.xcodeproj">
+   </FileRef>
+</Workspace>

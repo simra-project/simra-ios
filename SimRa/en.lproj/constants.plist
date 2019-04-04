@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>regions</key>
+	<array>
+		<string>Please select</string>
+		<string>Berlin</string>
+		<string>London</string>
+		<string>Other</string>
+	</array>
+	<key>locales</key>
+	<array>
+		<string>UNKNOWN</string>
+		<string>Berlin</string>
+		<string>London</string>
+		<string>other</string>
+		<string>TEST</string>
+	</array>
+	<key>ages</key>
+	<array>
+		<string>Please select</string>
+		<string>after 2004</string>
+		<string>2000-2004</string>
+		<string>1995-1999</string>
+		<string>1990-1994</string>
+		<string>1985-1989</string>
+		<string>1980-1984</string>
+		<string>1975-1979</string>
+		<string>1970-1974</string>
+		<string>1965-1969</string>
+		<string>1960-1964</string>
+		<string>1955-1959</string>
+		<string>1950-1954</string>
+		<string>before 1950</string>
+	</array>
+	<key>sexes</key>
+	<array>
+		<string>Please select</string>
+		<string>male</string>
+		<string>female</string>
+		<string>diverse</string>
+	</array>
+	<key>experiences</key>
+	<array>
+		<string>Please select</string>
+		<string>more than 10 years</string>
+		<string>5 to 10 years</string>
+		<string>2 to 4 years</string>
+		<string>less than 2 years</string>
+	</array>
+	<key>bikeTypes</key>
+	<array>
+		<string>(not selected)</string>
+		<string>City or Trecking Bike</string>
+		<string>Racing Bike</string>
+		<string>E-Bike</string>
+		<string>Recumbent Bike</string>
+		<string>Cargo Bike</string>
+		<string>Tandem</string>
+		<string>Other</string>
+	</array>
+	<key>positions</key>
+	<array>
+		<string>Trouser Pocket</string>
+		<string>Handlebar</string>
+		<string>Jacket Pocket</string>
+		<string>Handheld</string>
+		<string>Bike Basket / Pannier</string>
+		<string>Backpack etc.</string>
+		<string>Other (please comment)</string>
+	</array>
+	<key>incidents</key>
+	<array>
+		<string>Nichts</string>
+		<string>Zu dichtes Überholen</string>
+		<string>Ein- oder ausparkendes Fahrzeug</string>
+		<string>Beinahe-Abbiegeunfall</string>
+		<string>Entgegenkommender Verkehrsteilnehmer</string>
+		<string>Zu dichtes Auffahren</string>
+		<string>Beinahe-Dooring</string>
+		<string>Hindernis ausweichen (z.B. Hund)</string>
+		<string>Sonstiges</string>
+	</array>
+</dict>
+</plist>

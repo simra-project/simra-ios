@@ -1,0 +1,174 @@
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "03L-ez-qcN"; */
+"03L-ez-qcN.title" = "Einstellungen";
+
+/* Class = "UINavigationItem"; title = "Edit Trip"; ObjectID = "1cV-GU-tdF"; */
+"1cV-GU-tdF.title" = "Fahrt bearbeiten";
+
+/* Class = "UITableViewSection"; headerTitle = "Setup"; ObjectID = "1uD-bL-KPo"; */
+"1uD-bL-KPo.headerTitle" = "Voreinstellungen";
+
+/* Class = "UITextField"; text = "abc"; ObjectID = "1vL-kn-Fgp"; */
+"1vL-kn-Fgp.text" = "abc";
+
+/* Class = "UILabel"; text = "Bicycle"; ObjectID = "2Zr-zX-WNu"; */
+"2Zr-zX-WNu.text" = "Fahrrad";
+
+/* Class = "UINavigationItem"; title = "What Happened?"; ObjectID = "2gw-Rs-NjF"; */
+"2gw-Rs-NjF.title" = "Was ist passiert?";
+
+/* Class = "UILabel"; text = "Incidents"; ObjectID = "4ED-g6-RgE"; */
+"4ED-g6-RgE.text" = "Vorfälle";
+
+/* Class = "UINavigationItem"; title = "Profile"; ObjectID = "5WU-PW-83o"; */
+"5WU-PW-83o.title" = "Profil";
+
+/* Class = "UITableViewSection"; headerTitle = "Privacy: Hide part of your trips"; ObjectID = "8Fn-ss-h83"; */
+"8Fn-ss-h83.headerTitle" = "Privatspähre: Anfang der Fahrt";
+
+/* Class = "UILabel"; text = "Region"; ObjectID = "Ble-fg-2cq"; */
+"Ble-fg-2cq.text" = "Region";
+
+/* Class = "UILabel"; text = "Year of Birth"; ObjectID = "CLn-j1-mrG"; */
+"CLn-j1-mrG.text" = "Geburtsjahr";
+
+/* Class = "UILabel"; text = "55"; ObjectID = "Ch5-yO-f7f"; */
+"Ch5-yO-f7f.text" = "55";
+
+/* Class = "UITableViewSection"; headerTitle = "SimRa"; ObjectID = "Cks-n4-XGj"; */
+"Cks-n4-XGj.headerTitle" = "SimRa";
+
+/* Class = "UIButton"; normalTitle = "Imprint"; ObjectID = "DY1-7h-Asu"; */
+"DY1-7h-Asu.normalTitle" = "Impressum";
+
+/* Class = "UILabel"; text = "Passenger Car"; ObjectID = "FDw-TH-ScJ"; */
+"FDw-TH-ScJ.text" = "PKW";
+
+/* Class = "UILabel"; text = "Cycling Experience"; ObjectID = "Gt8-Qt-Vdn"; */
+"Gt8-Qt-Vdn.text" = "Raderfahrung";
+
+/* Class = "UIButton"; normalTitle = "About"; ObjectID = "Hy8-yG-bWd"; */
+"Hy8-yG-bWd.normalTitle" = "Über";
+
+/* Class = "UITableViewSection"; headerTitle = "Bike"; ObjectID = "I0W-mX-MMT"; */
+"I0W-mX-MMT.headerTitle" = "Fahrrad";
+
+/* Class = "UILabel"; text = "Bus"; ObjectID = "IH6-e7-C6E"; */
+"IH6-e7-C6E.text" = "Bus";
+
+/* Class = "UILabel"; text = "Type"; ObjectID = "Jxq-AX-FsN"; */
+"Jxq-AX-FsN.text" = "Typ";
+
+/* Class = "UILabel"; text = "Pedestrian"; ObjectID = "Khh-Xv-Ynq"; */
+"Khh-Xv-Ynq.text" = "Fußgänger";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "LGj-0o-yBH"; */
+"LGj-0o-yBH.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UILabel"; text = "Gender"; ObjectID = "MqN-41-3CZ"; */
+"MqN-41-3CZ.text" = "Geschlecht";
+
+/* Class = "UILabel"; text = "Duration"; ObjectID = "NAd-7W-hyb"; */
+"NAd-7W-hyb.text" = "Dauer";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "Py2-VK-zVn"; */
+"Py2-VK-zVn.title" = "Item";
+
+/* Class = "UILabel"; text = "Initial Seconds"; ObjectID = "Q3v-22-57Y"; */
+"Q3v-22-57Y.text" = "Sekunden anfangs";
+
+/* Class = "UIButton"; normalTitle = "How To"; ObjectID = "QeF-cV-htR"; */
+"QeF-cV-htR.normalTitle" = "Anleitung";
+
+/* Class = "UILabel"; text = "Incident"; ObjectID = "SvM-GS-sso"; */
+"SvM-GS-sso.text" = "Vorfall";
+
+/* Class = "UILabel"; text = "Settings"; ObjectID = "TX3-yP-atN"; */
+"TX3-yP-atN.text" = "Einstellungen";
+
+/* Class = "UITableViewSection"; headerTitle = "Attributes"; ObjectID = "U5K-Jr-VAV"; */
+"U5K-Jr-VAV.headerTitle" = "Attribute";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "VTO-Vt-8RE"; */
+"VTO-Vt-8RE.text" = "Subtitle";
+
+/* Class = "UILabel"; text = "Trailer"; ObjectID = "VhB-wN-SnI"; */
+"VhB-wN-SnI.text" = "Anhänger";
+
+/* Class = "UITextField"; text = "012345678901234567890123"; ObjectID = "XMw-Cr-Mre"; */
+"XMw-Cr-Mre.text" = "012345678901234567890123";
+
+/* Class = "UIButton"; normalTitle = "Privacy"; ObjectID = "XcY-SK-4YC"; */
+"XcY-SK-4YC.normalTitle" = "Privatsphäre";
+
+/* Class = "UITableViewSection"; headerTitle = "Other Traffic Participants"; ObjectID = "Z6B-Or-wWS"; */
+"Z6B-Or-wWS.headerTitle" = "Andere Verkehrsteilnehmer";
+
+/* Class = "UITableViewSection"; headerTitle = "Statistics"; ObjectID = "b5d-GW-6xP"; */
+"b5d-GW-6xP.headerTitle" = "Statistik";
+
+/* Class = "UITableViewSection"; headerTitle = "Comment"; ObjectID = "bow-5B-qsa"; */
+"bow-5B-qsa.headerTitle" = "Kommentar";
+
+/* Class = "UILabel"; text = "Child Seat"; ObjectID = "eXq-aF-Bmm"; */
+"eXq-aF-Bmm.text" = "Kindersitz";
+
+/* Class = "UILabel"; text = "Initial Meters"; ObjectID = "gLu-uM-5dG"; */
+"gLu-uM-5dG.text" = "Meter anfangs";
+
+/* Class = "UILabel"; text = "Commercial Vehicle"; ObjectID = "gM8-wW-yu6"; */
+"gM8-wW-yu6.text" = "LKW";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "hQw-y7-3KJ"; */
+"hQw-y7-3KJ.title" = "Einstellungen";
+
+/* Class = "UILabel"; text = "Time Slots"; ObjectID = "iFd-cr-Crk"; */
+"iFd-cr-Crk.text" = "Zeitschlitze";
+
+/* Class = "UILabel"; text = "Position of your iPhone"; ObjectID = "iWU-L2-tzF"; */
+"iWU-L2-tzF.text" = "Wo haben Sie Ihr iPhone";
+
+/* Class = "UILabel"; text = "Taxi"; ObjectID = "j7W-tE-H1P"; */
+"j7W-tE-H1P.text" = "Taxi";
+
+/* Class = "UILabel"; text = "Rides"; ObjectID = "nrt-bo-qSo"; */
+"nrt-bo-qSo.text" = "Fahrten";
+
+/* Class = "UINavigationItem"; title = "My Trips"; ObjectID = "pq7-Kn-x7k"; */
+"pq7-Kn-x7k.title" = "Meine Fahrten";
+
+/* Class = "UILabel"; text = "Idle"; ObjectID = "psv-hA-tkp"; */
+"psv-hA-tkp.text" = "Stillstand";
+
+/* Class = "UILabel"; text = "Length"; ObjectID = "tir-BI-xQG"; */
+"tir-BI-xQG.text" = "Distanz";
+
+/* Class = "UILabel"; text = "55"; ObjectID = "ts0-v6-Oh2"; */
+"ts0-v6-Oh2.text" = "55";
+
+/* Class = "UILabel"; text = "Profile"; ObjectID = "vCg-lZ-qrN"; */
+"vCg-lZ-qrN.text" = "Profil";
+
+/* Class = "UIButton"; normalTitle = "Feedback"; ObjectID = "vwj-ml-5PX"; */
+"vwj-ml-5PX.normalTitle" = "Rückmeldung";
+
+/* Class = "UILabel"; text = "This was frightening"; ObjectID = "w1x-m4-eN0"; */
+"w1x-m4-eN0.text" = "Das hat mir Angst gemacht";
+
+/* Class = "UILabel"; text = "Other (please comment)"; ObjectID = "wOF-fs-X67"; */
+"wOF-fs-X67.text" = "Anderes (bitte kommentieren)";
+
+/* Class = "UINavigationItem"; title = "SimRa"; ObjectID = "yDl-6c-Zif"; */
+"yDl-6c-Zif.title" = "SimRa";
+
+/* Class = "UILabel"; text = "Motorcycle"; ObjectID = "yNs-N4-TFw"; */
+"yNs-N4-TFw.text" = "Motorrad";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "zPk-B6-o6t"; */
+"zPk-B6-o6t.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "zd7-nb-obV"; */
+"zd7-nb-obV.normalTitle" = "Fertig";
+
+/* Class = "UILabel"; text = "Delivery Van"; ObjectID = "zmb-dx-KDO"; */
+"zmb-dx-KDO.text" = "Lieferwagen";
