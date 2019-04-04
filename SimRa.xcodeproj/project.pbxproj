@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AC224D125800488B31 /* MyTripsTVC.m */; };
 		840E20B0224D190400488B31 /* SettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AF224D190400488B31 /* SettingsTVC.m */; };
+		8418D52E22562148000A1D10 /* UploaderObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418D52D22562148000A1D10 /* UploaderObject.m */; };
 		8421D68D2254AE710056B62C /* NSString+hashCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D68C2254AE710056B62C /* NSString+hashCode.m */; };
 		8421D6902254B4E50056B62C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8421D68F2254B4E50056B62C /* LaunchScreen.storyboard */; };
 		8421D6932254B6F40056B62C /* NSTimeInterval+hms.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */; };
@@ -53,6 +54,8 @@
 		840E20AC224D125800488B31 /* MyTripsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTripsTVC.m; sourceTree = "<group>"; };
 		840E20AE224D190400488B31 /* SettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTVC.h; sourceTree = "<group>"; };
 		840E20AF224D190400488B31 /* SettingsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsTVC.m; sourceTree = "<group>"; };
+		8418D52C22562148000A1D10 /* UploaderObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploaderObject.h; sourceTree = "<group>"; };
+		8418D52D22562148000A1D10 /* UploaderObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploaderObject.m; sourceTree = "<group>"; };
 		8421D68B2254AE710056B62C /* NSString+hashCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+hashCode.h"; sourceTree = "<group>"; };
 		8421D68C2254AE710056B62C /* NSString+hashCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+hashCode.m"; sourceTree = "<group>"; };
 		8421D68F2254B4E50056B62C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 				84DD1EC1224CD9BF004895F9 /* Trips.m */,
 				84DD1EBD224CD9A6004895F9 /* Trip.h */,
 				84DD1EBE224CD9A6004895F9 /* Trip.m */,
+				8418D52C22562148000A1D10 /* UploaderObject.h */,
+				8418D52D22562148000A1D10 /* UploaderObject.m */,
 				8421D68B2254AE710056B62C /* NSString+hashCode.h */,
 				8421D68C2254AE710056B62C /* NSString+hashCode.m */,
 				8421D6912254B6F40056B62C /* NSTimeInterval+hms.h */,
@@ -353,6 +358,7 @@
 				84DD1E99224C0028004895F9 /* main.m in Sources */,
 				849CA147224D3C6600CE45EB /* IdPicker.m in Sources */,
 				84DD1E88224C0027004895F9 /* AppDelegate.m in Sources */,
+				8418D52E22562148000A1D10 /* UploaderObject.m in Sources */,
 				8421D6932254B6F40056B62C /* NSTimeInterval+hms.m in Sources */,
 				8421D6962254BAA30056B62C /* DSBarChart.m in Sources */,
 			);

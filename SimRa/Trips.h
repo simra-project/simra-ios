@@ -8,21 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "Trip.h"
+#import "UploaderObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Trips : NSObject <NSURLSessionDelegate>
+@interface Trips : UploaderObject
 @property (strong, nonatomic) NSMutableDictionary <NSNumber *, Trip *> *trips;
-@property (nonatomic) NSInteger version;
-@property (nonatomic) BOOL uploaded;
-@property (strong, nonatomic) NSString *fileHash;
-@property (strong, nonatomic) NSString *filePasswd;
-
 
 - (Trip *)newTrip;
 - (void)deleteTripWithIdentifier:(NSInteger)identifier;
 - (void)addTripToStatistics:(Trip *)trip;
-- (void)uploadWithController:(id)controller error:(SEL)error completion:(SEL)completion;
 
 @end
 

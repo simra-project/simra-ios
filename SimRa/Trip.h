@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <CoreMotion/CoreMotion.h>
+#import "UploaderObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -41,14 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) TripAnnotation *tripAnnotation;
 @end
 
-@interface Trip : NSObject <CLLocationManagerDelegate, NSURLSessionDelegate>
+@interface Trip : UploaderObject <CLLocationManagerDelegate>
 @property (nonatomic, readonly) NSInteger identifier;
-@property (nonatomic, readonly) NSInteger version;
 @property (nonatomic, readonly) Boolean recording;
-@property (nonatomic, readonly) Boolean edited;
-@property (nonatomic, readonly) Boolean uploaded;
-@property (strong, nonatomic, readonly) NSString *fileHash;
-@property (strong, nonatomic, readonly) NSString *filePasswd;
+@property (nonatomic) Boolean edited;
 @property (strong, nonatomic, readonly) CLLocation *startLocation;
 @property (strong, nonatomic, readonly) CLLocation *lastLocation;
 @property (strong, nonatomic, readonly) TripMotion *lastTripMotion;
@@ -60,13 +57,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) Boolean childseat;
 @property (nonatomic, readonly) Boolean trailer;
 
-
 - (instancetype)initFromDictionary:(NSDictionary *)dict;
 - (void)startRecording;
 - (void)stopRecording;
-- (void)uploadWithController:(id)controller error:(SEL)error completion:(SEL)completion;
-- (void)edit;
-- (void)save;
 - (NSInteger)tripMotions;
 - (NSInteger)tripAnnotations;
 - (NSDateInterval *)duration;

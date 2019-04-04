@@ -50,12 +50,7 @@
 
 @interface Trip ()
 @property (nonatomic) NSInteger identifier;
-@property (nonatomic) NSInteger version;
 @property (nonatomic) Boolean recording;
-@property (nonatomic) Boolean edited;
-@property (nonatomic) Boolean uploaded;
-@property (nonatomic, strong) NSString *fileHash;
-@property (nonatomic, strong) NSString *filePasswd;
 @property (strong, nonatomic) CLLocation *startLocation;
 @property (strong, nonatomic) CLLocation *lastLocation;
 @property (strong, nonatomic) TripMotion *lastTripMotion;
@@ -82,9 +77,7 @@
     identifier ++;
     self.identifier = identifier;
     [ad.defaults setInteger:identifier forKey:@"lastTripId"];
-    
-    self.version = 1;
-    
+        
     self.recording = FALSE;
     self.edited = FALSE;
     self.tripLocations = [[NSMutableArray alloc] init];
@@ -197,7 +190,7 @@
     [tripDict setObject:[NSNumber numberWithInteger:self.version] forKey:@"version"];
     [tripDict setObject:[NSNumber numberWithBool:self.recording] forKey:@"recording"];
     [tripDict setObject:[NSNumber numberWithBool:self.edited] forKey:@"edited"];
-    [tripDict setObject:[NSNumber numberWithBool:self.edited] forKey:@"uploaded"];
+    [tripDict setObject:[NSNumber numberWithBool:self.uploaded] forKey:@"uploaded"];
     if (self.fileHash) {
         [tripDict setObject:self.fileHash forKey:@"fileHash"];
     }
@@ -595,71 +588,11 @@
 }
 
 - (void)uploadWithController:(id)controller error:(SEL)error completion:(SEL)completion {
-    NSURL *csvFile = self.csvFile;
-    
-    NSData *data = [NSData dataWithContentsOfURL:csvFile];
-    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"data:\n%@", string);
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSArray <NSString *> *locales = [ad.constants mutableArrayValueForKey:@"locales"];
-    NSInteger regionId = [ad.defaults integerForKey:@"regionId"];
-
-    NSString *urlString = [NSString stringWithFormat: @"https://vm1.mcc.tu-berlin.de:8082/9/upload?fileName=%@&loc=%@&clientHash=%@",
-                           @"2",
-                           locales[regionId],
-                           NSString.clientHash];
-    
-    [request setURL:[NSURL URLWithString:urlString]];
-    [request setHTTPMethod:@"POST"];
-    
-    [request setValue:@"text/plain" forHTTPHeaderField: @"Content-Type"];
-    [request setTimeoutInterval:10.0];
-    
-    NSURLSessionUploadTask *dataTask =
-    [
-#if 1
-     [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration] delegate:self delegateQueue:nil]
-#else
-     [NSURLSession sharedSession]
-#endif
-     uploadTaskWithRequest:request
-     fromFile:csvFile
-     completionHandler:^(NSData *data,
-                         NSURLResponse *response,
-                         NSError *connectionError) {
-         
-         NSError *fmError;
-         [[NSFileManager defaultManager] removeItemAtURL:csvFile error:&fmError];
-         self.uploaded = TRUE;
-         self.fileHash = @"Hash";
-         self.filePasswd = @"Passwd";
-         
-         if (connectionError) {
-             NSLog(@"connectionError %@", connectionError);
-             [controller performSelectorOnMainThread:error
-                                          withObject:connectionError
-                                       waitUntilDone:NO];
-         } else {
-             NSLog(@"response %@ %@",
-                   response,
-                   [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-             NSDictionary *dict = @{@"response": response, @"data":data};
-             [controller performSelectorOnMainThread:completion
-                                          withObject:dict
-                                       waitUntilDone:NO];
-         }
-     }];
-    
-    [dataTask resume];
-    self.version++;
-    [self save];
-    
     [ad.trips addTripToStatistics:self];
-}
 
+    [super uploadWithController:controller error:error completion:completion];
+}
 
 - (void)edit {
     self.edited = TRUE;
@@ -670,28 +603,6 @@
     NSDictionary *tripDict = self.asDictionary;
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setObject:tripDict forKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
-}
-
-- (void)URLSession:(NSURLSession *)session
-didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
- completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler {
-    SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
-    SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, 0);
-    NSData *remoteCertificateData = CFBridgingRelease(SecCertificateCopyData(certificate));
-    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"server" ofType:@"cer"];
-    NSData *localCertData = [NSData dataWithContentsOfFile:cerPath];
-    
-    if ([remoteCertificateData isEqualToData:localCertData])
-    {
-        NSURLCredential *credential = [NSURLCredential credentialForTrust:serverTrust];
-        [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
-        completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
-    }
-    else
-    {
-        [[challenge sender] cancelAuthenticationChallenge:challenge];
-        completionHandler(NSURLSessionAuthChallengeRejectProtectionSpace, nil);
-    }
 }
 
 @end

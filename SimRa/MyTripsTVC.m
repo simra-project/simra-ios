@@ -52,7 +52,7 @@
     NSString *status;
 
     if (trip.uploaded) {
-        status = NSLocalizedString(@"Recording", @"Recording");
+        status = NSLocalizedString(@"Uploaded", @"Uploaded");
     } else {
         if (trip.edited) {
             status = NSLocalizedString(@"Edited", @"Edited");
@@ -68,14 +68,13 @@
     NSDateInterval *duration = trip.duration;
     NSTimeInterval seconds = [duration.endDate timeIntervalSinceDate:duration.startDate];
 
-    cell.textLabel.text = [NSString stringWithFormat:@"#%ld#%ld %@ %@",
+    cell.textLabel.text = [NSString stringWithFormat:@"#%ld#%ld %@",
                            trip.identifier,
                            trip.version,
-                           status,
-                           [startFormatter stringFromDate:trip.duration.startDate]
-                           ];
+                           status];
 
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %.01f km (%ld/%ld/%ld)",
+    cell.detailTextLabel.text = [NSString stringWithFormat:@" %@, %@, %.01f km (%ld/%ld/%ld)",
+                                 [startFormatter stringFromDate:trip.duration.startDate],
                                  hms(seconds),
                                  trip.length / 1000.0,
                                  trip.tripLocations.count,
@@ -122,7 +121,6 @@
         AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
         NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingSelector:@selector(compare:)][indexPath.row];
         Trip *trip = ad.trips.trips[key];
-        [trip edit];
         tripEditVC.trip = trip;
     }
     // Get the new view controller using [segue destinationViewController].
@@ -144,8 +142,6 @@
                                                preferredStyle:UIAlertControllerStyleAlert];
 
         [self presentViewController:self.ac animated:TRUE completion:nil];
-
-        [self.tableView reloadData];
     }
 }
 
@@ -159,7 +155,9 @@
                                  preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                       style:UIAlertActionStyleDefault
-                                                    handler:nil];
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        [self.tableView reloadData];
+                                                    }];
         [ac addAction:aay];
         [self presentViewController:ac animated:TRUE completion:nil];
     }];
@@ -203,7 +201,9 @@
                message:NSLocalizedString(@"Profile Running", @"Profile Running")
                preferredStyle:UIAlertControllerStyleAlert];
     
-    [self presentViewController:self.ac animated:TRUE completion:nil];
+    [self presentViewController:self.ac
+                       animated:TRUE
+                     completion:nil];
 }
 
 - (void)negativeCompletionResponse:(NSInteger)statusCode withText:(NSString *)text {
@@ -216,7 +216,9 @@
                preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                   style:UIAlertActionStyleDefault
-                                                handler:nil];
+                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                    [self.tableView reloadData];
+                                                }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
 }
@@ -229,7 +231,9 @@
                preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                   style:UIAlertActionStyleDefault
-                                                handler:nil];
+                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                    [self.tableView reloadData];
+                                                }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
 }
@@ -244,7 +248,9 @@
                                  preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                       style:UIAlertActionStyleDefault
-                                                    handler:nil];
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        [self.tableView reloadData];
+                                                    }];
         [ac addAction:aay];
         [self presentViewController:ac animated:TRUE completion:nil];
     }];
@@ -288,8 +294,8 @@
     UIAlertAction *aay = [UIAlertAction
                           actionWithTitle:NSLocalizedString(@"OK", @"OK")
                           style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction *action){
-//
+                          handler:^(UIAlertAction * _Nonnull action) {
+                              [self.tableView reloadData];
                           }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -305,7 +311,9 @@
                preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                   style:UIAlertActionStyleDefault
-                                                handler:nil];
+                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                    [self.tableView reloadData];
+                                                }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
 }
@@ -318,7 +326,9 @@
                preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                   style:UIAlertActionStyleDefault
-                                                handler:nil];
+                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                    [self.tableView reloadData];
+                                                }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
 }
@@ -327,6 +337,7 @@
 - (IBAction)saveTrip:(UIStoryboardSegue *)segue {
     if ([segue.sourceViewController isKindOfClass:[TripEditVC class]]) {
         TripEditVC *tripEditVC = (TripEditVC *)segue.sourceViewController;
+        tripEditVC.trip.edited = TRUE;
         [tripEditVC.trip save];
     }
 }
