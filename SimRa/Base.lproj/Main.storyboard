@@ -996,7 +996,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Trips" id="pq7-Kn-x7k">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="MJ7-9y-XJz">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="action" id="MJ7-9y-XJz">
                             <connections>
                                 <action selector="uploadPressed:" destination="PYd-3I-T6G" id="jkC-Mn-b9y"/>
                             </connections>
@@ -1026,7 +1026,7 @@
                         <viewLayoutGuide key="safeArea" id="a1x-xk-P31"/>
                     </stackView>
                     <navigationItem key="navigationItem" title="Edit Trip" id="1cV-GU-tdF">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="VHZ-9D-W3q">
+                        <barButtonItem key="rightBarButtonItem" title="Clip" id="VHZ-9D-W3q">
                             <connections>
                                 <action selector="donePressed:" destination="j7e-Gg-2dc" id="iGp-V2-2T8"/>
                             </connections>

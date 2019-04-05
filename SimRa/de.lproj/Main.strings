@@ -172,3 +172,6 @@
 
 /* Class = "UILabel"; text = "Delivery Van"; ObjectID = "zmb-dx-KDO"; */
 "zmb-dx-KDO.text" = "Lieferwagen";
+
+/* Class = "UIBarButtonItem"; title = "Clip"; ObjectID = "VHZ-9D-W3q"; */
+"VHZ-9D-W3q.title" = "Schnipp";

@@ -54,6 +54,7 @@
 		840E20AC224D125800488B31 /* MyTripsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTripsTVC.m; sourceTree = "<group>"; };
 		840E20AE224D190400488B31 /* SettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTVC.h; sourceTree = "<group>"; };
 		840E20AF224D190400488B31 /* SettingsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsTVC.m; sourceTree = "<group>"; };
+		84121643225757A4006F9E2C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		8418D52C22562148000A1D10 /* UploaderObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploaderObject.h; sourceTree = "<group>"; };
 		8418D52D22562148000A1D10 /* UploaderObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploaderObject.m; sourceTree = "<group>"; };
 		8421D68B2254AE710056B62C /* NSString+hashCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+hashCode.h"; sourceTree = "<group>"; };
@@ -68,7 +69,6 @@
 		84564AFA22549B1700D46132 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		848337FF22532B7600342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		848338002253C6A200342285 /* server.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = server.cer; sourceTree = "<group>"; };
-		848338062253CAB300342285 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		8483380A2253E2AF00342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/constants.plist; sourceTree = "<group>"; };
 		8483380B2253E2C700342285 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/constants.plist; sourceTree = "<group>"; };
 		8483380C2253E2CB00342285 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/constants.plist; sourceTree = "<group>"; };
@@ -421,7 +421,7 @@
 			children = (
 				84DD1E8D224C0027004895F9 /* Base */,
 				848337FF22532B7600342285 /* en */,
-				848338062253CAB300342285 /* de */,
+				84121643225757A4006F9E2C /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
