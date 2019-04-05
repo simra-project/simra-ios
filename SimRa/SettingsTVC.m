@@ -122,9 +122,10 @@
     if (MFMailComposeViewController.canSendMail) {
         MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
         controller.mailComposeDelegate = self;
-        [controller setToRecipients:@[@"db@mcc.tu-berlin.de"]];
-        [controller setSubject:@"Feedback SimRa"];
-        [controller setMessageBody:@"Liebes SimRa Team,\n\n\n\n--sent from SimRa iOS app--" isHTML:NO];
+        [controller setToRecipients:@[@"ask@mcc.tu-berlin.de"]];
+        [controller setSubject:NSLocalizedString(@"Feedback SimRa", @"Feedback SimRa")];
+        [controller setMessageBody:NSLocalizedString(@"Dear SimRa Team", @"Dear SimRa Team")
+                            isHTML:NO];
         [self presentViewController:controller animated:TRUE completion:nil];
     } else {
         self.ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"SimRa", @"SimRa")
