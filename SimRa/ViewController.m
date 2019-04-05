@@ -173,7 +173,7 @@
             self.annotationView = [[AnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"me"];
         }
 
-        UIImage *image = [UIImage imageNamed:@"Simra"];
+        UIImage *image = [UIImage imageNamed:@"SimraSquare"];
         self.annotationView.personImage = image;
         self.annotationView.tid = @"me";
         self.annotationView.speed = 0.0;

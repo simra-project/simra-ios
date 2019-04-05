@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "SimRa Logo 600x372.png",
+      "filename" : "simra.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "SimRa Logo 600x372-1.png",
+      "filename" : "simra-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "SimRa Logo 600x372-2.png",
+      "filename" : "simra-2.png",
       "scale" : "3x"
     }
   ],
