@@ -51,7 +51,7 @@
 	</array>
 	<key>bikeTypes</key>
 	<array>
-		<string>(not selected)</string>
+		<string>Please select</string>
 		<string>City or Trecking Bike</string>
 		<string>Racing Bike</string>
 		<string>E-Bike</string>
@@ -72,15 +72,15 @@
 	</array>
 	<key>incidents</key>
 	<array>
-		<string>Nichts</string>
-		<string>Zu dichtes Überholen</string>
-		<string>Ein- oder ausparkendes Fahrzeug</string>
-		<string>Beinahe-Abbiegeunfall</string>
-		<string>Entgegenkommender Verkehrsteilnehmer</string>
-		<string>Zu dichtes Auffahren</string>
-		<string>Beinahe-Dooring</string>
-		<string>Hindernis ausweichen (z.B. Hund)</string>
-		<string>Sonstiges</string>
+		<string>Nothing</string>
+		<string>Close Passing</string>
+		<string>Parking Car</string>
+		<string>Almost Turning Accident</string>
+		<string>Oncoming Traffic</string>
+		<string>Tailgating</string>
+		<string>Almost Dooring</string>
+		<string>Sidestep (e.g. a dog)</string>
+		<string>Other</string>
 	</array>
 </dict>
 </plist>

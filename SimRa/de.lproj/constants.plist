@@ -51,7 +51,7 @@
 	</array>
 	<key>bikeTypes</key>
 	<array>
-		<string>(not selected)</string>
+		<string>Bitte auswählen</string>
 		<string>City- oder Trecking-Rad</string>
 		<string>Rennrad</string>
 		<string>E-Bike</string>
