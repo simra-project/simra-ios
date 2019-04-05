@@ -33,7 +33,7 @@
 #define ACCZ_WIDTH 2.0
 
 #define TACHO_COLOR [UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.5]
-#define TACHO_MAX 50.0
+#define TACHO_MAX 50.0 // km/h
 
 
 /** This method does not seem to be called anymore in ios10
@@ -94,12 +94,13 @@
         UIBezierPath *tacho = [[UIBezierPath alloc] init];
         [tacho moveToPoint:CGPointMake(rect.origin.x + rect.size.width / 2.0,
                                        rect.origin.y + rect.size.height / 2.0)];
-        [tacho appendPath:[UIBezierPath bezierPathWithArcCenter: CGPointMake(rect.size.width / 2.0,
-                                                                             rect.size.height / 2.0)
-                                                         radius:CIRCLE_SIZE / 2.0
-                                                     startAngle:M_PI_2 + M_PI / 6.0
-                                                       endAngle:M_PI_2 + M_PI / 6.0 + M_PI * 2.0 * 5.0 / 6.0 * (MIN(self.speed / TACHO_MAX, 1.0))
-                                                      clockwise:true]];
+        [tacho appendPath:[UIBezierPath
+                           bezierPathWithArcCenter: CGPointMake(rect.size.width / 2.0,
+                                                                rect.size.height / 2.0)
+                           radius:CIRCLE_SIZE / 2.0
+                           startAngle:M_PI_2 + M_PI / 6.0
+                           endAngle:M_PI_2 + M_PI / 6.0 + M_PI * 2.0 * 5.0 / 6.0 * (MIN(self.speed * 3.6 / TACHO_MAX, 1.0))
+                           clockwise:true]];
         [tacho addLineToPoint:CGPointMake(rect.origin.x + rect.size.width / 2.0,
                                           rect.origin.y + rect.size.height / 2.0)];
         [tacho closePath];
