@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *totalIncidents;
 @property (weak, nonatomic) IBOutlet UITextField *totalIdle;
 @property (weak, nonatomic) IBOutlet UIView *totalSlots;
+@property (weak, nonatomic) IBOutlet UITextField *version;
 
 @property (strong, nonatomic) UIAlertController *ac;
 
@@ -100,24 +101,43 @@
     self.startMetersLabel.text = [ad.defaults stringForKey:@"deferredMeters"];
     self.childSeat.on = [ad.defaults boolForKey:@"childSeat"];
     self.trailer.on = [ad.defaults boolForKey:@"trailer"];
+
+    self.version.text = [NSString stringWithFormat:@"%@-%@-%@",
+                         [NSBundle mainBundle].infoDictionary[@"CFBundleName"],
+                         [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"],
+                         [NSLocale currentLocale].languageCode
+                         ];
 }
 
 - (IBAction)aboutPressed:(UIButton *)sender {
-    NSURL *url = [NSURL URLWithString:@"https://www.mcc.tu-berlin.de/menue/forschung/projekte/simra/"];
-    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-
+    NSString *urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/en/";
+    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
+        urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/de/";
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+                                                            options:@{}
+                                                  completionHandler:nil];
 }
 - (IBAction)privacyPressed:(UIButton *)sender {
-
-    NSURL *url = [NSURL URLWithString:@"https://www.tu-berlin.de/allgemeine_seiten/datenschutz/"];
-    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-
+    NSString *urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/privacy_policy_statement/parameter/en";
+    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
+        urlString = @"https://www.mcc.tu-berlin.de/menue/forschung/projekte/simra/datenschutzerklaerung/parameter/de/";
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+                                       options:@{}
+                             completionHandler:nil];
 }
+
 - (IBAction)howtoPressed:(UIButton *)sender {
-    NSURL *url = [NSURL URLWithString:@"http://www.redaktion.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung.pdf"];
-    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-
+    NSString *urlString = @"http://www.redaktion.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung.pdf";
+    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
+        urlString = @"http://www.redaktion.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung.pdf";
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+                                       options:@{}
+                             completionHandler:nil];
 }
+
 - (IBAction)feedbackPressed:(UIButton *)sender {
     if (MFMailComposeViewController.canSendMail) {
         MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
@@ -151,9 +171,13 @@
 }
 
 - (IBAction)imprintPressed:(UIButton *)sender {
-    NSURL *url = [NSURL URLWithString:@"https://www.mcc.tu-berlin.de/servicemenue/impressum/"];
-    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
-
+    NSString *urlString = @"https://www.mcc.tu-berlin.de/servicemenue/impressum/";
+    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
+        urlString = @"https://www.mcc.tu-berlin.de/servicemenue/impressum/";
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+                                       options:@{}
+                             completionHandler:nil];
 }
 
 - (IBAction)ageChanged:(IdPicker *)sender {

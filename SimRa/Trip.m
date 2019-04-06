@@ -597,9 +597,6 @@
 
     TripLocation *lastTripLocation;
     for (TripLocation *tripLocation in self.tripLocations) {
-        NSLog(@"idle %@ %f",
-              tripLocation.location.timestamp,
-              tripLocation.location.speed);
         if (!lastTripLocation) {
             lastTripLocation = tripLocation;
         } else {
@@ -611,12 +608,11 @@
             lastTripLocation = tripLocation;
         }
     }
-    NSLog(@"idle %ld", idle);
 
     return idle;
 }
 
-- (void)uploadWithController:(id)controller error:(SEL)error completion:(SEL)completion {
+- (void)uploadFile:(NSString *)name WithController:(id)controller error:(SEL)error completion:(SEL)completion {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
     // remove unedited annotations
@@ -628,7 +624,7 @@
     
     [ad.trips addTripToStatistics:self];
     
-    [super uploadWithController:controller error:error completion:completion];
+    [super uploadFile:name WithController:controller error:error completion:completion];
 }
 
 - (void)save {

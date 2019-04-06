@@ -23,8 +23,6 @@
     self.trips = [[Trips alloc] init];
 
     NSURL *bundleURL = [NSBundle mainBundle].bundleURL;
-    NSLog(@"languageCode %@", [NSLocale currentLocale].languageCode);
-
     NSURL *baseURL = [bundleURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.lproj",
                                                       [NSLocale currentLocale].languageCode]];
     NSURL *constantsURL = [baseURL URLByAppendingPathComponent:@"constants.plist"];

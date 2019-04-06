@@ -138,13 +138,13 @@
 
 - (void)setup {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
 
     if (self.trip.uploaded) {
         self.navigationItem.rightBarButtonItem.enabled = FALSE;
     } else {
         self.navigationItem.rightBarButtonItem.enabled = TRUE;
     }
-    NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
 
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
@@ -303,6 +303,9 @@ calloutAccessoryControlTapped:(UIControl *)control {
 
 - (IBAction)longPressed:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan) {
+        AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
+
         CGPoint p = [sender locationInView:self.mapView];
 
         CLLocationCoordinate2D coordinate = [self.mapView convertPoint:p toCoordinateFromView:self.mapView];
@@ -320,7 +323,7 @@ calloutAccessoryControlTapped:(UIControl *)control {
 
         closestTripLocation.tripAnnotation = [[TripAnnotation alloc] init];
         TripPoint *tripPoint = [[TripPoint alloc] init];
-        tripPoint.title = NSLocalizedString(@"Manual", @"Manual");
+        tripPoint.title = incidents[closestTripLocation.tripAnnotation.incidentId];
         tripPoint.tripLocation = closestTripLocation;
         tripPoint.tripLocations = self.trip.tripLocations;
 

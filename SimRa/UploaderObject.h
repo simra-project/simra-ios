@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSURL *)csvFile;
 - (void)save;
-- (void)uploadWithController:(id)controller error:(SEL)error completion:(SEL)completion;
+- (void)uploadFile:(NSString *)name WithController:(id)controller error:(SEL)error completion:(SEL)completion;
 
 @end
 

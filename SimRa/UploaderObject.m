@@ -10,6 +10,20 @@
 #import "AppDelegate.h"
 #import "NSString+hashCode.h"
 
+// This is only necessary because the backend uses a self signed
+// certificate currently
+// If the certificate will be replaced by a certificate issued
+// by a trusted CA (e.g. letsencrypt), the code marked with
+// SELF_SIGNED_HACK can go and the entry in Info.plist may
+// be deleted too:
+// <key>NSAppTransportSecurity</key>
+//      <dict>
+//          <key>NSAllowsArbitraryLoads</key>
+//          <true/>
+//      </dict>
+
+#define SELF_SIGNED_HACK 1
+
 @interface UploaderObject ()
 
 @end
@@ -30,7 +44,7 @@
     // must override
 }
 
-- (void)uploadWithController:(id)controller error:(SEL)error completion:(SEL)completion {
+- (void)uploadFile:(NSString *)name WithController:(id)controller error:(SEL)error completion:(SEL)completion {
     NSURL *csvFile = self.csvFile;
 
     NSData *data = [NSData dataWithContentsOfURL:csvFile];
@@ -56,8 +70,9 @@
                      NSString.clientHash];
         [request setHTTPMethod:@"PUT"];
     } else {
-        urlString = [NSString stringWithFormat: @"%@//%@/%d/upload?fileName=2&loc=%@&clientHash=%@",
+        urlString = [NSString stringWithFormat: @"%@//%@/%d/upload?fileName=%@&loc=%@&clientHash=%@",
                      UPLOAD_SCHEME, UPLOAD_HOST, UPLOAD_VERSION,
+                     name,
                      locales[regionId],
                      NSString.clientHash];
         [request setHTTPMethod:@"POST"];
@@ -69,7 +84,7 @@
 
     NSURLSessionUploadTask *dataTask =
     [
-#if 1
+#if SELF_SIGNED_HACK
      [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration] delegate:self delegateQueue:nil]
 #else
      [NSURLSession sharedSession]
@@ -127,6 +142,7 @@
     [dataTask resume];
 }
 
+#if SELF_SIGNED_HACK
 - (void)URLSession:(NSURLSession *)session
 didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
  completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler {
@@ -148,5 +164,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
         completionHandler(NSURLSessionAuthChallengeRejectProtectionSpace, nil);
     }
 }
+#endif
 
 @end

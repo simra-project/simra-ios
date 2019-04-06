@@ -150,9 +150,10 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
         Trip *trip = ad.trips.trips[key];
 
-        [trip uploadWithController:self
-                               error:@selector(completionError:)
-                          completion:@selector(completionResponse:)];
+        [trip uploadFile:@"accGPS.csv"
+          WithController:self
+                   error:@selector(completionError:)
+              completion:@selector(completionResponse:)];
 
         self.ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
                                                       message:NSLocalizedString(@"Running", @"Running")
@@ -188,9 +189,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
             [self.ac dismissViewControllerAnimated:TRUE completion:^() {
                 [self positiveCompletionResponse:httpResponse.statusCode
-                                        withText:[[NSString alloc]
-                                                  initWithData:data
-                                                  encoding:NSUTF8StringEncoding]];
+                                        withText:@""];
             }];
         } else {
             [self.ac dismissViewControllerAnimated:TRUE completion:^() {
@@ -209,9 +208,10 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (void)positiveCompletionResponse:(NSInteger)statusCode withText:(NSString *)text {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [ad.trips uploadWithController:self
-                             error:@selector(completionErrorTrips:)
-                        completion:@selector(completionResponseTrips:)];
+    [ad.trips uploadFile:@"profile.csv"
+          WithController:self
+                   error:@selector(completionErrorTrips:)
+              completion:@selector(completionResponseTrips:)];
 
     self.ac = [UIAlertController
                alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
@@ -281,9 +281,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
             [self.ac dismissViewControllerAnimated:TRUE completion:^() {
                 [self positiveCompletionResponseTrips:httpResponse.statusCode
-                                        withText:[[NSString alloc]
-                                                  initWithData:data
-                                                  encoding:NSUTF8StringEncoding]];
+                                        withText:@""];
             }];
         } else {
             [self.ac dismissViewControllerAnimated:TRUE completion:^() {

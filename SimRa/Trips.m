@@ -131,4 +131,8 @@
     [ad.defaults setObject:totalSlots forKey:@"totalSlots"];
 }
 
+- (void)uploadFile:(NSString *)name WithController:(id)controller error:(SEL)error completion:(SEL)completion {
+    [super uploadFile:name WithController:controller error:error completion:completion];
+}
+
 @end
