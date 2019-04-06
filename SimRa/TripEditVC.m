@@ -138,6 +138,12 @@
 
 - (void)setup {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    if (self.trip.uploaded) {
+        self.navigationItem.rightBarButtonItem.enabled = FALSE;
+    } else {
+        self.navigationItem.rightBarButtonItem.enabled = TRUE;
+    }
     NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
 
     [self.mapView removeOverlays:self.mapView.overlays];
@@ -190,7 +196,11 @@
                                                                 reuseIdentifier:@"startPoint"];
         }
         pinAnnotationView.pinTintColor = MKPinAnnotationView.greenPinColor;
-        pinAnnotationView.draggable = true;
+        if (self.trip.uploaded) {
+            pinAnnotationView.draggable = false;
+        } else {
+            pinAnnotationView.draggable = true;
+        }
         pinAnnotationView.canShowCallout = YES;
         [pinAnnotationView setNeedsDisplay];
 
@@ -206,7 +216,11 @@
                                                                 reuseIdentifier:@"endPoint"];
         }
         pinAnnotationView.pinTintColor = MKPinAnnotationView.redPinColor;
-        pinAnnotationView.draggable = true;
+        if (self.trip.uploaded) {
+            pinAnnotationView.draggable = false;
+        } else {
+            pinAnnotationView.draggable = true;
+        }
         pinAnnotationView.canShowCallout = YES;
         [pinAnnotationView setNeedsDisplay];
 
@@ -234,12 +248,20 @@
             pinAnnotationView.pinTintColor = MKPinAnnotationView.purplePinColor;;
         }
 
-        UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [refreshButton setTitle:NSLocalizedString(@"Delete", @"Delete") forState:UIControlStateNormal];
-        [refreshButton sizeToFit];
-        pinAnnotationView.leftCalloutAccessoryView = refreshButton;
+        if (self.trip.uploaded) {
+            pinAnnotationView.leftCalloutAccessoryView = nil;
+
+            pinAnnotationView.rightCalloutAccessoryView = nil;
+        } else {
+            UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            [deleteButton setTitle:NSLocalizedString(@"Delete", @"Delete") forState:UIControlStateNormal];
+            [deleteButton sizeToFit];
+            pinAnnotationView.leftCalloutAccessoryView = deleteButton;
+
+            pinAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        }
+
         pinAnnotationView.canShowCallout = YES;
-        pinAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 
         [pinAnnotationView setNeedsDisplay];
         return pinAnnotationView;

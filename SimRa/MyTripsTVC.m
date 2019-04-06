@@ -17,6 +17,12 @@
 
 @implementation MyTripsTVC
 
+NSInteger revertedSort(id num1, id num2, void *context) {
+    NSNumber *n1 = (NSNumber *)num1;
+    NSNumber *n2 = (NSNumber *)num2;
+    return [n2 compare:n1];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -50,7 +56,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trip" forIndexPath:indexPath];
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingSelector:@selector(compare:)][indexPath.row];
+    NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
     Trip *trip = ad.trips.trips[key];
 
     NSString *status;
@@ -72,24 +78,30 @@
     NSDateInterval *duration = trip.duration;
     NSTimeInterval seconds = [duration.endDate timeIntervalSinceDate:duration.startDate];
 
-    cell.textLabel.text = [NSString stringWithFormat:@"#%ld#%ld %@",
-                           trip.identifier,
-                           trip.version,
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",
                            status];
 
-    cell.detailTextLabel.text = [NSString stringWithFormat:@" %@, %@, %.01f km (%ld/%ld/%ld)",
+    cell.detailTextLabel.text = [NSString stringWithFormat:@" %@, %@, %.01f km",
                                  [startFormatter stringFromDate:trip.duration.startDate],
                                  hms(seconds),
-                                 trip.length / 1000.0,
-                                 trip.tripLocations.count,
-                                 trip.tripMotions,
-                                 trip.tripAnnotations];
+                                 trip.length / 1000.0];
     return cell;
 }
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
+    Trip *trip = ad.trips.trips[key];
+    if (trip.uploaded) {
+        return nil;
+    } else {
+        return indexPath;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -100,7 +112,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingSelector:@selector(compare:)][indexPath.row];
+        NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
         [ad.trips deleteTripWithIdentifier:key.integerValue];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -119,7 +131,7 @@
         UITableViewCell *cell = (UITableViewCell *)sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingSelector:@selector(compare:)][indexPath.row];
+        NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
         Trip *trip = ad.trips.trips[key];
         tripEditVC.trip = trip;
         tripEditVC.changed = FALSE;
@@ -131,7 +143,7 @@
 - (IBAction)uploadPressed:(UIBarButtonItem *)sender {
     if (self.tableView.indexPathForSelectedRow) {
         AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingSelector:@selector(compare:)][self.tableView.indexPathForSelectedRow.row];
+        NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
         Trip *trip = ad.trips.trips[key];
 
         [trip uploadWithController:self
