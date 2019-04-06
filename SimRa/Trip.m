@@ -596,6 +596,14 @@
 
 - (void)uploadWithController:(id)controller error:(SEL)error completion:(SEL)completion {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    // remove unedited annotations
+    for (TripLocation *location in self.tripLocations) {
+        if (location.tripAnnotation && location.tripAnnotation.incidentId == 0) {
+            location.tripAnnotation = nil;
+        }
+    }
+    
     [ad.trips addTripToStatistics:self];
     
     [super uploadWithController:controller error:error completion:completion];
