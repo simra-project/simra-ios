@@ -108,6 +108,10 @@ NSInteger revertedSort(id num1, id num2, void *context) {
     self.navigationItem.rightBarButtonItem.enabled = TRUE;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NSLocalizedString(@"Delete locally", @"Confirmation button for delete My Trips table row");
+}
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
