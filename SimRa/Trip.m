@@ -115,6 +115,7 @@
         NSNumber *timestamp = [tripLocationDict objectForKey:@"timestamp"];
         NSNumber *lat = [tripLocationDict objectForKey:@"lat"];
         NSNumber *lon = [tripLocationDict objectForKey:@"lon"];
+        NSNumber *speed = [tripLocationDict objectForKey:@"speed"];
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat.doubleValue,
                                                                        lon.doubleValue);
         CLLocation *location = [[CLLocation alloc]
@@ -123,7 +124,7 @@
                                 horizontalAccuracy:-1
                                 verticalAccuracy:-1
                                 course:-1
-                                speed:-1
+                                speed:speed.doubleValue
                                 timestamp:[NSDate dateWithTimeIntervalSince1970:timestamp.doubleValue]];
         TripLocation *tripLocation = [[TripLocation alloc] init];
         tripLocation.location = location;
@@ -211,7 +212,10 @@
         [tripLocationDict
          setObject:[NSNumber numberWithDouble: tripLocation.location.coordinate.longitude]
          forKey:@"lon"];
-        
+        [tripLocationDict
+         setObject:[NSNumber numberWithDouble: tripLocation.location.speed]
+         forKey:@"speed"];
+
         NSMutableArray *tripMotionsArray = [[NSMutableArray alloc] init];
         for (TripMotion *tripMotion in tripLocation.tripMotions) {
             NSMutableDictionary *tripMotionDict = [[NSMutableDictionary alloc] init];
@@ -590,7 +594,25 @@
 
 - (NSInteger)idle {
     NSInteger idle = 0;
-    
+
+    TripLocation *lastTripLocation;
+    for (TripLocation *tripLocation in self.tripLocations) {
+        NSLog(@"idle %@ %f",
+              tripLocation.location.timestamp,
+              tripLocation.location.speed);
+        if (!lastTripLocation) {
+            lastTripLocation = tripLocation;
+        } else {
+            // idle when travelling with less than 3 km/h. speed is given in m/s)
+            if (tripLocation.location.speed < 3.0 / 3.6) {
+                idle += (tripLocation.location.timestamp.timeIntervalSince1970 -
+                         lastTripLocation.location.timestamp.timeIntervalSince1970);
+            }
+            lastTripLocation = tripLocation;
+        }
+    }
+    NSLog(@"idle %ld", idle);
+
     return idle;
 }
 

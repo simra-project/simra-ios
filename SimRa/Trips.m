@@ -114,7 +114,7 @@
     totalDuration += [trip.duration.endDate timeIntervalSinceDate:trip.duration.startDate] * 1000.0;
     totalIncidents += trip.tripAnnotations;
     totalLength += trip.length;
-    totalIdle += trip.idle;
+    totalIdle += trip.idle * 1000.0;
 
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSInteger hour;
