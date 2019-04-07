@@ -31,7 +31,7 @@
 - (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
     CLLocation *location = [[CLLocation alloc] initWithLatitude:newCoordinate.latitude
                                                       longitude:newCoordinate.longitude];
-
+    
     TripLocation *closestTripLocation = self.tripLocations.firstObject;
     CLLocationDistance closestDistance = [closestTripLocation.location distanceFromLocation:location];
     for (TripLocation *tripLocation in self.tripLocations) {
@@ -53,13 +53,13 @@
 
 - (CLLocationCoordinate2D)coordinate {
     NSAssert(self.trip.tripLocations.count > 0, @"No tripLocations");
-
+    
     return self.trip.tripLocations[0].location.coordinate;
 }
 
 - (MKMapRect)boundingMapRect {
     NSAssert(self.trip.tripLocations.count > 0, @"No tripLocations");
-
+    
     MKMapPoint point = MKMapPointForCoordinate(self.trip.tripLocations[0].location.coordinate);
     MKMapRect mapRect = MKMapRectMake(
                                       point.x,
@@ -87,10 +87,10 @@
 
 - (MKPolyline *)polyLine {
     NSAssert(self.trip.tripLocations.count > 0, @"No tripLocations");
-
+    
     CLLocationCoordinate2D coordinate = self.coordinate;
     MKPolyline *polyLine = [MKPolyline polylineWithCoordinates:&coordinate count:1];
-
+    
     CLLocationCoordinate2D *coordinates =
     malloc(self.trip.tripLocations.count * sizeof(CLLocationCoordinate2D));
     if (coordinates) {
@@ -139,37 +139,37 @@
 - (void)setup {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
-
+    
     if (self.trip.uploaded) {
         self.navigationItem.rightBarButtonItem.enabled = FALSE;
     } else {
         self.navigationItem.rightBarButtonItem.enabled = TRUE;
     }
-
+    
     [self.mapView removeOverlays:self.mapView.overlays];
     [self.mapView removeAnnotations:self.mapView.annotations];
-
+    
     if (self.trip.tripLocations.count > 0) {
         self.tripTrack = [[TripTrack alloc] init];
         self.tripTrack.trip = self.trip;
         [self.mapView addOverlay:self.tripTrack];
-
+        
         [self.mapView setVisibleMapRect:self.tripTrack.boundingMapRect
                             edgePadding:UIEdgeInsetsMake(50.0, 50.0, 50.0, 50.0)
                                animated:TRUE];
-
+        
         self.startPoint = [[TripPoint alloc] init];
         self.startPoint.title = NSLocalizedString(@"Start", @"Start");
         self.startPoint.tripLocation = self.trip.tripLocations.firstObject;
         self.startPoint.tripLocations = self.trip.tripLocations;
         [self.mapView addAnnotation:self.startPoint];
-
+        
         self.endPoint = [[TripPoint alloc] init];
         self.endPoint.title = NSLocalizedString(@"Finish", @"Finish");
         self.endPoint.tripLocation = self.trip.tripLocations.lastObject;
         self.endPoint.tripLocations = self.trip.tripLocations;
         [self.mapView addAnnotation:self.endPoint];
-
+        
         self.tripPoints = [[NSMutableArray alloc] init];
         for (TripLocation *tripLocation in self.trip.tripLocations) {
             if (tripLocation.tripAnnotation) {
@@ -177,7 +177,7 @@
                 tripPoint.title = incidents[tripLocation.tripAnnotation.incidentId];
                 tripPoint.tripLocation = tripLocation;
                 tripPoint.tripLocations = self.trip.tripLocations;
-
+                
                 [self.tripPoints addObject:tripPoint];
                 [self.mapView addAnnotation:tripPoint];
             }
@@ -203,9 +203,9 @@
         }
         pinAnnotationView.canShowCallout = YES;
         [pinAnnotationView setNeedsDisplay];
-
+        
         return pinAnnotationView;
-
+        
     } else if (annotation == self.endPoint) {
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"endPoint"];
         MKPinAnnotationView *pinAnnotationView;
@@ -223,9 +223,9 @@
         }
         pinAnnotationView.canShowCallout = YES;
         [pinAnnotationView setNeedsDisplay];
-
+        
         return pinAnnotationView;
-
+        
     } else if ([self.tripPoints containsObject:annotation]) {
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"tripPoint"];
         MKPinAnnotationView *pinAnnotationView;
@@ -235,7 +235,7 @@
             pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
                                                                 reuseIdentifier:@"tripPoint"];
         }
-
+        
         TripPoint *tripPoint;
         if ([annotation isKindOfClass:[TripPoint class]]) {
             tripPoint = (TripPoint *)annotation;
@@ -247,25 +247,25 @@
         } else {
             pinAnnotationView.pinTintColor = MKPinAnnotationView.purplePinColor;;
         }
-
+        
         if (self.trip.uploaded) {
             pinAnnotationView.leftCalloutAccessoryView = nil;
-
+            
             pinAnnotationView.rightCalloutAccessoryView = nil;
         } else {
             UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeSystem];
             [deleteButton setTitle:NSLocalizedString(@"Delete", @"Delete") forState:UIControlStateNormal];
             [deleteButton sizeToFit];
             pinAnnotationView.leftCalloutAccessoryView = deleteButton;
-
+            
             pinAnnotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         }
-
+        
         pinAnnotationView.canShowCallout = YES;
-
+        
         [pinAnnotationView setNeedsDisplay];
         return pinAnnotationView;
-
+        
     } else {
         return nil;
     }
@@ -302,33 +302,36 @@ calloutAccessoryControlTapped:(UIControl *)control {
 }
 
 - (IBAction)longPressed:(UILongPressGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateBegan) {
-        AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
-
-        CGPoint p = [sender locationInView:self.mapView];
-
-        CLLocationCoordinate2D coordinate = [self.mapView convertPoint:p toCoordinateFromView:self.mapView];
-        CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude
-                                                          longitude:coordinate.longitude];
-
-        TripLocation *closestTripLocation = self.trip.tripLocations.firstObject;
-        CLLocationDistance closestDistance = [closestTripLocation.location distanceFromLocation:location];
-        for (TripLocation *tripLocation in self.trip.tripLocations) {
-            if ([tripLocation.location distanceFromLocation:location] < closestDistance) {
-                closestDistance = [tripLocation.location distanceFromLocation:location];
-                closestTripLocation = tripLocation;
+    if (!self.trip.uploaded) {
+        
+        if (sender.state == UIGestureRecognizerStateBegan) {
+            AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
+            
+            CGPoint p = [sender locationInView:self.mapView];
+            
+            CLLocationCoordinate2D coordinate = [self.mapView convertPoint:p toCoordinateFromView:self.mapView];
+            CLLocation *location = [[CLLocation alloc] initWithLatitude:coordinate.latitude
+                                                              longitude:coordinate.longitude];
+            
+            TripLocation *closestTripLocation = self.trip.tripLocations.firstObject;
+            CLLocationDistance closestDistance = [closestTripLocation.location distanceFromLocation:location];
+            for (TripLocation *tripLocation in self.trip.tripLocations) {
+                if ([tripLocation.location distanceFromLocation:location] < closestDistance) {
+                    closestDistance = [tripLocation.location distanceFromLocation:location];
+                    closestTripLocation = tripLocation;
+                }
             }
+            
+            closestTripLocation.tripAnnotation = [[TripAnnotation alloc] init];
+            TripPoint *tripPoint = [[TripPoint alloc] init];
+            tripPoint.title = incidents[closestTripLocation.tripAnnotation.incidentId];
+            tripPoint.tripLocation = closestTripLocation;
+            tripPoint.tripLocations = self.trip.tripLocations;
+            
+            [self.tripPoints addObject:tripPoint];
+            [self.mapView addAnnotation:tripPoint];
         }
-
-        closestTripLocation.tripAnnotation = [[TripAnnotation alloc] init];
-        TripPoint *tripPoint = [[TripPoint alloc] init];
-        tripPoint.title = incidents[closestTripLocation.tripAnnotation.incidentId];
-        tripPoint.tripLocation = closestTripLocation;
-        tripPoint.tripLocations = self.trip.tripLocations;
-
-        [self.tripPoints addObject:tripPoint];
-        [self.mapView addAnnotation:tripPoint];
     }
 }
 
@@ -356,7 +359,7 @@ calloutAccessoryControlTapped:(UIControl *)control {
         TripPoint *tripPoint = (TripPoint *)sender;
         annotationTVC.tripAnnotation = tripPoint.tripLocation.tripAnnotation;
         annotationTVC.changed = FALSE;
-
+        
     }
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
