@@ -171,9 +171,9 @@
 }
 
 - (IBAction)imprintPressed:(UIButton *)sender {
-    NSString *urlString = @"https://www.mcc.tu-berlin.de/servicemenue/impressum/";
+    NSString *urlString = @"https://www.tu-berlin.de/servicemenue/impressum/parameter/en/mobil/";
     if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"https://www.mcc.tu-berlin.de/servicemenue/impressum/";
+        urlString = @"https://www.tu-berlin.de/servicemenue/impressum/parameter/mobil/";
     }
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
                                        options:@{}
