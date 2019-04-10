@@ -67,6 +67,8 @@
 		84564AF722549B1100D46132 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84564AF922549B1500D46132 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84564AFA22549B1700D46132 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		845FD034225D71E90041568E /* Hash-Suffix.h.sample */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Hash-Suffix.h.sample"; sourceTree = "<group>"; };
+		845FD035225D71FE0041568E /* Hash-Suffix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hash-Suffix.h"; sourceTree = "<group>"; };
 		848337FF22532B7600342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		848338002253C6A200342285 /* server.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = server.cer; sourceTree = "<group>"; };
 		8483380A2253E2AF00342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/constants.plist; sourceTree = "<group>"; };
@@ -173,6 +175,8 @@
 				8418D52D22562148000A1D10 /* UploaderObject.m */,
 				8421D68B2254AE710056B62C /* NSString+hashCode.h */,
 				8421D68C2254AE710056B62C /* NSString+hashCode.m */,
+				845FD035225D71FE0041568E /* Hash-Suffix.h */,
+				845FD034225D71E90041568E /* Hash-Suffix.h.sample */,
 				8421D6912254B6F40056B62C /* NSTimeInterval+hms.h */,
 				8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */,
 				8421D6942254BAA30056B62C /* DSBarChart.h */,
@@ -549,6 +553,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -566,6 +572,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

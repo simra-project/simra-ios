@@ -2,6 +2,16 @@
 
 Build with Xcode 10.2 for iOS >= 11.0
 
+## How to Build
+
+The suffix used in the `clientHash` to protect the upload is not part of the source code. 
+To compile the project:
+
+- copy the file `Hash-Suffix.h.sample` to `Hash-Suffix.h`
+- replace the sample suffix #define HASH_SUFFIX @"mcc_simra"` with the suffix provided from the backend operator
+- compile
+
+
 ## Features
 
 - Internationalization (Base (Developer), en - English and de - Deutsch languages are available and are selected

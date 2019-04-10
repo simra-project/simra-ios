@@ -7,6 +7,7 @@
 //
 
 #import "NSString+hashCode.h"
+#import "Hash-Suffix.h"
 
 @implementation NSString (hashCode)
 - (UInt32)hashCode {
@@ -36,6 +37,7 @@
     return hashString;
 }
 
+
 + (NSString *)clientHash {
     // Java Code
     // public static final SimpleDateFormat DATE_PATTERN_SHORT = new SimpleDateFormat("dd.MM.yyyy");
@@ -46,8 +48,9 @@
 
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.dateFormat = @"dd.MM.yyyy";
-    NSString *client = [NSString stringWithFormat:@"%@KsSFazUyht3yQfKv",
-                        [df stringFromDate:[NSDate date]]];
+    NSString *client = [NSString stringWithFormat:@"%@%@",
+                        [df stringFromDate:[NSDate date]],
+                        HASH_SUFFIX];
 
     return client.hashString;
 }
