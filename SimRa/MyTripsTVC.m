@@ -150,7 +150,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
         Trip *trip = ad.trips.trips[key];
 
-        [trip uploadFile:@"accGPS.csv"
+        [trip uploadFile:@"ride"
           WithController:self
                    error:@selector(completionError:)
               completion:@selector(completionResponse:)];
@@ -208,7 +208,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (void)positiveCompletionResponse:(NSInteger)statusCode withText:(NSString *)text {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [ad.trips uploadFile:@"profile.csv"
+    [ad.trips uploadFile:@"profile"
           WithController:self
                    error:@selector(completionErrorTrips:)
               completion:@selector(completionResponseTrips:)];

@@ -62,15 +62,16 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;
     if (self.fileHash && self.filePasswd) {
-        urlString = [NSString stringWithFormat:@"%@//%@/%d/update?fileHash=%@&filePassword=%@&loc=%@&clientHash=%@",
+        urlString = [NSString stringWithFormat:@"%@//%@/%d/%@?fileHash=%@&filePassword=%@&loc=%@&clientHash=%@",
                      UPLOAD_SCHEME, UPLOAD_HOST, UPLOAD_VERSION,
+                     name,
                      self.fileHash,
                      self.filePasswd,
                      locales[regionId],
                      NSString.clientHash];
         [request setHTTPMethod:@"PUT"];
     } else {
-        urlString = [NSString stringWithFormat: @"%@//%@/%d/upload?fileName=%@&loc=%@&clientHash=%@",
+        urlString = [NSString stringWithFormat: @"%@//%@/%d/%@?loc=%@&clientHash=%@",
                      UPLOAD_SCHEME, UPLOAD_HOST, UPLOAD_VERSION,
                      name,
                      locales[regionId],
