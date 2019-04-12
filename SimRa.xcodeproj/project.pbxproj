@@ -551,8 +551,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C652JFWU23;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = KA3T58F3N4;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/Info.plist;
@@ -562,6 +562,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "SimRa Dev RobTest";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -570,8 +571,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C652JFWU23;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = KA3T58F3N4;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/Info.plist;
@@ -581,6 +583,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "SimRa Dist RobTest";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
