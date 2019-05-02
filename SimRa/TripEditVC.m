@@ -8,7 +8,9 @@
 
 #import "TripEditVC.h"
 #import "AnnotationTVC.h"
+#import "TripDetailTVC.h"
 #import "AppDelegate.h"
+#import "ImageAnnotationView.h"
 
 @interface TripPoint : NSObject <MKAnnotation>
 @property (nonatomic, copy) NSString *title;
@@ -112,6 +114,9 @@
 @property (strong, nonatomic) TripPoint *startPoint;
 @property (strong, nonatomic) TripPoint *endPoint;
 @property (strong, nonatomic) NSMutableArray <TripPoint *> *tripPoints;
+@property (strong, nonatomic) UIButton *detailButton;
+
+@property (nonatomic) BOOL initialTripDetail;
 
 @end
 
@@ -121,10 +126,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.mapView.delegate = self;
+
+    self.detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    self.detailButton.translatesAutoresizingMaskIntoConstraints = false;
+    [self.detailButton addTarget:self action:@selector(infoPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.detailButton];
+
+    NSLayoutConstraint *a = [NSLayoutConstraint constraintWithItem:self.detailButton
+                                                         attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual
+                                                            toItem:self.mapView
+                                                         attribute:NSLayoutAttributeBottom
+                                                        multiplier:1
+                                                          constant:-10];
+    NSLayoutConstraint *b = [NSLayoutConstraint constraintWithItem:self.detailButton
+                                                         attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual
+                                                            toItem:self.mapView
+                                                         attribute:NSLayoutAttributeTrailing
+                                                        multiplier:1
+                                                          constant:-10];
+
+    [NSLayoutConstraint activateConstraints:@[a, b]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (!self.initialTripDetail) {
+        self.initialTripDetail = TRUE;
+        [self performSegueWithIdentifier:@"tripDetail:" sender:nil];
+    }
     [self setup];
 }
 
@@ -134,6 +163,10 @@
         [self.trip save];
     }
     [super viewWillDisappear:animated];
+}
+
+- (IBAction)infoPressed:(id)sender {
+    [self performSegueWithIdentifier:@"tripDetail:" sender:nil];
 }
 
 - (void)setup {
@@ -188,43 +221,46 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if (annotation == self.startPoint) {
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"startPoint"];
-        MKPinAnnotationView *pinAnnotationView;
+        ImageAnnotationView *imageAnnotationView;
         if (annotationView) {
-            pinAnnotationView = (MKPinAnnotationView *)annotationView;
+            imageAnnotationView = (ImageAnnotationView *)annotationView;
         } else {
-            pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-                                                                reuseIdentifier:@"startPoint"];
+            imageAnnotationView = [[ImageAnnotationView alloc] initWithAnnotation:annotation
+                                                                  reuseIdentifier:@"startPoint"];
         }
-        pinAnnotationView.pinTintColor = MKPinAnnotationView.greenPinColor;
+        imageAnnotationView.annotationImage = [UIImage imageNamed:@"Start"];
+        imageAnnotationView.centerOffset = CGPointMake(+8, -32);
         if (self.trip.uploaded) {
-            pinAnnotationView.draggable = false;
+            imageAnnotationView.draggable = false;
         } else {
-            pinAnnotationView.draggable = true;
+            imageAnnotationView.draggable = true;
         }
-        pinAnnotationView.canShowCallout = YES;
-        [pinAnnotationView setNeedsDisplay];
+        imageAnnotationView.canShowCallout = YES;
+        [imageAnnotationView setNeedsDisplay];
         
-        return pinAnnotationView;
+        return imageAnnotationView;
         
     } else if (annotation == self.endPoint) {
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"endPoint"];
-        MKPinAnnotationView *pinAnnotationView;
+        ImageAnnotationView *imageAnnotationView;
         if (annotationView) {
-            pinAnnotationView = (MKPinAnnotationView *)annotationView;
+            imageAnnotationView = (ImageAnnotationView *)annotationView;
         } else {
-            pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+            imageAnnotationView = [[ImageAnnotationView alloc] initWithAnnotation:annotation
                                                                 reuseIdentifier:@"endPoint"];
         }
-        pinAnnotationView.pinTintColor = MKPinAnnotationView.redPinColor;
+        imageAnnotationView.annotationImage = [UIImage imageNamed:@"Finish"];
+        imageAnnotationView.centerOffset = CGPointMake(+8, -32);
+
         if (self.trip.uploaded) {
-            pinAnnotationView.draggable = false;
+            imageAnnotationView.draggable = false;
         } else {
-            pinAnnotationView.draggable = true;
+            imageAnnotationView.draggable = true;
         }
-        pinAnnotationView.canShowCallout = YES;
-        [pinAnnotationView setNeedsDisplay];
+        imageAnnotationView.canShowCallout = YES;
+        [imageAnnotationView setNeedsDisplay];
         
-        return pinAnnotationView;
+        return imageAnnotationView;
         
     } else if ([self.tripPoints containsObject:annotation]) {
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"tripPoint"];
@@ -359,10 +395,11 @@ calloutAccessoryControlTapped:(UIControl *)control {
         TripPoint *tripPoint = (TripPoint *)sender;
         annotationTVC.tripAnnotation = tripPoint.tripLocation.tripAnnotation;
         annotationTVC.changed = FALSE;
-        
     }
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.destinationViewController isKindOfClass:[TripDetailTVC class]]) {
+        TripDetailTVC *tripDetailTVC = (TripDetailTVC *)segue.destinationViewController;
+        tripDetailTVC.trip = self.trip;
+    }
 }
 
 - (IBAction)annotationChanged:(UIStoryboardSegue *)unwindSegue {

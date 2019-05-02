@@ -14,6 +14,8 @@
 		8421D6902254B4E50056B62C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8421D68F2254B4E50056B62C /* LaunchScreen.storyboard */; };
 		8421D6932254B6F40056B62C /* NSTimeInterval+hms.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */; };
 		8421D6962254BAA30056B62C /* DSBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D6952254BAA30056B62C /* DSBarChart.m */; };
+		845467E82278B9E30060E06D /* ImageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845467E72278B9E30060E06D /* ImageAnnotationView.m */; };
+		845467EB227B0ABD0060E06D /* TripDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 845467EA227B0ABD0060E06D /* TripDetailTVC.m */; };
 		84564AF822549B1200D46132 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84564AF622549B1100D46132 /* Localizable.strings */; };
 		848338012253C6A200342285 /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 848338002253C6A200342285 /* server.cer */; };
 		848338022253CA0D00342285 /* constants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848338042253CA0D00342285 /* constants.plist */; };
@@ -64,6 +66,10 @@
 		8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimeInterval+hms.m"; sourceTree = "<group>"; };
 		8421D6942254BAA30056B62C /* DSBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSBarChart.h; sourceTree = "<group>"; };
 		8421D6952254BAA30056B62C /* DSBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSBarChart.m; sourceTree = "<group>"; };
+		845467E62278B9E30060E06D /* ImageAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAnnotationView.h; sourceTree = "<group>"; };
+		845467E72278B9E30060E06D /* ImageAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageAnnotationView.m; sourceTree = "<group>"; };
+		845467E9227B0ABD0060E06D /* TripDetailTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripDetailTVC.h; sourceTree = "<group>"; };
+		845467EA227B0ABD0060E06D /* TripDetailTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripDetailTVC.m; sourceTree = "<group>"; };
 		84564AF722549B1100D46132 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84564AF922549B1500D46132 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84564AFA22549B1700D46132 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -157,6 +163,8 @@
 				84DD1E8A224C0027004895F9 /* ViewController.m */,
 				84DD1EC3224CEAB6004895F9 /* AnnotationView.h */,
 				84DD1EC4224CEAB6004895F9 /* AnnotationView.m */,
+				845467E62278B9E30060E06D /* ImageAnnotationView.h */,
+				845467E72278B9E30060E06D /* ImageAnnotationView.m */,
 				840E20AB224D125800488B31 /* MyTripsTVC.h */,
 				840E20AC224D125800488B31 /* MyTripsTVC.m */,
 				840E20AE224D190400488B31 /* SettingsTVC.h */,
@@ -165,6 +173,8 @@
 				849CA146224D3C6600CE45EB /* IdPicker.m */,
 				84E36107224E0721003847E8 /* TripEditVC.h */,
 				84E36108224E0721003847E8 /* TripEditVC.m */,
+				845467E9227B0ABD0060E06D /* TripDetailTVC.h */,
+				845467EA227B0ABD0060E06D /* TripDetailTVC.m */,
 				84E3610A224E0759003847E8 /* AnnotationTVC.h */,
 				84E3610B224E0759003847E8 /* AnnotationTVC.m */,
 				84DD1EC0224CD9BF004895F9 /* Trips.h */,
@@ -358,7 +368,9 @@
 				84E3610C224E0759003847E8 /* AnnotationTVC.m in Sources */,
 				84DD1EC5224CEAB6004895F9 /* AnnotationView.m in Sources */,
 				840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */,
+				845467EB227B0ABD0060E06D /* TripDetailTVC.m in Sources */,
 				8421D68D2254AE710056B62C /* NSString+hashCode.m in Sources */,
+				845467E82278B9E30060E06D /* ImageAnnotationView.m in Sources */,
 				84DD1E99224C0028004895F9 /* main.m in Sources */,
 				849CA147224D3C6600CE45EB /* IdPicker.m in Sources */,
 				84DD1E88224C0027004895F9 /* AppDelegate.m in Sources */,
