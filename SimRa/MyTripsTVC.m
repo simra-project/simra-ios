@@ -185,21 +185,35 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 }
 
 - (IBAction)uploadPressed:(UIBarButtonItem *)sender {
-    if (self.tableView.indexPathForSelectedRow) {
-        AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
-        Trip *trip = ad.trips.trips[key];
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if ([ad.defaults integerForKey:@"regionId"] == 0) {
+        UIAlertController *ac = [UIAlertController
+                                 alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
+                                 message:NSLocalizedString(@"Missing Region", @"Error message if region is not set yet")
+                                 preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        [self performSegueWithIdentifier:@"profile" sender:nil];
+                                                    }];
+        [ac addAction:aay];
+        [self presentViewController:ac animated:TRUE completion:nil];
+    } else {
+        if (self.tableView.indexPathForSelectedRow) {
+            NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
+            Trip *trip = ad.trips.trips[key];
 
-        [trip uploadFile:@"ride"
-          WithController:self
-                   error:@selector(completionError:)
-              completion:@selector(completionResponse:)];
+            [trip uploadFile:@"ride"
+              WithController:self
+                       error:@selector(completionError:)
+                  completion:@selector(completionResponse:)];
 
-        self.ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
-                                                      message:NSLocalizedString(@"Running", @"Running")
-                                               preferredStyle:UIAlertControllerStyleAlert];
+            self.ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
+                                                          message:NSLocalizedString(@"Running", @"Running")
+                                                   preferredStyle:UIAlertControllerStyleAlert];
 
-        [self presentViewController:self.ac animated:TRUE completion:nil];
+            [self presentViewController:self.ac animated:TRUE completion:nil];
+        }
     }
 }
 

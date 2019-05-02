@@ -1116,6 +1116,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="c8U-8m-Y77" kind="show" identifier="profile" id="i6e-Cg-Mdt"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cVh-Or-W9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1665,4 +1668,7 @@
     <resources>
         <image name="RacingFlag" width="32" height="32"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="i6e-Cg-Mdt"/>
+    </inferredMetricsTieBreakers>
 </document>

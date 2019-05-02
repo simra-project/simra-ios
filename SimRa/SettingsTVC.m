@@ -65,6 +65,11 @@
     self.age.arrayIndex = [ad.defaults integerForKey:@"ageId"];
     self.sex.arrayIndex = [ad.defaults integerForKey:@"sexId"];
     self.region.arrayIndex = [ad.defaults integerForKey:@"regionId"];
+    if (self.region.arrayIndex == 0) {
+        self.region.textColor = [UIColor redColor];
+    } else {
+        self.region.textColor = [UIColor blackColor];
+    }
     self.experience.arrayIndex = [ad.defaults integerForKey:@"experienceId"];
 
     self.totalIdle.text = hms([ad.defaults doubleForKey:@"totalIdle"] / 1000.0);
@@ -191,6 +196,7 @@
 - (IBAction)regionChanged:(IdPicker *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setInteger:sender.arrayIndex forKey:@"regionId"];
+    [self update];
 }
 - (IBAction)experienceChanged:(IdPicker *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
