@@ -182,4 +182,6 @@
 /* Class = "UIBarButtonItem"; title = "Upload"; ObjectID = "MJ7-9y-XJz"; */
 "MJ7-9y-XJz.title" = "Upload";
 
+/* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "hzM-QB-nuc"; */
+"hzM-QB-nuc.title" = "Settings";
 
