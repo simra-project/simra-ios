@@ -49,16 +49,27 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self adjustSelection];
+}
+
+- (void)adjustSelection {
+    self.navigationItem.rightBarButtonItem.enabled = FALSE;
+    NSLog(@"indexPathForSelectedRow pre  %@", self.tableView.indexPathForSelectedRow);
+    if (self.tableView.indexPathForSelectedRow) {
+        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:FALSE];
+    }
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSArray <NSNumber *> *keys = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil];
     for (NSInteger row = 0; row < keys.count; row++) {
         NSNumber *key = keys[row];
         Trip *trip = ad.trips.trips[key];
         if (!trip.uploaded) {
+            NSLog(@"selectRowAtIndexPath %@", [NSIndexPath indexPathForRow:row inSection:0]);
             [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]
-                                        animated:TRUE
-                                  scrollPosition:UITableViewScrollPositionNone];
+                                        animated:FALSE
+                                  scrollPosition:UITableViewScrollPositionMiddle];
             self.navigationItem.rightBarButtonItem.enabled = TRUE;
+            NSLog(@"indexPathForSelectedRow post %@", self.tableView.indexPathForSelectedRow);
             break;
         }
     }
@@ -140,7 +151,11 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
         NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
         [ad.trips deleteTripWithIdentifier:key.integerValue];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView performBatchUpdates:^{
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        } completion:^(BOOL finished) {
+            [self performSelector:@selector(adjustSelection) withObject:nil afterDelay:1.0];
+        }];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
@@ -200,6 +215,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         [self.tableView reloadData];
+                                                        [self adjustSelection];
                                                     }];
         [ac addAction:aay];
         [self presentViewController:ac animated:TRUE completion:nil];
@@ -260,6 +276,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
+                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -275,6 +292,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
+                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -292,6 +310,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         [self.tableView reloadData];
+                                                        [self adjustSelection];
                                                     }];
         [ac addAction:aay];
         [self presentViewController:ac animated:TRUE completion:nil];
@@ -336,6 +355,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                           style:UIAlertActionStyleDefault
                           handler:^(UIAlertAction * _Nonnull action) {
                               [self.tableView reloadData];
+                              [self adjustSelection];
                           }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -353,6 +373,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
+                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -368,6 +389,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
+                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
