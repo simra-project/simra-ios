@@ -178,3 +178,8 @@
 
 /* Class = "UIBarButtonItem"; title = "Clip"; ObjectID = "VHZ-9D-W3q"; */
 "VHZ-9D-W3q.title" = "Clip";
+
+/* Class = "UIBarButtonItem"; title = "Upload"; ObjectID = "MJ7-9y-XJz"; */
+"MJ7-9y-XJz.title" = "Upload";
+
+

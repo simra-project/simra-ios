@@ -24,15 +24,17 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7xF-YQ-Vih">
                                 <rect key="frame" x="0.0" y="539" width="320" height="29"/>
                                 <items>
-                                    <barButtonItem systemItem="play" id="NeF-Te-cJc">
+                                    <barButtonItem title="Start" id="NeF-Te-cJc">
                                         <connections>
                                             <action selector="playButtonPressed:" destination="BYZ-38-t0r" id="oTr-vq-4Ql"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="zon-bJ-fHC"/>
-                                    <barButtonItem enabled="NO" title="Item" style="plain" id="Py2-VK-zVn"/>
+                                    <barButtonItem enabled="NO" title="Item" style="plain" id="Py2-VK-zVn">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
                                     <barButtonItem systemItem="flexibleSpace" id="U3d-bw-Zah"/>
-                                    <barButtonItem systemItem="stop" id="dZi-32-hxA">
+                                    <barButtonItem title="Stop" id="dZi-32-hxA">
                                         <connections>
                                             <action selector="stopButtonPressed:" destination="BYZ-38-t0r" id="XXl-nJ-5Ws"/>
                                         </connections>
@@ -43,12 +45,12 @@
                         <viewLayoutGuide key="safeArea" id="jNN-Gl-Ju2"/>
                     </stackView>
                     <navigationItem key="navigationItem" title="SimRa" id="yDl-6c-Zif">
-                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="hzM-QB-nuc">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" id="hzM-QB-nuc">
                             <connections>
                                 <segue destination="Zrj-ys-gys" kind="show" id="C7l-ZL-GdY"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="5h9-tM-U6A">
+                        <barButtonItem key="rightBarButtonItem" title="Trips" id="5h9-tM-U6A">
                             <connections>
                                 <segue destination="PYd-3I-T6G" kind="show" id="Nv0-xU-ZYr"/>
                             </connections>
@@ -259,8 +261,35 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="zS8-SF-nTN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" id="cWX-0Q-Z5a">
                                         <rect key="frame" x="0.0" y="364" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cWX-0Q-Z5a" id="Uz7-ks-bXw">
+                                            <rect key="frame" x="0.0" y="0.0" width="252" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpD-ll-SMT">
+                                                    <rect key="frame" x="20" y="11.5" width="212" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="gni-8h-gfJ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="rpD-ll-SMT" firstAttribute="centerY" secondItem="Uz7-ks-bXw" secondAttribute="centerY" id="0UF-Ur-grg"/>
+                                                <constraint firstAttribute="trailing" secondItem="rpD-ll-SMT" secondAttribute="trailing" constant="20" symbolic="YES" id="BbN-Co-KZ5"/>
+                                                <constraint firstItem="rpD-ll-SMT" firstAttribute="leading" secondItem="Uz7-ks-bXw" secondAttribute="leading" constant="20" symbolic="YES" id="vdJ-PM-w9Z"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="nN8-Nf-2E6" kind="show" trigger="accessoryAction" id="FEG-rH-HeW"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="zS8-SF-nTN">
+                                        <rect key="frame" x="0.0" y="408" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zS8-SF-nTN" id="pya-Ma-Q37">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -310,6 +339,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3B-Kr-Puk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1895.625" y="-134.1549295774648"/>
+        </scene>
+        <!--Credits-->
+        <scene sceneID="eg0-8o-qRg">
+            <objects>
+                <tableViewController id="nN8-Nf-2E6" customClass="SettingsTVC" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="sr9-9x-kZn">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections>
+                            <tableViewSection id="LmQ-FC-QKc">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="311" id="hvi-xY-NPI">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="311"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hvi-xY-NPI" id="SJ9-8q-Wjg">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="310.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Icons made by Freepik https://www.freepik.com from https://www.flaticon.com/" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FlT-0A-Udk">
+                                                    <rect key="frame" x="64" y="0.0" width="240" height="73"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                </textView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RacingFlag" translatesAutoresizingMaskIntoConstraints="NO" id="YhP-Kz-C4g">
+                                                    <rect key="frame" x="0.0" y="0.0" width="65" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="nN8-Nf-2E6" id="tRG-9B-583"/>
+                            <outlet property="delegate" destination="nN8-Nf-2E6" id="baX-w0-d1O"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Credits" id="SUc-tM-AYx"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WbQ-JF-rk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2210.625" y="594.71830985915494"/>
         </scene>
         <!--Settings-->
         <scene sceneID="Hvw-2j-48M">
@@ -1034,7 +1110,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="My Trips" id="pq7-Kn-x7k">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="action" id="MJ7-9y-XJz">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Upload" id="MJ7-9y-XJz">
                             <connections>
                                 <action selector="uploadPressed:" destination="PYd-3I-T6G" id="jkC-Mn-b9y"/>
                             </connections>
@@ -1586,4 +1662,7 @@
             <point key="canvasLocation" x="186.95652173913044" y="-553.125"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="RacingFlag" width="32" height="32"/>
+    </resources>
 </document>

@@ -177,4 +177,7 @@
 "zmb-dx-KDO.text" = "Lieferwagen";
 
 /* Class = "UIBarButtonItem"; title = "Clip"; ObjectID = "VHZ-9D-W3q"; */
-"VHZ-9D-W3q.title" = "Schnipp";
+"VHZ-9D-W3q.title" = "Schneiden";
+
+/* Class = "UIBarButtonItem"; title = "Upload"; ObjectID = "MJ7-9y-XJz"; */
+"MJ7-9y-XJz.title" = "Hochladen";
