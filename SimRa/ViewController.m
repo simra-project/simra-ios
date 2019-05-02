@@ -11,6 +11,7 @@
 #import "Trips.h"
 #import "AnnotationView.h"
 #import "NSTimeInterval+hms.h"
+#import "MyTripsTVC.h"
 
 @interface MyAnnotation: NSObject <MKAnnotation>
 @property (strong, nonatomic) CLLocation *location;
@@ -37,6 +38,8 @@
 
 @property (strong, nonatomic) MKUserTrackingButton *trackingButton;
 @property (strong, nonatomic) Trip *trip;
+@property (strong, nonatomic) Trip *recordedTrip;
+
 @property (strong, nonatomic) AnnotationView *annotationView;
 @property (strong, nonatomic) MyAnnotation *myAnnotation;
 
@@ -108,6 +111,9 @@
                      forKeyPath:@"lastTripMotion"];
 
     [self.trip stopRecording];
+    self.recordedTrip = self.trip;
+    [self performSegueWithIdentifier:@"trips:" sender:nil];
+
     self.trip = nil;
     
     self.annotationView.recording = FALSE;
@@ -202,4 +208,12 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if (!sender) {
+        if ([segue.destinationViewController isKindOfClass:[MyTripsTVC class]]) {
+            MyTripsTVC *myTripsTVC = (MyTripsTVC *)segue.destinationViewController;
+            myTripsTVC.preselectedTrip = self.recordedTrip;
+        }
+    }
+}
 @end

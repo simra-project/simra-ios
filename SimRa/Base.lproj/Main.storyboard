@@ -52,7 +52,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Trips" id="5h9-tM-U6A">
                             <connections>
-                                <segue destination="PYd-3I-T6G" kind="show" id="Nv0-xU-ZYr"/>
+                                <segue destination="PYd-3I-T6G" kind="show" identifier="trips:" id="Nv0-xU-ZYr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
