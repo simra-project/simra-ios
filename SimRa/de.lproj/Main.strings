@@ -185,3 +185,9 @@
 /* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "hzM-QB-nuc"; */
 "hzM-QB-nuc.title" = "Einstellungen";
 
+/* Class = "UIBarButtonItem"; title = "Start"; ObjectID = "NeF-Te-cJc"; */
+"NeF-Te-cJc.title" = "Aufzeichnen";
+
+/* Class = "UIBarButtonItem"; title = "Stop"; ObjectID = "dZi-32-hxA"; */
+"dZi-32-hxA.title" = "Stopp";
+

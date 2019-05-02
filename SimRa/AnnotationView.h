@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AnnotationView : MKAnnotationView
-@property (strong, nonatomic) NSString *tid;
 @property (strong, nonatomic) UIImage *personImage;
+@property (nonatomic) BOOL recording;
 @property (nonatomic) double speed;
 @property (nonatomic) double course;
 @property (nonatomic) double accx;

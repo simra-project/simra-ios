@@ -13,12 +13,8 @@
 #define CIRCLE_SIZE 100.0
 #define CIRCLE_COLOR [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5]
 
-#define FENCE_FRIEND_COLOR [UIColor greenColor]
+#define FENCE_COLOR [UIColor colorWithRed:77.0 / 255.0 green:97.0 / 255.0 blue:137.0 / 255.0 alpha:1.0]
 #define FENCE_WIDTH 3.0
-
-#define ID_COLOR [UIColor blackColor]
-#define ID_FONTSIZE 20.0
-#define ID_INSET 3.0
 
 #define COURSE_COLOR [UIColor blueColor]
 #define COURSE_WIDTH 10.0
@@ -34,6 +30,9 @@
 
 #define TACHO_COLOR [UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.5]
 #define TACHO_MAX 50.0 // km/h
+
+#define CONTROL_FILL_COLOR [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.75]
+#define CONTROL_STROKE_COLOR [UIColor whiteColor]
 
 
 /** This method does not seem to be called anymore in ios10
@@ -73,8 +72,7 @@
     return image;
 }
 
-- (void)drawRect:(CGRect)rect
-{
+- (void)drawRect:(CGRect)rect {
     // It is all within a circle
     UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:rect];
     [circle addClip];
@@ -83,13 +81,11 @@
     [CIRCLE_COLOR setFill];
     [circle fill];
 
-    // ID
     if (self.personImage != nil) {
         [self.personImage drawInRect:rect];
     }
 
     // Tachometer
-
     if (self.speed > 0) {
         UIBezierPath *tacho = [[UIBezierPath alloc] init];
         [tacho moveToPoint:CGPointMake(rect.origin.x + rect.size.width / 2.0,
@@ -112,24 +108,9 @@
         [tacho stroke];
     }
 
-    // ID
-    if (self.personImage == nil) {
-        if (self.tid != nil && ![self.tid isEqualToString:@""]) {
-            UIFont *font = [UIFont boldSystemFontOfSize:ID_FONTSIZE];
-            NSDictionary *attributes = @{NSFontAttributeName: font,
-                                         NSForegroundColorAttributeName: ID_COLOR};
-            CGRect boundingRect = [self.tid boundingRectWithSize:rect.size options:0 attributes:attributes context:nil];
-            CGRect textRect = CGRectMake(rect.origin.x + (rect.size.width - boundingRect.size.width) / 2,
-                                         rect.origin.y + (rect.size.height - boundingRect.size.height) / 2,
-                                         boundingRect.size.width, boundingRect.size.height);
-
-            [self.tid drawInRect:textRect withAttributes:attributes];
-        }
-    }
-
     // FENCE
     [circle setLineWidth:FENCE_WIDTH];
-    [FENCE_FRIEND_COLOR setStroke];
+    [FENCE_COLOR setStroke];
     [circle stroke];
 
     // Course
@@ -152,13 +133,13 @@
     // Accelleration
     if (self.accx != 0 || self.accy != 0 ||self.accz != 0) {
         UIBezierPath *accx = [UIBezierPath bezierPathWithOvalInRect:
-                                CGRectMake(
-                                           rect.origin.x + rect.size.width / 2,
-                                           rect.origin.y + rect.size.height / 2,
-                                           fabs(self.accx) * rect.size.width / 2,
-                                           fabs(self.accx) * rect.size.height / 2
-                                           )
-                                ];
+                              CGRectMake(
+                                         rect.origin.x + rect.size.width / 2,
+                                         rect.origin.y + rect.size.height / 2,
+                                         fabs(self.accx) * rect.size.width / 2,
+                                         fabs(self.accx) * rect.size.height / 2
+                                         )
+                              ];
         [ACCX_COLOR setFill];
         [accx fill];
         [CIRCLE_COLOR setStroke];
@@ -194,6 +175,36 @@
         [accz stroke];
     }
 
+    // Record - Stop control
+    UIBezierPath *control;
+
+    if (self.recording) {
+        control = [UIBezierPath bezierPathWithRoundedRect:
+                   CGRectMake(
+                              rect.origin.x + rect.size.width / 4,
+                              rect.origin.y + rect.size.height / 4,
+                              rect.size.width / 2,
+                              rect.size.height / 2
+                              )
+                                             cornerRadius:rect.size.width / 16
+                   ];
+    } else {
+        control = [UIBezierPath bezierPathWithOvalInRect:
+                   CGRectMake(
+                              rect.origin.x + rect.size.width / 8,
+                              rect.origin.y + rect.size.height / 8,
+                              rect.size.width / 4 * 3,
+                              rect.size.height / 4 * 3
+                              )
+                   ];
+    }
+
+
+    [CONTROL_FILL_COLOR setFill];
+    [control fill];
+    [CONTROL_STROKE_COLOR setStroke];
+    control.lineWidth = 1.0;
+    [control stroke];
 }
 
 @end
