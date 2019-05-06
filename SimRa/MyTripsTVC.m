@@ -175,6 +175,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
             NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
             Trip *trip = ad.trips.trips[key];
             tripEditVC.trip = trip;
+            tripEditVC.clean = TRUE;
             tripEditVC.changed = FALSE;
         } else {
             tripEditVC.trip = self.preselectedTrip;

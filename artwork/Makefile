@@ -15,7 +15,13 @@ all: \
 	appicon-76.png \
 	appicon-76@2x.png \
 	appicon-83-5@2x.png \
-	appicon-1024.png 
+	appicon-1024.png \
+	start-48.png \
+	start-48@2x.png \
+	start-48@3x.png \
+	racing-flag-48.png \
+	racing-flag-48@2x.png \
+	racing-flag-48@3x.png \
 
 appicon-20.png:simra.png
 	$(IMAGEW) -w 20 -h 20 $< $@
@@ -61,3 +67,21 @@ appicon-83-5@2x.png:simra.png
 
 appicon-1024.png:simra.png
 	$(IMAGEW) -w 1024 -h 1024 $< $@
+
+start-48.png:start.png
+	$(IMAGEW) -w 48 -h 48 $< $@
+
+start-48@2x.png:start.png
+	$(IMAGEW) -w 96 -h 96 $< $@
+
+start-48@3x.png:start.png
+	$(IMAGEW) -w 144 -h 144 $< $@
+
+racing-flag-48.png:racing-flag.png
+	$(IMAGEW) -w 48 -h 48 $< $@
+
+racing-flag-48@2x.png:racing-flag.png
+	$(IMAGEW) -w 96 -h 96 $< $@
+
+racing-flag-48@3x.png:racing-flag.png
+	$(IMAGEW) -w 144 -h 144 $< $@

@@ -351,26 +351,71 @@
                         <sections>
                             <tableViewSection id="LmQ-FC-QKc">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="311" id="hvi-xY-NPI">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="311"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="176" id="hvi-xY-NPI">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="176"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hvi-xY-NPI" id="SJ9-8q-Wjg">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="310.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="175.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Icons made by Freepik https://www.freepik.com from https://www.flaticon.com/" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FlT-0A-Udk">
-                                                    <rect key="frame" x="64" y="0.0" width="240" height="73"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FlT-0A-Udk">
+                                                    <rect key="frame" x="92" y="20" width="208" height="135.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <string key="text">Icons made by
+Freepik www.freepik.com
+from www.flaticon.com</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                </textView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start" translatesAutoresizingMaskIntoConstraints="NO" id="YhP-Kz-C4g">
+                                                    <rect key="frame" x="20" y="20" width="64" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="64" id="5re-V3-jXR"/>
+                                                        <constraint firstAttribute="width" constant="64" id="GSi-DW-g9w"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="racing-flag" translatesAutoresizingMaskIntoConstraints="NO" id="iRR-Ki-aL6">
+                                                    <rect key="frame" x="20" y="92" width="64" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="64" id="4Z8-9d-2JX"/>
+                                                        <constraint firstAttribute="width" constant="64" id="69T-jE-ySW"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FlT-0A-Udk" firstAttribute="leading" secondItem="YhP-Kz-C4g" secondAttribute="trailing" constant="8" symbolic="YES" id="EhR-z7-EYb"/>
+                                                <constraint firstItem="YhP-Kz-C4g" firstAttribute="leading" secondItem="SJ9-8q-Wjg" secondAttribute="leading" constant="20" symbolic="YES" id="FEh-NH-cqJ"/>
+                                                <constraint firstItem="iRR-Ki-aL6" firstAttribute="leading" secondItem="SJ9-8q-Wjg" secondAttribute="leading" constant="20" symbolic="YES" id="R7Q-HC-0Je"/>
+                                                <constraint firstAttribute="trailing" secondItem="FlT-0A-Udk" secondAttribute="trailing" constant="20" symbolic="YES" id="VdQ-ng-huv"/>
+                                                <constraint firstAttribute="bottom" secondItem="FlT-0A-Udk" secondAttribute="bottom" constant="20" symbolic="YES" id="Xkt-BX-Uba"/>
+                                                <constraint firstItem="YhP-Kz-C4g" firstAttribute="top" secondItem="SJ9-8q-Wjg" secondAttribute="top" constant="20" symbolic="YES" id="atQ-k8-NcW"/>
+                                                <constraint firstItem="FlT-0A-Udk" firstAttribute="top" secondItem="SJ9-8q-Wjg" secondAttribute="top" constant="20" symbolic="YES" id="bNj-P7-PlJ"/>
+                                                <constraint firstItem="iRR-Ki-aL6" firstAttribute="top" secondItem="YhP-Kz-C4g" secondAttribute="bottom" constant="8" symbolic="YES" id="sWK-10-tke"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="119" id="2PF-Zg-VOX">
+                                        <rect key="frame" x="0.0" y="176" width="320" height="119"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2PF-Zg-VOX" id="P49-vJ-HbT">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="118.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="TTRangeSlider ByTom Thorpe is provided under the MIT license https://cocoapods.org/pods/TTRangeSlider" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vbZ-lE-wRt">
+                                                    <rect key="frame" x="20" y="20" width="280" height="78.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                 </textView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RacingFlag" translatesAutoresizingMaskIntoConstraints="NO" id="YhP-Kz-C4g">
-                                                    <rect key="frame" x="0.0" y="0.0" width="65" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vbZ-lE-wRt" firstAttribute="top" secondItem="P49-vJ-HbT" secondAttribute="top" constant="20" symbolic="YES" id="MZX-LH-Pqw"/>
+                                                <constraint firstItem="vbZ-lE-wRt" firstAttribute="leading" secondItem="P49-vJ-HbT" secondAttribute="leading" constant="20" symbolic="YES" id="Vtz-N2-nWd"/>
+                                                <constraint firstAttribute="bottom" secondItem="vbZ-lE-wRt" secondAttribute="bottom" constant="20" symbolic="YES" id="dDd-KD-maz"/>
+                                                <constraint firstAttribute="trailing" secondItem="vbZ-lE-wRt" secondAttribute="trailing" constant="20" symbolic="YES" id="s1Q-pl-C9p"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -385,7 +430,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WbQ-JF-rk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1896" y="689"/>
+            <point key="canvasLocation" x="1895.625" y="688.73239436619724"/>
         </scene>
         <!--Settings-->
         <scene sceneID="Hvw-2j-48M">
@@ -1070,7 +1115,7 @@
         <!--Trip Detail-->
         <scene sceneID="qgk-KA-JYm">
             <objects>
-                <tableViewController id="U6v-wH-DyA" customClass="TripDetailTVC" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="formSheet" id="U6v-wH-DyA" customClass="TripDetailTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8PU-sN-LxE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1832,7 +1877,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="RacingFlag" width="32" height="32"/>
+        <image name="racing-flag" width="48" height="48"/>
+        <image name="start" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="i6e-Cg-Mdt"/>

@@ -1,6 +1,7 @@
 # SimRa iOS App
 
 Build with Xcode 10.2 for iOS >= 11.0
+Packages are integrated with the help of [Cocoapods](https://cocoapods.org)
 
 ## How to Build
 
@@ -10,6 +11,8 @@ To compile the project:
 - copy the file `Hash-Suffix.h.sample` to `Hash-Suffix.h`
 - replace the sample suffix #define HASH_SUFFIX @"mcc_simra"` with the suffix provided from the backend operator
 - compile
+
+Always open `SimRa.xcworkspace` with Xcode, not `SimRa.xcodeproj` to include Cocoapods.
 
 
 ## Features
@@ -24,3 +27,6 @@ To compile the project:
 
 - ...
 
+## LICENSE
+
+SimRa uses [TTRangeSlider](https://github.com/TomThorpe/TTRangeSlider) by Tom Thorpe available under the MIT license.

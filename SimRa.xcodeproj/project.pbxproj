@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0970067372FFAB52EE7B49B4 /* Pods_SimRa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */; };
 		840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AC224D125800488B31 /* MyTripsTVC.m */; };
 		840E20B0224D190400488B31 /* SettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AF224D190400488B31 /* SettingsTVC.m */; };
 		8418D52E22562148000A1D10 /* UploaderObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418D52D22562148000A1D10 /* UploaderObject.m */; };
@@ -14,7 +15,6 @@
 		8421D6902254B4E50056B62C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8421D68F2254B4E50056B62C /* LaunchScreen.storyboard */; };
 		8421D6932254B6F40056B62C /* NSTimeInterval+hms.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */; };
 		8421D6962254BAA30056B62C /* DSBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D6952254BAA30056B62C /* DSBarChart.m */; };
-		845467E82278B9E30060E06D /* ImageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845467E72278B9E30060E06D /* ImageAnnotationView.m */; };
 		845467EB227B0ABD0060E06D /* TripDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 845467EA227B0ABD0060E06D /* TripDetailTVC.m */; };
 		84564AF822549B1200D46132 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84564AF622549B1100D46132 /* Localizable.strings */; };
 		848338012253C6A200342285 /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 848338002253C6A200342285 /* server.cer */; };
@@ -52,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimRa.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimRa/Pods-SimRa.release.xcconfig"; sourceTree = "<group>"; };
 		840E20AB224D125800488B31 /* MyTripsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTripsTVC.h; sourceTree = "<group>"; };
 		840E20AC224D125800488B31 /* MyTripsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTripsTVC.m; sourceTree = "<group>"; };
 		840E20AE224D190400488B31 /* SettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTVC.h; sourceTree = "<group>"; };
@@ -66,8 +67,6 @@
 		8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimeInterval+hms.m"; sourceTree = "<group>"; };
 		8421D6942254BAA30056B62C /* DSBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSBarChart.h; sourceTree = "<group>"; };
 		8421D6952254BAA30056B62C /* DSBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSBarChart.m; sourceTree = "<group>"; };
-		845467E62278B9E30060E06D /* ImageAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageAnnotationView.h; sourceTree = "<group>"; };
-		845467E72278B9E30060E06D /* ImageAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageAnnotationView.m; sourceTree = "<group>"; };
 		845467E9227B0ABD0060E06D /* TripDetailTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripDetailTVC.h; sourceTree = "<group>"; };
 		845467EA227B0ABD0060E06D /* TripDetailTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripDetailTVC.m; sourceTree = "<group>"; };
 		84564AF722549B1100D46132 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -107,6 +106,8 @@
 		84E36108224E0721003847E8 /* TripEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripEditVC.m; sourceTree = "<group>"; };
 		84E3610A224E0759003847E8 /* AnnotationTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnnotationTVC.h; sourceTree = "<group>"; };
 		84E3610B224E0759003847E8 /* AnnotationTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnnotationTVC.m; sourceTree = "<group>"; };
+		B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimRa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimRa.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimRa/Pods-SimRa.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0970067372FFAB52EE7B49B4 /* Pods_SimRa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +136,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		288809C55A11C3C4AE475945 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */,
+				471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		4B157F66407423D825C34D65 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		84DD1E7A224C0027004895F9 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +160,8 @@
 				84DD1EA1224C0028004895F9 /* SimRaTests */,
 				84DD1EAC224C0028004895F9 /* SimRaUITests */,
 				84DD1E84224C0027004895F9 /* Products */,
+				288809C55A11C3C4AE475945 /* Pods */,
+				4B157F66407423D825C34D65 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,8 +184,6 @@
 				84DD1E8A224C0027004895F9 /* ViewController.m */,
 				84DD1EC3224CEAB6004895F9 /* AnnotationView.h */,
 				84DD1EC4224CEAB6004895F9 /* AnnotationView.m */,
-				845467E62278B9E30060E06D /* ImageAnnotationView.h */,
-				845467E72278B9E30060E06D /* ImageAnnotationView.m */,
 				840E20AB224D125800488B31 /* MyTripsTVC.h */,
 				840E20AC224D125800488B31 /* MyTripsTVC.m */,
 				840E20AE224D190400488B31 /* SettingsTVC.h */,
@@ -228,9 +247,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84DD1EB2224C0028004895F9 /* Build configuration list for PBXNativeTarget "SimRa" */;
 			buildPhases = (
+				0FC07A2E8D20B78FB997B3F4 /* [CP] Check Pods Manifest.lock */,
 				84DD1E7F224C0027004895F9 /* Sources */,
 				84DD1E80224C0027004895F9 /* Frameworks */,
 				84DD1E81224C0027004895F9 /* Resources */,
+				5CEC94382466568DEB810719 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -355,6 +376,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0FC07A2E8D20B78FB997B3F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SimRa-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5CEC94382466568DEB810719 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SimRa/Pods-SimRa-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTRangeSlider.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SimRa/Pods-SimRa-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		84DD1E7F224C0027004895F9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -370,7 +430,6 @@
 				840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */,
 				845467EB227B0ABD0060E06D /* TripDetailTVC.m in Sources */,
 				8421D68D2254AE710056B62C /* NSString+hashCode.m in Sources */,
-				845467E82278B9E30060E06D /* ImageAnnotationView.m in Sources */,
 				84DD1E99224C0028004895F9 /* main.m in Sources */,
 				849CA147224D3C6600CE45EB /* IdPicker.m in Sources */,
 				84DD1E88224C0027004895F9 /* AppDelegate.m in Sources */,
@@ -561,17 +620,15 @@
 		};
 		84DD1EB3224C0028004895F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
-				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "$(inherited)";
 				INFOPLIST_FILE = simra/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -580,17 +637,15 @@
 		};
 		84DD1EB4224C0028004895F9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
-				GCC_PREPROCESSOR_DEFINITIONS = "";
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "$(inherited)";
 				INFOPLIST_FILE = simra/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -604,11 +659,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
 				INFOPLIST_FILE = simraTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -623,11 +674,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
 				INFOPLIST_FILE = simraTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -641,11 +688,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
 				INFOPLIST_FILE = simraUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -659,11 +702,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
 				INFOPLIST_FILE = simraUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
