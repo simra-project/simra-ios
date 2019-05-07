@@ -11,6 +11,7 @@
 #import "Trips.h"
 #import "AnnotationView.h"
 #import "NSTimeInterval+hms.h"
+#import "MyTripsTVC.h"
 
 @interface MyAnnotation: NSObject <MKAnnotation>
 @property (strong, nonatomic) CLLocation *location;
@@ -37,6 +38,8 @@
 
 @property (strong, nonatomic) MKUserTrackingButton *trackingButton;
 @property (strong, nonatomic) Trip *trip;
+@property (strong, nonatomic) Trip *recordedTrip;
+
 @property (strong, nonatomic) AnnotationView *annotationView;
 @property (strong, nonatomic) MyAnnotation *myAnnotation;
 
@@ -85,6 +88,7 @@
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     self.trip = [ad.trips newTrip];
     [self.trip startRecording];
+
     self.playButton.enabled = FALSE;
     self.stopButton.enabled = TRUE;
     self.navigationItem.leftBarButtonItem.enabled = FALSE;
@@ -107,7 +111,12 @@
                      forKeyPath:@"lastTripMotion"];
 
     [self.trip stopRecording];
+    self.recordedTrip = self.trip;
+    [self performSegueWithIdentifier:@"trips:" sender:nil];
+
+    self.trip = nil;
     
+    self.annotationView.recording = FALSE;
     self.annotationView.speed = 0.0;
     self.annotationView.course = 0.0;
     self.annotationView.accx = 0.0;
@@ -131,6 +140,7 @@
 
 - (void)update {
     if (self.annotationView) {
+        self.annotationView.recording = self.trip != nil;
         if (self.trip) {
             if (self.trip.lastLocation) {
                 //NSLog(@"update lastLocation %@", self.trip.lastLocation);
@@ -175,7 +185,8 @@
 
         UIImage *image = [UIImage imageNamed:@"SimraSquare"];
         self.annotationView.personImage = image;
-        self.annotationView.tid = @"me";
+
+        self.annotationView.recording = self.trip != nil;
         self.annotationView.speed = 0.0;
         self.annotationView.course = 0.0;
         self.annotationView.accx = 0.0;
@@ -186,6 +197,23 @@
         return self.annotationView;
     }
     return nil;
+}
 
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    [self.mapView deselectAnnotation:self.myAnnotation animated:FALSE];
+    if (self.trip) {
+        [self stopButtonPressed:nil];
+    } else {
+        [self playButtonPressed:nil];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if (!sender) {
+        if ([segue.destinationViewController isKindOfClass:[MyTripsTVC class]]) {
+            MyTripsTVC *myTripsTVC = (MyTripsTVC *)segue.destinationViewController;
+            myTripsTVC.preselectedTrip = self.recordedTrip;
+        }
+    }
 }
 @end

@@ -22,6 +22,17 @@
     self.mm = [[CMMotionManager alloc] init];
     self.trips = [[Trips alloc] init];
 
+    if (![self.defaults boolForKey:@"initialMessage"]) {
+        [self.defaults setBool:TRUE forKey:@"initialMessage"];
+        NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
+        if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
+            urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
+        }
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+                                           options:@{}
+                                 completionHandler:nil];
+    }
+
     NSURL *bundleURL = [NSBundle mainBundle].bundleURL;
     NSURL *baseURL = [bundleURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.lproj",
                                                       [NSLocale currentLocale].languageCode]];

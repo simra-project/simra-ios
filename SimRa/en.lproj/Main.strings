@@ -5,6 +5,9 @@
 /* Class = "UINavigationItem"; title = "Edit Trip"; ObjectID = "1cV-GU-tdF"; */
 "1cV-GU-tdF.title" = "Edit Trip";
 
+/* Class = "UINavigationItem"; title = "Trip Detail"; ObjectID = "zMa-cg-HEi"; */
+"zMa-cg-HEi.title" = "Trip Detail";
+
 /* Class = "UITableViewSection"; headerTitle = "Setup"; ObjectID = "1uD-bL-KPo"; */
 "1uD-bL-KPo.headerTitle" = "Setup";
 
@@ -59,6 +62,9 @@
 /* Class = "UILabel"; text = "Type"; ObjectID = "Jxq-AX-FsN"; */
 "Jxq-AX-FsN.text" = "Type";
 
+/* Class = "UILabel"; text = "Type"; ObjectID = "qIW-lA-oYU"; */
+"qIW-lA-oYU.text" = "Type";
+
 /* Class = "UILabel"; text = "Pedestrian"; ObjectID = "Khh-Xv-Ynq"; */
 "Khh-Xv-Ynq.text" = "Pedestrian";
 
@@ -95,6 +101,9 @@
 /* Class = "UILabel"; text = "Trailer"; ObjectID = "VhB-wN-SnI"; */
 "VhB-wN-SnI.text" = "Trailer";
 
+/* Class = "UILabel"; text = "Trailer"; ObjectID = "uOP-ce-kGd"; */
+"uOP-ce-kGd.text" = "Trailer";
+
 /* Class = "UITextField"; text = "012345678901234567890123"; ObjectID = "XMw-Cr-Mre"; */
 "XMw-Cr-Mre.text" = "012345678901234567890123";
 
@@ -113,6 +122,9 @@
 /* Class = "UILabel"; text = "Child Seat"; ObjectID = "eXq-aF-Bmm"; */
 "eXq-aF-Bmm.text" = "Child Seat";
 
+/* Class = "UILabel"; text = "Child Seat"; ObjectID = "50k-vz-Uwh"; */
+"50k-vz-Uwh.text" = "Child Seat";
+
 /* Class = "UILabel"; text = "Initial Meters"; ObjectID = "gLu-uM-5dG"; */
 "gLu-uM-5dG.text" = "Initial Meters";
 
@@ -127,6 +139,9 @@
 
 /* Class = "UILabel"; text = "Position of your iPhone"; ObjectID = "iWU-L2-tzF"; */
 "iWU-L2-tzF.text" = "Position of your iPhone";
+
+/* Class = "UILabel"; text = "Position of your iPhone"; ObjectID = "iuW-2T-zPq"; */
+"iuW-2T-zPq.text" = "Position of your iPhone";
 
 /* Class = "UILabel"; text = "Version"; ObjectID = "ysy-Na-eJd"; */
 "ysy-Na-eJd.text" = "Version";
@@ -178,3 +193,19 @@
 
 /* Class = "UIBarButtonItem"; title = "Clip"; ObjectID = "VHZ-9D-W3q"; */
 "VHZ-9D-W3q.title" = "Clip";
+
+/* Class = "UIBarButtonItem"; title = "Upload"; ObjectID = "MJ7-9y-XJz"; */
+"MJ7-9y-XJz.title" = "Upload";
+
+/* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "hzM-QB-nuc"; */
+"hzM-QB-nuc.title" = "Settings";
+
+/* Class = "UIBarButtonItem"; title = "Trips"; ObjectID = "5h9-tM-U6A"; */
+"5h9-tM-U6A.title" = "Trips";
+
+/* Class = "UIBarButtonItem"; title = "Start"; ObjectID = "NeF-Te-cJc"; */
+"NeF-Te-cJc.title" = "Record";
+
+/* Class = "UIBarButtonItem"; title = "Stop"; ObjectID = "dZi-32-hxA"; */
+"dZi-32-hxA.title" = "Stop";
+

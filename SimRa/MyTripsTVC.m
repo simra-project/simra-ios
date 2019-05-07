@@ -35,12 +35,46 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationItem.rightBarButtonItem.enabled = FALSE;
-    if (self.tableView.indexPathForSelectedRow) {
-        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:FALSE];
+
+    if (self.preselectedTrip) {
+        [self performSegueWithIdentifier:@"edit:" sender:nil];
+    } else {
+        self.navigationItem.rightBarButtonItem.enabled = FALSE;
+        if (self.tableView.indexPathForSelectedRow) {
+            [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:FALSE];
+        }
     }
     [self.tableView reloadData];
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self adjustSelection];
+}
+
+- (void)adjustSelection {
+    self.navigationItem.rightBarButtonItem.enabled = FALSE;
+    NSLog(@"indexPathForSelectedRow pre  %@", self.tableView.indexPathForSelectedRow);
+    if (self.tableView.indexPathForSelectedRow) {
+        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:FALSE];
+    }
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSArray <NSNumber *> *keys = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil];
+    for (NSInteger row = 0; row < keys.count; row++) {
+        NSNumber *key = keys[row];
+        Trip *trip = ad.trips.trips[key];
+        if (!trip.uploaded) {
+            NSLog(@"selectRowAtIndexPath %@", [NSIndexPath indexPathForRow:row inSection:0]);
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]
+                                        animated:FALSE
+                                  scrollPosition:UITableViewScrollPositionMiddle];
+            self.navigationItem.rightBarButtonItem.enabled = TRUE;
+            NSLog(@"indexPathForSelectedRow post %@", self.tableView.indexPathForSelectedRow);
+            break;
+        }
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -51,7 +85,6 @@ NSInteger revertedSort(id num1, id num2, void *context) {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     return ad.trips.trips.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trip" forIndexPath:indexPath];
@@ -118,7 +151,11 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
         NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
         [ad.trips deleteTripWithIdentifier:key.integerValue];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView performBatchUpdates:^{
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        } completion:^(BOOL finished) {
+            [self performSelector:@selector(adjustSelection) withObject:nil afterDelay:1.0];
+        }];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
@@ -129,37 +166,55 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"edit:"] &&
-        [segue.destinationViewController isKindOfClass:[TripEditVC class]] &&
-        [sender isKindOfClass:[UITableViewCell class]]) {
+        [segue.destinationViewController isKindOfClass:[TripEditVC class]]) {
         TripEditVC *tripEditVC = (TripEditVC *)segue.destinationViewController;
-        UITableViewCell *cell = (UITableViewCell *)sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-        AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-        Trip *trip = ad.trips.trips[key];
-        tripEditVC.trip = trip;
-        tripEditVC.changed = FALSE;
+        if ([sender isKindOfClass:[UITableViewCell class]]) {
+            UITableViewCell *cell = (UITableViewCell *)sender;
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+            AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
+            Trip *trip = ad.trips.trips[key];
+            tripEditVC.trip = trip;
+            tripEditVC.clean = TRUE;
+            tripEditVC.changed = FALSE;
+        } else {
+            tripEditVC.trip = self.preselectedTrip;
+            self.preselectedTrip = false;
+            tripEditVC.changed = FALSE;
+        }
     }
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
 
 - (IBAction)uploadPressed:(UIBarButtonItem *)sender {
-    if (self.tableView.indexPathForSelectedRow) {
-        AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
-        Trip *trip = ad.trips.trips[key];
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if ([ad.defaults integerForKey:@"regionId"] == 0) {
+        UIAlertController *ac = [UIAlertController
+                                 alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
+                                 message:NSLocalizedString(@"Missing Region", @"Error message if region is not set yet")
+                                 preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        [self performSegueWithIdentifier:@"profile" sender:nil];
+                                                    }];
+        [ac addAction:aay];
+        [self presentViewController:ac animated:TRUE completion:nil];
+    } else {
+        if (self.tableView.indexPathForSelectedRow) {
+            NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
+            Trip *trip = ad.trips.trips[key];
 
-        [trip uploadFile:@"ride"
-          WithController:self
-                   error:@selector(completionError:)
-              completion:@selector(completionResponse:)];
+            [trip uploadFile:@"ride"
+              WithController:self
+                       error:@selector(completionError:)
+                  completion:@selector(completionResponse:)];
 
-        self.ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
-                                                      message:NSLocalizedString(@"Running", @"Running")
-                                               preferredStyle:UIAlertControllerStyleAlert];
+            self.ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
+                                                          message:NSLocalizedString(@"Running", @"Running")
+                                                   preferredStyle:UIAlertControllerStyleAlert];
 
-        [self presentViewController:self.ac animated:TRUE completion:nil];
+            [self presentViewController:self.ac animated:TRUE completion:nil];
+        }
     }
 }
 
@@ -175,6 +230,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         [self.tableView reloadData];
+                                                        [self adjustSelection];
                                                     }];
         [ac addAction:aay];
         [self presentViewController:ac animated:TRUE completion:nil];
@@ -235,6 +291,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
+                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -250,6 +307,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
+                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -267,6 +325,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         [self.tableView reloadData];
+                                                        [self adjustSelection];
                                                     }];
         [ac addAction:aay];
         [self presentViewController:ac animated:TRUE completion:nil];
@@ -311,6 +370,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                           style:UIAlertActionStyleDefault
                           handler:^(UIAlertAction * _Nonnull action) {
                               [self.tableView reloadData];
+                              [self adjustSelection];
                           }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -328,6 +388,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
+                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -343,6 +404,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
+                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];

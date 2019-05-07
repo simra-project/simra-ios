@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Trips.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MyTripsTVC : UITableViewController
+@property (strong, nonatomic, nullable) Trip *preselectedTrip;
 
 @end
 

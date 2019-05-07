@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SimRa/NSString+hashCode.m"
-            timestampString = "576552571.892377"
+            filePath = "SimRa/TripEditVC.m"
+            timestampString = "578831829.96928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "-hashString"
+            startingLineNumber = "509"
+            endingLineNumber = "509"
+            landmarkName = "-donePressed:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,29 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SimRa/NSString+hashCode.m"
-            timestampString = "576552571.8925101"
+            filePath = "SimRa/TripEditVC.m"
+            timestampString = "578831829.96944"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "+clientHash"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SimRa/NSString+hashCode.m"
-            timestampString = "576552571.892584"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "+clientHash"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-coordinate"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

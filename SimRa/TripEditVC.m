@@ -8,12 +8,58 @@
 
 #import "TripEditVC.h"
 #import "AnnotationTVC.h"
+#import "TripDetailTVC.h"
 #import "AppDelegate.h"
+#import "TTRangeSlider.h"
+
+#define IMAGE_ANNOTATION_VIEW_SIZE 48.0
+
+@interface ImageAnnotationView : MKAnnotationView
+@property (strong, nonatomic) UIImage *annotationImage;
+- (UIImage *)getImage;
+
+@end
+
+@implementation ImageAnnotationView
+
+- (instancetype)initWithAnnotation:(id<MKAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
+    self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.0];
+    self.frame = CGRectMake(0, 0, IMAGE_ANNOTATION_VIEW_SIZE, IMAGE_ANNOTATION_VIEW_SIZE);
+    self.centerOffset = CGPointMake(0, -(IMAGE_ANNOTATION_VIEW_SIZE / 2));
+    return self;
+}
+
+- (void)setAnnotationImage:(UIImage *)image {
+    if (image) {
+        _annotationImage = [UIImage imageWithCGImage:image.CGImage
+                                               scale:(MAX(image.size.width, image.size.height) / IMAGE_ANNOTATION_VIEW_SIZE)
+                                         orientation:UIImageOrientationUp];
+    } else {
+        _annotationImage = nil;
+    }
+}
+
+- (UIImage *)getImage {
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(IMAGE_ANNOTATION_VIEW_SIZE, IMAGE_ANNOTATION_VIEW_SIZE), NO, 0.0);
+    [self drawRect:CGRectMake(0, 0, IMAGE_ANNOTATION_VIEW_SIZE, IMAGE_ANNOTATION_VIEW_SIZE)];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+- (void)drawRect:(CGRect)rect {
+    
+    if (self.annotationImage != nil) {
+        [self.annotationImage drawInRect:rect];
+    }
+}
+
+@end
 
 @interface TripPoint : NSObject <MKAnnotation>
 @property (nonatomic, copy) NSString *title;
-@property (weak, nonatomic) TripLocation *tripLocation;
-@property (weak, nonatomic) NSArray <TripLocation *> *tripLocations;
+@property (strong, nonatomic) TripLocation *tripLocation;
 @end
 
 @implementation TripPoint
@@ -28,19 +74,13 @@
     return self.tripLocation.location.coordinate;
 }
 
-- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:newCoordinate.latitude
-                                                      longitude:newCoordinate.longitude];
-    
-    TripLocation *closestTripLocation = self.tripLocations.firstObject;
-    CLLocationDistance closestDistance = [closestTripLocation.location distanceFromLocation:location];
-    for (TripLocation *tripLocation in self.tripLocations) {
-        if ([tripLocation.location distanceFromLocation:location] < closestDistance) {
-            closestDistance = [tripLocation.location distanceFromLocation:location];
-            closestTripLocation = tripLocation;
-        }
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[TripPoint class]]) {
+        TripPoint *tripPoint = (TripPoint *)object;
+        return (self.tripLocation.location.timestamp == tripPoint.tripLocation.location.timestamp);
+    } else {
+        return false;
     }
-    self.tripLocation = closestTripLocation;
 }
 
 @end
@@ -113,6 +153,12 @@
 @property (strong, nonatomic) TripPoint *endPoint;
 @property (strong, nonatomic) NSMutableArray <TripPoint *> *tripPoints;
 
+@property (strong, nonatomic) UIButton *detailButton;
+@property (strong, nonatomic) TTRangeSlider *rangeSlider;
+@property (nonatomic) float lastSliderMinSelected;
+@property (nonatomic) float lastSliderMaxSelected;
+@property (nonatomic) BOOL initialTripDetail;
+
 @end
 
 @implementation TripEditVC
@@ -121,10 +167,77 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.mapView.delegate = self;
+    
+    self.detailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    self.detailButton.translatesAutoresizingMaskIntoConstraints = false;
+    [self.detailButton addTarget:self action:@selector(infoPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.detailButton];
+    
+    NSLayoutConstraint *a = [NSLayoutConstraint constraintWithItem:self.detailButton
+                                                         attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual
+                                                            toItem:self.mapView
+                                                         attribute:NSLayoutAttributeBottom
+                                                        multiplier:1
+                                                          constant:-20];
+    NSLayoutConstraint *b = [NSLayoutConstraint constraintWithItem:self.detailButton
+                                                         attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual
+                                                            toItem:self.mapView
+                                                         attribute:NSLayoutAttributeTrailing
+                                                        multiplier:1
+                                                          constant:-20];
+    
+    [NSLayoutConstraint activateConstraints:@[a, b]];
+    
+    self.rangeSlider = [[TTRangeSlider alloc] init];
+    self.rangeSlider.backgroundColor = [UIColor colorWithRed:0.5
+                                                       green:0.5
+                                                        blue:0.5
+                                                       alpha:0.5];
+    self.rangeSlider.translatesAutoresizingMaskIntoConstraints = false;
+    [self.rangeSlider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    //self.rangeSlider.tintColor = [UIColor blueColor];
+    self.rangeSlider.lineHeight = 3;
+    self.rangeSlider.lineBorderWidth = 1;
+    
+    self.rangeSlider.step = 1;
+    self.rangeSlider.enableStep = TRUE;
+    self.rangeSlider.minDistance = 1;
+
+    self.rangeSlider.hideLabels = TRUE;
+    
+    [self.view addSubview:self.rangeSlider];
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:self.rangeSlider
+                                                           attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual
+                                                              toItem:self.mapView
+                                                           attribute:NSLayoutAttributeTopMargin
+                                                          multiplier:1
+                                                            constant:20];
+    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:self.rangeSlider
+                                                               attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self.mapView
+                                                               attribute:NSLayoutAttributeLeading
+                                                              multiplier:1
+                                                                constant:20];
+    
+    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:self.rangeSlider
+                                                                attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual
+                                                                   toItem:self.mapView
+                                                                attribute:NSLayoutAttributeTrailing
+                                                               multiplier:1
+                                                                 constant:-20];
+    
+    
+    [NSLayoutConstraint activateConstraints:@[top, leading, trailing]];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (!self.initialTripDetail) {
+        self.initialTripDetail = TRUE;
+        [self performSegueWithIdentifier:@"tripDetail:" sender:nil];
+    }
     [self setup];
 }
 
@@ -136,95 +249,153 @@
     [super viewWillDisappear:animated];
 }
 
+- (IBAction)infoPressed:(id)sender {
+    [self performSegueWithIdentifier:@"tripDetail:" sender:nil];
+}
+
+- (IBAction)sliderChanged:(TTRangeSlider *)rangeSlider {
+    NSLog(@"sliderChanged %lu: %f-%f",
+          (unsigned long)self.trip.tripLocations.count,
+          rangeSlider.selectedMinimum,
+          rangeSlider.selectedMaximum);
+    if (self.lastSliderMinSelected != rangeSlider.selectedMinimum ||
+        self.lastSliderMaxSelected != rangeSlider.selectedMaximum) {
+        self.lastSliderMinSelected = rangeSlider.selectedMinimum;
+        self.lastSliderMaxSelected = rangeSlider.selectedMaximum;
+        if (self.startPoint && rangeSlider.selectedMinimum < self.trip.tripLocations.count) {
+            self.startPoint.tripLocation = self.trip.tripLocations[(NSInteger)rangeSlider.selectedMinimum];
+            [self.mapView removeAnnotation:self.startPoint];
+            [self.mapView addAnnotation:self.startPoint];
+        }
+        if (self.endPoint && rangeSlider.selectedMaximum < self.trip.tripLocations.count) {
+            self.endPoint.tripLocation = self.trip.tripLocations[(NSInteger)rangeSlider.selectedMaximum];
+            [self.mapView removeAnnotation:self.endPoint];
+            [self.mapView addAnnotation:self.endPoint];
+        }
+        if (self.rangeSlider.minValue != self.rangeSlider.selectedMinimum ||
+            self.rangeSlider.maxValue != self.rangeSlider.selectedMaximum) {
+            self.navigationItem.rightBarButtonItem.enabled = TRUE;
+        } else {
+            self.navigationItem.rightBarButtonItem.enabled = FALSE;
+        }
+    }
+}
+
 - (void)setup {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
-    
+    if (self.clean) {
+        if (self.tripTrack) {
+            [self.mapView removeOverlay:self.tripTrack];
+            self.tripTrack = nil;
+        }
+        if (self.startPoint) {
+            [self.mapView removeAnnotation:self.startPoint];
+            self.startPoint = nil;
+        }
+        if (self.startPoint) {
+            [self.mapView removeAnnotation:self.endPoint];
+            self.endPoint = nil;
+        }
+        if (self.tripPoints) {
+            for (TripPoint *tripPoint in self.tripPoints) {
+                [self.mapView removeAnnotation:tripPoint];
+            }
+            self.tripPoints = nil;
+        }
+        
+        self.clean = FALSE;
+    }
     if (self.trip.uploaded) {
         self.navigationItem.rightBarButtonItem.enabled = FALSE;
+        self.rangeSlider.hidden = TRUE;
     } else {
         self.navigationItem.rightBarButtonItem.enabled = TRUE;
+        self.rangeSlider.hidden = FALSE;
     }
     
-    [self.mapView removeOverlays:self.mapView.overlays];
-    [self.mapView removeAnnotations:self.mapView.annotations];
+    self.rangeSlider.minValue = 0;
+    self.rangeSlider.maxValue = self.trip.tripLocations.count - 1;
     
     if (self.trip.tripLocations.count > 0) {
-        self.tripTrack = [[TripTrack alloc] init];
-        self.tripTrack.trip = self.trip;
-        [self.mapView addOverlay:self.tripTrack];
+        if (!self.tripTrack) {
+            self.tripTrack = [[TripTrack alloc] init];
+            self.tripTrack.trip = self.trip;
+            [self.mapView addOverlay:self.tripTrack];
+            
+            [self.mapView setVisibleMapRect:self.tripTrack.boundingMapRect
+                                edgePadding:UIEdgeInsetsMake(128.0, 48.0, 128.0, 48.0)
+                                   animated:TRUE];
+        }
         
-        [self.mapView setVisibleMapRect:self.tripTrack.boundingMapRect
-                            edgePadding:UIEdgeInsetsMake(50.0, 50.0, 50.0, 50.0)
-                               animated:TRUE];
+        if (!self.startPoint) {
+            self.startPoint = [[TripPoint alloc] init];
+            self.startPoint.title = NSLocalizedString(@"Start", @"Start");
+            self.startPoint.tripLocation = self.trip.tripLocations[0];
+            [self.mapView addAnnotation:self.startPoint];
+            self.rangeSlider.selectedMinimum = [self.trip.tripLocations indexOfObject:self.startPoint.tripLocation];
+        }
         
-        self.startPoint = [[TripPoint alloc] init];
-        self.startPoint.title = NSLocalizedString(@"Start", @"Start");
-        self.startPoint.tripLocation = self.trip.tripLocations.firstObject;
-        self.startPoint.tripLocations = self.trip.tripLocations;
-        [self.mapView addAnnotation:self.startPoint];
+        if (!self.endPoint) {
+            self.endPoint = [[TripPoint alloc] init];
+            self.endPoint.title = NSLocalizedString(@"Finish", @"Finish");
+            self.endPoint.tripLocation = self.trip.tripLocations[self.trip.tripLocations.count - 1];
+            [self.mapView addAnnotation:self.endPoint];
+            self.rangeSlider.selectedMaximum = [self.trip.tripLocations indexOfObject:self.endPoint.tripLocation];
+        }
         
-        self.endPoint = [[TripPoint alloc] init];
-        self.endPoint.title = NSLocalizedString(@"Finish", @"Finish");
-        self.endPoint.tripLocation = self.trip.tripLocations.lastObject;
-        self.endPoint.tripLocations = self.trip.tripLocations;
-        [self.mapView addAnnotation:self.endPoint];
-        
-        self.tripPoints = [[NSMutableArray alloc] init];
-        for (TripLocation *tripLocation in self.trip.tripLocations) {
-            if (tripLocation.tripAnnotation) {
-                TripPoint *tripPoint = [[TripPoint alloc] init];
-                tripPoint.title = incidents[tripLocation.tripAnnotation.incidentId];
-                tripPoint.tripLocation = tripLocation;
-                tripPoint.tripLocations = self.trip.tripLocations;
-                
-                [self.tripPoints addObject:tripPoint];
-                [self.mapView addAnnotation:tripPoint];
+        if (!self.tripPoints) {
+            self.tripPoints = [[NSMutableArray alloc] init];
+            AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
+            
+            for (TripLocation *tripLocation in self.trip.tripLocations) {
+                if (tripLocation.tripAnnotation) {
+                    TripPoint *tripPoint = [[TripPoint alloc] init];
+                    tripPoint.title = incidents[tripLocation.tripAnnotation.incidentId];
+                    tripPoint.tripLocation = tripLocation;
+                    
+                    [self.tripPoints addObject:tripPoint];
+                    [self.mapView addAnnotation:tripPoint];
+                }
             }
         }
     }
 }
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+- (MKAnnotationView *)mapView:(MKMapView *)mapView
+            viewForAnnotation:(id<MKAnnotation>)annotation {
     if (annotation == self.startPoint) {
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"startPoint"];
-        MKPinAnnotationView *pinAnnotationView;
+        ImageAnnotationView *imageAnnotationView;
         if (annotationView) {
-            pinAnnotationView = (MKPinAnnotationView *)annotationView;
+            imageAnnotationView = (ImageAnnotationView *)annotationView;
         } else {
-            pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-                                                                reuseIdentifier:@"startPoint"];
+            imageAnnotationView = [[ImageAnnotationView alloc] initWithAnnotation:annotation
+                                                                  reuseIdentifier:@"startPoint"];
         }
-        pinAnnotationView.pinTintColor = MKPinAnnotationView.greenPinColor;
-        if (self.trip.uploaded) {
-            pinAnnotationView.draggable = false;
-        } else {
-            pinAnnotationView.draggable = true;
-        }
-        pinAnnotationView.canShowCallout = YES;
-        [pinAnnotationView setNeedsDisplay];
+        imageAnnotationView.annotationImage = [UIImage imageNamed:@"start"];
+        imageAnnotationView.centerOffset = CGPointMake(0, -(IMAGE_ANNOTATION_VIEW_SIZE / 2) + 4);
+        imageAnnotationView.canShowCallout = YES;
+        [imageAnnotationView setNeedsDisplay];
         
-        return pinAnnotationView;
+        return imageAnnotationView;
         
     } else if (annotation == self.endPoint) {
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"endPoint"];
-        MKPinAnnotationView *pinAnnotationView;
+        ImageAnnotationView *imageAnnotationView;
         if (annotationView) {
-            pinAnnotationView = (MKPinAnnotationView *)annotationView;
+            imageAnnotationView = (ImageAnnotationView *)annotationView;
         } else {
-            pinAnnotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-                                                                reuseIdentifier:@"endPoint"];
+            imageAnnotationView = [[ImageAnnotationView alloc] initWithAnnotation:annotation
+                                                                  reuseIdentifier:@"endPoint"];
         }
-        pinAnnotationView.pinTintColor = MKPinAnnotationView.redPinColor;
-        if (self.trip.uploaded) {
-            pinAnnotationView.draggable = false;
-        } else {
-            pinAnnotationView.draggable = true;
-        }
-        pinAnnotationView.canShowCallout = YES;
-        [pinAnnotationView setNeedsDisplay];
         
-        return pinAnnotationView;
+        imageAnnotationView.annotationImage = [UIImage imageNamed:@"racing-flag"];
+        imageAnnotationView.centerOffset = CGPointMake(7, -(IMAGE_ANNOTATION_VIEW_SIZE / 2) + 2);
+        
+        imageAnnotationView.canShowCallout = YES;
+        [imageAnnotationView setNeedsDisplay];
+        
+        return imageAnnotationView;
         
     } else if ([self.tripPoints containsObject:annotation]) {
         MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:@"tripPoint"];
@@ -250,7 +421,6 @@
         
         if (self.trip.uploaded) {
             pinAnnotationView.leftCalloutAccessoryView = nil;
-            
             pinAnnotationView.rightCalloutAccessoryView = nil;
         } else {
             UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -271,7 +441,8 @@
     }
 }
 
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView
+            rendererForOverlay:(id<MKOverlay>)overlay {
     if ([overlay isKindOfClass:[TripTrack class]]) {
         TripTrack *tripTrack = (TripTrack *)overlay;
         MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:tripTrack.polyLine];
@@ -327,7 +498,6 @@ calloutAccessoryControlTapped:(UIControl *)control {
             TripPoint *tripPoint = [[TripPoint alloc] init];
             tripPoint.title = incidents[closestTripLocation.tripAnnotation.incidentId];
             tripPoint.tripLocation = closestTripLocation;
-            tripPoint.tripLocations = self.trip.tripLocations;
             
             [self.tripPoints addObject:tripPoint];
             [self.mapView addAnnotation:tripPoint];
@@ -335,7 +505,7 @@ calloutAccessoryControlTapped:(UIControl *)control {
     }
 }
 
-- (IBAction)donePressed:(UIBarButtonItem *)sender {
+- (IBAction)donePressed:(UIBarButtonItem *)sender {    
     for (NSInteger i = 0; i < self.trip.tripLocations.count;) {
         NSInteger startIndex = [self.trip.tripLocations indexOfObject:self.startPoint.tripLocation];
         NSInteger endIndex = [self.trip.tripLocations indexOfObject:self.endPoint.tripLocation];
@@ -346,6 +516,7 @@ calloutAccessoryControlTapped:(UIControl *)control {
         }
     }
     self.changed = TRUE;
+    self.clean = TRUE;
     [self setup];
 }
 
@@ -359,13 +530,17 @@ calloutAccessoryControlTapped:(UIControl *)control {
         TripPoint *tripPoint = (TripPoint *)sender;
         annotationTVC.tripAnnotation = tripPoint.tripLocation.tripAnnotation;
         annotationTVC.changed = FALSE;
-        
     }
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.destinationViewController isKindOfClass:[TripDetailTVC class]]) {
+        TripDetailTVC *tripDetailTVC = (TripDetailTVC *)segue.destinationViewController;
+        tripDetailTVC.trip = self.trip;
+    }
 }
 
 - (IBAction)annotationChanged:(UIStoryboardSegue *)unwindSegue {
     self.changed = TRUE;
+    self.clean = TRUE;
+    [self setup];
 }
+
 @end

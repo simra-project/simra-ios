@@ -1,0 +1,16 @@
+PODS:
+  - TTRangeSlider (1.0.6)
+
+DEPENDENCIES:
+  - TTRangeSlider
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - TTRangeSlider
+
+SPEC CHECKSUMS:
+  TTRangeSlider: 78188bea83f6471a06f75adbc88da5e990baeafe
+
+PODFILE CHECKSUM: 3720380b35e554a09a997594573b4319f5b8837f
+
+COCOAPODS: 1.5.3
