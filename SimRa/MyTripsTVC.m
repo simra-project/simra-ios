@@ -54,7 +54,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (void)adjustSelection {
     self.navigationItem.rightBarButtonItem.enabled = FALSE;
-    NSLog(@"indexPathForSelectedRow pre  %@", self.tableView.indexPathForSelectedRow);
+    //NSLog(@"indexPathForSelectedRow pre  %@", self.tableView.indexPathForSelectedRow);
     if (self.tableView.indexPathForSelectedRow) {
         [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:FALSE];
     }
@@ -64,12 +64,12 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         NSNumber *key = keys[row];
         Trip *trip = ad.trips.trips[key];
         if (!trip.uploaded) {
-            NSLog(@"selectRowAtIndexPath %@", [NSIndexPath indexPathForRow:row inSection:0]);
+            //NSLog(@"selectRowAtIndexPath %@", [NSIndexPath indexPathForRow:row inSection:0]);
             [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]
                                         animated:FALSE
                                   scrollPosition:UITableViewScrollPositionMiddle];
             self.navigationItem.rightBarButtonItem.enabled = TRUE;
-            NSLog(@"indexPathForSelectedRow post %@", self.tableView.indexPathForSelectedRow);
+            //NSLog(@"indexPathForSelectedRow post %@", self.tableView.indexPathForSelectedRow);
             break;
         }
     }

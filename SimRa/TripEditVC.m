@@ -254,10 +254,10 @@
 }
 
 - (IBAction)sliderChanged:(TTRangeSlider *)rangeSlider {
-    NSLog(@"sliderChanged %lu: %f-%f",
-          (unsigned long)self.trip.tripLocations.count,
-          rangeSlider.selectedMinimum,
-          rangeSlider.selectedMaximum);
+    //NSLog(@"sliderChanged %lu: %f-%f",
+    //      (unsigned long)self.trip.tripLocations.count,
+    //      rangeSlider.selectedMinimum,
+    //      rangeSlider.selectedMaximum);
     if (self.lastSliderMinSelected != rangeSlider.selectedMinimum ||
         self.lastSliderMaxSelected != rangeSlider.selectedMaximum) {
         self.lastSliderMinSelected = rangeSlider.selectedMinimum;
@@ -463,9 +463,9 @@ calloutAccessoryControlTapped:(UIControl *)control {
         if ([view.annotation isKindOfClass:[TripPoint class]]) {
             TripPoint *tripPoint = (TripPoint *)view.annotation;
             tripPoint.tripLocation.tripAnnotation = nil;
-            NSLog(@"before %@", mapView.annotations);
+            //NSLog(@"before %@", mapView.annotations);
             [mapView removeAnnotation:tripPoint];
-            NSLog(@"after %@", mapView.annotations);
+            //NSLog(@"after %@", mapView.annotations);
             [self.tripPoints removeObject:tripPoint];
             self.changed = TRUE;
         }

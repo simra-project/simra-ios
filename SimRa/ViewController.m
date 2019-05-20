@@ -49,6 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     self.mapView.delegate = self;
     self.mapView.showsScale = TRUE;
     self.mapView.showsCompass = TRUE;

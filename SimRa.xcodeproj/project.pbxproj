@@ -17,7 +17,6 @@
 		8421D6962254BAA30056B62C /* DSBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D6952254BAA30056B62C /* DSBarChart.m */; };
 		845467EB227B0ABD0060E06D /* TripDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 845467EA227B0ABD0060E06D /* TripDetailTVC.m */; };
 		84564AF822549B1200D46132 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84564AF622549B1100D46132 /* Localizable.strings */; };
-		848338012253C6A200342285 /* server.cer in Resources */ = {isa = PBXBuildFile; fileRef = 848338002253C6A200342285 /* server.cer */; };
 		848338022253CA0D00342285 /* constants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848338042253CA0D00342285 /* constants.plist */; };
 		849CA147224D3C6600CE45EB /* IdPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CA146224D3C6600CE45EB /* IdPicker.m */; };
 		84DD1E88224C0027004895F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD1E87224C0027004895F9 /* AppDelegate.m */; };
@@ -355,7 +354,6 @@
 				84DD1E93224C0028004895F9 /* Assets.xcassets in Resources */,
 				848338022253CA0D00342285 /* constants.plist in Resources */,
 				8421D6902254B4E50056B62C /* LaunchScreen.storyboard in Resources */,
-				848338012253C6A200342285 /* server.cer in Resources */,
 				84DD1E8E224C0027004895F9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,8 +621,9 @@
 			baseConfigurationReference = CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = KA3T58F3N4;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C652JFWU23;
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/Info.plist;
@@ -634,7 +633,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "SimRa Dev RobTest";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -644,9 +643,9 @@
 			baseConfigurationReference = 471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = KA3T58F3N4;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = C652JFWU23;
 				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/Info.plist;
@@ -656,7 +655,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "SimRa Dist RobTest";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -21,8 +21,18 @@
 //          <key>NSAllowsArbitraryLoads</key>
 //          <true/>
 //      </dict>
+// and the file `server.cer` can be removed from the build
 
-#define SELF_SIGNED_HACK 1
+#define SELF_SIGNED_HACK 0
+
+#define UPLOAD_SCHEME @"https:"
+#if SELF_SIGNED_HACK
+#define UPLOAD_HOST @"vm1.mcc.tu-berlin.de:8082"
+#else
+//#define UPLOAD_HOST @"vm3.mcc.tu-berlin.de:8082"
+#define UPLOAD_HOST @"vm2.mcc.tu-berlin.de:8082"
+#endif
+#define UPLOAD_VERSION 10
 
 @interface UploaderObject ()
 
@@ -55,10 +65,6 @@
     NSArray <NSString *> *locales = [ad.constants mutableArrayValueForKey:@"locales"];
     NSInteger regionId = [ad.defaults integerForKey:@"regionId"];
 
-#define UPLOAD_SCHEME @"https:"
-#define UPLOAD_HOST @"vm1.mcc.tu-berlin.de:8082"
-#define UPLOAD_VERSION 10
-
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;
     if (self.fileHash && self.filePasswd) {
@@ -82,6 +88,7 @@
 
     [request setValue:@"text/plain" forHTTPHeaderField: @"Content-Type"];
     [request setTimeoutInterval:10.0];
+    NSLog(@"request:\n%@", request);
 
     NSURLSessionUploadTask *dataTask =
     [
