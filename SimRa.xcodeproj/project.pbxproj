@@ -645,10 +645,9 @@
 			baseConfigurationReference = CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 19;
-				DEVELOPMENT_TEAM = C652JFWU23;
+				DEVELOPMENT_TEAM = KA3T58F3N4;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"DEBUG=1",
@@ -662,7 +661,7 @@
 				MARKETING_VERSION = 19;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "SimRa Dev RobTest";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -672,10 +671,10 @@
 			baseConfigurationReference = 471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 19;
-				DEVELOPMENT_TEAM = C652JFWU23;
+				DEVELOPMENT_TEAM = KA3T58F3N4;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/Info.plist;
@@ -686,7 +685,7 @@
 				MARKETING_VERSION = 19;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "SimRa Dist RobTest";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
