@@ -43,6 +43,8 @@
 @property (strong, nonatomic) AnnotationView *annotationView;
 @property (strong, nonatomic) MyAnnotation *myAnnotation;
 
+@property (strong, nonatomic) UIAlertController *ac;
+
 @end
 
 @implementation ViewController
@@ -83,6 +85,42 @@
     self.dummyButton.title = NSLocalizedString(@"Not Recording", @"Not Recording");
 
     // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (![ad.defaults boolForKey:@"initialMessage"]) {
+        [ad.defaults setBool:TRUE forKey:@"initialMessage"];
+        self.ac = [UIAlertController
+                   alertControllerWithTitle:NSLocalizedString(@"How To", @"How To")
+                   message:[NSString stringWithFormat:@"%@\n\n%@",
+                            NSLocalizedString(@"Would you like to view the User Manual now?", @"Would you like to view the User Manual now?"),
+                            NSLocalizedString(@"If not, you may access it via Settings/How To later", @"If not, you may access it via Settings/How To")
+                            ]
+                   preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                        showHowTo();
+                                                    }];
+        [self.ac addAction:aay];
+
+        UIAlertAction *aac = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel")
+                                                      style:UIAlertActionStyleCancel
+                                                    handler:nil];
+        [self.ac addAction:aac];
+        [self presentViewController:self.ac animated:TRUE completion:nil];
+    }
+}
+
+ void showHowTo() {
+    NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
+    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
+        urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+                                       options:@{}
+                             completionHandler:nil];
 }
 
 - (IBAction)playButtonPressed:(UIBarButtonItem *)sender {
