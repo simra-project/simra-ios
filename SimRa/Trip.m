@@ -16,6 +16,9 @@
 @implementation TripMotion
 @end
 
+@implementation TripGyro
+@end
+
 @implementation TripLocation
 - (instancetype)init {
     self = [super init];
@@ -116,18 +119,32 @@
         NSNumber *lat = [tripLocationDict objectForKey:@"lat"];
         NSNumber *lon = [tripLocationDict objectForKey:@"lon"];
         NSNumber *speed = [tripLocationDict objectForKey:@"speed"];
+        NSNumber *horizontalAccuracy = [tripLocationDict objectForKey:@"horizontalAccuracy"];
+
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(lat.doubleValue,
                                                                        lon.doubleValue);
         CLLocation *location = [[CLLocation alloc]
                                 initWithCoordinate:coordinate
                                 altitude:-1
-                                horizontalAccuracy:-1
+                                horizontalAccuracy:horizontalAccuracy.doubleValue
                                 verticalAccuracy:-1
                                 course:-1
                                 speed:speed.doubleValue
                                 timestamp:[NSDate dateWithTimeIntervalSince1970:timestamp.doubleValue]];
+
+        NSNumber *a = [tripLocationDict objectForKey:@"a"];
+        NSNumber *b = [tripLocationDict objectForKey:@"b"];
+        NSNumber *c = [tripLocationDict objectForKey:@"c"];
+
+        TripGyro *gyro = [[TripGyro alloc] init];
+        gyro.x = a.doubleValue;
+        gyro.y = b.doubleValue;
+        gyro.z = c.doubleValue;
+
         TripLocation *tripLocation = [[TripLocation alloc] init];
         tripLocation.location = location;
+        tripLocation.gyro = gyro;
+
         tripLocation.tripMotions = [[NSMutableArray alloc] init];
         NSDictionary *tripMotionsArray = [tripLocationDict objectForKey:@"tripMotions"];
         for (NSDictionary *tripMotionDict in tripMotionsArray) {
@@ -207,14 +224,27 @@
          setObject:[NSNumber numberWithDouble:tripLocation.location.timestamp.timeIntervalSince1970]
          forKey:@"timestamp"];
         [tripLocationDict
-         setObject:[NSNumber numberWithDouble: tripLocation.location.coordinate.latitude]
+         setObject:[NSNumber numberWithDouble:tripLocation.location.coordinate.latitude]
          forKey:@"lat"];
         [tripLocationDict
-         setObject:[NSNumber numberWithDouble: tripLocation.location.coordinate.longitude]
+         setObject:[NSNumber numberWithDouble:tripLocation.location.coordinate.longitude]
          forKey:@"lon"];
         [tripLocationDict
-         setObject:[NSNumber numberWithDouble: tripLocation.location.speed]
+         setObject:[NSNumber numberWithDouble:tripLocation.location.speed]
          forKey:@"speed"];
+        [tripLocationDict
+         setObject:[NSNumber numberWithDouble:tripLocation.location.horizontalAccuracy]
+         forKey:@"horizontalAccuracy"];
+
+        [tripLocationDict
+         setObject:[NSNumber numberWithDouble:tripLocation.gyro.x]
+         forKey:@"a"];
+        [tripLocationDict
+         setObject:[NSNumber numberWithDouble:tripLocation.gyro.y]
+         forKey:@"b"];
+        [tripLocationDict
+         setObject:[NSNumber numberWithDouble:tripLocation.gyro.z]
+         forKey:@"c"];
 
         NSMutableArray *tripMotionsArray = [[NSMutableArray alloc] init];
         for (TripMotion *tripMotion in tripLocation.tripMotions) {
@@ -340,12 +370,15 @@
     csvString = [csvString stringByAppendingFormat:@"i%@#%ld\n",
                  [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"],
                  self.version];
-    csvString = [csvString stringByAppendingString:@"lat,lon,X,Y,Z,timeStamp\n"];
+    csvString = [csvString stringByAppendingString:@"lat,lon,X,Y,Z,timeStamp,acc,a,b,c\n"];
     [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
     
     for (TripLocation *tripLocation in self.tripLocations) {
         CLLocationDegrees lat = tripLocation.location.coordinate.latitude;
         CLLocationDegrees lon = tripLocation.location.coordinate.longitude;
+        CLLocationAccuracy horizontalAccuray = tripLocation.location.horizontalAccuracy;
+        TripGyro *gyro = tripLocation.gyro;
+
         for (TripMotion *tripMotion in tripLocation.tripMotions) {
             if (lat == 0.0 && lon == 0.0) {
                 csvString = @",,";
@@ -356,11 +389,31 @@
                 lat = 0.0;
                 lon = 0.0;
             }
-            csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%.0f\n",
+
+            csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%.0f,",
                          tripMotion.x * 9.81,
                          tripMotion.y * 9.81,
                          tripMotion.z * 9.81,
                          tripMotion.timestamp * 1000.0];
+
+            if (horizontalAccuray == -1.0) {
+                csvString = [csvString stringByAppendingString:@","];
+            } else {
+                csvString = [csvString stringByAppendingFormat:@"%f,",
+                             horizontalAccuray];
+                horizontalAccuray = -1;
+            }
+
+            if (!gyro) {
+                csvString = [csvString stringByAppendingString:@",,\n"];
+            } else {
+                csvString = [csvString stringByAppendingFormat:@"%f,%f,%f\n",
+                             gyro.x,
+                             gyro.y,
+                             gyro.z];
+                gyro = nil;
+            }
+
             [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
         }
     }
@@ -377,6 +430,13 @@
     self.positionId = [ad.defaults integerForKey:@"positionId"];
     self.childseat = [ad.defaults integerForKey:@"childseat"];
     self.trailer = [ad.defaults boolForKey:@"trailer"];
+
+    if (ad.mm.isGyroAvailable) {
+        [ad.mm startGyroUpdates];
+    } else {
+        NSLog(@"no isGyroAvailable");
+    }
+
     ad.lm.delegate = self;
     if (CLLocationManager.locationServicesEnabled) {
         ad.lm.allowsBackgroundLocationUpdates = TRUE;
@@ -443,7 +503,12 @@
 - (void)stopRecording {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [self.timer invalidate];
-    [ad.mm stopAccelerometerUpdates];
+    if (ad.mm.isGyroActive) {
+        [ad.mm stopGyroUpdates];
+    }
+    if (ad.mm.isAccelerometerActive) {
+        [ad.mm stopAccelerometerUpdates];
+    }
     [ad.lm stopUpdatingLocation];
     ad.lm.delegate = nil;
     
@@ -505,7 +570,7 @@
     [self save];
 }
 
-- (void)addLocation:(CLLocation *)location {
+- (void)addLocation:(CLLocation *)location withGyroData:(CMGyroData *)gyroData {
     if (!self.startLocation) {
         self.startLocation = location;
     }
@@ -517,6 +582,11 @@
         (deferredMeters == 0 || [location distanceFromLocation:self.startLocation] > deferredMeters)) {
         TripLocation *newLocation = [[TripLocation alloc] init];
         newLocation.location = location;
+        TripGyro *gyro = [[TripGyro alloc] init];
+        gyro.x = gyroData.rotationRate.x;
+        gyro.y = gyroData.rotationRate.y;
+        gyro.z = gyroData.rotationRate.z;
+        newLocation.gyro = gyro;
         [self.tripLocations addObject:newLocation];
     }
 }
@@ -540,11 +610,16 @@
 #define LOCATION_FREQUENCE 3.0
 
     for (CLLocation *location in locations) {
-        NSLog(@"[Trip] didUpdateLocations %f %@", location.timestamp.timeIntervalSince1970, location);
+        //NSLog(@"[Trip] didUpdateLocations %f %@",
+        //  location.timestamp.timeIntervalSince1970, location);
         if (!self.lastLocation ||
             location.timestamp.timeIntervalSince1970 - self.lastLocation.timestamp.timeIntervalSince1970 >= LOCATION_FREQUENCE) {
-            NSLog(@"[Trip] addLocation %@", location);
-            [self addLocation:location];
+
+            AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            CMGyroData *gyroData = ad.mm.gyroData;
+
+            NSLog(@"[Trip] addLocation:%@ withGyroData:%@", location, gyroData);
+            [self addLocation:location withGyroData:gyroData];
             self.lastLocation = location;
         }
     }

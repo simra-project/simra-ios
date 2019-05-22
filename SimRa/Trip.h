@@ -36,8 +36,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSTimeInterval timestamp;
 @end
 
+@interface TripGyro : NSObject
+@property (nonatomic) double x;
+@property (nonatomic) double y;
+@property (nonatomic) double z;
+@end
+
 @interface TripLocation : NSObject
 @property (strong, nonatomic) CLLocation *location;
+@property (strong, nonatomic) TripGyro *gyro;
 @property (strong, nonatomic) NSMutableArray <TripMotion *> *tripMotions;
 @property (strong, nonatomic, nullable) TripAnnotation *tripAnnotation;
 @end
