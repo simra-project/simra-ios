@@ -54,9 +54,12 @@
     
     NSString *csvString;
     
+    NSString *bundleVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
+    NSArray <NSString *> *components = [bundleVersion componentsSeparatedByString:@"."];
     csvString = [NSString stringWithFormat:@"i%@#%ld\n",
-                 [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"],
+                 components[0],
                  self.version];
+    
     csvString = [csvString stringByAppendingString:@"birth,gender,region,experience,numberOfRides,duration,numberOfIncidents,length,idle"];
     for (NSInteger i = 0; i < 24; i++) {
         csvString = [csvString stringByAppendingFormat:@",%ld", i];

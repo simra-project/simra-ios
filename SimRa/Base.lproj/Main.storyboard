@@ -351,14 +351,46 @@
                         <sections>
                             <tableViewSection id="LmQ-FC-QKc">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="176" id="hvi-xY-NPI">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="176"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="104" id="hvi-xY-NPI">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hvi-xY-NPI" id="SJ9-8q-Wjg">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="103.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Created my free logo at https://LogoMakr.com" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FlT-0A-Udk">
+                                                    <rect key="frame" x="92" y="20" width="208" height="63.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                </textView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SimraSquare" translatesAutoresizingMaskIntoConstraints="NO" id="YhP-Kz-C4g">
+                                                    <rect key="frame" x="20" y="20" width="64" height="64"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="64" id="5re-V3-jXR"/>
+                                                        <constraint firstAttribute="width" constant="64" id="GSi-DW-g9w"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FlT-0A-Udk" firstAttribute="leading" secondItem="YhP-Kz-C4g" secondAttribute="trailing" constant="8" symbolic="YES" id="EhR-z7-EYb"/>
+                                                <constraint firstItem="YhP-Kz-C4g" firstAttribute="leading" secondItem="SJ9-8q-Wjg" secondAttribute="leading" constant="20" symbolic="YES" id="FEh-NH-cqJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="FlT-0A-Udk" secondAttribute="trailing" constant="20" symbolic="YES" id="VdQ-ng-huv"/>
+                                                <constraint firstAttribute="bottom" secondItem="FlT-0A-Udk" secondAttribute="bottom" constant="20" symbolic="YES" id="Xkt-BX-Uba"/>
+                                                <constraint firstItem="YhP-Kz-C4g" firstAttribute="top" secondItem="SJ9-8q-Wjg" secondAttribute="top" constant="20" symbolic="YES" id="atQ-k8-NcW"/>
+                                                <constraint firstItem="FlT-0A-Udk" firstAttribute="top" secondItem="SJ9-8q-Wjg" secondAttribute="top" constant="20" symbolic="YES" id="bNj-P7-PlJ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="176" id="ehW-HH-4Ip">
+                                        <rect key="frame" x="0.0" y="104" width="320" height="176"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ehW-HH-4Ip" id="K6y-ws-21n">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="175.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FlT-0A-Udk">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="agv-he-9aQ">
                                                     <rect key="frame" x="92" y="20" width="208" height="135.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <string key="text">Icons made by
@@ -368,35 +400,35 @@ from www.flaticon.com</string>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                 </textView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start" translatesAutoresizingMaskIntoConstraints="NO" id="YhP-Kz-C4g">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start" translatesAutoresizingMaskIntoConstraints="NO" id="doN-ZP-QFg">
                                                     <rect key="frame" x="20" y="20" width="64" height="64"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="64" id="5re-V3-jXR"/>
-                                                        <constraint firstAttribute="width" constant="64" id="GSi-DW-g9w"/>
+                                                        <constraint firstAttribute="height" constant="64" id="UkM-xv-LOa"/>
+                                                        <constraint firstAttribute="width" constant="64" id="gUn-FY-c5Y"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="racing-flag" translatesAutoresizingMaskIntoConstraints="NO" id="iRR-Ki-aL6">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="racing-flag" translatesAutoresizingMaskIntoConstraints="NO" id="Kqe-gR-mzf">
                                                     <rect key="frame" x="20" y="92" width="64" height="64"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="64" id="4Z8-9d-2JX"/>
-                                                        <constraint firstAttribute="width" constant="64" id="69T-jE-ySW"/>
+                                                        <constraint firstAttribute="height" constant="64" id="Xg3-5a-Qka"/>
+                                                        <constraint firstAttribute="width" constant="64" id="aVQ-me-YTZ"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="FlT-0A-Udk" firstAttribute="leading" secondItem="YhP-Kz-C4g" secondAttribute="trailing" constant="8" symbolic="YES" id="EhR-z7-EYb"/>
-                                                <constraint firstItem="YhP-Kz-C4g" firstAttribute="leading" secondItem="SJ9-8q-Wjg" secondAttribute="leading" constant="20" symbolic="YES" id="FEh-NH-cqJ"/>
-                                                <constraint firstItem="iRR-Ki-aL6" firstAttribute="leading" secondItem="SJ9-8q-Wjg" secondAttribute="leading" constant="20" symbolic="YES" id="R7Q-HC-0Je"/>
-                                                <constraint firstAttribute="trailing" secondItem="FlT-0A-Udk" secondAttribute="trailing" constant="20" symbolic="YES" id="VdQ-ng-huv"/>
-                                                <constraint firstAttribute="bottom" secondItem="FlT-0A-Udk" secondAttribute="bottom" constant="20" symbolic="YES" id="Xkt-BX-Uba"/>
-                                                <constraint firstItem="YhP-Kz-C4g" firstAttribute="top" secondItem="SJ9-8q-Wjg" secondAttribute="top" constant="20" symbolic="YES" id="atQ-k8-NcW"/>
-                                                <constraint firstItem="FlT-0A-Udk" firstAttribute="top" secondItem="SJ9-8q-Wjg" secondAttribute="top" constant="20" symbolic="YES" id="bNj-P7-PlJ"/>
-                                                <constraint firstItem="iRR-Ki-aL6" firstAttribute="top" secondItem="YhP-Kz-C4g" secondAttribute="bottom" constant="8" symbolic="YES" id="sWK-10-tke"/>
+                                                <constraint firstItem="agv-he-9aQ" firstAttribute="leading" secondItem="doN-ZP-QFg" secondAttribute="trailing" constant="8" symbolic="YES" id="FeB-xu-LrG"/>
+                                                <constraint firstItem="Kqe-gR-mzf" firstAttribute="top" secondItem="doN-ZP-QFg" secondAttribute="bottom" constant="8" symbolic="YES" id="Fzw-u4-cUT"/>
+                                                <constraint firstItem="doN-ZP-QFg" firstAttribute="leading" secondItem="K6y-ws-21n" secondAttribute="leading" constant="20" symbolic="YES" id="Ij9-qF-mA9"/>
+                                                <constraint firstAttribute="bottom" secondItem="agv-he-9aQ" secondAttribute="bottom" constant="20" symbolic="YES" id="Kc5-lv-K10"/>
+                                                <constraint firstAttribute="trailing" secondItem="agv-he-9aQ" secondAttribute="trailing" constant="20" symbolic="YES" id="LbJ-Kt-iFP"/>
+                                                <constraint firstItem="agv-he-9aQ" firstAttribute="top" secondItem="K6y-ws-21n" secondAttribute="top" constant="20" symbolic="YES" id="mTt-tg-PwX"/>
+                                                <constraint firstItem="Kqe-gR-mzf" firstAttribute="leading" secondItem="K6y-ws-21n" secondAttribute="leading" constant="20" symbolic="YES" id="qWi-UU-PeX"/>
+                                                <constraint firstItem="doN-ZP-QFg" firstAttribute="top" secondItem="K6y-ws-21n" secondAttribute="top" constant="20" symbolic="YES" id="u4a-Au-tWu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="119" id="2PF-Zg-VOX">
-                                        <rect key="frame" x="0.0" y="176" width="320" height="119"/>
+                                        <rect key="frame" x="0.0" y="280" width="320" height="119"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2PF-Zg-VOX" id="P49-vJ-HbT">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="118.5"/>
@@ -1877,6 +1909,7 @@ from www.flaticon.com</string>
         </scene>
     </scenes>
     <resources>
+        <image name="SimraSquare" width="266" height="266"/>
         <image name="racing-flag" width="48" height="48"/>
         <image name="start" width="48" height="48"/>
     </resources>

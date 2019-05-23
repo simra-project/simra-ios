@@ -324,10 +324,13 @@
     NSFileHandle *fh = [NSFileHandle fileHandleForWritingAtPath:fileURL.path];
     
     NSString *csvString;
-    
+
+    NSString *bundleVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
+    NSArray <NSString *> *components = [bundleVersion componentsSeparatedByString:@"."];
     csvString = [NSString stringWithFormat:@"i%@#%ld\n",
-                 [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"],
+                 components[0],
                  self.version];
+
     csvString = [csvString stringByAppendingString:@"key,lat,lon,ts,bike,childCheckBox,trailerCheckBox,pLoc,incident,i1,i2,i3,i4,i5,i6,i7,i8,i9,scary,desc\n"];
     [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
     
