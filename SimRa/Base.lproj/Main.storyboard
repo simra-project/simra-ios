@@ -1095,7 +1095,7 @@ from www.flaticon.com</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Slots" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFd-cr-Crk">
-                                                    <rect key="frame" x="20" y="20" width="81" height="21"/>
+                                                    <rect key="frame" x="20" y="20" width="280" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="8Y7-SO-O12"/>
                                                     </constraints>
@@ -1109,6 +1109,7 @@ from www.flaticon.com</string>
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="iFd-cr-Crk" secondAttribute="trailing" constant="20" symbolic="YES" id="1V0-By-oHU"/>
                                                 <constraint firstItem="R0t-sr-fR7" firstAttribute="top" secondItem="iFd-cr-Crk" secondAttribute="bottom" constant="8" symbolic="YES" id="Pg1-aJ-SIq"/>
                                                 <constraint firstAttribute="trailing" secondItem="R0t-sr-fR7" secondAttribute="trailing" constant="20" symbolic="YES" id="b13-Bl-Ke0"/>
                                                 <constraint firstItem="iFd-cr-Crk" firstAttribute="top" secondItem="cz8-tj-hus" secondAttribute="top" constant="20" symbolic="YES" id="cH5-9V-uKL"/>
@@ -1171,7 +1172,7 @@ from www.flaticon.com</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-Lc-xY3" customClass="IdPicker">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-Lc-xY3" customClass="IdPicker">
                                                     <rect key="frame" x="66" y="7" width="234" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="sMF-7X-ILT"/>
@@ -1179,6 +1180,9 @@ from www.flaticon.com</string>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="bikeTypeChanged:" destination="U6v-wH-DyA" eventType="editingDidEnd" id="GfE-OX-nfU"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1206,7 +1210,7 @@ from www.flaticon.com</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mYN-Xr-lMp" customClass="IdPicker">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mYN-Xr-lMp" customClass="IdPicker">
                                                     <rect key="frame" x="204" y="7" width="96" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="NR8-dP-FUh"/>
@@ -1214,6 +1218,9 @@ from www.flaticon.com</string>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="positionChanged:" destination="U6v-wH-DyA" eventType="editingDidEnd" id="ujf-yQ-V2m"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -1241,11 +1248,14 @@ from www.flaticon.com</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZh-ch-MMc">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZh-ch-MMc">
                                                     <rect key="frame" x="251" y="6.5" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="bnr-sS-kit"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <action selector="childSeatChanged:" destination="U6v-wH-DyA" eventType="valueChanged" id="dkU-3X-5Jc"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -1273,11 +1283,14 @@ from www.flaticon.com</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yxb-J0-Tnp">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yxb-J0-Tnp">
                                                     <rect key="frame" x="251" y="6.5" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="2Zw-cZ-C7X"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <action selector="trailerChanged:" destination="U6v-wH-DyA" eventType="valueChanged" id="atp-IP-4S5"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -1297,15 +1310,23 @@ from www.flaticon.com</string>
                             <outlet property="delegate" destination="U6v-wH-DyA" id="TFe-y7-g1R"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Trip Detail" id="zMa-cg-HEi"/>
+                    <navigationItem key="navigationItem" title="Trip Detail" id="zMa-cg-HEi">
+                        <barButtonItem key="rightBarButtonItem" title="Set Default" id="VDG-DB-ai5">
+                            <connections>
+                                <action selector="setDefaultPressed:" destination="U6v-wH-DyA" id="QJC-pv-grw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bikeType" destination="JAb-Lc-xY3" id="hnK-Bg-wFt"/>
                         <outlet property="childSeat" destination="MZh-ch-MMc" id="6wM-ye-QnE"/>
                         <outlet property="position" destination="mYN-Xr-lMp" id="5H8-7g-n2P"/>
                         <outlet property="trailer" destination="yxb-J0-Tnp" id="zaU-Lz-sx7"/>
+                        <segue destination="OIj-aE-95K" kind="unwind" identifier="attributesChanged:" unwindAction="attributesChanged:" id="uVh-1G-ClM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yWT-cV-2Gk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="OIj-aE-95K" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3964" y="-134"/>
         </scene>

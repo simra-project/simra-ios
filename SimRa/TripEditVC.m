@@ -543,4 +543,10 @@ calloutAccessoryControlTapped:(UIControl *)control {
     [self setup];
 }
 
+- (IBAction)attributesChanged:(UIStoryboardSegue *)unwindSegue {
+    self.changed = TRUE;
+    self.clean = TRUE;
+    [self setup];
+}
+
 @end

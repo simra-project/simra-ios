@@ -57,10 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSMutableArray <TripLocation *> *tripLocations;
 @property (nonatomic, readonly) NSInteger deferredSecs;
 @property (nonatomic, readonly) NSInteger deferredMeters;
-@property (nonatomic, readonly) NSInteger bikeTypeId;
-@property (nonatomic, readonly) NSInteger positionId;
-@property (nonatomic, readonly) Boolean childseat;
-@property (nonatomic, readonly) Boolean trailer;
+@property (nonatomic) NSInteger bikeTypeId;
+@property (nonatomic) NSInteger positionId;
+@property (nonatomic) Boolean childseat;
+@property (nonatomic) Boolean trailer;
 
 - (instancetype)initFromDictionary:(NSDictionary *)dict;
 - (void)startRecording;

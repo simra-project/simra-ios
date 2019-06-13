@@ -58,10 +58,6 @@
 @property (strong, nonatomic) TripMotion *lastTripMotion;
 @property (nonatomic) NSInteger deferredSecs;
 @property (nonatomic) NSInteger deferredMeters;
-@property (nonatomic) NSInteger bikeTypeId;
-@property (nonatomic) NSInteger positionId;
-@property (nonatomic) Boolean childseat;
-@property (nonatomic) Boolean trailer;
 
 @property (strong, nonatomic) NSTimer *timer;
 @end

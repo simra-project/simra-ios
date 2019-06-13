@@ -208,3 +208,6 @@
 
 /* Class = "UIBarButtonItem"; title = "Stop"; ObjectID = "dZi-32-hxA"; */
 "dZi-32-hxA.title" = "Stopp";
+
+/* Class = "UIBarButtonItem"; title = "Set Default"; ObjectID = "VDG-DB-ai5"; */
+"VDG-DB-ai5.title" = "Als Standard";
