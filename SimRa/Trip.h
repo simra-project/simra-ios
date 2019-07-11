@@ -49,6 +49,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) TripAnnotation *tripAnnotation;
 @end
 
+@interface TripInfo : NSObject
+@property (nonatomic) NSInteger identifier;
+@property (nonatomic) NSInteger version;
+@property (nonatomic) Boolean edited;
+@property (nonatomic) Boolean uploaded;
+@property (strong, nonatomic) NSString *fileHash;
+@property (strong, nonatomic) NSString *filePasswd;
+@property (nonatomic) NSDateInterval *duration;
+@property (nonatomic) NSInteger length;
+
+- (instancetype)initFromDictionary:(NSDictionary *)dict;
+- (NSDictionary *)asDictionary;
+@end
+
 @interface Trip : UploaderObject <CLLocationManagerDelegate>
 @property (nonatomic, readonly) NSInteger identifier;
 @property (strong, nonatomic, readonly) CLLocation *startLocation;
@@ -62,6 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) Boolean childseat;
 @property (nonatomic) Boolean trailer;
 
+- (instancetype)initFromDefaults:(NSInteger)identifier;
 - (instancetype)initFromDictionary:(NSDictionary *)dict;
 - (void)startRecording;
 - (void)stopRecording;
@@ -71,6 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)length;
 - (NSInteger)idle;
 - (NSDictionary *)asDictionary;
+- (TripInfo *)tripInfo;
 @end
 
 NS_ASSUME_NONNULL_END

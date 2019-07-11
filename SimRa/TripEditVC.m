@@ -148,6 +148,8 @@
 
 @interface TripEditVC ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) UIAlertController *ac;
+
 @property (strong, nonatomic) TripTrack *tripTrack;
 @property (strong, nonatomic) TripPoint *startPoint;
 @property (strong, nonatomic) TripPoint *endPoint;
@@ -244,7 +246,15 @@
 - (void)viewWillDisappear:(BOOL)animated {
     if (self.changed) {
         self.trip.edited = TRUE;
+        self.ac = [UIAlertController
+                   alertControllerWithTitle:NSLocalizedString(@"Saving Trip", @"Saving Trip")
+                   message:[NSString stringWithFormat:@"Trip-%ld", self.trip.identifier]
+                   preferredStyle:UIAlertControllerStyleAlert];
+
+        [self presentViewController:self.ac animated:TRUE completion:nil];
+
         [self.trip save];
+        [self dismissViewControllerAnimated:TRUE completion:nil];
     }
     [super viewWillDisappear:animated];
 }

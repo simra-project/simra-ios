@@ -51,6 +51,56 @@
 
 @end
 
+@implementation TripInfo
+- (instancetype)initFromDictionary:(NSDictionary *)dict {
+    self = [super init];
+    NSNumber *identifier = [dict objectForKey:@"identifier"];
+    self.identifier = identifier.integerValue;
+    NSNumber *version = [dict objectForKey:@"version"];
+    self.version = version.integerValue;
+    NSNumber *edited = [dict objectForKey:@"edited"];
+    self.edited = edited.boolValue;
+    NSNumber *uploaded = [dict objectForKey:@"uploaded"];
+    self.uploaded = uploaded.boolValue;
+    self.fileHash = [dict objectForKey:@"fileHash"];
+    self.filePasswd = [dict objectForKey:@"filePasswd"];
+
+    NSNumber *start = [dict objectForKey:@"start"];
+    NSNumber *end = [dict objectForKey:@"end"];
+    self.duration = [[NSDateInterval alloc]
+                     initWithStartDate:[NSDate dateWithTimeIntervalSince1970:start.doubleValue]
+                     endDate:[NSDate dateWithTimeIntervalSince1970:end.doubleValue]
+                     ];
+    NSNumber *length = [dict objectForKey:@"length"];
+    self.length = length.integerValue;
+    return self;
+}
+
+- (NSDictionary *)asDictionary {
+    NSMutableDictionary *tripInfoDict = [[NSMutableDictionary alloc] init];
+    [tripInfoDict setObject:[NSNumber numberWithInteger:self.identifier] forKey:@"identifier"];
+    [tripInfoDict setObject:[NSNumber numberWithInteger:self.version] forKey:@"version"];
+    [tripInfoDict setObject:[NSNumber numberWithBool:self.edited] forKey:@"edited"];
+    [tripInfoDict setObject:[NSNumber numberWithBool:self.uploaded] forKey:@"uploaded"];
+    if (self.fileHash) {
+        [tripInfoDict setObject:self.fileHash forKey:@"fileHash"];
+    }
+    if (self.filePasswd) {
+        [tripInfoDict setObject:self.filePasswd forKey:@"filePasswd"];
+    }
+
+    [tripInfoDict setObject:[NSNumber
+                             numberWithDouble:self.duration.startDate.timeIntervalSince1970]
+                     forKey:@"start"];
+    [tripInfoDict setObject:[NSNumber
+                             numberWithDouble:self.duration.endDate.timeIntervalSince1970]
+                     forKey:@"end"];
+    [tripInfoDict setObject:[NSNumber numberWithInteger:self.length] forKey:@"length"];
+    return tripInfoDict;
+}
+
+@end
+
 @interface Trip ()
 @property (nonatomic) NSInteger identifier;
 @property (strong, nonatomic) CLLocation *startLocation;
@@ -77,6 +127,14 @@
     self.uploaded = FALSE;
     self.tripLocations = [[NSMutableArray alloc] init];
     return self;
+}
+
+- (instancetype)initFromDefaults:(NSInteger)identifier {
+    NSLog(@"initFromDefaults %ld", identifier);
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSDictionary *dict = [ad.defaults objectForKey:[NSString stringWithFormat:@"Trip-%ld",
+                                                    identifier]];
+    return [self initFromDictionary:dict];
 }
 
 - (instancetype)initFromDictionary:(NSDictionary *)dict {
@@ -378,22 +436,54 @@
         CLLocationAccuracy horizontalAccuray = tripLocation.location.horizontalAccuracy;
         TripGyro *gyro = tripLocation.gyro;
 
-        for (TripMotion *tripMotion in tripLocation.tripMotions) {
-            if (lat == 0.0 && lon == 0.0) {
-                csvString = @",,";
-            } else {
-                csvString = [NSString stringWithFormat:@"%f,%f,",
-                             lat,
-                             lon];
-                lat = 0.0;
-                lon = 0.0;
+        if (tripLocation.tripMotions.count > 0) {
+            for (TripMotion *tripMotion in tripLocation.tripMotions) {
+                if (lat == 0.0 && lon == 0.0) {
+                    csvString = @",,";
+                } else {
+                    csvString = [NSString stringWithFormat:@"%f,%f,",
+                                 lat,
+                                 lon];
+                    lat = 0.0;
+                    lon = 0.0;
+                }
+
+                csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%.0f,",
+                             tripMotion.x * 9.81,
+                             tripMotion.y * 9.81,
+                             tripMotion.z * 9.81,
+                             tripMotion.timestamp * 1000.0];
+
+                if (horizontalAccuray == -1.0) {
+                    csvString = [csvString stringByAppendingString:@","];
+                } else {
+                    csvString = [csvString stringByAppendingFormat:@"%f,",
+                                 horizontalAccuray];
+                    horizontalAccuray = -1;
+                }
+
+                if (!gyro) {
+                    csvString = [csvString stringByAppendingString:@",,\n"];
+                } else {
+                    csvString = [csvString stringByAppendingFormat:@"%f,%f,%f\n",
+                                 gyro.x,
+                                 gyro.y,
+                                 gyro.z];
+                    gyro = nil;
+                }
+
+                [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
             }
+        } else {
+            csvString = [NSString stringWithFormat:@"%f,%f,",
+                         lat,
+                         lon];
 
             csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%.0f,",
-                         tripMotion.x * 9.81,
-                         tripMotion.y * 9.81,
-                         tripMotion.z * 9.81,
-                         tripMotion.timestamp * 1000.0];
+                         0.0,
+                         0.0,
+                         0.0,
+                         tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0];
 
             if (horizontalAccuray == -1.0) {
                 csvString = [csvString stringByAppendingString:@","];
@@ -702,9 +792,25 @@
 }
 
 - (void)save {
-    NSDictionary *tripDict = self.asDictionary;
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSDictionary *tripDict = self.asDictionary;
     [ad.defaults setObject:tripDict forKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
+    NSDictionary *tripInfoDict = self.tripInfo.asDictionary;
+    [ad.defaults setObject:tripInfoDict forKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
+    [ad.trips updateTrip:self];
+}
+
+- (TripInfo *)tripInfo {
+    TripInfo *tripInfo = [[TripInfo alloc] init];
+    tripInfo.identifier = self.identifier;
+    tripInfo.version = self.version;
+    tripInfo.edited = self.edited;
+    tripInfo.uploaded = self.uploaded;
+    tripInfo.fileHash = self.fileHash;
+    tripInfo.filePasswd = self.filePasswd;
+    tripInfo.duration = self.duration;
+    tripInfo.length = self.length;
+    return tripInfo;
 }
 
 @end

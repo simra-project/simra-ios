@@ -13,11 +13,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface Trips : UploaderObject
-@property (strong, nonatomic) NSMutableDictionary <NSNumber *, Trip *> *trips;
+@property (strong, nonatomic) NSMutableDictionary <NSNumber *, TripInfo *> *tripInfos;
 
 - (Trip *)newTrip;
 - (void)deleteTripWithIdentifier:(NSInteger)identifier;
 - (void)addTripToStatistics:(Trip *)trip;
+- (void)updateTrip:(Trip *)trip;
 
 @end
 

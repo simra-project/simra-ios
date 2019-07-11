@@ -19,13 +19,30 @@
     self.fileHash = [ad.defaults stringForKey:@"fileHash"];
     self.filePasswd = [ad.defaults stringForKey:@"filePasswd"];
 
-    self.trips = [[NSMutableDictionary alloc] init];
-    NSLog(@"defaults %@", ad.defaults.dictionaryRepresentation);
+    self.tripInfos = [[NSMutableDictionary alloc] init];
+    NSLog(@"defaults %@", ad.defaults.dictionaryRepresentation.allKeys);
+    for (NSString *key in ad.defaults.dictionaryRepresentation.allKeys) {
+        if ([key rangeOfString:@"TripInfo-"].location == 0) {
+            NSLog(@"loading %@", key);
+            NSDictionary *dict = [ad.defaults objectForKey:key];
+            TripInfo *tripInfo = [[TripInfo alloc] initFromDictionary:dict];
+            [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:tripInfo.identifier]];
+        }
+    }
+
     for (NSString *key in ad.defaults.dictionaryRepresentation.allKeys) {
         if ([key rangeOfString:@"Trip-"].location == 0) {
-            NSDictionary *dict = [ad.defaults objectForKey:key];
-            Trip *trip = [[Trip alloc] initFromDictionary:dict];
-            [self.trips setObject:trip forKey:[NSNumber numberWithInteger:trip.identifier]];
+            NSInteger identifier = [key substringFromIndex:5].integerValue;
+            if (![self.tripInfos objectForKey:[NSNumber numberWithInteger:identifier]]) {
+                NSLog(@"loading %@", key);
+                NSDictionary *dict = [ad.defaults objectForKey:key];
+                Trip *trip = [[Trip alloc] initFromDictionary:dict];
+                TripInfo *tripInfo = trip.tripInfo;
+                [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:trip.identifier]];
+                [trip save];
+            } else {
+                NSLog(@"already have info of %@", key);
+            }
         }
     }
     return self;
@@ -33,14 +50,21 @@
 
 - (Trip *)newTrip {
     Trip *trip = [[Trip alloc] init];
-    [self.trips setObject:trip forKey:[NSNumber numberWithInteger:trip.identifier]];
+    TripInfo *tripInfo = trip.tripInfo;
+    [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:trip.identifier]];
     return trip;
 }
 
 - (void)deleteTripWithIdentifier:(NSInteger)identifier {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", identifier]];
-    [self.trips removeObjectForKey:[NSNumber numberWithInteger:identifier]];
+    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", identifier]];
+    [self.tripInfos removeObjectForKey:[NSNumber numberWithInteger:identifier]];
+}
+
+- (void)updateTrip:(Trip *)trip {
+    TripInfo *tripInfo = trip.tripInfo;
+    [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:trip.identifier]];
 }
 
 - (NSURL *)csvFile {

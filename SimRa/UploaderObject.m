@@ -132,7 +132,7 @@
                      self.edited = FALSE;
                      [self performSelectorOnMainThread:@selector(save)
                                             withObject:nil
-                                         waitUntilDone:TRUE ];
+                                         waitUntilDone:TRUE];
                  } else {
                      //
                  }

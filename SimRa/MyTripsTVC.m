@@ -59,11 +59,11 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:FALSE];
     }
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSArray <NSNumber *> *keys = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil];
+    NSArray <NSNumber *> *keys = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil];
     for (NSInteger row = 0; row < keys.count; row++) {
         NSNumber *key = keys[row];
-        Trip *trip = ad.trips.trips[key];
-        if (!trip.uploaded) {
+        TripInfo *tripInfo = ad.trips.tripInfos[key];
+        if (!tripInfo.uploaded) {
             //NSLog(@"selectRowAtIndexPath %@", [NSIndexPath indexPathForRow:row inSection:0]);
             [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]
                                         animated:FALSE
@@ -83,21 +83,21 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    return ad.trips.trips.count;
+    return ad.trips.tripInfos.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trip" forIndexPath:indexPath];
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-    Trip *trip = ad.trips.trips[key];
+    NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
+    TripInfo *tripInfo = ad.trips.tripInfos[key];
 
     NSString *status;
 
-    if (trip.edited) {
+    if (tripInfo.edited) {
         status = NSLocalizedString(@"Edited", @"Edited");
     } else {
-        if (trip.uploaded) {
+        if (tripInfo.uploaded) {
             status = NSLocalizedString(@"Uploaded", @"Uploaded");
         } else {
             status = NSLocalizedString(@"New", @"New");
@@ -108,16 +108,16 @@ NSInteger revertedSort(id num1, id num2, void *context) {
     startFormatter.dateStyle = NSDateFormatterShortStyle;
     startFormatter.timeStyle =NSDateFormatterShortStyle;
 
-    NSDateInterval *duration = trip.duration;
+    NSDateInterval *duration = tripInfo.duration;
     NSTimeInterval seconds = [duration.endDate timeIntervalSinceDate:duration.startDate];
 
     cell.textLabel.text = [NSString stringWithFormat:@"%@",
                            status];
 
     cell.detailTextLabel.text = [NSString stringWithFormat:@" %@, %@, %.01f km",
-                                 [startFormatter stringFromDate:trip.duration.startDate],
+                                 [startFormatter stringFromDate:tripInfo.duration.startDate],
                                  hms(seconds),
-                                 trip.length / 1000.0];
+                                 tripInfo.length / 1000.0];
     return cell;
 }
 
@@ -128,9 +128,9 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-    Trip *trip = ad.trips.trips[key];
-    if (trip.uploaded) {
+    NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
+    TripInfo *tripInfo = ad.trips.tripInfos[key];
+    if (tripInfo.uploaded) {
         return nil;
     } else {
         return indexPath;
@@ -149,7 +149,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
+        NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
         [ad.trips deleteTripWithIdentifier:key.integerValue];
         [tableView performBatchUpdates:^{
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -172,8 +172,8 @@ NSInteger revertedSort(id num1, id num2, void *context) {
             UITableViewCell *cell = (UITableViewCell *)sender;
             NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
             AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-            Trip *trip = ad.trips.trips[key];
+            NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
+            Trip *trip = [[Trip alloc] initFromDefaults:key.integerValue];
             tripEditVC.trip = trip;
             tripEditVC.clean = TRUE;
             tripEditVC.changed = FALSE;
@@ -201,8 +201,8 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         [self presentViewController:ac animated:TRUE completion:nil];
     } else {
         if (self.tableView.indexPathForSelectedRow) {
-            NSNumber *key = [ad.trips.trips.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
-            Trip *trip = ad.trips.trips[key];
+            NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
+            Trip *trip = [[Trip alloc] initFromDefaults:key.integerValue];
 
             [trip uploadFile:@"ride"
               WithController:self

@@ -21,6 +21,7 @@
     [self.lm requestWhenInUseAuthorization];
     self.mm = [[CMMotionManager alloc] init];
     self.trips = [[Trips alloc] init];
+    [self.trips save];
 
     NSURL *bundleURL = [NSBundle mainBundle].bundleURL;
     NSURL *baseURL = [bundleURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.lproj",
