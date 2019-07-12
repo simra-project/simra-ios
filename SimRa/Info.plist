@@ -15,9 +15,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>7</string>
+	<string>8</string>
 	<key>CFBundleVersion</key>
-	<string>7</string>
+	<string>8</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -28,9 +28,11 @@
 		<false/>
 	</dict>
 	<key>NSLocationUsageDescription</key>
-	<string>SimRa records your location only when in use</string>
+	<string>Diese App benötigt den Zugriff auf deine Standortdaten, um dich auf der Karte anzuzeigen und deine Fahrt zu speichern.
+This app needs permission to access your location data in order to show you your location on the map and to record your rides.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>SimRa records your location</string>
+	<string>Diese App benötigt den Zugriff auf deine Standortdaten, um dich auf der Karte anzuzeigen und deine Fahrt zu speichern.
+This app needs permission to access your location data in order to show you your location on the map and to record your rides.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
