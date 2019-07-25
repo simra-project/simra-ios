@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *bike;
 @property (weak, nonatomic) IBOutlet UISwitch *motorbike;
 @property (weak, nonatomic) IBOutlet UISwitch *other;
+@property (weak, nonatomic) IBOutlet UISwitch *escooter;
 @property (weak, nonatomic) IBOutlet UITextView *comment;
 
 @end
@@ -61,6 +62,7 @@
     self.motorbike.on = self.tripAnnotation.motorcycle;
     self.pedestrian.on = self.tripAnnotation.pedestrian;
     self.other.on = self.tripAnnotation.other;
+    self.escooter.on = self.tripAnnotation.escooter;
     self.comment.text = self.tripAnnotation.comment;
 }
 
@@ -116,6 +118,11 @@
 
 - (IBAction)motorbikeChanged:(UISwitch *)sender {
     self.tripAnnotation.motorcycle = sender.on;
+    self.changed = TRUE;
+}
+
+- (IBAction)escooterChanged:(UISwitch *)sender {
+    self.tripAnnotation.escooter = sender.on;
     self.changed = TRUE;
 }
 

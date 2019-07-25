@@ -240,6 +240,8 @@
             tripAnnotation.pedestrian = pedestrian.boolValue;
             NSNumber *other = [tripAnnotationDict objectForKey:@"other"];
             tripAnnotation.other = other.boolValue;
+            NSNumber *escooter = [tripAnnotationDict objectForKey:@"escooter"];
+            tripAnnotation.escooter = escooter.boolValue;
             NSString *comment = [tripAnnotationDict objectForKey:@"comment"];
             tripAnnotation.comment = comment;
             
@@ -352,6 +354,10 @@
             [tripAnnotationDict
              setObject:[NSNumber numberWithBool:tripLocation.tripAnnotation.other]
              forKey:@"other"];
+            [tripAnnotationDict
+             setObject:[NSNumber numberWithBool:tripLocation.tripAnnotation.escooter]
+             forKey:@"escooter"];
+
             
             if (tripLocation.tripAnnotation.comment) {
                 [tripAnnotationDict
@@ -385,7 +391,7 @@
                  components[0],
                  self.version];
 
-    csvString = [csvString stringByAppendingString:@"key,lat,lon,ts,bike,childCheckBox,trailerCheckBox,pLoc,incident,i1,i2,i3,i4,i5,i6,i7,i8,i9,scary,desc\n"];
+    csvString = [csvString stringByAppendingString:@"key,lat,lon,ts,bike,childCheckBox,trailerCheckBox,pLoc,incident,i1,i2,i3,i4,i5,i6,i7,i8,i9,scary,desc,i10\n"];
     [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSInteger key = 0;
@@ -397,7 +403,7 @@
                 comment = [comment stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
                 comment = [comment stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
             }
-            csvString = [NSString stringWithFormat:@"%ld,%f,%f,%.0f,%ld,%d,%d,%ld,%ld,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%@\n",
+            csvString = [NSString stringWithFormat:@"%ld,%f,%f,%.0f,%ld,%d,%d,%ld,%ld,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%@,%d\n",
                          key,
                          tripLocation.location.coordinate.latitude,
                          tripLocation.location.coordinate.longitude,
@@ -417,7 +423,8 @@
                          tripLocation.tripAnnotation.taxi,
                          tripLocation.tripAnnotation.other,
                          tripLocation.tripAnnotation.frightening,
-                         comment ? [NSString stringWithFormat:@"\"%@\"", comment] : @""];
+                         comment ? [NSString stringWithFormat:@"\"%@\"", comment] : @"",
+                         tripLocation.tripAnnotation.escooter];
             [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
             key++;
         }

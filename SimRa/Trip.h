@@ -25,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL bicycle;
 @property (nonatomic) BOOL motorcycle;
 @property (nonatomic) BOOL other;
+@property (nonatomic) BOOL escooter;
 @property (nonatomic) NSInteger incidentId;
 
 @end

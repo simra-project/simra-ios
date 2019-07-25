@@ -1804,8 +1804,44 @@ from www.flaticon.com</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="uLn-rd-duz">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="zNJ-WW-SHZ">
                                         <rect key="frame" x="0.0" y="468" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zNJ-WW-SHZ" id="FAR-mf-b8W">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="emB-n0-Jtj">
+                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="31" id="5ld-Y6-uHc"/>
+                                                        <constraint firstAttribute="width" constant="49" id="hg2-aS-1Hk"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="escooterChanged:" destination="Mbe-On-WHO" eventType="valueChanged" id="SQO-JW-2vN"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-Scooter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRX-9C-cpb">
+                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="OUV-8n-skh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="FRX-9C-cpb" firstAttribute="leading" secondItem="FAR-mf-b8W" secondAttribute="leading" constant="20" symbolic="YES" id="Jni-Tc-CD6"/>
+                                                <constraint firstItem="emB-n0-Jtj" firstAttribute="leading" secondItem="FRX-9C-cpb" secondAttribute="trailing" constant="8" symbolic="YES" id="OP2-eH-h96"/>
+                                                <constraint firstAttribute="trailing" secondItem="emB-n0-Jtj" secondAttribute="trailing" constant="20" symbolic="YES" id="cYZ-SI-zdq"/>
+                                                <constraint firstItem="emB-n0-Jtj" firstAttribute="centerY" secondItem="FAR-mf-b8W" secondAttribute="centerY" id="dHz-4f-QPg"/>
+                                                <constraint firstItem="FRX-9C-cpb" firstAttribute="centerY" secondItem="FAR-mf-b8W" secondAttribute="centerY" id="ezG-Mm-0Xo"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="uLn-rd-duz">
+                                        <rect key="frame" x="0.0" y="512" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uLn-rd-duz" id="AX9-rf-6yn">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -1845,7 +1881,7 @@ from www.flaticon.com</string>
                             <tableViewSection headerTitle="Comment" id="bow-5B-qsa">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="129" id="lhp-If-Vnk">
-                                        <rect key="frame" x="0.0" y="540" width="320" height="129"/>
+                                        <rect key="frame" x="0.0" y="584" width="320" height="129"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lhp-If-Vnk" id="mol-YN-wah">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="128.5"/>
@@ -1894,6 +1930,7 @@ from www.flaticon.com</string>
                         <outlet property="bus" destination="Edu-us-abC" id="OHQ-n5-Mx8"/>
                         <outlet property="car" destination="m9z-dl-3zF" id="AhU-8n-zBb"/>
                         <outlet property="comment" destination="LGj-0o-yBH" id="uAS-tv-s3G"/>
+                        <outlet property="escooter" destination="emB-n0-Jtj" id="YbH-F8-o0U"/>
                         <outlet property="frightened" destination="IKb-oF-Gff" id="ECt-WV-rx7"/>
                         <outlet property="incident" destination="RUN-lE-OIW" id="KfE-HG-1dr"/>
                         <outlet property="lorry" destination="vw5-uq-TES" id="f7K-eg-weg"/>
