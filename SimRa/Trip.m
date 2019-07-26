@@ -326,7 +326,9 @@
             [tripAnnotationDict
              setObject:[NSNumber numberWithInteger:tripLocation.tripAnnotation.incidentId]
              forKey:@"incidentId"];
-            
+            [tripAnnotationDict
+             setObject:[NSNumber numberWithBool:tripLocation.tripAnnotation.frightening]
+             forKey:@"frightening"];
             [tripAnnotationDict
              setObject:[NSNumber numberWithBool:tripLocation.tripAnnotation.car]
              forKey:@"car"];
@@ -357,7 +359,6 @@
             [tripAnnotationDict
              setObject:[NSNumber numberWithBool:tripLocation.tripAnnotation.escooter]
              forKey:@"escooter"];
-
             
             if (tripLocation.tripAnnotation.comment) {
                 [tripAnnotationDict
@@ -733,10 +734,23 @@
     NSInteger tripAnnotations = 0;
     for (TripLocation *tripLocation in self.tripLocations) {
         if (tripLocation.tripAnnotation) {
-            tripAnnotations ++;
+            tripAnnotations++;
         }
     }
     return tripAnnotations;
+}
+
+- (NSInteger)numberOfScary {
+    NSInteger numberOfScary = 0;
+    for (TripLocation *tripLocation in self.tripLocations) {
+        if (tripLocation.tripAnnotation) {
+            if (tripLocation.tripAnnotation.frightening) {
+                numberOfScary++;
+            }
+        }
+    }
+    return numberOfScary;
+
 }
 
 - (NSDateInterval *)duration {

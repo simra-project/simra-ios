@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *totalIdle;
 @property (weak, nonatomic) IBOutlet UIView *totalSlots;
 @property (weak, nonatomic) IBOutlet UITextField *version;
+@property (weak, nonatomic) IBOutlet UITextField *scaryEvents;
 
 @property (strong, nonatomic) UIAlertController *ac;
 
@@ -73,6 +74,7 @@
     self.experience.arrayIndex = [ad.defaults integerForKey:@"experienceId"];
 
     self.totalIdle.text = hms([ad.defaults doubleForKey:@"totalIdle"] / 1000.0);
+    self.scaryEvents.text = [ad.defaults stringForKey:@"numberOfScary"];
     self.totalRides.text = [ad.defaults stringForKey:@"totalRides"];
     self.totalLength.text = [NSString stringWithFormat:@"%.1f km",
                              [ad.defaults doubleForKey:@"totalLength"] / 1000.0];

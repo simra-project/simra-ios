@@ -84,7 +84,7 @@
                  components[0],
                  self.version];
     
-    csvString = [csvString stringByAppendingString:@"birth,gender,region,experience,numberOfRides,duration,numberOfIncidents,length,idle"];
+    csvString = [csvString stringByAppendingString:@"birth,gender,region,experience,numberOfRides,duration,numberOfIncidents,length,idle,numberOfScary"];
     for (NSInteger i = 0; i < 24; i++) {
         csvString = [csvString stringByAppendingFormat:@",%ld", i];
     }
@@ -92,7 +92,7 @@
     [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
     
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    csvString = [NSString stringWithFormat:@"%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld",
+    csvString = [NSString stringWithFormat:@"%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld",
                  [ad.defaults integerForKey:@"ageId"],
                  [ad.defaults integerForKey:@"sexId"],
                  [ad.defaults integerForKey:@"regionId"],
@@ -101,7 +101,8 @@
                  [ad.defaults integerForKey:@"totalDuration"],
                  [ad.defaults integerForKey:@"totalIncidents"],
                  [ad.defaults integerForKey:@"totalLength"],
-                 [ad.defaults integerForKey:@"totalIdle"]];
+                 [ad.defaults integerForKey:@"totalIdle"],
+                 [ad.defaults integerForKey:@"numberOfScary"]];
     NSArray <NSNumber *> *totalSlots = [ad.defaults arrayForKey:@"totalSlots"];
     for (NSInteger i = 0; i < 24; i++) {
         csvString = [csvString stringByAppendingFormat:@",%ld",
@@ -129,6 +130,7 @@
     NSInteger totalIncidents = [ad.defaults integerForKey:@"totalIncidents"];
     NSInteger totalLength = [ad.defaults integerForKey:@"totalLength"];
     NSInteger totalIdle = [ad.defaults integerForKey:@"totalIdle"];
+    NSInteger numberOfScary = [ad.defaults integerForKey:@"numberOfScary"];
     NSMutableArray <NSNumber *> *totalSlots = [[ad.defaults arrayForKey:@"totalSlots"] mutableCopy];
     if (!totalSlots) {
         totalSlots = [[NSMutableArray alloc] init];
@@ -142,6 +144,7 @@
     totalIncidents += trip.tripAnnotations;
     totalLength += trip.length;
     totalIdle += trip.idle * 1000.0;
+    numberOfScary += trip.numberOfScary;
 
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSInteger hour;
@@ -155,6 +158,7 @@
     [ad.defaults setInteger:totalIncidents forKey:@"totalIncidents"];
     [ad.defaults setInteger:totalLength forKey:@"totalLength"];
     [ad.defaults setInteger:totalIdle forKey:@"totalIdle"];
+    [ad.defaults setInteger:numberOfScary forKey:@"numberOfScary"];
     [ad.defaults setObject:totalSlots forKey:@"totalSlots"];
 }
 

@@ -158,6 +158,9 @@
 /* Class = "UILabel"; text = "Idle"; ObjectID = "psv-hA-tkp"; */
 "psv-hA-tkp.text" = "Idle";
 
+/* Class = "UILabel"; text = "Scary Events"; ObjectID = "AbA-66-1FG"; */
+"AbA-66-1FG.text" = "Scary Events";
+
 /* Class = "UILabel"; text = "Length"; ObjectID = "tir-BI-xQG"; */
 "tir-BI-xQG.text" = "Length";
 
