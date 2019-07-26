@@ -1,5 +1,8 @@
 # SimRa Changelog
 
+## Version 10 2019-07-26
+    [NEW] Scary Events / Beängstigende Ereignisse in Statistik closes #19
+
 ## Version 9 2019-07-25
     [FIX] Popup "Saving Trip" verschwindet nicht mehr closing #16
     [NEW] "E-Scooter" als Verkehrsbeteiligter (kommt in Version 9) closes #17
