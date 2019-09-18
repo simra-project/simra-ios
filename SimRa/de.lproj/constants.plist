@@ -6,9 +6,12 @@
 	<array>
 		<string>Bitte auswählen</string>
 		<string>Berlin</string>
-		<string>London</string>
+		<string>London (inactive)</string>
 		<string>Anderswo</string>
 		<string>Bern</string>
+		<string>Pforzheim/Enzkreis</string>
+		<string>Augsburg</string>
+		<string>Bochum</string>
 	</array>
 	<key>locales</key>
 	<array>
@@ -16,7 +19,10 @@
 		<string>Berlin</string>
 		<string>London</string>
 		<string>other</string>
-		<string>TEST</string>
+		<string>Bern</string>
+		<string>Pforzheim/Enzkreis</string>
+		<string>Augsburg</string>
+		<string>Bochum</string>
 	</array>
 	<key>ages</key>
 	<array>

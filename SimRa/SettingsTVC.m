@@ -66,7 +66,7 @@
     self.age.arrayIndex = [ad.defaults integerForKey:@"ageId"];
     self.sex.arrayIndex = [ad.defaults integerForKey:@"sexId"];
     self.region.arrayIndex = [ad.defaults integerForKey:@"regionId"];
-    if (self.region.arrayIndex == 0) {
+    if (self.region.arrayIndex == 0 || self.region.arrayIndex == 2) {
         self.region.textColor = [UIColor redColor];
     } else {
         self.region.textColor = [UIColor blackColor];
