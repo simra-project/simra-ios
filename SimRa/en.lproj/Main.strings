@@ -161,8 +161,14 @@
 /* Class = "UILabel"; text = "Scary Events"; ObjectID = "AbA-66-1FG"; */
 "AbA-66-1FG.text" = "Scary Events";
 
-/* Class = "UILabel"; text = "Length"; ObjectID = "tir-BI-xQG"; */
-"tir-BI-xQG.text" = "Length";
+/* Class = "UILabel"; text = "Distance"; ObjectID = "tir-BI-xQG"; */
+"tir-BI-xQG.text" = "Distance";
+
+/* Class = "UILabel"; text = "Average Speed"; ObjectID = "D3n-2Y-FbO"; */
+"D3n-2Y-FbO.text" = "Average Speed";
+
+/* Class = "UILabel"; text = "CO2 Saved"; ObjectID = "TUw-ey-TsK"; */
+"TUw-ey-TsK.text" = "CO2 Saved";
 
 /* Class = "UILabel"; text = "55"; ObjectID = "ts0-v6-Oh2"; */
 "ts0-v6-Oh2.text" = "55";

@@ -35,6 +35,8 @@
 @property (weak, nonatomic) IBOutlet UIView *totalSlots;
 @property (weak, nonatomic) IBOutlet UITextField *version;
 @property (weak, nonatomic) IBOutlet UITextField *scaryEvents;
+@property (weak, nonatomic) IBOutlet UITextField *totalCO2;
+@property (weak, nonatomic) IBOutlet UITextField *averageSpeed;
 
 @property (strong, nonatomic) UIAlertController *ac;
 
@@ -78,7 +80,21 @@
     self.totalRides.text = [ad.defaults stringForKey:@"totalRides"];
     self.totalLength.text = [NSString stringWithFormat:@"%.1f km",
                              [ad.defaults doubleForKey:@"totalLength"] / 1000.0];
+    self.totalCO2.text = [NSString stringWithFormat:@"%.1f kg",
+                              ([ad.defaults doubleForKey:@"totalLength"] / 1000.0 * 0.138)];
     self.totalDuration.text = hms([ad.defaults doubleForKey:@"totalDuration"] / 1000.0);
+    self.averageSpeed.text = [NSString stringWithFormat:@"%.1f km/h",
+                              (
+                               ([ad.defaults doubleForKey:@"totalLength"] / 1000.0) /
+                               (
+                                (
+                                 ([ad.defaults doubleForKey:@"totalDuration"] / 1000.0) -
+                                 ([ad.defaults doubleForKey:@"totalIdle"] / 1000.0)
+                                 ) /
+                                3600.0
+                                )
+                               )
+                              ];
     self.totalIncidents.text = [ad.defaults stringForKey:@"totalIncidents"];
 
     NSArray *totalSlots = [ad.defaults arrayForKey:@"totalSlots"];
