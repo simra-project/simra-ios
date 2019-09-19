@@ -4,8 +4,8 @@
 <dict>
 	<key>regions</key>
 	<array>
-		<string>Please select</string>
-		<string>Berlin</string>
+		<string>Please Choose</string>
+		<string>Berlin/Potsdam</string>
 		<string>London (inactive)</string>
 		<string>Other</string>
 		<string>Bern</string>
@@ -20,7 +20,7 @@
 		<string>London</string>
 		<string>other</string>
 		<string>Bern</string>
-		<string>Pforzheim/Enzkreis</string>
+		<string>Pforzheim</string>
 		<string>Augsburg</string>
 		<string>Bochum</string>
 	</array>

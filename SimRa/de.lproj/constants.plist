@@ -5,9 +5,9 @@
 	<key>regions</key>
 	<array>
 		<string>Bitte auswählen</string>
-		<string>Berlin</string>
+		<string>Berlin/Potsdam</string>
 		<string>London (inactive)</string>
-		<string>Anderswo</string>
+		<string>Sonstiges</string>
 		<string>Bern</string>
 		<string>Pforzheim/Enzkreis</string>
 		<string>Augsburg</string>
@@ -20,7 +20,7 @@
 		<string>London</string>
 		<string>other</string>
 		<string>Bern</string>
-		<string>Pforzheim/Enzkreis</string>
+		<string>Pforzheim</string>
 		<string>Augsburg</string>
 		<string>Bochum</string>
 	</array>
