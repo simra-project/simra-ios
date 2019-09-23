@@ -158,8 +158,8 @@
 /* Class = "UILabel"; text = "Idle"; ObjectID = "psv-hA-tkp"; */
 "psv-hA-tkp.text" = "Idle";
 
-/* Class = "UILabel"; text = "Scary Events"; ObjectID = "AbA-66-1FG"; */
-"AbA-66-1FG.text" = "Scary Events";
+/* Class = "UILabel"; text = "Thereof Scary"; ObjectID = "AbA-66-1FG"; */
+"AbA-66-1FG.text" = "Thereof Scary";
 
 /* Class = "UILabel"; text = "Distance"; ObjectID = "tir-BI-xQG"; */
 "tir-BI-xQG.text" = "Distance";
@@ -223,3 +223,12 @@
 
 /* Class = "UIBarButtonItem"; title = "Set Default"; ObjectID = "VDG-DB-ai5"; */
 "VDG-DB-ai5.title" = "Set Default";
+
+/* Class = "UILabel"; text = "Adherence to Rules"; ObjectID = "hbI-gv-mnl"; */
+"hbI-gv-mnl.text" = "Adherence to Rules";
+
+/* Class = "UILabel"; text = "Never"; ObjectID = "rVw-dc-Kk6"; */
+"rVw-dc-Kk6.text" = "Never";
+
+/* Class = "UILabel"; text = "Delivery Van"; ObjectID = "39Z-h9-cEF"; */
+"39Z-h9-cEF.text" = "Always";

@@ -84,7 +84,7 @@
                  components[0],
                  self.version];
     
-    csvString = [csvString stringByAppendingString:@"birth,gender,region,experience,numberOfRides,duration,numberOfIncidents,length,idle,numberOfScary"];
+    csvString = [csvString stringByAppendingString:@"birth,gender,region,experience,numberOfRides,duration,numberOfIncidents,length,idle,behaviour,numberOfScary"];
     for (NSInteger i = 0; i < 24; i++) {
         csvString = [csvString stringByAppendingFormat:@",%ld", i];
     }
@@ -92,7 +92,7 @@
     [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
     
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    csvString = [NSString stringWithFormat:@"%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld",
+    csvString = [NSString stringWithFormat:@"%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%@,%ld",
                  [ad.defaults integerForKey:@"ageId"],
                  [ad.defaults integerForKey:@"sexId"],
                  [ad.defaults integerForKey:@"regionId"],
@@ -102,6 +102,10 @@
                  [ad.defaults integerForKey:@"totalIncidents"],
                  [ad.defaults integerForKey:@"totalLength"],
                  [ad.defaults integerForKey:@"totalIdle"],
+                 [ad.defaults boolForKey:@"behaviour"] ?
+                    [NSString stringWithFormat:@"%ld",
+                     [ad.defaults integerForKey:@"behaviourValue"]] :
+                     @"",
                  [ad.defaults integerForKey:@"numberOfScary"]];
     NSArray <NSNumber *> *totalSlots = [ad.defaults arrayForKey:@"totalSlots"];
     for (NSInteger i = 0; i < 24; i++) {

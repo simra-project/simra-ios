@@ -37,6 +37,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *scaryEvents;
 @property (weak, nonatomic) IBOutlet UITextField *totalCO2;
 @property (weak, nonatomic) IBOutlet UITextField *averageSpeed;
+@property (weak, nonatomic) IBOutlet UISwitch *behaviourSwitch;
+@property (weak, nonatomic) IBOutlet UISlider *behaviourSlider;
 
 @property (strong, nonatomic) UIAlertController *ac;
 
@@ -71,9 +73,16 @@
     if (self.region.arrayIndex == 0 || self.region.arrayIndex == 2) {
         self.region.textColor = [UIColor redColor];
     } else {
-        self.region.textColor = [UIColor blackColor];
+        if (@available(iOS 13.0, *)) {
+            self.region.textColor = [UIColor labelColor];
+        } else {
+            self.region.textColor = [UIColor darkTextColor];
+        }
     }
     self.experience.arrayIndex = [ad.defaults integerForKey:@"experienceId"];
+    self.behaviourSwitch.on = [ad.defaults boolForKey:@"behaviour"];
+    self.behaviourSlider.enabled = self.behaviourSwitch.on;
+    self.behaviourSlider.value = [ad.defaults integerForKey:@"behaviourValue"];
 
     self.totalIdle.text = hms([ad.defaults doubleForKey:@"totalIdle"] / 1000.0);
     self.scaryEvents.text = [ad.defaults stringForKey:@"numberOfScary"];
@@ -207,15 +216,18 @@
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setInteger:sender.arrayIndex forKey:@"ageId"];
 }
+
 - (IBAction)sexChanged:(IdPicker *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setInteger:sender.arrayIndex forKey:@"sexId"];
 }
+
 - (IBAction)regionChanged:(IdPicker *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setInteger:sender.arrayIndex forKey:@"regionId"];
     [self update];
 }
+
 - (IBAction)experienceChanged:(IdPicker *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setInteger:sender.arrayIndex forKey:@"experienceId"];
@@ -250,6 +262,18 @@
 - (IBAction)trailerChanged:(UISwitch *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setBool:sender.on forKey:@"trailer"];
+}
+
+- (IBAction)behaviourSwitchChanged:(UISwitch *)sender {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ad.defaults setBool:sender.on forKey:@"behaviour"];
+    [self update];
+}
+
+- (IBAction)behaviourSliderChanged:(UISlider *)sender {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
+    [self update];
 }
 
 @end
