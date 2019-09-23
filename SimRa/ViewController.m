@@ -44,6 +44,8 @@
 @property (strong, nonatomic) MyAnnotation *myAnnotation;
 
 @property (strong, nonatomic) UIAlertController *ac;
+@property (nonatomic) NSInteger queued;
+
 
 @end
 
@@ -101,8 +103,8 @@
         UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                        showHowTo();
-                                                    }];
+            showHowTo();
+        }];
         [self.ac addAction:aay];
 
         UIAlertAction *aac = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel")
@@ -113,7 +115,7 @@
     }
 }
 
- void showHowTo() {
+void showHowTo() {
     NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
     if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
         urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
@@ -134,20 +136,20 @@
     self.navigationItem.rightBarButtonItem.enabled = FALSE;
 
     [self.trip addObserver:self
-                  forKeyPath:@"lastLocation"
-                     options:NSKeyValueObservingOptionNew
-                     context:nil];
+                forKeyPath:@"lastLocation"
+                   options:NSKeyValueObservingOptionNew
+                   context:nil];
     [self.trip addObserver:self
-                  forKeyPath:@"lastTripMotion"
-                     options:NSKeyValueObservingOptionNew
-                     context:nil];
+                forKeyPath:@"lastTripMotion"
+                   options:NSKeyValueObservingOptionNew
+                   context:nil];
 }
 
 - (IBAction)stopButtonPressed:(UIBarButtonItem *)sender {
     [self.trip removeObserver:self
-                     forKeyPath:@"lastLocation"];
+                   forKeyPath:@"lastLocation"];
     [self.trip removeObserver:self
-                     forKeyPath:@"lastTripMotion"];
+                   forKeyPath:@"lastTripMotion"];
 
     [self.trip stopRecording];
     self.recordedTrip = self.trip;
@@ -174,44 +176,51 @@
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-    [self performSelectorOnMainThread:@selector(update) withObject:nil waitUntilDone:NO];
+    [self performSelectorOnMainThread:@selector(update)
+                           withObject:nil
+                        waitUntilDone:NO];
+    self.queued++;
+    NSLog(@"Queued I: %ld", (long)self.queued);
 }
 
 - (void)update {
-    if (self.annotationView) {
-        self.annotationView.recording = self.trip != nil;
+    self.queued--;
+    NSLog(@"Queued O: %ld", (long)self.queued);
+    if (!self.queued) {
+        if (self.annotationView) {
+            self.annotationView.recording = self.trip != nil;
+            if (self.trip) {
+                if (self.trip.lastLocation) {
+                    //NSLog(@"update lastLocation %@", self.trip.lastLocation);
+                    self.annotationView.speed = self.trip.lastLocation.speed;
+                    self.annotationView.course = self.trip.lastLocation.course;
+                }
+                if (self.trip.lastTripMotion) {
+                    //NSLog(@"update lastTripMotion %@", self.trip.lastTripMotion);
+                    self.annotationView.accx = self.trip.lastTripMotion.x;
+                    self.annotationView.accy = self.trip.lastTripMotion.y;
+                    self.annotationView.accz = self.trip.lastTripMotion.z;
+                }
+            }
+            [self.annotationView setNeedsDisplay];
+        }
+
         if (self.trip) {
             if (self.trip.lastLocation) {
-                //NSLog(@"update lastLocation %@", self.trip.lastLocation);
-                self.annotationView.speed = self.trip.lastLocation.speed;
-                self.annotationView.course = self.trip.lastLocation.course;
-            }
-            if (self.trip.lastTripMotion) {
-                //NSLog(@"update lastTripMotion %@", self.trip.lastTripMotion);
-                self.annotationView.accx = self.trip.lastTripMotion.x;
-                self.annotationView.accy = self.trip.lastTripMotion.y;
-                self.annotationView.accz = self.trip.lastTripMotion.z;
+                AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                NSInteger deferredSecs = [ad.defaults integerForKey:@"deferredSecs"];
+                NSTimeInterval seconds = [self.trip.lastLocation.timestamp timeIntervalSinceDate:self.trip.startLocation.timestamp] - deferredSecs;
+                NSInteger deferredMeters = [ad.defaults integerForKey:@"deferredMeters"];
+                NSInteger meters = [self.trip.lastLocation distanceFromLocation:self.trip.startLocation] - deferredMeters;
+
+                self.dummyButton.title = [NSString stringWithFormat:@"%@ / %ld m",
+                                          hms(seconds),
+                                          meters];
+            } else {
+                self.dummyButton.title = NSLocalizedString(@"Recording", @"Recording");
             }
         }
-        [self.annotationView setNeedsDisplay];
     }
-
-    if (self.trip) {
-        if (self.trip.lastLocation) {
-            AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            NSInteger deferredSecs = [ad.defaults integerForKey:@"deferredSecs"];
-            NSTimeInterval seconds = [self.trip.lastLocation.timestamp timeIntervalSinceDate:self.trip.startLocation.timestamp] - deferredSecs;
-            NSInteger deferredMeters = [ad.defaults integerForKey:@"deferredMeters"];
-            NSInteger meters = [self.trip.lastLocation distanceFromLocation:self.trip.startLocation] - deferredMeters;
-
-            self.dummyButton.title = [NSString stringWithFormat:@"%@ / %ld m",
-                                      hms(seconds),
-                                      meters];
-        } else {
-            self.dummyButton.title = NSLocalizedString(@"Recording", @"Recording");
-        }
-    }
-
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView
