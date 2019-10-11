@@ -65,6 +65,7 @@
 		<string>Liegerad</string>
 		<string>Lastenfahrrad</string>
 		<string>Tandem</string>
+		<string>Mountainbike</string>
 		<string>Anderes</string>
 	</array>
 	<key>positions</key>

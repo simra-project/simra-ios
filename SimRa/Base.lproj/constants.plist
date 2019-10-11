@@ -65,6 +65,7 @@
 		<string>Recumbent Bike</string>
 		<string>Cargo Bike</string>
 		<string>Tandem</string>
+		<string>Mountain Bike</string>
 		<string>Other</string>
 	</array>
 	<key>positions</key>
