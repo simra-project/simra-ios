@@ -12,6 +12,7 @@
 		<string>Pforzheim/Enzkreis</string>
 		<string>Augsburg</string>
 		<string>Bochum</string>
+		<string>Stuttgart</string>
 	</array>
 	<key>locales</key>
 	<array>
@@ -23,6 +24,7 @@
 		<string>Pforzheim</string>
 		<string>Augsburg</string>
 		<string>Bochum</string>
+		<string>Stuttgart</string>
 	</array>
 	<key>ages</key>
 	<array>
