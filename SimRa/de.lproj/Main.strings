@@ -168,11 +168,10 @@
 "1xw-dA-InH.text" = "∅-Distanz";
 
 /* Class = "UILabel"; text = "Average Idle Time"; ObjectID = "oBk-eL-4Fm"; */
-"oBk-eL-4Fm.text" = "∅-Distanz";
-
+"oBk-eL-4Fm.text" = "∅-Stillstandsdauer";
 
 /* Class = "UILabel"; text = "Average Speed"; ObjectID = "D3n-2Y-FbO"; */
-"D3n-2Y-FbO.text" = "∅-Stillstandsdauer";
+"D3n-2Y-FbO.text" = "∅-Geschwindigkeit";
 
 /* Class = "UILabel"; text = "CO2 Saved"; ObjectID = "TUw-ey-TsK"; */
 "TUw-ey-TsK.text" = "Eingespartes CO2";
