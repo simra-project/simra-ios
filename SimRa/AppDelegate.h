@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <CoreMotion/CoreMotion.h>
 #import "Trips.h"
+#import "Regions.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) CMMotionManager *mm;
 @property (strong, nonatomic) Trips *trips;
 @property (strong, nonatomic) NSDictionary *constants;
+@property (strong, nonatomic) Regions *regions;
 
 @end
 

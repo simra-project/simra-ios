@@ -95,7 +95,7 @@
     csvString = [NSString stringWithFormat:@"%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%@,%ld",
                  [ad.defaults integerForKey:@"ageId"],
                  [ad.defaults integerForKey:@"sexId"],
-                 [ad.defaults integerForKey:@"regionId"],
+                 ad.regions.regionId,
                  [ad.defaults integerForKey:@"experienceId"],
                  [ad.defaults integerForKey:@"totalRides"],
                  [ad.defaults integerForKey:@"totalDuration"],

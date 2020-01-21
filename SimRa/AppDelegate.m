@@ -17,6 +17,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     self.defaults = [NSUserDefaults standardUserDefaults];
+    self.regions = [[Regions alloc] init];
     self.lm = [[CLLocationManager alloc] init];
     [self.lm requestWhenInUseAuthorization];
     self.mm = [[CMMotionManager alloc] init];

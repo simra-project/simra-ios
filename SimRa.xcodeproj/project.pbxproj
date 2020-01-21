@@ -17,6 +17,8 @@
 		8421D6962254BAA30056B62C /* DSBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D6952254BAA30056B62C /* DSBarChart.m */; };
 		845467EB227B0ABD0060E06D /* TripDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 845467EA227B0ABD0060E06D /* TripDetailTVC.m */; };
 		84564AF822549B1200D46132 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84564AF622549B1100D46132 /* Localizable.strings */; };
+		8470352C23D6D0810041AAFB /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470352B23D6D0810041AAFB /* Region.m */; };
+		8470352F23D6D0DA0041AAFB /* Regions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470352E23D6D0DA0041AAFB /* Regions.m */; };
 		848338022253CA0D00342285 /* constants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848338042253CA0D00342285 /* constants.plist */; };
 		849CA147224D3C6600CE45EB /* IdPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CA146224D3C6600CE45EB /* IdPicker.m */; };
 		84DD1E88224C0027004895F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD1E87224C0027004895F9 /* AppDelegate.m */; };
@@ -73,6 +75,10 @@
 		84564AFA22549B1700D46132 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845FD034225D71E90041568E /* Hash-Suffix.h.sample */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Hash-Suffix.h.sample"; sourceTree = "<group>"; };
 		845FD035225D71FE0041568E /* Hash-Suffix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hash-Suffix.h"; sourceTree = "<group>"; };
+		8470352A23D6D0810041AAFB /* Region.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
+		8470352B23D6D0810041AAFB /* Region.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
+		8470352D23D6D0DA0041AAFB /* Regions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Regions.h; sourceTree = "<group>"; };
+		8470352E23D6D0DA0041AAFB /* Regions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Regions.m; sourceTree = "<group>"; };
 		848337FF22532B7600342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		848338002253C6A200342285 /* server.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = server.cer; sourceTree = "<group>"; };
 		8483380A2253E2AF00342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/constants.plist; sourceTree = "<group>"; };
@@ -199,6 +205,10 @@
 				84DD1EC1224CD9BF004895F9 /* Trips.m */,
 				84DD1EBD224CD9A6004895F9 /* Trip.h */,
 				84DD1EBE224CD9A6004895F9 /* Trip.m */,
+				8470352A23D6D0810041AAFB /* Region.h */,
+				8470352B23D6D0810041AAFB /* Region.m */,
+				8470352D23D6D0DA0041AAFB /* Regions.h */,
+				8470352E23D6D0DA0041AAFB /* Regions.m */,
 				8418D52C22562148000A1D10 /* UploaderObject.h */,
 				8418D52D22562148000A1D10 /* UploaderObject.m */,
 				8421D68B2254AE710056B62C /* NSString+hashCode.h */,
@@ -418,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8470352C23D6D0810041AAFB /* Region.m in Sources */,
 				84DD1E8B224C0027004895F9 /* ViewController.m in Sources */,
 				84DD1EBF224CD9A6004895F9 /* Trip.m in Sources */,
 				840E20B0224D190400488B31 /* SettingsTVC.m in Sources */,
@@ -434,6 +445,7 @@
 				8418D52E22562148000A1D10 /* UploaderObject.m in Sources */,
 				8421D6932254B6F40056B62C /* NSTimeInterval+hms.m in Sources */,
 				8421D6962254BAA30056B62C /* DSBarChart.m in Sources */,
+				8470352F23D6D0DA0041AAFB /* Regions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

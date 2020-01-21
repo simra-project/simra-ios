@@ -187,8 +187,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (IBAction)uploadPressed:(UIBarButtonItem *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if ([ad.defaults integerForKey:@"regionId"] == 0 ||
-        [ad.defaults integerForKey:@"regionId"] == 2) {
+    if (!ad.regions.regionSelected) {
         UIAlertController *ac = [UIAlertController
                                  alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
                                  message:NSLocalizedString(@"Missing Region", @"Error message if region is not set yet")

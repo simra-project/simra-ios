@@ -56,7 +56,7 @@
 
     self.age.array = [ad.constants mutableArrayValueForKey:@"ages"];
     self.sex.array = [ad.constants mutableArrayValueForKey:@"sexes"];
-    self.region.array = [ad.constants mutableArrayValueForKey:@"regions"];
+    self.region.array = [ad.regions regionTexts];
     self.experience.array = [ad.constants mutableArrayValueForKey:@"experiences"];
     self.bikeType.array = [ad.constants mutableArrayValueForKey:@"bikeTypes"];
     self.position.array = [ad.constants mutableArrayValueForKey:@"positions"];
@@ -69,8 +69,8 @@
 
     self.age.arrayIndex = [ad.defaults integerForKey:@"ageId"];
     self.sex.arrayIndex = [ad.defaults integerForKey:@"sexId"];
-    self.region.arrayIndex = [ad.defaults integerForKey:@"regionId"];
-    if (self.region.arrayIndex == 0 || self.region.arrayIndex == 2) {
+    self.region.arrayIndex = ad.regions.filteredRegionId;
+    if (!ad.regions.regionSelected) {
         self.region.textColor = [UIColor redColor];
     } else {
         if (@available(iOS 13.0, *)) {
@@ -224,7 +224,7 @@
 
 - (IBAction)regionChanged:(IdPicker *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [ad.defaults setInteger:sender.arrayIndex forKey:@"regionId"];
+    [ad.regions selectId:sender.arrayIndex];
     [self update];
 }
 

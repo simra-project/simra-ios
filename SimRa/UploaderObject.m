@@ -62,8 +62,6 @@
     NSLog(@"data:\n%@", string);
 
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSArray <NSString *> *locales = [ad.constants mutableArrayValueForKey:@"locales"];
-    NSInteger regionId = [ad.defaults integerForKey:@"regionId"];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;
@@ -73,14 +71,14 @@
                      name,
                      self.fileHash,
                      self.filePasswd,
-                     locales[regionId],
+                     ad.regions.currentRegion.identifier,
                      NSString.clientHash];
         [request setHTTPMethod:@"PUT"];
     } else {
         urlString = [NSString stringWithFormat: @"%@//%@/%d/%@?loc=%@&clientHash=%@",
                      UPLOAD_SCHEME, UPLOAD_HOST, UPLOAD_VERSION,
                      name,
-                     locales[regionId],
+                     ad.regions.currentRegion.identifier,
                      NSString.clientHash];
         [request setHTTPMethod:@"POST"];
     }
