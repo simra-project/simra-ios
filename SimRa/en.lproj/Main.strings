@@ -164,6 +164,12 @@
 /* Class = "UILabel"; text = "Distance"; ObjectID = "tir-BI-xQG"; */
 "tir-BI-xQG.text" = "Distance";
 
+/* Class = "UILabel"; text = "Average Distance"; ObjectID = "1xw-dA-InH"; */
+"1xw-dA-InH.text" = "Average Distance";
+
+/* Class = "UILabel"; text = "Average Idle Time"; ObjectID = "oBk-eL-4Fm"; */
+"oBk-eL-4Fm.text" = "Average Idle Time";
+
 /* Class = "UILabel"; text = "Average Speed"; ObjectID = "D3n-2Y-FbO"; */
 "D3n-2Y-FbO.text" = "Average Speed";
 

@@ -39,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *averageSpeed;
 @property (weak, nonatomic) IBOutlet UISwitch *behaviourSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *behaviourSlider;
+@property (weak, nonatomic) IBOutlet UITextField *averageDistance;
+@property (weak, nonatomic) IBOutlet UITextField *averageIdle;
 
 @property (strong, nonatomic) UIAlertController *ac;
 
@@ -85,10 +87,13 @@
     self.behaviourSlider.value = [ad.defaults integerForKey:@"behaviourValue"];
 
     self.totalIdle.text = hms([ad.defaults doubleForKey:@"totalIdle"] / 1000.0);
+    self.averageIdle.text = hms([ad.defaults doubleForKey:@"totalIdle"] / 1000.0 / [ad.defaults stringForKey:@"totalRides"].integerValue);
     self.scaryEvents.text = [ad.defaults stringForKey:@"numberOfScary"];
     self.totalRides.text = [ad.defaults stringForKey:@"totalRides"];
     self.totalLength.text = [NSString stringWithFormat:@"%.1f km",
                              [ad.defaults doubleForKey:@"totalLength"] / 1000.0];
+    self.averageDistance.text = [NSString stringWithFormat:@"%.1f km",
+                             [ad.defaults doubleForKey:@"totalLength"] / 1000.0 / [ad.defaults stringForKey:@"totalRides"].integerValue];
     self.totalCO2.text = [NSString stringWithFormat:@"%.1f kg",
                               ([ad.defaults doubleForKey:@"totalLength"] / 1000.0 * 0.138)];
     self.totalDuration.text = hms([ad.defaults doubleForKey:@"totalDuration"] / 1000.0);
