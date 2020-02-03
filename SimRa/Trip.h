@@ -55,6 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSInteger version;
 @property (nonatomic) Boolean edited;
 @property (nonatomic) Boolean uploaded;
+@property (nonatomic) NSURL *csvFile;
 @property (strong, nonatomic) NSString *fileHash;
 @property (strong, nonatomic) NSString *filePasswd;
 @property (nonatomic) NSDateInterval *duration;
