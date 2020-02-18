@@ -62,6 +62,9 @@
     self.edited = edited.boolValue;
     NSNumber *uploaded = [dict objectForKey:@"uploaded"];
     self.uploaded = uploaded.boolValue;
+    NSNumber *statisticsAdded = [dict objectForKey:@"statisticsAdded"];
+    self.statisticsAdded = statisticsAdded.boolValue;
+
     self.fileHash = [dict objectForKey:@"fileHash"];
     self.filePasswd = [dict objectForKey:@"filePasswd"];
 
@@ -82,6 +85,8 @@
     [tripInfoDict setObject:[NSNumber numberWithInteger:self.version] forKey:@"version"];
     [tripInfoDict setObject:[NSNumber numberWithBool:self.edited] forKey:@"edited"];
     [tripInfoDict setObject:[NSNumber numberWithBool:self.uploaded] forKey:@"uploaded"];
+    [tripInfoDict setObject:[NSNumber numberWithBool:self.statisticsAdded] forKey:@"statisticsAdded"];
+
     if (self.fileHash) {
         [tripInfoDict setObject:self.fileHash forKey:@"fileHash"];
     }
@@ -108,7 +113,6 @@
 @property (strong, nonatomic) TripMotion *lastTripMotion;
 @property (nonatomic) NSInteger deferredSecs;
 @property (nonatomic) NSInteger deferredMeters;
-@property (nonatomic) Boolean statisticsAdded;
 
 @property (strong, nonatomic) NSTimer *timer;
 @end
@@ -840,6 +844,7 @@
     tripInfo.filePasswd = self.filePasswd;
     tripInfo.duration = self.duration;
     tripInfo.length = self.length;
+    tripInfo.statisticsAdded = self.statisticsAdded;
     return tripInfo;
 }
 
