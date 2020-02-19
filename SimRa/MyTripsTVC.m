@@ -169,6 +169,23 @@ NSInteger revertedSort(id num1, id num2, void *context) {
     }   
 }
 
+- (UIContextMenuConfiguration *)tableView:(UITableView *)tableView contextMenuConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point  API_AVAILABLE(ios(13.0)){
+    
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
+    Trip *trip = [[Trip alloc] initFromDefaults:key.integerValue];
+
+    UIImage *shareIcon = [UIImage systemImageNamed:@"square.and.arrow.up"];
+    UIAction *exportAction = [UIAction actionWithTitle:NSLocalizedString(@"Manual Export", @"MyTrips View Context menu export title") image:shareIcon identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[trip csvFile]] applicationActivities:nil];
+        [self presentViewController:activityController animated:true completion:nil];
+    }];
+    
+    return [UIContextMenuConfiguration configurationWithIdentifier:nil previewProvider:nil actionProvider:^UIMenu * _Nullable(NSArray<UIMenuElement *> * _Nonnull suggestedActions) {
+        return [UIMenu menuWithTitle:NSLocalizedString(@"Actions", @"MyTrips View Context menu title") children:@[exportAction]];
+    }];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
