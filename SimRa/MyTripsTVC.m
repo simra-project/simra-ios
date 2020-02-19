@@ -96,11 +96,19 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
     if (tripInfo.edited) {
         status = NSLocalizedString(@"Edited", @"Edited");
+        if (tripInfo.statisticsAdded) {
+            status = [status stringByAppendingFormat:@"-%@",
+                      NSLocalizedString(@"Completed", @"Completed")];
+        }
     } else {
         if (tripInfo.uploaded) {
             status = NSLocalizedString(@"Uploaded", @"Uploaded");
         } else {
             status = NSLocalizedString(@"New", @"New");
+            if (tripInfo.statisticsAdded) {
+                status = [status stringByAppendingFormat:@"-%@",
+                          NSLocalizedString(@"Completed", @"Completed")];
+            }
         }
     }
 

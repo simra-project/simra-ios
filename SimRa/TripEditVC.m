@@ -305,7 +305,7 @@
         
         self.clean = FALSE;
     }
-    if (self.trip.uploaded) {
+    if (self.trip.uploaded || self.trip.statisticsAdded) {
         self.navigationItem.rightBarButtonItem.enabled = FALSE;
         self.rangeSlider.hidden = TRUE;
     } else {
@@ -420,7 +420,7 @@
             pinAnnotationView.pinTintColor = MKPinAnnotationView.purplePinColor;;
         }
         
-        if (self.trip.uploaded) {
+        if (self.trip.uploaded || self.trip.statisticsAdded) {
             pinAnnotationView.leftCalloutAccessoryView = nil;
             pinAnnotationView.rightCalloutAccessoryView = nil;
         } else {
@@ -474,7 +474,7 @@ calloutAccessoryControlTapped:(UIControl *)control {
 }
 
 - (IBAction)longPressed:(UILongPressGestureRecognizer *)sender {
-    if (!self.trip.uploaded) {
+    if (!self.trip.uploaded && !self.trip.statisticsAdded) {
         
         if (sender.state == UIGestureRecognizerStateBegan) {
             AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;

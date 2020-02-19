@@ -62,6 +62,9 @@
     self.edited = edited.boolValue;
     NSNumber *uploaded = [dict objectForKey:@"uploaded"];
     self.uploaded = uploaded.boolValue;
+    NSNumber *statisticsAdded = [dict objectForKey:@"statisticsAdded"];
+    self.statisticsAdded = statisticsAdded.boolValue;
+
     self.fileHash = [dict objectForKey:@"fileHash"];
     self.filePasswd = [dict objectForKey:@"filePasswd"];
 
@@ -82,6 +85,8 @@
     [tripInfoDict setObject:[NSNumber numberWithInteger:self.version] forKey:@"version"];
     [tripInfoDict setObject:[NSNumber numberWithBool:self.edited] forKey:@"edited"];
     [tripInfoDict setObject:[NSNumber numberWithBool:self.uploaded] forKey:@"uploaded"];
+    [tripInfoDict setObject:[NSNumber numberWithBool:self.statisticsAdded] forKey:@"statisticsAdded"];
+
     if (self.fileHash) {
         [tripInfoDict setObject:self.fileHash forKey:@"fileHash"];
     }
@@ -125,6 +130,7 @@
     
     self.edited = FALSE;
     self.uploaded = FALSE;
+    self.statisticsAdded = FALSE;
     self.tripLocations = [[NSMutableArray alloc] init];
     return self;
 }
@@ -163,7 +169,9 @@
     self.childseat = childseat.boolValue;
     NSNumber *trailer = [dict objectForKey:@"trailer"];
     self.trailer = trailer.boolValue;
-    
+    NSNumber *statisticsAdded = [dict objectForKey:@"statisticsAdded"];
+    self.statisticsAdded = statisticsAdded.boolValue;
+
     self.tripLocations = [[NSMutableArray alloc] init];
     
     
@@ -272,7 +280,8 @@
     
     [tripDict setObject:[NSNumber numberWithBool:self.childseat] forKey:@"childseat"];
     [tripDict setObject:[NSNumber numberWithBool:self.trailer] forKey:@"trailer"];
-    
+    [tripDict setObject:[NSNumber numberWithBool:self.statisticsAdded] forKey:@"statisticsAdded"];
+
     NSMutableArray *tripLocationsArray = [[NSMutableArray alloc] init];
     for (TripLocation *tripLocation in self.tripLocations) {
         NSMutableDictionary *tripLocationDict = [[NSMutableDictionary alloc] init];
@@ -806,8 +815,12 @@
             location.tripAnnotation = nil;
         }
     }
-    
-    [ad.trips addTripToStatistics:self];
+
+    if (!self.statisticsAdded) {
+        [ad.trips addTripToStatistics:self];
+        self.statisticsAdded = TRUE;
+        [self save];
+    }
     
     [super uploadFile:name WithController:controller error:error completion:completion];
 }
@@ -831,6 +844,7 @@
     tripInfo.filePasswd = self.filePasswd;
     tripInfo.duration = self.duration;
     tripInfo.length = self.length;
+    tripInfo.statisticsAdded = self.statisticsAdded;
     return tripInfo;
 }
 

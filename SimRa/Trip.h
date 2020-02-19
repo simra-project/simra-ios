@@ -56,6 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) Boolean edited;
 @property (nonatomic) Boolean uploaded;
 @property (nonatomic) NSURL *csvFile;
+@property (nonatomic) Boolean statisticsAdded;
 @property (strong, nonatomic) NSString *fileHash;
 @property (strong, nonatomic) NSString *filePasswd;
 @property (nonatomic) NSDateInterval *duration;
@@ -77,6 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSInteger positionId;
 @property (nonatomic) Boolean childseat;
 @property (nonatomic) Boolean trailer;
+@property (nonatomic) Boolean statisticsAdded;
 
 - (instancetype)initFromDefaults:(NSInteger)identifier;
 - (instancetype)initFromDictionary:(NSDictionary *)dict;
