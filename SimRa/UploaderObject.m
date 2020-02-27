@@ -82,6 +82,7 @@
                      NSString.clientHash];
         [request setHTTPMethod:@"POST"];
     }
+    urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
     [request setURL:[NSURL URLWithString:urlString]];
 
     [request setValue:@"text/plain" forHTTPHeaderField: @"Content-Type"];
