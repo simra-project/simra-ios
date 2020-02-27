@@ -10,6 +10,20 @@
 #import "AppDelegate.h"
 #import "NSString+hashCode.h"
 
+@interface NSString (withRegionId)
+- (NSString *)withRegionId:(NSInteger)regionId;
+@end
+
+@implementation NSString (withRegionId)
+- (NSString *)withRegionId:(NSInteger)regionId {
+    if (regionId == 0) {
+        return self;
+    } else {
+        return [self stringByAppendingFormat:@"-%ld", regionId];
+    }
+}
+@end
+
 @implementation Trips
 - (instancetype)init {
     self = [super init];
@@ -45,6 +59,44 @@
             }
         }
     }
+
+    BOOL copyStatisticsOnce = [ad.defaults boolForKey:@"copyStatisticsOnce"];
+    if (!copyStatisticsOnce) {
+        [ad.defaults setBool:TRUE forKey:@"copyStatisticsOnce"];
+
+        if (ad.regions.regionSelected) {
+            [self save];
+
+            NSInteger totalRides = [ad.defaults integerForKey:@"totalRides"];
+            NSInteger totalDuration = [ad.defaults integerForKey:@"totalDuration"];
+            NSInteger totalIncidents = [ad.defaults integerForKey:@"totalIncidents"];
+            NSInteger totalLength = [ad.defaults integerForKey:@"totalLength"];
+            NSInteger totalIdle = [ad.defaults integerForKey:@"totalIdle"];
+            NSInteger numberOfScary = [ad.defaults integerForKey:@"numberOfScary"];
+            NSMutableArray <NSNumber *> *totalSlots = [[ad.defaults arrayForKey:@"totalSlots"] mutableCopy];
+            if (!totalSlots) {
+                totalSlots = [[NSMutableArray alloc] init];
+                for (NSInteger i = 0; i < 24; i++) {
+                    [totalSlots setObject:[NSNumber numberWithInteger:0] atIndexedSubscript:i];
+                }
+            }
+            [ad.defaults setInteger:totalRides
+                             forKey:[@"totalRides" withRegionId:ad.regions.regionId]];
+            [ad.defaults setInteger:totalDuration
+                             forKey:[@"totalDuration" withRegionId:ad.regions.regionId]];
+            [ad.defaults setInteger:totalIncidents
+                             forKey:[@"totalIncidents" withRegionId:ad.regions.regionId]];
+            [ad.defaults setInteger:totalLength
+                             forKey:[@"totalLength" withRegionId:ad.regions.regionId]];
+            [ad.defaults setInteger:totalIdle
+                             forKey:[@"totalIdle" withRegionId:ad.regions.regionId]];
+            [ad.defaults setInteger:numberOfScary
+                             forKey:[@"numberOfScary" withRegionId:ad.regions.regionId]];
+            [ad.defaults setObject:totalSlots
+                            forKey:[@"totalSlots" withRegionId:ad.regions.regionId]];
+        }
+    }
+
     return self;
 }
 
@@ -97,17 +149,17 @@
                  [ad.defaults integerForKey:@"sexId"],
                  ad.regions.regionId,
                  [ad.defaults integerForKey:@"experienceId"],
-                 [ad.defaults integerForKey:@"totalRides"],
-                 [ad.defaults integerForKey:@"totalDuration"],
-                 [ad.defaults integerForKey:@"totalIncidents"],
-                 [ad.defaults integerForKey:@"totalLength"],
-                 [ad.defaults integerForKey:@"totalIdle"],
+                 [ad.defaults integerForKey:[@"totalRides" withRegionId:ad.regions.regionId]],
+                 [ad.defaults integerForKey:[@"totalDuration" withRegionId:ad.regions.regionId]],
+                 [ad.defaults integerForKey:[@"totalIncidents" withRegionId:ad.regions.regionId]],
+                 [ad.defaults integerForKey:[@"totalLength" withRegionId:ad.regions.regionId]],
+                 [ad.defaults integerForKey:[@"totalIdle" withRegionId:ad.regions.regionId]],
                  [ad.defaults boolForKey:@"behaviour"] ?
                     [NSString stringWithFormat:@"%ld",
                      [ad.defaults integerForKey:@"behaviourValue"]] :
                      @"",
-                 [ad.defaults integerForKey:@"numberOfScary"]];
-    NSArray <NSNumber *> *totalSlots = [ad.defaults arrayForKey:@"totalSlots"];
+                 [ad.defaults integerForKey:[@"numberOfScary" withRegionId:ad.regions.regionId]]];
+    NSArray <NSNumber *> *totalSlots = [ad.defaults arrayForKey:[@"totalSlots" withRegionId:ad.regions.regionId]];
     for (NSInteger i = 0; i < 24; i++) {
         csvString = [csvString stringByAppendingFormat:@",%ld",
                      totalSlots[i].integerValue];
@@ -120,22 +172,42 @@
 
 - (void)save {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [ad.defaults setInteger:self.version forKey:@"version"];
-    [ad.defaults setBool:self.uploaded forKey:@"uploaded"];
-    [ad.defaults setObject:self.fileHash forKey:@"fileHash"];
-    [ad.defaults setObject:self.filePasswd forKey:@"filePasswd"];
+    [ad.defaults setInteger:self.version
+                     forKey:[@"version" withRegionId:ad.regions.regionId]];
+    [ad.defaults setBool:self.uploaded
+                  forKey:[@"uploaded" withRegionId:ad.regions.regionId]];
+    [ad.defaults setObject:self.fileHash
+                    forKey:[@"fileHash" withRegionId:ad.regions.regionId]];
+    [ad.defaults setObject:self.filePasswd
+                    forKey:[@"filePasswd" withRegionId:ad.regions.regionId]];
 }
 
 - (void)addTripToStatistics:(Trip *)trip {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
-    NSInteger totalRides = [ad.defaults integerForKey:@"totalRides"];
-    NSInteger totalDuration = [ad.defaults integerForKey:@"totalDuration"];
-    NSInteger totalIncidents = [ad.defaults integerForKey:@"totalIncidents"];
-    NSInteger totalLength = [ad.defaults integerForKey:@"totalLength"];
-    NSInteger totalIdle = [ad.defaults integerForKey:@"totalIdle"];
-    NSInteger numberOfScary = [ad.defaults integerForKey:@"numberOfScary"];
-    NSMutableArray <NSNumber *> *totalSlots = [[ad.defaults arrayForKey:@"totalSlots"] mutableCopy];
+    [self addTripToStatistics:trip regionId:0];
+    if (ad.regions.regionSelected) {
+        [self addTripToStatistics:trip regionId:ad.regions.regionId];
+    }
+}
+
+- (void)addTripToStatistics:(Trip *)trip regionId:(NSInteger)regionId {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    NSInteger totalRides = [ad.defaults
+                            integerForKey:[@"totalRides" withRegionId:regionId]];
+    NSInteger totalDuration = [ad.defaults
+                               integerForKey:[@"totalDuration" withRegionId:regionId]];
+    NSInteger totalIncidents = [ad.defaults
+                                integerForKey:[@"totalIncidents" withRegionId:regionId]];
+    NSInteger totalLength = [ad.defaults
+                             integerForKey:[@"totalLength" withRegionId:regionId]];
+    NSInteger totalIdle = [ad.defaults
+                           integerForKey:[@"totalIdle" withRegionId:regionId]];
+    NSInteger numberOfScary = [ad.defaults
+                               integerForKey:[@"numberOfScary" withRegionId:regionId]];
+    NSMutableArray <NSNumber *> *totalSlots = [[ad.defaults
+                                                arrayForKey:[@"totalSlots" withRegionId:regionId]] mutableCopy];
     if (!totalSlots) {
         totalSlots = [[NSMutableArray alloc] init];
         for (NSInteger i = 0; i < 24; i++) {
@@ -157,16 +229,34 @@
     hour = [calendar component:NSCalendarUnitHour fromDate:trip.duration.endDate];
     [totalSlots setObject:[NSNumber numberWithInteger:totalSlots[hour].integerValue + 1] atIndexedSubscript:hour];
 
-    [ad.defaults setInteger:totalRides forKey:@"totalRides"];
-    [ad.defaults setInteger:totalDuration forKey:@"totalDuration"];
-    [ad.defaults setInteger:totalIncidents forKey:@"totalIncidents"];
-    [ad.defaults setInteger:totalLength forKey:@"totalLength"];
-    [ad.defaults setInteger:totalIdle forKey:@"totalIdle"];
-    [ad.defaults setInteger:numberOfScary forKey:@"numberOfScary"];
-    [ad.defaults setObject:totalSlots forKey:@"totalSlots"];
+    [ad.defaults setInteger:totalRides
+                     forKey:[@"totalRides" withRegionId:regionId]];
+    [ad.defaults setInteger:totalDuration
+                     forKey:[@"totalDuration" withRegionId:regionId]];
+    [ad.defaults setInteger:totalIncidents
+                     forKey:[@"totalIncidents" withRegionId:regionId]];
+    [ad.defaults setInteger:totalLength
+                     forKey:[@"totalLength" withRegionId:regionId]];
+    [ad.defaults setInteger:totalIdle
+                     forKey:[@"totalIdle" withRegionId:regionId]];
+    [ad.defaults setInteger:numberOfScary
+                     forKey:[@"numberOfScary" withRegionId:regionId]];
+    [ad.defaults setObject:totalSlots
+                    forKey:[@"totalSlots" withRegionId:regionId]];
 }
 
 - (void)uploadFile:(NSString *)name WithController:(id)controller error:(SEL)error completion:(SEL)completion {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    self.version = [ad.defaults integerForKey:[@"version"
+                                               withRegionId:ad.regions.regionId]];
+    self.uploaded = [ad.defaults boolForKey:[@"uploaded"
+                                             withRegionId:ad.regions.regionId]];
+    self.fileHash = [ad.defaults stringForKey:[@"fileHash"
+                                               withRegionId:ad.regions.regionId]];
+    self.filePasswd = [ad.defaults stringForKey:[@"filePasswd"
+                                                 withRegionId:ad.regions.regionId]];
+
     [super uploadFile:name WithController:controller error:error completion:completion];
 }
 
