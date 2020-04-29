@@ -217,7 +217,7 @@
 
     totalRides++;
     totalDuration += [trip.duration.endDate timeIntervalSinceDate:trip.duration.startDate] * 1000.0;
-    totalIncidents += trip.tripAnnotations;
+    totalIncidents += trip.tripValidAnnotations;
     totalLength += trip.length;
     totalIdle += trip.idle * 1000.0;
     numberOfScary += trip.numberOfScary;

@@ -749,6 +749,17 @@
     return tripAnnotations;
 }
 
+- (NSInteger)tripValidAnnotations {
+    NSInteger tripValidAnnotations = 0;
+    for (TripLocation *tripLocation in self.tripLocations) {
+        if (tripLocation.tripAnnotation) {
+            if (tripLocation.tripAnnotation.incidentId != 0)
+            tripValidAnnotations++;
+        }
+    }
+    return tripValidAnnotations;
+}
+
 - (NSInteger)numberOfScary {
     NSInteger numberOfScary = 0;
     for (TripLocation *tripLocation in self.tripLocations) {
@@ -809,11 +820,27 @@
 - (void)uploadFile:(NSString *)name WithController:(id)controller error:(SEL)error completion:(SEL)completion {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
+    BOOL saveNecessary = FALSE;
     // remove unedited annotations
     for (TripLocation *location in self.tripLocations) {
         if (location.tripAnnotation && location.tripAnnotation.incidentId == 0) {
             location.tripAnnotation = nil;
+            saveNecessary = TRUE;
         }
+    }
+
+    // if no valid annotations, insert dummy
+    if (!self.tripAnnotations) {
+        TripLocation *location = self.tripLocations.firstObject;
+        TripAnnotation *annotation = [[TripAnnotation alloc] init];
+        annotation.incidentId = 0;
+        annotation.comment = @"3fzr";
+        location.tripAnnotation = annotation;
+        saveNecessary = TRUE;
+    }
+
+    if (saveNecessary) {
+        [self save];
     }
 
     if (!self.statisticsAdded) {

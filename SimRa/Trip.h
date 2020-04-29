@@ -86,6 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)stopRecording;
 - (NSInteger)tripMotions;
 - (NSInteger)tripAnnotations;
+- (NSInteger)tripValidAnnotations;
 - (NSInteger)numberOfScary;
 - (NSDateInterval *)duration;
 - (NSInteger)length;
