@@ -64,6 +64,12 @@
     self.uploaded = uploaded.boolValue;
     NSNumber *statisticsAdded = [dict objectForKey:@"statisticsAdded"];
     self.statisticsAdded = statisticsAdded.boolValue;
+    NSNumber *reUploaded = [dict objectForKey:@"reUploaded"];
+    self.reUploaded = reUploaded.boolValue;
+    NSNumber *annotationsCount = [dict objectForKey:@"annotationsCount"];
+    self.annotationsCount = annotationsCount.integerValue;
+    NSNumber *validAnnotationsCount = [dict objectForKey:@"validAnnotationsCount"];
+    self.validAnnotationsCount = validAnnotationsCount.integerValue;
 
     self.fileHash = [dict objectForKey:@"fileHash"];
     self.filePasswd = [dict objectForKey:@"filePasswd"];
@@ -86,6 +92,9 @@
     [tripInfoDict setObject:[NSNumber numberWithBool:self.edited] forKey:@"edited"];
     [tripInfoDict setObject:[NSNumber numberWithBool:self.uploaded] forKey:@"uploaded"];
     [tripInfoDict setObject:[NSNumber numberWithBool:self.statisticsAdded] forKey:@"statisticsAdded"];
+    [tripInfoDict setObject:[NSNumber numberWithBool:self.reUploaded] forKey:@"reUploaded"];
+    [tripInfoDict setObject:[NSNumber numberWithBool:self.annotationsCount] forKey:@"annotationsCount"];
+    [tripInfoDict setObject:[NSNumber numberWithBool:self.validAnnotationsCount] forKey:@"validAnnotationsCount"];
 
     if (self.fileHash) {
         [tripInfoDict setObject:self.fileHash forKey:@"fileHash"];
@@ -131,6 +140,7 @@
     self.edited = FALSE;
     self.uploaded = FALSE;
     self.statisticsAdded = FALSE;
+    self.reUploaded = FALSE;
     self.tripLocations = [[NSMutableArray alloc] init];
     return self;
 }
@@ -171,9 +181,10 @@
     self.trailer = trailer.boolValue;
     NSNumber *statisticsAdded = [dict objectForKey:@"statisticsAdded"];
     self.statisticsAdded = statisticsAdded.boolValue;
+    NSNumber *reUploaded = [dict objectForKey:@"reUploaded"];
+    self.reUploaded = reUploaded.boolValue;
 
     self.tripLocations = [[NSMutableArray alloc] init];
-    
     
     NSArray *tripLocations = [dict objectForKey:@"tripLocations"];
     for (NSDictionary *tripLocationDict in tripLocations) {
@@ -257,6 +268,16 @@
         }
         [self.tripLocations addObject:tripLocation];
     }
+
+    // if no valid annotations, insert dummy
+    if (!self.tripAnnotations) {
+        TripLocation *location = self.tripLocations.firstObject;
+        TripAnnotation *annotation = [[TripAnnotation alloc] init];
+        annotation.incidentId = 0;
+        annotation.comment = @"k2y1";
+        location.tripAnnotation = annotation;
+    }
+
     return self;
 }
 
@@ -281,6 +302,7 @@
     [tripDict setObject:[NSNumber numberWithBool:self.childseat] forKey:@"childseat"];
     [tripDict setObject:[NSNumber numberWithBool:self.trailer] forKey:@"trailer"];
     [tripDict setObject:[NSNumber numberWithBool:self.statisticsAdded] forKey:@"statisticsAdded"];
+    [tripDict setObject:[NSNumber numberWithBool:self.reUploaded] forKey:@"reUploaded"];
 
     NSMutableArray *tripLocationsArray = [[NSMutableArray alloc] init];
     for (TripLocation *tripLocation in self.tripLocations) {
@@ -852,6 +874,10 @@
     [super uploadFile:name WithController:controller error:error completion:completion];
 }
 
+- (void)successfullyReUploaded {
+    self.reUploaded = TRUE;
+}
+
 - (void)save {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSDictionary *tripDict = self.asDictionary;
@@ -872,6 +898,9 @@
     tripInfo.duration = self.duration;
     tripInfo.length = self.length;
     tripInfo.statisticsAdded = self.statisticsAdded;
+    tripInfo.reUploaded = self.reUploaded;
+    tripInfo.annotationsCount = self.tripAnnotations;
+    tripInfo.validAnnotationsCount = self.tripValidAnnotations;
     return tripInfo;
 }
 

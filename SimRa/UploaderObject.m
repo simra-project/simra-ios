@@ -128,6 +128,9 @@
                      }
                      self.version++;
                      self.uploaded = TRUE;
+                     if ([self respondsToSelector:@selector(successfullyReUploaded)]) {
+                         [self performSelector:@selector(successfullyReUploaded)];
+                     }
                      self.edited = FALSE;
                      [self performSelectorOnMainThread:@selector(save)
                                             withObject:nil

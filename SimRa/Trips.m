@@ -10,6 +10,9 @@
 #import "AppDelegate.h"
 #import "NSString+hashCode.h"
 
+//#warning DEBUG SIMULATE_NOT_RE_UPLOADED
+//#define SIMULATE_NOT_RE_UPLOADED 2
+
 @interface NSString (withRegionId)
 - (NSString *)withRegionId:(NSInteger)regionId;
 @end
@@ -40,6 +43,11 @@
             NSLog(@"loading %@", key);
             NSDictionary *dict = [ad.defaults objectForKey:key];
             TripInfo *tripInfo = [[TripInfo alloc] initFromDictionary:dict];
+#ifdef SIMULATE_NOT_RE_UPLOADED
+            if (tripInfo.identifier <= SIMULATE_NOT_RE_UPLOADED) {
+                tripInfo.reUploaded = FALSE;
+            }
+#endif
             [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:tripInfo.identifier]];
         }
     }
@@ -47,11 +55,18 @@
     for (NSString *key in ad.defaults.dictionaryRepresentation.allKeys) {
         if ([key rangeOfString:@"Trip-"].location == 0) {
             NSInteger identifier = [key substringFromIndex:5].integerValue;
-            if (![self.tripInfos objectForKey:[NSNumber numberWithInteger:identifier]]) {
-                NSLog(@"loading %@", key);
+            TripInfo *tripInfo = [self.tripInfos objectForKey:[NSNumber numberWithInteger:identifier]];
+            if (!tripInfo || tripInfo.annotationsCount == 0) {
+                NSLog(@"loading %@ (%ld)",
+                      key, (long)tripInfo.annotationsCount);
                 NSDictionary *dict = [ad.defaults objectForKey:key];
                 Trip *trip = [[Trip alloc] initFromDictionary:dict];
                 TripInfo *tripInfo = trip.tripInfo;
+#ifdef SIMULATE_NOT_RE_UPLOADED
+                if (tripInfo.identifier <= SIMULATE_NOT_RE_UPLOADED) {
+                    tripInfo.reUploaded = FALSE;
+                }
+#endif
                 [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:trip.identifier]];
                 [trip save];
             } else {

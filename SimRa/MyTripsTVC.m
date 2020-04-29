@@ -11,6 +11,11 @@
 #import "TripEditVC.h"
 #import "NSTimeInterval+hms.h"
 
+//#warning DEBUG SIMULATE_UNKNOWN_FILEHASH
+//#define SIMULATE_UNKNOWN_FILEHASH @"12345678"
+//#warning DEBUG EXTRA_OUTPUT
+//#define EXTRA_OUTPUT 1
+
 @interface MyTripsTVC ()
 @property (strong, nonatomic) UIAlertController *ac;
 @end
@@ -122,10 +127,18 @@ NSInteger revertedSort(id num1, id num2, void *context) {
     cell.textLabel.text = [NSString stringWithFormat:@"%@",
                            status];
 
-    cell.detailTextLabel.text = [NSString stringWithFormat:@" %@, %@, %.01f km",
-                                 [startFormatter stringFromDate:tripInfo.duration.startDate],
-                                 hms(seconds),
-                                 tripInfo.length / 1000.0];
+    NSString *detail = [NSString stringWithFormat:@" %@, %@, %.01f km",
+                        [startFormatter stringFromDate:tripInfo.duration.startDate],
+                        hms(seconds),
+                        tripInfo.length / 1000.0];
+#ifdef EXTRA_OUTPUT
+    detail = [detail stringByAppendingFormat:@" (%ld/%ld/%d)",
+              (long)tripInfo.validAnnotationsCount,
+              (long)tripInfo.annotationsCount,
+              tripInfo.reUploaded];
+#endif
+
+    cell.detailTextLabel.text = detail;
     return cell;
 }
 
@@ -383,6 +396,37 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 }
 
 - (void)positiveCompletionResponseTrips:(NSInteger)statusCode withText:(NSString *)text {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    for (NSNumber *key in [ad.trips.tripInfos.allKeys sortedArrayUsingSelector:@selector(compare:)]) {
+        TripInfo *tripInfo = ad.trips.tripInfos[key];
+        NSLog(@"positiveCompletionResponseTrips %ld (%ld/%ld/%d)",
+              tripInfo.identifier,
+              tripInfo.validAnnotationsCount,
+              tripInfo.annotationsCount,
+              tripInfo.reUploaded);
+        if (tripInfo.validAnnotationsCount == 0 && !tripInfo.reUploaded) {
+            Trip *trip = [[Trip alloc] initFromDefaults:tripInfo.identifier];
+#ifdef SIMULATE_UNKNOWN_FILEHASH
+            trip.fileHash = SIMULATE_UNKNOWN_FILEHASH;
+#endif
+            [trip uploadFile:@"ride"
+              WithController:self
+                       error:@selector(completionErrorTrips:)
+                  completion:@selector(completionResponseTrips:)];
+
+            self.ac = [UIAlertController
+                       alertControllerWithTitle:[NSString stringWithFormat:@"%@ %ld",
+                                                 NSLocalizedString(@"Re-Upload", @"Re-Upload"),
+                                                 tripInfo.identifier]
+                       message:NSLocalizedString(@"Running", @"Running")
+                       preferredStyle:UIAlertControllerStyleAlert];
+
+            [self presentViewController:self.ac animated:TRUE completion:nil];
+            return;
+        }
+    }
+    
     self.ac = [UIAlertController
                alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
                message:[NSString stringWithFormat:@"%@\nHTTP:%ld %@",
