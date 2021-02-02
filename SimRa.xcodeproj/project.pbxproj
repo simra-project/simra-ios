@@ -645,6 +645,7 @@
 			baseConfigurationReference = CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = KA3T58F3N4;
@@ -661,7 +662,7 @@
 				MARKETING_VERSION = 19;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "SimRa Dev RobTest";
+				PROVISIONING_PROFILE_SPECIFIER = SimRaDist;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -685,7 +686,7 @@
 				MARKETING_VERSION = 19;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "SimRa Dist RobTest";
+				PROVISIONING_PROFILE_SPECIFIER = SimRaDist;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
