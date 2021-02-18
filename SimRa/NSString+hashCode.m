@@ -3,7 +3,7 @@
 //  SimRa
 //
 //  Created by Christoph Krey on 03.04.19.
-//  Copyright © 2019 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.
+//  Copyright © 2019-2021 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.
 //
 
 #import "NSString+hashCode.h"
@@ -19,7 +19,7 @@
     // n – is the length of the string, and
     // ^ – indicates exponentiation
 
-    // client = @"02.04.2019mcc_simra"; // should result in 0xeaa555f0
+    // client = @"02.04.2019-2021mcc_simra"; // should result in 0xeaa555f0
 
     UInt32 hashCode = 0;
     if (self.length > 0) {

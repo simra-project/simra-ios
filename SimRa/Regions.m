@@ -3,7 +3,7 @@
 //  SimRa
 //
 //  Created by Christoph Krey on 21.01.20.
-//  Copyright © 2020 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.
+//  Copyright © 2020-2021 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.
 //
 
 #import "Regions.h"
