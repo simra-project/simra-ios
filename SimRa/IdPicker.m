@@ -18,19 +18,25 @@
 
 - (void)initialize {
     self.pickerView = [[UIPickerView alloc] init];
-    [self.pickerView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+    [self.pickerView setAutoresizingMask:
+     UIViewAutoresizingFlexibleHeight |
+     UIViewAutoresizingFlexibleWidth |
+     UIViewAutoresizingFlexibleLeftMargin |
+     UIViewAutoresizingFlexibleRightMargin];
     [self.pickerView setShowsSelectionIndicator:YES];
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
     self.inputView = self.pickerView;
 
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:NSLocalizedString(@"Done", @"Done")
-                                   style:UIBarButtonItemStyleDone
-                                   target:self action:@selector(done:)];
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                   target:nil
-                                                                                   action:nil];
+    UIBarButtonItem *doneButton =
+    [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done")
+                                     style:UIBarButtonItemStyleDone
+                                    target:self
+                                    action:@selector(done:)];
+    UIBarButtonItem *flexibleSpace =
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                  target:nil
+                                                  action:nil];
     UIToolbar *toolBar = [[UIToolbar alloc]initWithFrame:
                           CGRectMake(0, self.frame.size.height-50, 320, 50)];
     NSArray *toolbarItems = [NSArray arrayWithObjects:
@@ -74,6 +80,7 @@
           forComponent:(NSInteger)component
            reusingView:(UIView *)view {
     UILabel *label = [[UILabel alloc] init];
+    label.textAlignment = NSTextAlignmentCenter;
     label.text = self.array[row];
     return label;
 }
