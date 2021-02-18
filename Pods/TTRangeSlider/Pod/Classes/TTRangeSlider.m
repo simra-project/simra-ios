@@ -71,10 +71,15 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _handleBorderWidth = 0.0;
     _handleBorderColor = self.tintColor;
     
+    
     _labelPadding = 8.0;
+    _barSidePadding = 16.0;
 
     _labelPosition = LabelPositionAbove;
-
+    
+    _handleType =   HandleTypeRound;
+    _handleSize = CGSizeMake(_handleDiameter, _handleDiameter);
+    
     //draw the slider line
     self.sliderLine = [CALayer layer];
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
@@ -158,7 +163,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [super layoutSubviews];
 
     //positioning for the slider line
-    float barSidePadding = 16.0f;
+    float barSidePadding = self.barSidePadding;
     CGRect currentFrame = self.frame;
     float yMiddle = currentFrame.size.height/2.0;
     CGPoint lineLeftSide = CGPointMake(barSidePadding, yMiddle);
@@ -166,7 +171,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.sliderLine.frame = CGRectMake(lineLeftSide.x, lineLeftSide.y, lineRightSide.x-lineLeftSide.x, self.lineHeight);
     
     self.sliderLine.cornerRadius = self.lineHeight / 2.0;
-
+    self.sliderLineBetweenHandles.cornerRadius = self.lineHeight / 2.0;
+    
     [self updateLabelValues];
     [self updateHandlePositions];
     [self updateLabelPositions];
@@ -213,8 +219,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
     [CATransaction setAnimationDuration:0.5];
     [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut] ];
     self.sliderLine.backgroundColor = color;
-    if (self.handleColor == nil) {
+    if (_minHandleColor == nil) {
         self.leftHandle.backgroundColor = color;
+    }
+    if (_maxHandleColor == nil) {
         self.rightHandle.backgroundColor = color;
     }
 
@@ -330,8 +338,21 @@ static const CGFloat kLabelsFontSize = 12.0f;
     }
 }
 
-#pragma mark - Touch Tracking
+- (void)updateHandleTypeAndSize {
+    self.leftHandle.cornerRadius = self.handleType == HandleTypeRound ? self.handleDiameter / 2 : 0;
+    self.rightHandle.cornerRadius = self.handleType == HandleTypeRound ? self.handleDiameter / 2 : 0;
 
+    CGRect handleRect = self.handleType == HandleTypeRound ? CGRectMake(0, 0, self.handleDiameter, self.handleDiameter) : CGRectMake(0, 0, self.handleSize.width, self.handleSize.height);
+    self.leftHandle.frame = handleRect;
+    self.rightHandle.frame = handleRect;
+}
+
+#pragma mark - Touch Tracking
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    //kill any gestures when we're tracking a touch that started on one of the handles. This ensures the correct behaviour when
+    //the superview is something like a scrollview that can accepts touches in the same area as the slider thats placed on that view.
+    return !self.isTracking;
+}
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint gesturePressLocation = [touch locationInView:self];
@@ -368,7 +389,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (void)refresh {
 
-    if (self.enableStep && self.step>=0.0f){
+    if (self.enableStep && self.step>0.0f){
         _selectedMinimum = roundf(self.selectedMinimum/self.step)*self.step;
         _selectedMaximum = roundf(self.selectedMaximum/self.step)*self.step;
     }
@@ -452,7 +473,17 @@ static const CGFloat kLabelsFontSize = 12.0f;
     return YES;
 }
 
+- (void)cancelTrackingWithEvent:(UIEvent *)event {
+    [super cancelTrackingWithEvent:event];
+    [self cleanupTouch];
+}
+
 - (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
+    [super endTrackingWithTouch:touch withEvent:event];
+    [self cleanupTouch];
+}
+
+- (void)cleanupTouch {
     if (self.leftHandleSelected){
         self.leftHandleSelected = NO;
         [self animateHandle:self.leftHandle withSelection:NO];
@@ -585,15 +616,25 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.maxLabel.foregroundColor = _maxLabelColour.CGColor;
 }
 
+-(void)setMinHandleColor:(UIColor *)minHandleColor{
+    _minHandleColor = minHandleColor;
+    self.leftHandle.backgroundColor = _minHandleColor.CGColor;
+}
+
+-(void)setMaxHandleColor:(UIColor *)maxHandleColor{
+    _maxHandleColor = maxHandleColor;
+    self.rightHandle.backgroundColor = _maxHandleColor.CGColor;
+}
+
 -(void)setMinLabelFont:(UIFont *)minLabelFont{
     _minLabelFont = minLabelFont;
-    self.minLabel.font = (__bridge CFTypeRef)_minLabelFont.fontName;
+    self.minLabel.font = (__bridge CFTypeRef)_minLabelFont;
     self.minLabel.fontSize = _minLabelFont.pointSize;
 }
 
 -(void)setMaxLabelFont:(UIFont *)maxLabelFont{
     _maxLabelFont = maxLabelFont;
-    self.maxLabel.font = (__bridge CFTypeRef)_maxLabelFont.fontName;
+    self.maxLabel.font = (__bridge CFTypeRef)_maxLabelFont;
     self.maxLabel.fontSize = _maxLabelFont.pointSize;
 }
 
@@ -618,7 +659,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
 }
 
 -(void)setHandleColor:(UIColor *)handleColor{
-    _handleColor = handleColor;
+    _minHandleColor = handleColor;
+    _maxHandleColor = handleColor;
     self.leftHandle.backgroundColor = [handleColor CGColor];
     self.rightHandle.backgroundColor = [handleColor CGColor];
 }
@@ -669,6 +711,58 @@ static const CGFloat kLabelsFontSize = 12.0f;
 -(void)setLabelPadding:(CGFloat)labelPadding {
     _labelPadding = labelPadding;
     [self updateLabelPositions];
+}
+
+-(void)setBarSidePadding:(CGFloat)barSidePadding {
+    _barSidePadding = barSidePadding;
+    [self updateLabelPositions];
+}
+
+- (void)setShadowRadius:(CGFloat)shadowRadius {
+    _shadowRadius = shadowRadius;
+    _shadowOpacity = 1.0;
+
+    self.leftHandle.shadowOffset = CGSizeMake(0.0, self.shadowRadius);
+    self.leftHandle.shadowRadius = self.shadowRadius;
+    self.leftHandle.shadowColor = self.tintColor.CGColor;
+    
+    self.rightHandle.shadowOffset = CGSizeMake(0.0, _shadowRadius);
+    self.rightHandle.shadowRadius = _shadowRadius;
+    self.rightHandle.shadowColor = self.tintColor.CGColor;
+}
+
+- (void)setShadowOpacity:(float)shadowOpacity {
+    _shadowOpacity = shadowOpacity;
+    
+    self.leftHandle.shadowOffset = CGSizeMake(0.0, self.shadowRadius);
+    self.leftHandle.shadowOpacity = self.shadowOpacity;
+    self.leftHandle.shadowColor = self.tintColor.CGColor;
+    
+    self.rightHandle.shadowOffset = CGSizeMake(0.0, _shadowRadius);
+    self.rightHandle.shadowOpacity = _shadowOpacity;
+    self.rightHandle.shadowColor = self.tintColor.CGColor;
+}
+
+- (void)setEnableStep:(BOOL)enableStep {
+    _enableStep = enableStep;
+    
+    [self refresh];
+}
+
+- (void)setStep:(float)step {
+    _step = step;
+    
+    [self refresh];
+}
+
+-(void)setHandleType:(HandleType)handleType {
+    _handleType = handleType;
+    [self updateHandleTypeAndSize];
+}
+
+-(void)setHandleSize:(CGSize)handleSize {
+    _handleSize = handleSize;
+    [self updateHandleTypeAndSize];
 }
 
 #pragma mark - UIAccessibility

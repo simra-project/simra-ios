@@ -3,168 +3,168 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B4B7D56FC18A4723EED462C0F0CAA83 /* Pods-SimRa-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 28C8B33AAE11AAADE4F41609844F1854 /* Pods-SimRa-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		32981424ACAF7F7336ED72608050E10C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		3CF75E41B3D590C5218A87D5E9B82141 /* TTRangeSliderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 407296477FF2D6C57925257C9CFAF192 /* TTRangeSliderDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5BDB563B6ED5011395FC9CD0A05772F /* TTRangeSlider-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1BF9A9B31EC721B06DA9038F7A24D0 /* TTRangeSlider-dummy.m */; };
-		B14CE656E8D9292CCF386972DA4DFB40 /* Pods-SimRa-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5781DFB8383918444AF53AE1A561145F /* Pods-SimRa-dummy.m */; };
-		CDA280C175B649F9E7FFD498E5DD4C25 /* TTRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6F14FE8401B437E425A7D93C657F84 /* TTRangeSlider.m */; };
-		ED4E415415B3FD096D514EE8A10E3100 /* TTRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = C63F7358E7B53FECF8E97B90465DD1CA /* TTRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F5DDE0E345D1FC28C5C42D9110B7DEE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */; };
-		FEEF1D11A42B8A68CC028A465694FDD1 /* TTRangeSlider-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 650CBF5B9F6152CD2B01FA872D34E9CD /* TTRangeSlider-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1708F288CA75FE63C31359F1BAE73779 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		2C8D21502D397A45C764D85035121A06 /* Pods-SimRa-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0487EC76C5D3319A434D9AF261AB64AD /* Pods-SimRa-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33DD67A474D0829B4718D76875C4F270 /* TTRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 73788113077C4F27DE39C18329349737 /* TTRangeSlider.m */; };
+		3B5C25E62C9C7947BA1686D2E697FF0E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		5228D015DF434A9238B35720B8A222EC /* TTRangeSlider-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 408715F4C009155093026F5D1D708416 /* TTRangeSlider-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5FC0AE797E5966DEFCC4943ACAEB526E /* Pods-SimRa-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE25595E047A7D3B6DA01FFF97129D /* Pods-SimRa-dummy.m */; };
+		B5B5D144A87CB13D02C58A2D1BBA448F /* TTRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = BE8D0A8DD03B775B8D0113FB45939C77 /* TTRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DF5A149660130DAA5E236BAA3D361BFC /* TTRangeSlider-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2192A6E15B883D65F125617221898B88 /* TTRangeSlider-dummy.m */; };
+		EBBCD02000F0C491E1351D10519A9D72 /* TTRangeSliderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A9FA36C322E93F782D0936354D42FB34 /* TTRangeSliderDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A22337F40043D99D6EE4BD6CAD20CA56 /* PBXContainerItemProxy */ = {
+		425C561362098DEFD38B1715C7E5F4A0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9F9442D3B2DB74FAE8D6F3DCCD492F79;
+			remoteGlobalIDString = 05ECCA2E3E16948A8CDA86E2A6E279C3;
 			remoteInfo = TTRangeSlider;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		045A7091D8866524A94A5A99C16C1B47 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		053E0BCCF17F0432EF21A75D0E4FE197 /* Pods_SimRa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimRa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		088EE9C76315656BD9B69A487D50E862 /* Pods-SimRa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SimRa.debug.xcconfig"; sourceTree = "<group>"; };
-		2336FF5102B7A35C9D2D22DA29F6014C /* Pods-SimRa-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SimRa-acknowledgements.plist"; sourceTree = "<group>"; };
-		28C8B33AAE11AAADE4F41609844F1854 /* Pods-SimRa-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SimRa-umbrella.h"; sourceTree = "<group>"; };
-		37905CA8D3ED443DB5B56E4FC067F147 /* TTRangeSlider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TTRangeSlider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C504ABE8CA7D93CDE0E9521B83C8DEA /* TTRangeSlider.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TTRangeSlider.modulemap; sourceTree = "<group>"; };
-		407296477FF2D6C57925257C9CFAF192 /* TTRangeSliderDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTRangeSliderDelegate.h; path = Pod/Classes/TTRangeSliderDelegate.h; sourceTree = "<group>"; };
-		4A8EB8ED774F667E6F5AADD346DD4E70 /* Pods-SimRa-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SimRa-resources.sh"; sourceTree = "<group>"; };
-		5781DFB8383918444AF53AE1A561145F /* Pods-SimRa-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SimRa-dummy.m"; sourceTree = "<group>"; };
-		650CBF5B9F6152CD2B01FA872D34E9CD /* TTRangeSlider-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTRangeSlider-umbrella.h"; sourceTree = "<group>"; };
-		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7359CEB990F800B36160DD63C1D33CB0 /* Pods-SimRa.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SimRa.modulemap"; sourceTree = "<group>"; };
-		802EB122CA237211E624668F43F0AB39 /* Pods-SimRa-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SimRa-frameworks.sh"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9C9A19EB8D2F08E348CBEF7A9AD60186 /* Pods-SimRa-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SimRa-acknowledgements.markdown"; sourceTree = "<group>"; };
-		BB35F82A747D515A812CE82A8AFACCF9 /* Pods-SimRa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SimRa.release.xcconfig"; sourceTree = "<group>"; };
-		C63F7358E7B53FECF8E97B90465DD1CA /* TTRangeSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTRangeSlider.h; path = Pod/Classes/TTRangeSlider.h; sourceTree = "<group>"; };
-		CCE28108B75578C09C0EA31DAAAFE36F /* TTRangeSlider-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTRangeSlider-prefix.pch"; sourceTree = "<group>"; };
-		CD6F14FE8401B437E425A7D93C657F84 /* TTRangeSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTRangeSlider.m; path = Pod/Classes/TTRangeSlider.m; sourceTree = "<group>"; };
-		EA8B51EF1217FA3E7A79F263FC89CD8D /* TTRangeSlider.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TTRangeSlider.xcconfig; sourceTree = "<group>"; };
-		F853E9F5392873EB941DB112069F2858 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FB1BF9A9B31EC721B06DA9038F7A24D0 /* TTRangeSlider-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TTRangeSlider-dummy.m"; sourceTree = "<group>"; };
+		0487EC76C5D3319A434D9AF261AB64AD /* Pods-SimRa-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SimRa-umbrella.h"; sourceTree = "<group>"; };
+		0FF00027D20CF3606DE463C4FA196B91 /* Pods-SimRa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SimRa.debug.xcconfig"; sourceTree = "<group>"; };
+		1FCE25595E047A7D3B6DA01FFF97129D /* Pods-SimRa-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SimRa-dummy.m"; sourceTree = "<group>"; };
+		2192A6E15B883D65F125617221898B88 /* TTRangeSlider-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TTRangeSlider-dummy.m"; sourceTree = "<group>"; };
+		238FE1C5CCF8EBA82A8112312388E6C9 /* Pods-SimRa-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SimRa-Info.plist"; sourceTree = "<group>"; };
+		314404CE7C1492AACB4B85CA1AC84CDC /* TTRangeSlider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TTRangeSlider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		408715F4C009155093026F5D1D708416 /* TTRangeSlider-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTRangeSlider-umbrella.h"; sourceTree = "<group>"; };
+		54A8D8D62AFF6C59FB12C20CF5FD6B81 /* TTRangeSlider.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TTRangeSlider.debug.xcconfig; sourceTree = "<group>"; };
+		561CC0F0F46F3AB7DAD9F69F689C4D71 /* Pods_SimRa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimRa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC4A3C0D1052E859EFEFECFEE597BFE /* TTRangeSlider.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TTRangeSlider.release.xcconfig; sourceTree = "<group>"; };
+		68B59725B5497639C7CB4F1C7F21F0B0 /* TTRangeSlider.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TTRangeSlider.modulemap; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		73788113077C4F27DE39C18329349737 /* TTRangeSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTRangeSlider.m; path = Pod/Classes/TTRangeSlider.m; sourceTree = "<group>"; };
+		884F866ECC98347609C6F845BB2E7820 /* Pods-SimRa.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SimRa.modulemap"; sourceTree = "<group>"; };
+		89B0F92F54F297A978862F198FD53F78 /* Pods-SimRa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SimRa.release.xcconfig"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9FCFDF10C1A8D6B301F294327A6FFFE6 /* TTRangeSlider-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTRangeSlider-prefix.pch"; sourceTree = "<group>"; };
+		A9FA36C322E93F782D0936354D42FB34 /* TTRangeSliderDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTRangeSliderDelegate.h; path = Pod/Classes/TTRangeSliderDelegate.h; sourceTree = "<group>"; };
+		BE8D0A8DD03B775B8D0113FB45939C77 /* TTRangeSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTRangeSlider.h; path = Pod/Classes/TTRangeSlider.h; sourceTree = "<group>"; };
+		C6AB5D755DD1DACA470474E9E91065BF /* Pods-SimRa-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SimRa-frameworks.sh"; sourceTree = "<group>"; };
+		C94BB39D4F6BEAEA7BF8911B95E4F5D9 /* Pods-SimRa-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SimRa-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E5E18248C82E6888C86403BA8A6AA8A0 /* Pods-SimRa-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SimRa-acknowledgements.plist"; sourceTree = "<group>"; };
+		F7A9A52E3E7495C4DB8F6A8AF1FCDC7D /* TTRangeSlider-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TTRangeSlider-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4170AD7BF202D4E74A8785B264918B72 /* Frameworks */ = {
+		10921DB166F016D121710336AA9CCA6E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5DDE0E345D1FC28C5C42D9110B7DEE2 /* Foundation.framework in Frameworks */,
+				3B5C25E62C9C7947BA1686D2E697FF0E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9BBB2180D375730B2E1166198A572790 /* Frameworks */ = {
+		25FAB02DAC922F1090AE1F4D5D9D9ECA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				32981424ACAF7F7336ED72608050E10C /* Foundation.framework in Frameworks */,
+				1708F288CA75FE63C31359F1BAE73779 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		28C0821BACD6C8CE5B9E4076B5123961 /* Support Files */ = {
+		057B8027060B3A7A767A5498171F332E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				045A7091D8866524A94A5A99C16C1B47 /* Info.plist */,
-				3C504ABE8CA7D93CDE0E9521B83C8DEA /* TTRangeSlider.modulemap */,
-				EA8B51EF1217FA3E7A79F263FC89CD8D /* TTRangeSlider.xcconfig */,
-				FB1BF9A9B31EC721B06DA9038F7A24D0 /* TTRangeSlider-dummy.m */,
-				CCE28108B75578C09C0EA31DAAAFE36F /* TTRangeSlider-prefix.pch */,
-				650CBF5B9F6152CD2B01FA872D34E9CD /* TTRangeSlider-umbrella.h */,
+				360C11FE689229DE7D6C7E55503A5F53 /* TTRangeSlider */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		360C11FE689229DE7D6C7E55503A5F53 /* TTRangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				BE8D0A8DD03B775B8D0113FB45939C77 /* TTRangeSlider.h */,
+				73788113077C4F27DE39C18329349737 /* TTRangeSlider.m */,
+				A9FA36C322E93F782D0936354D42FB34 /* TTRangeSliderDelegate.h */,
+				B7F3FB99335E3374D6D9DCFBE017F349 /* Support Files */,
+			);
+			path = TTRangeSlider;
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		B7F3FB99335E3374D6D9DCFBE017F349 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				68B59725B5497639C7CB4F1C7F21F0B0 /* TTRangeSlider.modulemap */,
+				2192A6E15B883D65F125617221898B88 /* TTRangeSlider-dummy.m */,
+				F7A9A52E3E7495C4DB8F6A8AF1FCDC7D /* TTRangeSlider-Info.plist */,
+				9FCFDF10C1A8D6B301F294327A6FFFE6 /* TTRangeSlider-prefix.pch */,
+				408715F4C009155093026F5D1D708416 /* TTRangeSlider-umbrella.h */,
+				54A8D8D62AFF6C59FB12C20CF5FD6B81 /* TTRangeSlider.debug.xcconfig */,
+				5DC4A3C0D1052E859EFEFECFEE597BFE /* TTRangeSlider.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/TTRangeSlider";
 			sourceTree = "<group>";
 		};
-		788E4811259F3EC6D3FC835AE5F344AE /* Targets Support Files */ = {
+		BD5BD6AB344CA1A8F1C6E80E0161C531 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				99FAAB80EE52347C5DD5C19DBD3659E5 /* Pods-SimRa */,
+				EE90F6F24B7B2CA627650A3CBF4D525D /* Pods-SimRa */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		7DB346D0F39D3F0E887471402A8071AB = {
+		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				862240117233B0692CBBCB620A46093B /* Pods */,
-				F306CCAE556E95B0DB72E3EA7964CA57 /* Products */,
-				788E4811259F3EC6D3FC835AE5F344AE /* Targets Support Files */,
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				057B8027060B3A7A767A5498171F332E /* Pods */,
+				F4C452EA6CD9F240EDC2CE673EFE3C72 /* Products */,
+				BD5BD6AB344CA1A8F1C6E80E0161C531 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		862240117233B0692CBBCB620A46093B /* Pods */ = {
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AC179F9E5B9859C396B9B5C93897FBFC /* TTRangeSlider */,
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		99FAAB80EE52347C5DD5C19DBD3659E5 /* Pods-SimRa */ = {
+		EE90F6F24B7B2CA627650A3CBF4D525D /* Pods-SimRa */ = {
 			isa = PBXGroup;
 			children = (
-				F853E9F5392873EB941DB112069F2858 /* Info.plist */,
-				7359CEB990F800B36160DD63C1D33CB0 /* Pods-SimRa.modulemap */,
-				9C9A19EB8D2F08E348CBEF7A9AD60186 /* Pods-SimRa-acknowledgements.markdown */,
-				2336FF5102B7A35C9D2D22DA29F6014C /* Pods-SimRa-acknowledgements.plist */,
-				5781DFB8383918444AF53AE1A561145F /* Pods-SimRa-dummy.m */,
-				802EB122CA237211E624668F43F0AB39 /* Pods-SimRa-frameworks.sh */,
-				4A8EB8ED774F667E6F5AADD346DD4E70 /* Pods-SimRa-resources.sh */,
-				28C8B33AAE11AAADE4F41609844F1854 /* Pods-SimRa-umbrella.h */,
-				088EE9C76315656BD9B69A487D50E862 /* Pods-SimRa.debug.xcconfig */,
-				BB35F82A747D515A812CE82A8AFACCF9 /* Pods-SimRa.release.xcconfig */,
+				884F866ECC98347609C6F845BB2E7820 /* Pods-SimRa.modulemap */,
+				C94BB39D4F6BEAEA7BF8911B95E4F5D9 /* Pods-SimRa-acknowledgements.markdown */,
+				E5E18248C82E6888C86403BA8A6AA8A0 /* Pods-SimRa-acknowledgements.plist */,
+				1FCE25595E047A7D3B6DA01FFF97129D /* Pods-SimRa-dummy.m */,
+				C6AB5D755DD1DACA470474E9E91065BF /* Pods-SimRa-frameworks.sh */,
+				238FE1C5CCF8EBA82A8112312388E6C9 /* Pods-SimRa-Info.plist */,
+				0487EC76C5D3319A434D9AF261AB64AD /* Pods-SimRa-umbrella.h */,
+				0FF00027D20CF3606DE463C4FA196B91 /* Pods-SimRa.debug.xcconfig */,
+				89B0F92F54F297A978862F198FD53F78 /* Pods-SimRa.release.xcconfig */,
 			);
 			name = "Pods-SimRa";
 			path = "Target Support Files/Pods-SimRa";
 			sourceTree = "<group>";
 		};
-		AC179F9E5B9859C396B9B5C93897FBFC /* TTRangeSlider */ = {
+		F4C452EA6CD9F240EDC2CE673EFE3C72 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C63F7358E7B53FECF8E97B90465DD1CA /* TTRangeSlider.h */,
-				CD6F14FE8401B437E425A7D93C657F84 /* TTRangeSlider.m */,
-				407296477FF2D6C57925257C9CFAF192 /* TTRangeSliderDelegate.h */,
-				28C0821BACD6C8CE5B9E4076B5123961 /* Support Files */,
-			);
-			path = TTRangeSlider;
-			sourceTree = "<group>";
-		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D35AF013A5F0BAD4F32504907A52519E /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D35AF013A5F0BAD4F32504907A52519E /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		F306CCAE556E95B0DB72E3EA7964CA57 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				053E0BCCF17F0432EF21A75D0E4FE197 /* Pods_SimRa.framework */,
-				37905CA8D3ED443DB5B56E4FC067F147 /* TTRangeSlider.framework */,
+				561CC0F0F46F3AB7DAD9F69F689C4D71 /* Pods_SimRa.framework */,
+				314404CE7C1492AACB4B85CA1AC84CDC /* TTRangeSlider.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,34 +172,35 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		B9D7F9EB9C19EB60670CDC2FFF972581 /* Headers */ = {
+		339BC51D054BCA386AE69C5E8CDA4D0D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEEF1D11A42B8A68CC028A465694FDD1 /* TTRangeSlider-umbrella.h in Headers */,
-				ED4E415415B3FD096D514EE8A10E3100 /* TTRangeSlider.h in Headers */,
-				3CF75E41B3D590C5218A87D5E9B82141 /* TTRangeSliderDelegate.h in Headers */,
+				5228D015DF434A9238B35720B8A222EC /* TTRangeSlider-umbrella.h in Headers */,
+				B5B5D144A87CB13D02C58A2D1BBA448F /* TTRangeSlider.h in Headers */,
+				EBBCD02000F0C491E1351D10519A9D72 /* TTRangeSliderDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BA9042604E14ED5D8AF9E0512FFB86F7 /* Headers */ = {
+		E1A9E7325E6AE4899AEE34076AA34D68 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B4B7D56FC18A4723EED462C0F0CAA83 /* Pods-SimRa-umbrella.h in Headers */,
+				2C8D21502D397A45C764D85035121A06 /* Pods-SimRa-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		9F9442D3B2DB74FAE8D6F3DCCD492F79 /* TTRangeSlider */ = {
+		05ECCA2E3E16948A8CDA86E2A6E279C3 /* TTRangeSlider */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 78FEB1A321539D10A168CBDF2D1980ED /* Build configuration list for PBXNativeTarget "TTRangeSlider" */;
+			buildConfigurationList = 82DBFF365FDC13C46431D6AF12EDC3CD /* Build configuration list for PBXNativeTarget "TTRangeSlider" */;
 			buildPhases = (
-				498A8527643C719764258EF34ABC58D8 /* Sources */,
-				4170AD7BF202D4E74A8785B264918B72 /* Frameworks */,
-				B9D7F9EB9C19EB60670CDC2FFF972581 /* Headers */,
+				339BC51D054BCA386AE69C5E8CDA4D0D /* Headers */,
+				531F5FAD34C76999BF5E43665A4052A5 /* Sources */,
+				25FAB02DAC922F1090AE1F4D5D9D9ECA /* Frameworks */,
+				BC2D0AB0AC5A286C5870AD280E0B4AA5 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -207,86 +208,176 @@
 			);
 			name = TTRangeSlider;
 			productName = TTRangeSlider;
-			productReference = 37905CA8D3ED443DB5B56E4FC067F147 /* TTRangeSlider.framework */;
+			productReference = 314404CE7C1492AACB4B85CA1AC84CDC /* TTRangeSlider.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		CE991E2697AEB3842DBA003345D75878 /* Pods-SimRa */ = {
+		4BF45FF0D967624A436AFE6073E68A59 /* Pods-SimRa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AFB2DD56DB45E482F5EF27E71D8CEE16 /* Build configuration list for PBXNativeTarget "Pods-SimRa" */;
+			buildConfigurationList = 648958D2AE5D7E91CDE54444110DB608 /* Build configuration list for PBXNativeTarget "Pods-SimRa" */;
 			buildPhases = (
-				28E309454CEBFF2256BD6265F71E1430 /* Sources */,
-				9BBB2180D375730B2E1166198A572790 /* Frameworks */,
-				BA9042604E14ED5D8AF9E0512FFB86F7 /* Headers */,
+				E1A9E7325E6AE4899AEE34076AA34D68 /* Headers */,
+				E29EDD836774B681BB20302676F6E1E5 /* Sources */,
+				10921DB166F016D121710336AA9CCA6E /* Frameworks */,
+				550F31C6AF9835CB1EC34130169B2CA4 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BED4CE4A58AE43E9A23AE9D4677C4BE8 /* PBXTargetDependency */,
+				D737E5714CEF8511E6E1F97FD79EC62B /* PBXTargetDependency */,
 			);
 			name = "Pods-SimRa";
 			productName = "Pods-SimRa";
-			productReference = 053E0BCCF17F0432EF21A75D0E4FE197 /* Pods_SimRa.framework */;
+			productReference = 561CC0F0F46F3AB7DAD9F69F689C4D71 /* Pods_SimRa.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 1020;
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1240;
 			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = F306CCAE556E95B0DB72E3EA7964CA57 /* Products */;
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = F4C452EA6CD9F240EDC2CE673EFE3C72 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CE991E2697AEB3842DBA003345D75878 /* Pods-SimRa */,
-				9F9442D3B2DB74FAE8D6F3DCCD492F79 /* TTRangeSlider */,
+				4BF45FF0D967624A436AFE6073E68A59 /* Pods-SimRa */,
+				05ECCA2E3E16948A8CDA86E2A6E279C3 /* TTRangeSlider */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXSourcesBuildPhase section */
-		28E309454CEBFF2256BD6265F71E1430 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+/* Begin PBXResourcesBuildPhase section */
+		550F31C6AF9835CB1EC34130169B2CA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B14CE656E8D9292CCF386972DA4DFB40 /* Pods-SimRa-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		498A8527643C719764258EF34ABC58D8 /* Sources */ = {
+		BC2D0AB0AC5A286C5870AD280E0B4AA5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		531F5FAD34C76999BF5E43665A4052A5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5BDB563B6ED5011395FC9CD0A05772F /* TTRangeSlider-dummy.m in Sources */,
-				CDA280C175B649F9E7FFD498E5DD4C25 /* TTRangeSlider.m in Sources */,
+				DF5A149660130DAA5E236BAA3D361BFC /* TTRangeSlider-dummy.m in Sources */,
+				33DD67A474D0829B4718D76875C4F270 /* TTRangeSlider.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E29EDD836774B681BB20302676F6E1E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FC0AE797E5966DEFCC4943ACAEB526E /* Pods-SimRa-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BED4CE4A58AE43E9A23AE9D4677C4BE8 /* PBXTargetDependency */ = {
+		D737E5714CEF8511E6E1F97FD79EC62B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = TTRangeSlider;
-			target = 9F9442D3B2DB74FAE8D6F3DCCD492F79 /* TTRangeSlider */;
-			targetProxy = A22337F40043D99D6EE4BD6CAD20CA56 /* PBXContainerItemProxy */;
+			target = 05ECCA2E3E16948A8CDA86E2A6E279C3 /* TTRangeSlider */;
+			targetProxy = 425C561362098DEFD38B1715C7E5F4A0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		08638A96A528B1EC32DE62F8A728389D /* Release */ = {
+		02207F640D459EE46A4D6F67BEF358F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DC4A3C0D1052E859EFEFECFEE597BFE /* TTRangeSlider.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TTRangeSlider/TTRangeSlider-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TTRangeSlider/TTRangeSlider-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/TTRangeSlider/TTRangeSlider.modulemap";
+				PRODUCT_MODULE_NAME = TTRangeSlider;
+				PRODUCT_NAME = TTRangeSlider;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5921F3CE1ECD6AA7BA155421F6C4AC22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89B0F92F54F297A978862F198FD53F78 /* Pods-SimRa.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-SimRa/Pods-SimRa-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SimRa/Pods-SimRa.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		903A0004D3E6651EFD5D2E16214D101B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -313,14 +404,13 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -337,51 +427,24 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		12C7C3B7FEFFABC9570EE7E0AD626457 /* Debug */ = {
+		952DCA8591B12419E286680364E0B15F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA8B51EF1217FA3E7A79F263FC89CD8D /* TTRangeSlider.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TTRangeSlider/TTRangeSlider-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TTRangeSlider/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/TTRangeSlider/TTRangeSlider.modulemap";
-				PRODUCT_MODULE_NAME = TTRangeSlider;
-				PRODUCT_NAME = TTRangeSlider;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		2520F8DC22D26814E75D4E78D07FDD74 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB35F82A747D515A812CE82A8AFACCF9 /* Pods-SimRa.release.xcconfig */;
+			baseConfigurationReference = 0FF00027D20CF3606DE463C4FA196B91 /* Pods-SimRa.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -390,76 +453,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SimRa/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-SimRa/Pods-SimRa-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SimRa/Pods-SimRa.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		2CCC57BAF70F6E3972D91760A9E81804 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA8B51EF1217FA3E7A79F263FC89CD8D /* TTRangeSlider.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TTRangeSlider/TTRangeSlider-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TTRangeSlider/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/TTRangeSlider/TTRangeSlider.modulemap";
-				PRODUCT_MODULE_NAME = TTRangeSlider;
-				PRODUCT_NAME = TTRangeSlider;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		4D00E95E51BA72180537DDC69E04E790 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 088EE9C76315656BD9B69A487D50E862 /* Pods-SimRa.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-SimRa/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-SimRa/Pods-SimRa.modulemap";
 				OTHER_LDFLAGS = "";
@@ -475,7 +476,7 @@
 			};
 			name = Debug;
 		};
-		9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */ = {
+		B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -502,14 +503,13 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -529,47 +529,83 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		EC2BFBFA41CB7EF80A832F2765F9F43E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54A8D8D62AFF6C59FB12C20CF5FD6B81 /* TTRangeSlider.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TTRangeSlider/TTRangeSlider-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TTRangeSlider/TTRangeSlider-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/TTRangeSlider/TTRangeSlider.modulemap";
+				PRODUCT_MODULE_NAME = TTRangeSlider;
+				PRODUCT_NAME = TTRangeSlider;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */,
-				08638A96A528B1EC32DE62F8A728389D /* Release */,
+				B4EFE046ACF8F37157F6E322C7FCFC28 /* Debug */,
+				903A0004D3E6651EFD5D2E16214D101B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		78FEB1A321539D10A168CBDF2D1980ED /* Build configuration list for PBXNativeTarget "TTRangeSlider" */ = {
+		648958D2AE5D7E91CDE54444110DB608 /* Build configuration list for PBXNativeTarget "Pods-SimRa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				12C7C3B7FEFFABC9570EE7E0AD626457 /* Debug */,
-				2CCC57BAF70F6E3972D91760A9E81804 /* Release */,
+				952DCA8591B12419E286680364E0B15F /* Debug */,
+				5921F3CE1ECD6AA7BA155421F6C4AC22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AFB2DD56DB45E482F5EF27E71D8CEE16 /* Build configuration list for PBXNativeTarget "Pods-SimRa" */ = {
+		82DBFF365FDC13C46431D6AF12EDC3CD /* Build configuration list for PBXNativeTarget "TTRangeSlider" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D00E95E51BA72180537DDC69E04E790 /* Debug */,
-				2520F8DC22D26814E75D4E78D07FDD74 /* Release */,
+				EC2BFBFA41CB7EF80A832F2765F9F43E /* Debug */,
+				02207F640D459EE46A4D6F67BEF358F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }

@@ -58,6 +58,20 @@ IB_DESIGNABLE
  */
 @property (nonatomic, strong) IBInspectable UIColor *maxLabelColour;
 
+/**
+ * The color of both handles. If not set, the default is the tintColor.
+ */
+@property (nonatomic, strong) IBInspectable UIColor *handleColor;
+
+/**
+ * The color of the left handle. If not set, the default is the tintColor.
+ */
+@property (nonatomic, strong) IBInspectable UIColor *minHandleColor;
+
+/**
+ * The color of the right handle. If not set, the default is the tintColor.
+ */
+@property (nonatomic, strong) IBInspectable UIColor *maxHandleColor;
 
 /**
  * The font of the minimum value text label. If not set, the default is system font size 12.
@@ -116,14 +130,15 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable CGFloat labelPadding;
 
 /**
+ *Set padding on left and right side of slider line (default 16.0)
+ */
+@property (nonatomic, assign) IBInspectable CGFloat barSidePadding;
+
+/**
  *Handle slider with custom image, you can set custom image for your handle
  */
 @property (nonatomic, strong) UIImage *handleImage;
 
-/**
- *Handle slider with custom color, you can set custom color for your handle
- */
-@property (nonatomic, strong) UIColor *handleColor;
 
 /**
  *Handle slider with custom border color, you can set custom border color for your handle
@@ -177,5 +192,34 @@ typedef NS_ENUM(NSInteger, LabelPosition) {
  *Set the label positions (default LabelPositionAbove)
  */
 @property (nonatomic, assign) LabelPosition labelPosition;
+
+/**
+ *Set radius of the shadow for handle. Also used for setting shadow offset value
+ */
+
+@property (nonatomic, assign) IBInspectable CGFloat shadowRadius;
+
+/**
+ *Set the opacity of the shadow for handle
+ */
+@property (nonatomic, assign) IBInspectable float shadowOpacity;
+
+/**
+ *Define the two possibilities of HandleType (round or rectangle)
+ */
+typedef NS_ENUM(NSInteger, HandleType) {
+    HandleTypeRound,
+    HandleTypeRectangle,
+};
+
+/**
+ *Set the  HandleType (default HandleType)
+ */
+@property (nonatomic, assign) HandleType handleType;
+
+/**
+ *Set the  Handle Size (default (16.0, 16.0))
+ */
+@property (nonatomic, assign) CGSize handleSize;
 
 @end
