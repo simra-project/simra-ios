@@ -466,7 +466,7 @@
     csvString = [csvString stringByAppendingFormat:@"i%@#%ld\n",
                  [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"],
                  self.version];
-    csvString = [csvString stringByAppendingString:@"lat,lon,X,Y,Z,timeStamp,acc,a,b,c\n"];
+    csvString = [csvString stringByAppendingString:@"lat,lon,X,Y,Z,timeStamp,acc,a,b,c,obsDistanceLeft1,obsDistanceLeft2,obsDistanceRight1,obsDistanceRight2,obsClosePassEvent,XL,YL,ZL,RX,RY,RZ,RC\n"];
     [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
     
     for (TripLocation *tripLocation in self.tripLocations) {
@@ -502,14 +502,18 @@
                 }
 
                 if (!gyro) {
-                    csvString = [csvString stringByAppendingString:@",,\n"];
+                    csvString = [csvString stringByAppendingString:@",,,"];
                 } else {
-                    csvString = [csvString stringByAppendingFormat:@"%f,%f,%f\n",
+                    csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,",
                                  gyro.x,
                                  gyro.y,
                                  gyro.z];
                     gyro = nil;
                 }
+
+                csvString = [csvString stringByAppendingString:@",,,,,"]; // OBS Values
+                csvString = [csvString stringByAppendingString:@",,,,,,"]; // Linear Giro Values
+                csvString = [csvString stringByAppendingString:@"\n"];
 
                 [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
             }
@@ -533,14 +537,18 @@
             }
 
             if (!gyro) {
-                csvString = [csvString stringByAppendingString:@",,\n"];
+                csvString = [csvString stringByAppendingString:@",,,"];
             } else {
-                csvString = [csvString stringByAppendingFormat:@"%f,%f,%f\n",
+                csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,",
                              gyro.x,
                              gyro.y,
                              gyro.z];
                 gyro = nil;
             }
+
+            csvString = [csvString stringByAppendingString:@",,,,,"]; // OBS Values
+            csvString = [csvString stringByAppendingString:@",,,,,,"]; // Linear Giro Values
+            csvString = [csvString stringByAppendingString:@"\n"];
 
             [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
         }

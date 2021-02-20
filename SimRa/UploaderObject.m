@@ -30,7 +30,11 @@
 #define UPLOAD_HOST @"vm1.mcc.tu-berlin.de:8082"
 #else
 //#define UPLOAD_HOST @"vm3.mcc.tu-berlin.de:8082"
+#ifdef DEBUG
+#define UPLOAD_HOST @"vm1.mcc.tu-berlin.de:8082"
+#else
 #define UPLOAD_HOST @"vm2.mcc.tu-berlin.de:8082"
+#endif
 #endif
 #define UPLOAD_VERSION 10
 

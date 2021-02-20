@@ -10,7 +10,11 @@
 #import "NSString+hashCode.h"
 
 #define GET_SCHEME @"https:"
+#ifdef DEBUG
+#define GET_HOST @"vm1.mcc.tu-berlin.de:8082"
+#else
 #define GET_HOST @"vm2.mcc.tu-berlin.de:8082"
+#endif
 #define GET_VERSION 10
 
 @interface Regions ()
