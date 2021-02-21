@@ -18,6 +18,7 @@
 
     self.defaults = [NSUserDefaults standardUserDefaults];
     self.regions = [[Regions alloc] init];
+    self.news = [[News alloc] init];
     self.lm = [[CLLocationManager alloc] init];
     [self.lm requestWhenInUseAuthorization];
     self.mm = [[CMMotionManager alloc] init];

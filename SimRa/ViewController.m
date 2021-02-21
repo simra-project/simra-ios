@@ -12,6 +12,7 @@
 #import "AnnotationView.h"
 #import "NSTimeInterval+hms.h"
 #import "MyTripsTVC.h"
+#import "News.h"
 
 @interface MyAnnotation: NSObject <MKAnnotation>
 @property (strong, nonatomic) CLLocation *location;
@@ -86,7 +87,11 @@
 
     self.dummyButton.title = NSLocalizedString(@"Not Recording", @"Not Recording");
 
-    // Do any additional setup after loading the view.
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ad.news addObserver:self
+              forKeyPath:@"newsVersion"
+                 options:NSKeyValueObservingOptionNew
+                 context:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -176,11 +181,25 @@ void showHowTo() {
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-    [self performSelectorOnMainThread:@selector(update)
-                           withObject:nil
-                        waitUntilDone:NO];
-    self.queued++;
-    NSLog(@"Queued I: %ld", (long)self.queued);
+
+    if ([keyPath isEqualToString:@"lastLocation"] ||
+        [keyPath isEqualToString:@"lastTripMotion"]) {
+        [self performSelectorOnMainThread:@selector(update)
+                               withObject:nil
+                            waitUntilDone:NO];
+        self.queued++;
+        NSLog(@"Queued I: %ld", (long)self.queued);
+    }
+
+    if ([keyPath isEqualToString:@"newsVersion"]) {
+        [self performSegueWithIdentifier:@"showNews" sender:nil];
+    }
+}
+
+- (IBAction)newsSeen:(UIStoryboardSegue *)unwindSegue {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ad.news seen];
+    [self dismissViewControllerAnimated:TRUE completion:nil];
 }
 
 - (void)update {

@@ -11,6 +11,7 @@
 #import <CoreMotion/CoreMotion.h>
 #import "Trips.h"
 #import "Regions.h"
+#import "News.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -22,6 +23,7 @@
 @property (strong, nonatomic) Trips *trips;
 @property (strong, nonatomic) NSDictionary *constants;
 @property (strong, nonatomic) Regions *regions;
+@property (strong, nonatomic) News *news;
 
 @end
 
