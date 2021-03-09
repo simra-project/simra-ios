@@ -225,10 +225,24 @@
             NSNumber *x = [tripMotionDict objectForKey:@"x"];
             NSNumber *y = [tripMotionDict objectForKey:@"y"];
             NSNumber *z = [tripMotionDict objectForKey:@"z"];
+            NSNumber *xl = [tripMotionDict objectForKey:@"xl"];
+            NSNumber *yl = [tripMotionDict objectForKey:@"yl"];
+            NSNumber *zl = [tripMotionDict objectForKey:@"zl"];
+            NSNumber *xr = [tripMotionDict objectForKey:@"xr"];
+            NSNumber *yr = [tripMotionDict objectForKey:@"yr"];
+            NSNumber *zr = [tripMotionDict objectForKey:@"zr"];
+            NSNumber *cr = [tripMotionDict objectForKey:@"cr"];
             NSNumber *timestamp = [tripMotionDict objectForKey:@"timestamp"];
             tripMotion.x = x.doubleValue;
             tripMotion.y = y.doubleValue;
             tripMotion.z = z.doubleValue;
+            tripMotion.xl = xl.doubleValue;
+            tripMotion.yl = yl.doubleValue;
+            tripMotion.zl = zl.doubleValue;
+            tripMotion.xr = xr.doubleValue;
+            tripMotion.yr = yr.doubleValue;
+            tripMotion.zr = zr.doubleValue;
+            tripMotion.cr = cr.doubleValue;
             tripMotion.timestamp = timestamp.doubleValue;
             [tripLocation.tripMotions addObject:tripMotion];
         }
@@ -345,6 +359,27 @@
             [tripMotionDict
              setObject:[NSNumber numberWithDouble: tripMotion.z]
              forKey:@"z"];
+            [tripMotionDict
+             setObject:[NSNumber numberWithDouble: tripMotion.xl]
+             forKey:@"xl"];
+            [tripMotionDict
+             setObject:[NSNumber numberWithDouble: tripMotion.yl]
+             forKey:@"yl"];
+            [tripMotionDict
+             setObject:[NSNumber numberWithDouble: tripMotion.zl]
+             forKey:@"zl"];
+            [tripMotionDict
+             setObject:[NSNumber numberWithDouble: tripMotion.xr]
+             forKey:@"xr"];
+            [tripMotionDict
+             setObject:[NSNumber numberWithDouble: tripMotion.yr]
+             forKey:@"yr"];
+            [tripMotionDict
+             setObject:[NSNumber numberWithDouble: tripMotion.zr]
+             forKey:@"zr"];
+            [tripMotionDict
+             setObject:[NSNumber numberWithDouble: tripMotion.cr]
+             forKey:@"cr"];
             [tripMotionDict
              setObject:[NSNumber numberWithDouble: tripMotion.timestamp]
              forKey:@"timestamp"];
@@ -512,7 +547,15 @@
                 }
 
                 csvString = [csvString stringByAppendingString:@",,,,,"]; // OBS Values
-                csvString = [csvString stringByAppendingString:@",,,,,,"]; // Linear Giro Values
+                csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%f,%f,%f,%f",
+                             tripMotion.xl * 9.81,
+                             tripMotion.yl * 9.81,
+                             tripMotion.zl * 9.81,
+                             tripMotion.xr,
+                             tripMotion.yr,
+                             tripMotion.zr,
+                             tripMotion.cr];
+
                 csvString = [csvString stringByAppendingString:@"\n"];
 
                 [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -591,6 +634,13 @@
         static double xa[ACCELEROMETER_SAMPLES];
         static double ya[ACCELEROMETER_SAMPLES];
         static double za[ACCELEROMETER_SAMPLES];
+        static double xla[ACCELEROMETER_SAMPLES];
+        static double yla[ACCELEROMETER_SAMPLES];
+        static double zla[ACCELEROMETER_SAMPLES];
+        static double xra[ACCELEROMETER_SAMPLES];
+        static double yra[ACCELEROMETER_SAMPLES];
+        static double zra[ACCELEROMETER_SAMPLES];
+        static double cra[ACCELEROMETER_SAMPLES];
         static int aIndex;
         static int aFill;
 
@@ -598,39 +648,84 @@
         aFill = 0;
         ad.mm.accelerometerUpdateInterval = 1.0 / 50.0;
         [ad.mm startAccelerometerUpdates];
+        if (ad.mm.isDeviceMotionAvailable) {
+            ad.mm.deviceMotionUpdateInterval = 1.0 / 50.0;
+            [ad.mm startDeviceMotionUpdates];
+        }
         self.timer =
         [NSTimer
          scheduledTimerWithTimeInterval:1.0 / 50.0
          repeats:TRUE
          block:^(NSTimer * _Nonnull timer) {
-             CMAccelerometerData *accelerometerData = ad.mm.accelerometerData;
-             if (accelerometerData) {
-                 xa[aIndex] = accelerometerData.acceleration.x;
-                 ya[aIndex] = accelerometerData.acceleration.y;
-                 za[aIndex] = accelerometerData.acceleration.z;
-                 aIndex = (aIndex + 1) % ACCELEROMETER_SAMPLES;
-                 aFill++;
+            CMAccelerometerData *accelerometerData = ad.mm.accelerometerData;
+            CMDeviceMotion *deviceMotion = ad.mm.deviceMotion;
 
-                 if (aFill >= ACCELEROMETER_SAMPLES) {
-                     double x = 0.0;
-                     double y = 0.0;
-                     double z = 0.0;
-                     for (int i = 0; i < ACCELEROMETER_SAMPLES; i++) {
-                         x += xa[i];
-                         y += ya[i];
-                         z += za[i];
-                     }
-                     x /= ACCELEROMETER_SAMPLES;
-                     y /= ACCELEROMETER_SAMPLES;
-                     z /= ACCELEROMETER_SAMPLES;
+            if (accelerometerData) {
+                xa[aIndex] = accelerometerData.acceleration.x;
+                ya[aIndex] = accelerometerData.acceleration.y;
+                za[aIndex] = accelerometerData.acceleration.z;
+                if (deviceMotion) {
+                    xla[aIndex] = deviceMotion.userAcceleration.x;
+                    yla[aIndex] = deviceMotion.userAcceleration.y;
+                    zla[aIndex] = deviceMotion.userAcceleration.z;
+                    xra[aIndex] = deviceMotion.attitude.quaternion.x;
+                    yra[aIndex] = deviceMotion.attitude.quaternion.y;
+                    zra[aIndex] = deviceMotion.attitude.quaternion.z;
+                    cra[aIndex] = deviceMotion.attitude.quaternion.w;
+                } else {
+                    xla[aIndex] = 0.0;
+                    yla[aIndex] = 0.0;
+                    zla[aIndex] = 0.0;
+                    xra[aIndex] = 0.0;
+                    yra[aIndex] = 0.0;
+                    zra[aIndex] = 0.0;
+                    cra[aIndex] = 0.0;
+                }
 
-                     [self addAccelerationX:x y:y z:z];
-                     aFill = ACCELEROMETER_SAMPLES - ACCELEROMETER_STEPS;
-                 }
-             } else {
-                 NSLog(@"error no Data");
-             }
-         }];
+                aIndex = (aIndex + 1) % ACCELEROMETER_SAMPLES;
+                aFill++;
+
+                if (aFill >= ACCELEROMETER_SAMPLES) {
+                    double x = 0.0;
+                    double y = 0.0;
+                    double z = 0.0;
+                    double xl = 0.0;
+                    double yl = 0.0;
+                    double zl = 0.0;
+                    double xr = 0.0;
+                    double yr = 0.0;
+                    double zr = 0.0;
+                    double cr = 0.0;
+                    for (int i = 0; i < ACCELEROMETER_SAMPLES; i++) {
+                        x += xa[i];
+                        y += ya[i];
+                        z += za[i];
+                        xl += xla[i];
+                        yl += yla[i];
+                        zl += zla[i];
+                        xr += xla[i];
+                        yr += yla[i];
+                        zr += zla[i];
+                        cr += zla[i];
+                    }
+                    x /= ACCELEROMETER_SAMPLES;
+                    y /= ACCELEROMETER_SAMPLES;
+                    z /= ACCELEROMETER_SAMPLES;
+                    xl /= ACCELEROMETER_SAMPLES;
+                    yl /= ACCELEROMETER_SAMPLES;
+                    zl /= ACCELEROMETER_SAMPLES;
+                    xr /= ACCELEROMETER_SAMPLES;
+                    yr /= ACCELEROMETER_SAMPLES;
+                    zr /= ACCELEROMETER_SAMPLES;
+                    cr /= ACCELEROMETER_SAMPLES;
+
+                    [self addAccelerationX:x y:y z:z xl:xl yl:yl zl:zl xr:xr yr:yr zr:zr cr:cr];
+                    aFill = ACCELEROMETER_SAMPLES - ACCELEROMETER_STEPS;
+                }
+            } else {
+                NSLog(@"error no Data");
+            }
+        }];
     } else {
         NSLog(@"no isAccelerometerAvailable");
     }
@@ -644,6 +739,9 @@
     }
     if (ad.mm.isAccelerometerActive) {
         [ad.mm stopAccelerometerUpdates];
+    }
+    if (ad.mm.isDeviceMotionActive) {
+        [ad.mm stopDeviceMotionUpdates];
     }
     [ad.lm stopUpdatingLocation];
     ad.lm.delegate = nil;
@@ -729,13 +827,27 @@
 
 - (void)addAccelerationX:(double)x
                        y:(double)y
-                       z:(double)z {
+                       z:(double)z
+                      xl:(double)xl
+                      yl:(double)yl
+                      zl:(double)zl
+                      xr:(double)xr
+                      yr:(double)yr
+                      zr:(double)zr
+                      cr:(double)cr {
     TripLocation *lastLocation = self.tripLocations.lastObject;
     if (lastLocation) {
         TripMotion *tripMotion = [[TripMotion alloc] init];
         tripMotion.x = x;
         tripMotion.y = y;
         tripMotion.z = z;
+        tripMotion.xl = xl;
+        tripMotion.yl = yl;
+        tripMotion.zl = zl;
+        tripMotion.xr = xr;
+        tripMotion.yr = yr;
+        tripMotion.zr = zr;
+        tripMotion.cr = cr;
         tripMotion.timestamp = [NSDate date].timeIntervalSince1970;
         [lastLocation.tripMotions addObject:tripMotion];
         self.lastTripMotion = tripMotion;
@@ -784,7 +896,7 @@
     for (TripLocation *tripLocation in self.tripLocations) {
         if (tripLocation.tripAnnotation) {
             if (tripLocation.tripAnnotation.incidentId != 0)
-            tripValidAnnotations++;
+                tripValidAnnotations++;
         }
     }
     return tripValidAnnotations;

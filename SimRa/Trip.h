@@ -34,6 +34,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) double x;
 @property (nonatomic) double y;
 @property (nonatomic) double z;
+@property (nonatomic) double xl;
+@property (nonatomic) double yl;
+@property (nonatomic) double zl;
+@property (nonatomic) double xr;
+@property (nonatomic) double yr;
+@property (nonatomic) double zr;
+@property (nonatomic) double cr;
 @property (nonatomic) NSTimeInterval timestamp;
 @end
 
