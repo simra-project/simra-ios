@@ -72,8 +72,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSDateInterval *duration;
 @property (nonatomic) NSInteger length;
 
-- (instancetype)initFromDictionary:(NSDictionary *)dict;
-- (NSDictionary *)asDictionary;
++ (NSArray <NSNumber *> *)allStoredIdentifiers;
+- (instancetype)initFromStorage:(NSInteger)identifier;
+
 @end
 
 @interface Trip : UploaderObject <CLLocationManagerDelegate>
@@ -91,8 +92,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) Boolean statisticsAdded;
 @property (nonatomic) Boolean reUploaded;
 
-- (instancetype)initFromDefaults:(NSInteger)identifier;
-- (instancetype)initFromDictionary:(NSDictionary *)dict;
++ (NSArray <NSNumber *> *)allStoredIdentifiers;
+- (instancetype)initFromStorage:(NSInteger)identifier;
++ (void)deleteFromStorage:(NSInteger)identifier;
 - (void)startRecording;
 - (void)stopRecording;
 - (NSInteger)tripMotions;
@@ -102,7 +104,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDateInterval *)duration;
 - (NSInteger)length;
 - (NSInteger)idle;
-- (NSDictionary *)asDictionary;
 - (TripInfo *)tripInfo;
 - (void)successfullyReUploaded;
 @end

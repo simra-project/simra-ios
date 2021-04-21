@@ -52,6 +52,69 @@
 @end
 
 @implementation TripInfo
++ (NSArray <NSNumber *> *)allStoredIdentifiers {
+    NSMutableArray <NSNumber *> *all = [[NSMutableArray alloc] init];
+
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSArray <NSString *> *allKeys = [ad.defaults.dictionaryRepresentation.allKeys sortedArrayUsingSelector:@selector(compare:)];
+    NSLog(@"TripInfo allStoredIdentifiers %@", allKeys);
+
+    for (NSString *key in allKeys) {
+        if ([key rangeOfString:@"TripInfo-"].location == 0) {
+            NSInteger identifier = [key substringFromIndex:9].integerValue;
+            NSNumber *anIdentifier = [NSNumber numberWithInteger:identifier];
+            [all addObject:anIdentifier];
+        }
+    }
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory
+                                                      inDomains:NSUserDomainMask].firstObject;
+    NSArray<NSString *> *contents = [fileManager contentsOfDirectoryAtPath:documentDirectoryURL.path
+                                                                     error:nil];
+    NSLog(@"contents %@", contents);
+
+    for (NSString *content in contents) {
+        if ([content rangeOfString:@"TripInfo-"].location == 0) {
+            NSInteger identifier = [content substringFromIndex:9].integerValue;
+            BOOL found = FALSE;
+            for (NSNumber *one in all) {
+                if (one.integerValue == identifier) {
+                    found = TRUE;
+                }
+            }
+            if (!found) {
+                NSNumber *anIdentifier = [NSNumber numberWithInteger:identifier];
+                [all addObject:anIdentifier];
+            }
+        }
+    }
+
+    return all;
+}
+
+- (instancetype)initFromStorage:(NSInteger)identifier {
+    NSLog(@"TripInfo initFromStorage %ld", identifier);
+    
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSDictionary *dict = [ad.defaults objectForKey:[NSString stringWithFormat:@"TripInfo-%ld",
+                                                    identifier]];
+
+    if (!dict) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory
+                                                          inDomains:NSUserDomainMask].firstObject;
+        NSURL *tripInfoURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"TripInfo-%ld.json", identifier]];
+
+        NSData *jsonData = [fileManager contentsAtPath:tripInfoURL.path];
+        dict = [NSJSONSerialization JSONObjectWithData:jsonData
+                                               options:0
+                                                 error:nil];
+    }
+    return [self initFromDictionary:dict];
+}
+
+
 - (instancetype)initFromDictionary:(NSDictionary *)dict {
     self = [super init];
     NSNumber *identifier = [dict objectForKey:@"identifier"];
@@ -113,6 +176,13 @@
     return tripInfoDict;
 }
 
+- (NSData *)asJSONData {
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.asDictionary
+                                                       options:0
+                                                         error:nil];
+    return jsonData;
+}
+
 @end
 
 @interface Trip ()
@@ -145,12 +215,89 @@
     return self;
 }
 
-- (instancetype)initFromDefaults:(NSInteger)identifier {
-    NSLog(@"initFromDefaults %ld", identifier);
++ (NSArray<NSNumber *> *)allStoredIdentifiers {
+    NSMutableArray <NSNumber *> *all = [[NSMutableArray alloc] init];
+
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSArray <NSString *> *allKeys = [ad.defaults.dictionaryRepresentation.allKeys sortedArrayUsingSelector:@selector(compare:)];
+
+    for (NSString *key in allKeys) {
+        if ([key rangeOfString:@"Trip-"].location == 0) {
+            NSInteger identifier = [key substringFromIndex:5].integerValue;
+            //NSNumber *anIdentifier = [NSNumber numberWithInteger:identifier];
+            //[all addObject:anIdentifier];
+            NSLog(@"[Trip] move from NSUserDefaults to Files %ld", identifier);
+            Trip *trip = [[Trip alloc] initFromStorage:identifier];
+            [trip save];
+        }
+    }
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory
+                                                      inDomains:NSUserDomainMask].firstObject;
+    NSArray<NSString *> *contents = [fileManager contentsOfDirectoryAtPath:documentDirectoryURL.path
+                                                                     error:nil];
+    NSLog(@"contents %@", contents);
+
+    for (NSString *content in contents) {
+        if ([content rangeOfString:@"Trip-"].location == 0) {
+            NSInteger identifier = [content substringFromIndex:5].integerValue;
+            BOOL found = FALSE;
+            for (NSNumber *one in all) {
+                if (one.integerValue == identifier) {
+                    found = TRUE;
+                }
+            }
+            if (!found) {
+                NSNumber *anIdentifier = [NSNumber numberWithInteger:identifier];
+                [all addObject:anIdentifier];
+            }
+        }
+    }
+
+    return all;
+}
+
+- (instancetype)initFromStorage:(NSInteger)identifier {
+    NSLog(@"Trip initFromStorage %ld", identifier);
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSDictionary *dict = [ad.defaults objectForKey:[NSString stringWithFormat:@"Trip-%ld",
                                                     identifier]];
+
+    if (!dict) {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory
+                                                          inDomains:NSUserDomainMask].firstObject;
+        NSURL *tripURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Trip-%ld.json", identifier]];
+
+        NSData *jsonData = [fileManager contentsAtPath:tripURL.path];
+        dict = [NSJSONSerialization JSONObjectWithData:jsonData
+                                               options:0
+                                                 error:nil];
+    }
     return [self initFromDictionary:dict];
+}
+
++ (void)deleteFromStorage:(NSInteger)identifier {
+    // Delete in UserDefaults
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", identifier]];
+    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", identifier]];
+
+    // Delete in Filesystem
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory
+                                                      inDomains:NSUserDomainMask].firstObject;
+    NSURL *tripURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Trip-%ld.json", identifier]];
+    NSURL *tripInfoURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"TripInfo-%ld.json", identifier]];
+
+    BOOL tripSuccess = [fileManager removeItemAtPath:tripURL.path
+                            error:nil];
+    BOOL tripInfoSuccess = [fileManager removeItemAtPath:tripInfoURL.path
+                            error:nil];
+
+    NSLog(@"[Trip] deleteFromStorage tripSuccess=%d tripInfoSuccess=%d",
+          tripSuccess, tripInfoSuccess);
 }
 
 - (instancetype)initFromDictionary:(NSDictionary *)dict {
@@ -439,6 +586,13 @@
     }
     [tripDict setObject:tripLocationsArray forKey:@"tripLocations"];
     return tripDict;
+}
+
+- (NSData *)asJSONData {
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.asDictionary
+                                                       options:0
+                                                         error:nil];
+    return jsonData;
 }
 
 - (NSURL *)csvFile {
@@ -1000,11 +1154,35 @@
 
 - (void)save {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ad.trips updateTrip:self];
+
+    // Store in FileSystem
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory
+                                                      inDomains:NSUserDomainMask].firstObject;
+    NSURL *tripURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Trip-%ld.json", self.identifier]];
+    NSURL *tripInfoURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"TripInfo-%ld.json", self.identifier]];
+
+    BOOL tripSuccess = [fileManager createFileAtPath:tripURL.path
+                         contents:self.asJSONData
+                       attributes:nil];
+    BOOL tripInfoSuccess = [fileManager createFileAtPath:tripInfoURL.path
+                         contents:self.tripInfo.asJSONData
+                       attributes:nil];
+
+    NSLog(@"[Trip] save tripSuccess=%d tripInfoSuccess=%d",
+          tripSuccess, tripInfoSuccess);
+
+    // Delete from UserDefaults
+#if 0
     NSDictionary *tripDict = self.asDictionary;
     [ad.defaults setObject:tripDict forKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
     NSDictionary *tripInfoDict = self.tripInfo.asDictionary;
     [ad.defaults setObject:tripInfoDict forKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
-    [ad.trips updateTrip:self];
+#else
+    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
+    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
+#endif
 }
 
 - (TripInfo *)tripInfo {

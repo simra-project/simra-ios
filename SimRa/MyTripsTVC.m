@@ -186,7 +186,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
     
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-    Trip *trip = [[Trip alloc] initFromDefaults:key.integerValue];
+    Trip *trip = [[Trip alloc] initFromStorage:key.integerValue];
 
     UIImage *shareIcon = [UIImage systemImageNamed:@"square.and.arrow.up"];
     UIAction *exportAction = [UIAction actionWithTitle:NSLocalizedString(@"Manual Export", @"MyTrips View Context menu export title") image:shareIcon identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
@@ -211,7 +211,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
             NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
             AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
             NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-            Trip *trip = [[Trip alloc] initFromDefaults:key.integerValue];
+            Trip *trip = [[Trip alloc] initFromStorage:key.integerValue];
             tripEditVC.trip = trip;
             tripEditVC.clean = TRUE;
             tripEditVC.changed = FALSE;
@@ -240,7 +240,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
     } else {
         if (self.tableView.indexPathForSelectedRow) {
             NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
-            Trip *trip = [[Trip alloc] initFromDefaults:key.integerValue];
+            Trip *trip = [[Trip alloc] initFromStorage:key.integerValue];
 
             [trip uploadFile:@"ride"
               WithController:self
@@ -406,7 +406,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
               tripInfo.annotationsCount,
               tripInfo.reUploaded);
         if (tripInfo.validAnnotationsCount == 0 && !tripInfo.reUploaded) {
-            Trip *trip = [[Trip alloc] initFromDefaults:tripInfo.identifier];
+            Trip *trip = [[Trip alloc] initFromStorage:tripInfo.identifier];
 #ifdef SIMULATE_UNKNOWN_FILEHASH
             trip.fileHash = SIMULATE_UNKNOWN_FILEHASH;
 #endif

@@ -37,30 +37,33 @@
     self.filePasswd = [ad.defaults stringForKey:@"filePasswd"];
 
     self.tripInfos = [[NSMutableDictionary alloc] init];
-    NSLog(@"defaults %@", ad.defaults.dictionaryRepresentation.allKeys);
-    for (NSString *key in ad.defaults.dictionaryRepresentation.allKeys) {
-        if ([key rangeOfString:@"TripInfo-"].location == 0) {
-            NSLog(@"loading %@", key);
-            NSDictionary *dict = [ad.defaults objectForKey:key];
-            TripInfo *tripInfo = [[TripInfo alloc] initFromDictionary:dict];
+
+    NSArray <NSNumber *> *allTripInfos = [[TripInfo allStoredIdentifiers] sortedArrayUsingSelector:@selector(compare:)];
+    NSLog(@"allTripInfos %@", allTripInfos);
+
+    for (NSNumber *anIdentifier in allTripInfos) {
+        NSInteger identifier = anIdentifier.integerValue;
+        NSLog(@"loading %ld", (long)identifier);
+        TripInfo *tripInfo = [[TripInfo alloc] initFromStorage:identifier];
 #ifdef SIMULATE_NOT_RE_UPLOADED
-            if (tripInfo.identifier <= SIMULATE_NOT_RE_UPLOADED) {
-                tripInfo.reUploaded = FALSE;
-            }
-#endif
-            [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:tripInfo.identifier]];
+        if (tripInfo.identifier <= SIMULATE_NOT_RE_UPLOADED) {
+            tripInfo.reUploaded = FALSE;
         }
+#endif
+        [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:tripInfo.identifier]];
     }
 
-    for (NSString *key in ad.defaults.dictionaryRepresentation.allKeys) {
-        if ([key rangeOfString:@"Trip-"].location == 0) {
-            NSInteger identifier = [key substringFromIndex:5].integerValue;
+    NSArray <NSNumber *> *allTrips = [[Trip allStoredIdentifiers] sortedArrayUsingSelector:@selector(compare:)];
+    NSLog(@"allTrips %@", allTrips);
+
+    for (NSNumber *anIdentifier in allTrips) {
+        NSInteger identifier = anIdentifier.integerValue;
+
             TripInfo *tripInfo = [self.tripInfos objectForKey:[NSNumber numberWithInteger:identifier]];
             if (!tripInfo || tripInfo.annotationsCount == 0) {
-                NSLog(@"loading %@ (%ld)",
-                      key, (long)tripInfo.annotationsCount);
-                NSDictionary *dict = [ad.defaults objectForKey:key];
-                Trip *trip = [[Trip alloc] initFromDictionary:dict];
+                NSLog(@"loading %ld, (%ld)",
+                      (long)identifier, (long)tripInfo.annotationsCount);
+                Trip *trip = [[Trip alloc] initFromStorage:identifier];
                 TripInfo *tripInfo = trip.tripInfo;
 #ifdef SIMULATE_NOT_RE_UPLOADED
                 if (tripInfo.identifier <= SIMULATE_NOT_RE_UPLOADED) {
@@ -70,9 +73,8 @@
                 [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:trip.identifier]];
                 [trip save];
             } else {
-                NSLog(@"already have info of %@", key);
+                NSLog(@"already have info of %ld", (long)identifier);
             }
-        }
     }
 
     BOOL copyStatisticsOnce = [ad.defaults boolForKey:@"copyStatisticsOnce"];
@@ -123,10 +125,8 @@
 }
 
 - (void)deleteTripWithIdentifier:(NSInteger)identifier {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", identifier]];
-    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", identifier]];
     [self.tripInfos removeObjectForKey:[NSNumber numberWithInteger:identifier]];
+    [Trip deleteFromStorage:identifier];
 }
 
 - (void)updateTrip:(Trip *)trip {

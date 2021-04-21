@@ -188,7 +188,7 @@ void showHowTo() {
                                withObject:nil
                             waitUntilDone:NO];
         self.queued++;
-        NSLog(@"Queued I: %ld", (long)self.queued);
+        //NSLog(@"Queued I: %ld", (long)self.queued);
     }
 
     if ([keyPath isEqualToString:@"newsVersion"]) {
@@ -204,7 +204,7 @@ void showHowTo() {
 
 - (void)update {
     self.queued--;
-    NSLog(@"Queued O: %ld", (long)self.queued);
+    //NSLog(@"Queued O: %ld", (long)self.queued);
     if (!self.queued) {
         if (self.annotationView) {
             self.annotationView.recording = self.trip != nil;
