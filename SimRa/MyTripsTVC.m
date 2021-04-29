@@ -29,7 +29,7 @@
     self.uploadedTripInfos = [[NSMutableDictionary alloc] init];
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     for (TripInfo *tripInfo in ad.trips.tripInfos.allValues) {
-        if (tripInfo.uploaded) {
+        if (tripInfo.uploaded && !tripInfo.edited) {
             self.uploadedTripInfos[[NSNumber numberWithInteger:tripInfo.identifier]] = tripInfo;
         } else {
             self.localTripInfos[[NSNumber numberWithInteger:tripInfo.identifier]] = tripInfo;
