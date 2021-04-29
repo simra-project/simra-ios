@@ -120,9 +120,9 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
-        return  NSLocalizedString(@"Not Uploaded", @"Not Uploaded");
+        return self.localTripInfos.count > 0 ? NSLocalizedString(@"Not Uploaded", @"Not Uploaded") : nil;
     } else {
-        return  NSLocalizedString(@"Uploaded", @"Uploaded");
+        return self.uploadedTripInfos.count > 0 ? NSLocalizedString(@"Uploaded", @"Uploaded") : nil;
     }
 }
 
