@@ -453,23 +453,6 @@ NSInteger revertedSort(id num1, id num2, void *context) {
             return;
         }
     }
-    
-    self.ac = [UIAlertController
-               alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
-               message:[NSString stringWithFormat:@"%@\nHTTP:%ld %@",
-                        NSLocalizedString(@"Profile UploadSuccessfull", @"Profile UploadSuccessfull"),
-                        (long)statusCode,
-                        text]
-               preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *aay = [UIAlertAction
-                          actionWithTitle:NSLocalizedString(@"OK", @"OK")
-                          style:UIAlertActionStyleDefault
-                          handler:^(UIAlertAction * _Nonnull action) {
-                              [self.tableView reloadData];
-                              [self adjustSelection];
-                          }];
-    [self.ac addAction:aay];
-    [self presentViewController:self.ac animated:TRUE completion:nil];
 }
 
 - (void)negativeCompletionResponseTrips:(NSInteger)statusCode withText:(NSString *)text {
