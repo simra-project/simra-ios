@@ -432,7 +432,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
               tripInfo.validAnnotationsCount,
               tripInfo.annotationsCount,
               tripInfo.reUploaded);
-        if (tripInfo.validAnnotationsCount == 0 && !tripInfo.reUploaded) {
+        if (tripInfo.validAnnotationsCount == 0 && tripInfo.uploaded && !tripInfo.reUploaded) {
             Trip *trip = [[Trip alloc] initFromStorage:tripInfo.identifier];
 #ifdef SIMULATE_UNKNOWN_FILEHASH
             trip.fileHash = SIMULATE_UNKNOWN_FILEHASH;
