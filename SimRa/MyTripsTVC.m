@@ -453,6 +453,9 @@ NSInteger revertedSort(id num1, id num2, void *context) {
             return;
         }
     }
+
+    [self.tableView reloadData];
+    [self adjustSelection];
 }
 
 - (void)negativeCompletionResponseTrips:(NSInteger)statusCode withText:(NSString *)text {
