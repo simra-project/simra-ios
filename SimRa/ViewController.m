@@ -108,7 +108,7 @@
         UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
-            showHowTo();
+            [self showHowTo];
         }];
         [self.ac addAction:aay];
 
@@ -120,7 +120,7 @@
     }
 }
 
-void showHowTo() {
+- (void)showHowTo {
     NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
     if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
         urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
