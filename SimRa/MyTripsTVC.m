@@ -18,9 +18,38 @@
 
 @interface MyTripsTVC ()
 @property (strong, nonatomic) UIAlertController *ac;
+@property (strong, nonatomic) NSMutableDictionary <NSNumber *, TripInfo *> *localTripInfos;
+@property (strong, nonatomic) NSMutableDictionary <NSNumber *, TripInfo *> *uploadedTripInfos;
 @end
 
 @implementation MyTripsTVC
+
+- (void)getTripInfos {
+    self.localTripInfos = [[NSMutableDictionary alloc] init];
+    self.uploadedTripInfos = [[NSMutableDictionary alloc] init];
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    for (TripInfo *tripInfo in ad.trips.tripInfos.allValues) {
+        if (tripInfo.uploaded) {
+            self.uploadedTripInfos[[NSNumber numberWithInteger:tripInfo.identifier]] = tripInfo;
+        } else {
+            self.localTripInfos[[NSNumber numberWithInteger:tripInfo.identifier]] = tripInfo;
+        }
+    }
+}
+
+- (TripInfo *)getTripInfo:(NSIndexPath *)indexPath {
+    TripInfo *tripInfo;
+    if (indexPath.section == 0) {
+        NSNumber *key = [self.localTripInfos.allKeys sortedArrayUsingFunction:revertedSort
+                                                                      context:nil][indexPath.row];
+        tripInfo = self.localTripInfos[key];
+    } else {
+        NSNumber *key = [self.uploadedTripInfos.allKeys sortedArrayUsingFunction:revertedSort
+                                                                         context:nil][indexPath.row];
+        tripInfo = self.uploadedTripInfos[key];
+    }
+    return tripInfo;
+}
 
 NSInteger revertedSort(id num1, id num2, void *context) {
     NSNumber *n1 = (NSNumber *)num1;
@@ -59,43 +88,47 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (void)adjustSelection {
     self.navigationItem.rightBarButtonItem.enabled = FALSE;
-    //NSLog(@"indexPathForSelectedRow pre  %@", self.tableView.indexPathForSelectedRow);
+
     if (self.tableView.indexPathForSelectedRow) {
         [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:FALSE];
     }
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSArray <NSNumber *> *keys = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil];
-    for (NSInteger row = 0; row < keys.count; row++) {
-        NSNumber *key = keys[row];
-        TripInfo *tripInfo = ad.trips.tripInfos[key];
-        if (!tripInfo.uploaded) {
-            //NSLog(@"selectRowAtIndexPath %@", [NSIndexPath indexPathForRow:row inSection:0]);
-            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]
-                                        animated:FALSE
-                                  scrollPosition:UITableViewScrollPositionMiddle];
-            self.navigationItem.rightBarButtonItem.enabled = TRUE;
-            //NSLog(@"indexPathForSelectedRow post %@", self.tableView.indexPathForSelectedRow);
-            break;
-        }
+
+    [self getTripInfos];
+
+    if (self.localTripInfos.count > 0) {
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                                    animated:FALSE
+                              scrollPosition:UITableViewScrollPositionMiddle];
+        self.navigationItem.rightBarButtonItem.enabled = TRUE;
     }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    return ad.trips.tripInfos.count;
+    [self getTripInfos];
+    if (section == 0) {
+        return self.localTripInfos.count;
+    } else {
+        return self.uploadedTripInfos.count;
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return  NSLocalizedString(@"Not Uploaded", @"Not Uploaded");
+    } else {
+        return  NSLocalizedString(@"Uploaded", @"Uploaded");
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trip" forIndexPath:indexPath];
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-    TripInfo *tripInfo = ad.trips.tripInfos[key];
+    TripInfo *tripInfo = [self getTripInfo:indexPath];
 
     NSString *status;
 
@@ -148,13 +181,10 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-    TripInfo *tripInfo = ad.trips.tripInfos[key];
-    if (tripInfo.uploaded) {
-        return nil;
-    } else {
+    if (indexPath.section == 0) {
         return indexPath;
+    } else {
+        return nil;
     }
 }
 
@@ -169,9 +199,9 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        TripInfo *tripInfo = [self getTripInfo:indexPath];
         AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-        NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-        [ad.trips deleteTripWithIdentifier:key.integerValue];
+        [ad.trips deleteTripWithIdentifier:tripInfo.identifier];
         [tableView performBatchUpdates:^{
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         } completion:^(BOOL finished) {
@@ -183,10 +213,9 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 }
 
 - (UIContextMenuConfiguration *)tableView:(UITableView *)tableView contextMenuConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point  API_AVAILABLE(ios(13.0)){
-    
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-    Trip *trip = [[Trip alloc] initFromStorage:key.integerValue];
+
+    TripInfo *tripInfo = [self getTripInfo:indexPath];
+    Trip *trip = [[Trip alloc] initFromStorage:tripInfo.identifier];
 
     UIImage *shareIcon = [UIImage systemImageNamed:@"square.and.arrow.up"];
     UIAction *exportAction = [UIAction actionWithTitle:NSLocalizedString(@"Manual Export", @"MyTrips View Context menu export title") image:shareIcon identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
@@ -209,9 +238,8 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         if ([sender isKindOfClass:[UITableViewCell class]]) {
             UITableViewCell *cell = (UITableViewCell *)sender;
             NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-            AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][indexPath.row];
-            Trip *trip = [[Trip alloc] initFromStorage:key.integerValue];
+            TripInfo *tripInfo = [self getTripInfo:indexPath];
+            Trip *trip = [[Trip alloc] initFromStorage:tripInfo.identifier];
             tripEditVC.trip = trip;
             tripEditVC.clean = TRUE;
             tripEditVC.changed = FALSE;
@@ -239,9 +267,8 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         [self presentViewController:ac animated:TRUE completion:nil];
     } else {
         if (self.tableView.indexPathForSelectedRow) {
-            NSNumber *key = [ad.trips.tripInfos.allKeys sortedArrayUsingFunction:revertedSort context:nil][self.tableView.indexPathForSelectedRow.row];
-            Trip *trip = [[Trip alloc] initFromStorage:key.integerValue];
-
+            TripInfo *tripInfo = [self getTripInfo:self.tableView.indexPathForSelectedRow];
+            Trip *trip = [[Trip alloc] initFromStorage:tripInfo.identifier];
             [trip uploadFile:@"ride"
               WithController:self
                        error:@selector(completionError:)
