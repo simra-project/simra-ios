@@ -67,13 +67,13 @@
 
     NSLayoutConstraint *a = [NSLayoutConstraint constraintWithItem:self.trackingButton
                                                          attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual
-                                                            toItem:self.mapView
+                                                            toItem:self.view.safeAreaLayoutGuide
                                                          attribute:NSLayoutAttributeBottom
                                                         multiplier:1
                                                           constant:-10];
     NSLayoutConstraint *b = [NSLayoutConstraint constraintWithItem:self.trackingButton
                                                          attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual
-                                                            toItem:self.mapView
+                                                            toItem:self.view.safeAreaLayoutGuide
                                                          attribute:NSLayoutAttributeTrailing
                                                         multiplier:1
                                                           constant:-10];

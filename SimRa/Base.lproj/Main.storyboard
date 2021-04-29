@@ -13,34 +13,25 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <stackView key="view" opaque="NO" contentMode="scaleToFill" axis="vertical" id="7vD-p4-Ur8">
+                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="qjl-XI-Yhp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qjl-XI-Yhp">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
-                            </mapView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7xF-YQ-Vih">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <items>
-                                    <barButtonItem title="Start" id="NeF-Te-cJc">
-                                        <connections>
-                                            <action selector="playButtonPressed:" destination="BYZ-38-t0r" id="oTr-vq-4Ql"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem systemItem="flexibleSpace" id="zon-bJ-fHC"/>
-                                    <barButtonItem enabled="NO" title="Item" style="plain" id="Py2-VK-zVn"/>
-                                    <barButtonItem systemItem="flexibleSpace" id="U3d-bw-Zah"/>
-                                    <barButtonItem title="Stop" id="dZi-32-hxA">
-                                        <connections>
-                                            <action selector="stopButtonPressed:" destination="BYZ-38-t0r" id="XXl-nJ-5Ws"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="jNN-Gl-Ju2"/>
-                    </stackView>
+                    </mapView>
+                    <toolbarItems>
+                        <barButtonItem title="Start" id="NeF-Te-cJc">
+                            <connections>
+                                <action selector="playButtonPressed:" destination="BYZ-38-t0r" id="oTr-vq-4Ql"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="zon-bJ-fHC"/>
+                        <barButtonItem enabled="NO" title="Item" style="plain" id="Py2-VK-zVn"/>
+                        <barButtonItem systemItem="flexibleSpace" id="U3d-bw-Zah"/>
+                        <barButtonItem title="Stop" id="dZi-32-hxA">
+                            <connections>
+                                <action selector="stopButtonPressed:" destination="BYZ-38-t0r" id="XXl-nJ-5Ws"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="SimRa" id="yDl-6c-Zif">
                         <barButtonItem key="leftBarButtonItem" title="Settings" id="hzM-QB-nuc">
                             <connections>
@@ -53,6 +44,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dummyButton" destination="Py2-VK-zVn" id="7QS-qV-0cb"/>
                         <outlet property="mapView" destination="qjl-XI-Yhp" id="10V-ux-a3R"/>
@@ -68,7 +60,7 @@
         <!--Settings-->
         <scene sceneID="pZY-AP-PkF">
             <objects>
-                <tableViewController id="Zrj-ys-gys" customClass="SettingsTVC" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="Zrj-ys-gys" customClass="SettingsTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="320-4m-rIz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -329,6 +321,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="03L-ez-qcN"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="version" destination="4sb-MR-RAq" id="oq8-hk-RI5"/>
                     </connections>
@@ -1622,7 +1615,7 @@ from www.flaticon.com</string>
         <!--My Trips-->
         <scene sceneID="l3r-EA-Rm6">
             <objects>
-                <tableViewController id="PYd-3I-T6G" customClass="MyTripsTVC" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="PYd-3I-T6G" customClass="MyTripsTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jyQ-XJ-aOD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1668,6 +1661,7 @@ from www.flaticon.com</string>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="c8U-8m-Y77" kind="show" identifier="profile" id="i6e-Cg-Mdt"/>
                     </connections>
@@ -2238,13 +2232,17 @@ from www.flaticon.com</string>
         <!--Navigation Controller-->
         <scene sceneID="FB6-RX-TiT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Qp-s0-MOK" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="3Qp-s0-MOK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="06u-S2-oVJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1RR-lD-mkk">
+                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="lji-p7-0cF"/>
                     </connections>
@@ -2255,7 +2253,7 @@ from www.flaticon.com</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="i6e-Cg-Mdt"/>
+        <segue reference="EUT-E4-1tq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Simra" width="300" height="186"/>
