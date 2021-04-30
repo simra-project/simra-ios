@@ -34,7 +34,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *totalIncidents;
 @property (weak, nonatomic) IBOutlet UITextField *totalIdle;
 @property (weak, nonatomic) IBOutlet UIView *totalSlots;
-@property (weak, nonatomic) IBOutlet UITextField *version;
+@property (weak, nonatomic) IBOutlet UILabel *version;
 @property (weak, nonatomic) IBOutlet UITextField *scaryEvents;
 @property (weak, nonatomic) IBOutlet UITextField *totalCO2;
 @property (weak, nonatomic) IBOutlet UITextField *averageSpeed;
