@@ -62,7 +62,7 @@
         <scene sceneID="pZY-AP-PkF">
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="Zrj-ys-gys" customClass="SettingsTVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="320-4m-rIz">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="320-4m-rIz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,7 +93,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="c8U-8m-Y77" kind="show" trigger="accessoryAction" id="EUT-E4-1tq"/>
+                                            <segue destination="c8U-8m-Y77" kind="show" id="EUT-E4-1tq"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" id="sDA-LC-U9t">
@@ -120,7 +120,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="NGZ-Ib-TCI" kind="show" trigger="accessoryAction" id="LGd-bn-r2A"/>
+                                            <segue destination="NGZ-Ib-TCI" kind="show" id="LGd-bn-r2A"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -276,7 +276,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="nN8-Nf-2E6" kind="show" trigger="accessoryAction" id="FEG-rH-HeW"/>
+                                            <segue destination="nN8-Nf-2E6" kind="show" id="FEG-rH-HeW"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="ysy-Na-eJd" detailTextLabel="QbR-cf-yoT" style="IBUITableViewCellStyleValue1" id="zS8-SF-nTN">
