@@ -28,20 +28,20 @@
 @property (weak, nonatomic) IBOutlet UILabel *startMetersLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *AI;
 
-@property (weak, nonatomic) IBOutlet UITextField *totalRides;
-@property (weak, nonatomic) IBOutlet UITextField *totalLength;
-@property (weak, nonatomic) IBOutlet UITextField *totalDuration;
-@property (weak, nonatomic) IBOutlet UITextField *totalIncidents;
-@property (weak, nonatomic) IBOutlet UITextField *totalIdle;
+@property (weak, nonatomic) IBOutlet UILabel *totalRides;
+@property (weak, nonatomic) IBOutlet UILabel *totalLength;
+@property (weak, nonatomic) IBOutlet UILabel *totalDuration;
+@property (weak, nonatomic) IBOutlet UILabel *totalIncidents;
+@property (weak, nonatomic) IBOutlet UILabel *totalIdle;
 @property (weak, nonatomic) IBOutlet UIView *totalSlots;
 @property (weak, nonatomic) IBOutlet UILabel *version;
-@property (weak, nonatomic) IBOutlet UITextField *scaryEvents;
-@property (weak, nonatomic) IBOutlet UITextField *totalCO2;
-@property (weak, nonatomic) IBOutlet UITextField *averageSpeed;
+@property (weak, nonatomic) IBOutlet UILabel *scaryEvents;
+@property (weak, nonatomic) IBOutlet UILabel *totalCO2;
+@property (weak, nonatomic) IBOutlet UILabel *averageSpeed;
 @property (weak, nonatomic) IBOutlet UISwitch *behaviourSwitch;
 @property (weak, nonatomic) IBOutlet UISlider *behaviourSlider;
-@property (weak, nonatomic) IBOutlet UITextField *averageDistance;
-@property (weak, nonatomic) IBOutlet UITextField *averageIdle;
+@property (weak, nonatomic) IBOutlet UILabel *averageDistance;
+@property (weak, nonatomic) IBOutlet UILabel *averageIdle;
 
 @property (strong, nonatomic) UIAlertController *ac;
 
