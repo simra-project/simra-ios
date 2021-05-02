@@ -170,15 +170,11 @@
 
     if (!self.regions) {
         self.regions = [[NSMutableArray alloc] init];
-        NSURL *bundleURL = [NSBundle mainBundle].bundleURL;
-
-        NSURL *baseURL = [bundleURL URLByAppendingPathComponent:@"de.lproj"];
-        NSURL *constantsURL = [baseURL URLByAppendingPathComponent:@"constants.plist"];
+        NSURL *constantsURL = [[NSBundle mainBundle] URLForResource:@"constants" withExtension:@"plist" subdirectory:nil localization:@"de"];
         NSDictionary *germanConstants = [NSDictionary dictionaryWithContentsOfURL:constantsURL];
         NSArray *germanRegions = germanConstants[@"regions"];
 
-        baseURL = [bundleURL URLByAppendingPathComponent:@"Base.lproj"];
-        constantsURL = [baseURL URLByAppendingPathComponent:@"constants.plist"];
+        constantsURL = [[NSBundle mainBundle] URLForResource:@"constants" withExtension:@"plist" subdirectory:nil localization:@"Base"];
         NSDictionary *englishConstants = [NSDictionary dictionaryWithContentsOfURL:constantsURL];
         NSArray *englishRegions = englishConstants[@"regions"];
 
