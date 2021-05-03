@@ -225,7 +225,14 @@
     [self.trip removeObserver:self
                    forKeyPath:@"lastTripMotion"];
 
+    UIAlertController *ac = [UIAlertController
+                                 alertControllerWithTitle:NSLocalizedString(@"Incident Detection Running", @"Incident Detection Running")
+                                 message:NSLocalizedString(@"Please wait", @"Please wait")
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:ac animated:TRUE completion:nil];
     [self.trip stopRecording];
+    [ac dismissViewControllerAnimated:TRUE completion:nil];
+    
     self.recordedTrip = self.trip;
     [self performSegueWithIdentifier:@"trips:" sender:nil];
 

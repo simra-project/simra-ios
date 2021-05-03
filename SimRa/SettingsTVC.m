@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UISlider *startMeters;
 @property (weak, nonatomic) IBOutlet UILabel *startSecsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *startMetersLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *AI;
 
 @property (weak, nonatomic) IBOutlet UITextField *totalRides;
 @property (weak, nonatomic) IBOutlet UITextField *totalLength;
@@ -140,6 +141,7 @@
     self.startMetersLabel.text = [ad.defaults stringForKey:@"deferredMeters"];
     self.childSeat.on = [ad.defaults boolForKey:@"childSeat"];
     self.trailer.on = [ad.defaults boolForKey:@"trailer"];
+    self.AI.on = [ad.defaults boolForKey:@"AI"];
 
     self.version.text = [NSString stringWithFormat:@"%@-%@-%@",
                          [NSBundle mainBundle].infoDictionary[@"CFBundleName"],
@@ -313,6 +315,7 @@
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setBool:sender.on forKey:@"childSeat"];
 }
+
 - (IBAction)trailerChanged:(UISwitch *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setBool:sender.on forKey:@"trailer"];
@@ -328,6 +331,11 @@
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
     [self update];
+}
+
+- (IBAction)AIChanged:(UISwitch *)sender {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ad.defaults setBool:sender.on forKey:@"AI"];
 }
 
 @end

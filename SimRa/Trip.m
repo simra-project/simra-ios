@@ -185,6 +185,14 @@
 
 @end
 
+#define GET_SCHEME @"https:"
+#ifdef DEBUG
+#define GET_HOST @"vm1.mcc.tu-berlin.de:8082"
+#else
+#define GET_HOST @"vm2.mcc.tu-berlin.de:8082"
+#endif
+#define GET_VERSION 12
+
 @interface Trip ()
 @property (nonatomic) NSInteger identifier;
 @property (strong, nonatomic) CLLocation *startLocation;
@@ -212,6 +220,7 @@
     self.statisticsAdded = FALSE;
     self.reUploaded = FALSE;
     self.tripLocations = [[NSMutableArray alloc] init];
+    self.AIVersion = 0;
     return self;
 }
 
@@ -317,6 +326,8 @@
     self.bikeTypeId = bikeTypeId.integerValue;
     NSNumber *positionId = [dict objectForKey:@"positionId"];
     self.positionId = positionId.integerValue;
+    NSNumber *AIVersion = [dict objectForKey:@"AIVersion"];
+    self.AIVersion = AIVersion.integerValue;
     NSNumber *deferredSecs = [dict objectForKey:@"deferredSecs"];
     self.deferredSecs = deferredSecs.integerValue;
     NSNumber *deferredMeters = [dict objectForKey:@"deferredMeters"];
@@ -459,7 +470,8 @@
     [tripDict setObject:[NSNumber numberWithInteger:self.deferredMeters] forKey:@"deferredMeters"];
     [tripDict setObject:[NSNumber numberWithInteger:self.bikeTypeId] forKey:@"bikeTypeId"];
     [tripDict setObject:[NSNumber numberWithInteger:self.positionId] forKey:@"positionId"];
-    
+    [tripDict setObject:[NSNumber numberWithInteger:self.AIVersion] forKey:@"AIVersion"];
+
     [tripDict setObject:[NSNumber numberWithBool:self.childseat] forKey:@"childseat"];
     [tripDict setObject:[NSNumber numberWithBool:self.trailer] forKey:@"trailer"];
     [tripDict setObject:[NSNumber numberWithBool:self.statisticsAdded] forKey:@"statisticsAdded"];
@@ -596,6 +608,10 @@
 }
 
 - (NSURL *)csvFile {
+    return [self csvFileWithHeader:TRUE];
+}
+
+- (NSURL *)csvFileWithHeader:(BOOL)withHeader {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSURL *temporaryDirectory = fm.temporaryDirectory;
     NSURL *fileURL = [temporaryDirectory URLByAppendingPathComponent:@"trip.csv"];
@@ -606,53 +622,58 @@
     
     NSString *csvString;
 
-    NSString *bundleVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
-    NSArray <NSString *> *components = [bundleVersion componentsSeparatedByString:@"."];
-    csvString = [NSString stringWithFormat:@"i%@#%ld\n",
-                 components[0],
-                 self.version];
+    if (withHeader) {
+        NSString *bundleVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
+        NSArray <NSString *> *components = [bundleVersion componentsSeparatedByString:@"."];
+        csvString = [NSString stringWithFormat:@"i%@#%ld#%ld\n",
+                     components[0],
+                     self.version,
+                     self.AIVersion];
 
-    csvString = [csvString stringByAppendingString:@"key,lat,lon,ts,bike,childCheckBox,trailerCheckBox,pLoc,incident,i1,i2,i3,i4,i5,i6,i7,i8,i9,scary,desc,i10\n"];
-    [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSInteger key = 0;
-    for (TripLocation *tripLocation in self.tripLocations) {
-        if (tripLocation.tripAnnotation) {
-            NSString *comment;
-            if (tripLocation.tripAnnotation.comment) {
-                comment = tripLocation.tripAnnotation.comment;
-                comment = [comment stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
-                comment = [comment stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+        csvString = [csvString stringByAppendingString:@"key,lat,lon,ts,bike,childCheckBox,trailerCheckBox,pLoc,incident,i1,i2,i3,i4,i5,i6,i7,i8,i9,scary,desc,i10\n"];
+        [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+
+        NSInteger key = 0;
+        for (TripLocation *tripLocation in self.tripLocations) {
+            if (tripLocation.tripAnnotation) {
+                NSString *comment;
+                if (tripLocation.tripAnnotation.comment) {
+                    comment = tripLocation.tripAnnotation.comment;
+                    comment = [comment stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+                    comment = [comment stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"];
+                }
+                csvString = [NSString stringWithFormat:@"%ld,%f,%f,%.0f,%ld,%d,%d,%ld,%ld,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%@,%d\n",
+                             key,
+                             tripLocation.location.coordinate.latitude,
+                             tripLocation.location.coordinate.longitude,
+                             tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0,
+                             self.bikeTypeId,
+                             self.childseat,
+                             self.trailer,
+                             self.positionId,
+                             tripLocation.tripAnnotation.incidentId,
+                             tripLocation.tripAnnotation.bus,
+                             tripLocation.tripAnnotation.bicycle,
+                             tripLocation.tripAnnotation.pedestrian,
+                             tripLocation.tripAnnotation.delivery,
+                             tripLocation.tripAnnotation.commercial,
+                             tripLocation.tripAnnotation.motorcycle,
+                             tripLocation.tripAnnotation.car,
+                             tripLocation.tripAnnotation.taxi,
+                             tripLocation.tripAnnotation.other,
+                             tripLocation.tripAnnotation.frightening,
+                             comment ? [NSString stringWithFormat:@"\"%@\"", comment] : @"",
+                             tripLocation.tripAnnotation.escooter];
+                [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+                key++;
             }
-            csvString = [NSString stringWithFormat:@"%ld,%f,%f,%.0f,%ld,%d,%d,%ld,%ld,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%@,%d\n",
-                         key,
-                         tripLocation.location.coordinate.latitude,
-                         tripLocation.location.coordinate.longitude,
-                         tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0,
-                         self.bikeTypeId,
-                         self.childseat,
-                         self.trailer,
-                         self.positionId,
-                         tripLocation.tripAnnotation.incidentId,
-                         tripLocation.tripAnnotation.bus,
-                         tripLocation.tripAnnotation.bicycle,
-                         tripLocation.tripAnnotation.pedestrian,
-                         tripLocation.tripAnnotation.delivery,
-                         tripLocation.tripAnnotation.commercial,
-                         tripLocation.tripAnnotation.motorcycle,
-                         tripLocation.tripAnnotation.car,
-                         tripLocation.tripAnnotation.taxi,
-                         tripLocation.tripAnnotation.other,
-                         tripLocation.tripAnnotation.frightening,
-                         comment ? [NSString stringWithFormat:@"\"%@\"", comment] : @"",
-                         tripLocation.tripAnnotation.escooter];
-            [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
-            key++;
         }
+
+        csvString = @"\n===================\n";
+        [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
     }
-    
-    csvString = @"\n===================\n";
-    csvString = [csvString stringByAppendingFormat:@"i%@#%ld\n",
+
+    csvString = [NSString stringWithFormat:@"i%@#%ld\n",
                  [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"],
                  self.version];
     csvString = [csvString stringByAppendingString:@"lat,lon,X,Y,Z,timeStamp,acc,a,b,c,obsDistanceLeft1,obsDistanceLeft2,obsDistanceRight1,obsDistanceRight2,obsClosePassEvent,XL,YL,ZL,RX,RY,RZ,RC\n"];
@@ -899,62 +920,13 @@
     }
     [ad.lm stopUpdatingLocation];
     ad.lm.delegate = nil;
-    
-    TripLocation *largestXMotion;
-    TripLocation *secondLargestXMotion;
-    TripLocation *largestYMotion;
-    TripLocation *secondLargestYMotion;
-    TripLocation *largestZMotion;
-    TripLocation *secondLargestZMotion;
-    
-    double largestX = 0.0;
-    double secondLargestX = 0.0;
-    double largestY = 0.0;
-    double secondLargestY = 0.0;
-    double largestZ = 0.0;
-    double secondLargestZ = 0.0;
-    
-    for (TripLocation *tripLocation in self.tripLocations) {
-        if (tripLocation == self.tripLocations.firstObject ||
-            tripLocation == self.tripLocations.lastObject) {
-            continue;
-        }
-        CMAcceleration minMax = tripLocation.minMaxOfMotions;
-        if (minMax.x > largestX) {
-            secondLargestXMotion = largestXMotion;
-            secondLargestX = largestX;
-            largestXMotion = tripLocation;
-            largestX = minMax.x;
-        } else if (minMax.x > secondLargestX) {
-            secondLargestXMotion = tripLocation;
-            secondLargestX = minMax.x;
-        }
-        if (minMax.y > largestY) {
-            secondLargestYMotion = largestYMotion;
-            secondLargestY = largestY;
-            largestYMotion = tripLocation;
-            largestY = minMax.y;
-        } else if (minMax.y > secondLargestY) {
-            secondLargestYMotion = tripLocation;
-            secondLargestY = minMax.y;
-        }
-        if (minMax.z > largestZ) {
-            secondLargestZMotion = largestZMotion;
-            secondLargestZ = largestZ;
-            largestZMotion = tripLocation;
-            largestZ = minMax.z;
-        } else if (minMax.z > secondLargestZ) {
-            secondLargestZMotion = tripLocation;
-            secondLargestZ = minMax.z;
-        }
+
+    if ([ad.defaults boolForKey:@"AI"]) {
+        [self AIIncidentDetection];
+    } else {
+        [self offlineIncidentDectection];
     }
-    largestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    secondLargestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    largestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    secondLargestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    largestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    secondLargestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    
+
     [self save];
 }
 
@@ -1200,6 +1172,144 @@
     tripInfo.annotationsCount = self.tripAnnotations;
     tripInfo.validAnnotationsCount = self.tripValidAnnotations;
     return tripInfo;
+}
+
+- (void)offlineIncidentDectection {
+    TripLocation *largestXMotion;
+    TripLocation *secondLargestXMotion;
+    TripLocation *largestYMotion;
+    TripLocation *secondLargestYMotion;
+    TripLocation *largestZMotion;
+    TripLocation *secondLargestZMotion;
+
+    double largestX = 0.0;
+    double secondLargestX = 0.0;
+    double largestY = 0.0;
+    double secondLargestY = 0.0;
+    double largestZ = 0.0;
+    double secondLargestZ = 0.0;
+
+    for (TripLocation *tripLocation in self.tripLocations) {
+        if (tripLocation == self.tripLocations.firstObject ||
+            tripLocation == self.tripLocations.lastObject) {
+            continue;
+        }
+        CMAcceleration minMax = tripLocation.minMaxOfMotions;
+        if (minMax.x > largestX) {
+            secondLargestXMotion = largestXMotion;
+            secondLargestX = largestX;
+            largestXMotion = tripLocation;
+            largestX = minMax.x;
+        } else if (minMax.x > secondLargestX) {
+            secondLargestXMotion = tripLocation;
+            secondLargestX = minMax.x;
+        }
+        if (minMax.y > largestY) {
+            secondLargestYMotion = largestYMotion;
+            secondLargestY = largestY;
+            largestYMotion = tripLocation;
+            largestY = minMax.y;
+        } else if (minMax.y > secondLargestY) {
+            secondLargestYMotion = tripLocation;
+            secondLargestY = minMax.y;
+        }
+        if (minMax.z > largestZ) {
+            secondLargestZMotion = largestZMotion;
+            secondLargestZ = largestZ;
+            largestZMotion = tripLocation;
+            largestZ = minMax.z;
+        } else if (minMax.z > secondLargestZ) {
+            secondLargestZMotion = tripLocation;
+            secondLargestZ = minMax.z;
+        }
+    }
+    largestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    secondLargestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    largestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    secondLargestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    largestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    secondLargestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
+}
+
+- (void)AIIncidentDetection {
+    __block BOOL finished = FALSE;
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSString *urlString;
+    urlString = [NSString stringWithFormat:@"%@//%@/%d/classify-ride?clientHash=%@&bikeType=%ld&phoneLocation=%ld",
+                 GET_SCHEME, GET_HOST, GET_VERSION,
+                 NSString.clientHash,
+                 (long)self.bikeTypeId,
+                 (long)self.positionId];
+    [request setHTTPMethod:@"POST"];
+    [request setURL:[NSURL URLWithString:urlString]];
+
+    [request setValue:@"text/plain" forHTTPHeaderField: @"Content-Type"];
+    [request setTimeoutInterval:10.0];
+    NSLog(@"AIIncidentDetection request:\n%@", request);
+    NSURL *csvFile = [self csvFileWithHeader:FALSE];
+
+    NSURLSessionUploadTask *dataTask =
+    [
+     [NSURLSession sharedSession]
+     uploadTaskWithRequest:request
+     fromFile:csvFile
+     completionHandler:^(NSData *data,
+                         NSURLResponse *response,
+                         NSError *connectionError) {
+
+        NSError *fmError;
+        [[NSFileManager defaultManager] removeItemAtURL:csvFile error:&fmError];
+
+        if (connectionError) {
+            NSLog(@"AIIncidentDetection connectionError %@", connectionError);
+            [self offlineIncidentDectection];
+            finished = TRUE;
+        } else {
+            NSLog(@" AIIncidentDetection response %@ %@",
+                  response,
+                  [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+
+            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
+                    NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                    if (array && array.count > 0) {
+                        NSNumber *AIVersion = array[0];
+                        self.AIVersion = AIVersion.integerValue;
+                        for (NSInteger i = 1; i < array.count; i++) {
+                            NSNumber *interval = array[i];
+                            for (TripLocation *tripLocation in self.tripLocations) {
+                                for (TripMotion *tripMotion in tripLocation.tripMotions) {
+                                    if (round(tripMotion.timestamp * 1000.0) == interval.doubleValue) {
+                                        if (!tripLocation.tripAnnotation) {
+                                            tripLocation.tripAnnotation = [[TripAnnotation alloc] init];
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        [self offlineIncidentDectection];
+                    }
+                    finished = TRUE;
+                } else {
+                    [self offlineIncidentDectection];
+                    finished = TRUE;
+                }
+            } else {
+                [self offlineIncidentDectection];
+                finished = TRUE;
+            }
+        }
+    }];
+
+    [dataTask resume];
+
+    while (!finished) {
+        NSLog(@"AIIncidentDetection waiting to finish");
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
 }
 
 @end

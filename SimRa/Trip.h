@@ -87,6 +87,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSInteger deferredMeters;
 @property (nonatomic) NSInteger bikeTypeId;
 @property (nonatomic) NSInteger positionId;
+@property (nonatomic) NSInteger AIVersion;
+
 @property (nonatomic) Boolean childseat;
 @property (nonatomic) Boolean trailer;
 @property (nonatomic) Boolean statisticsAdded;

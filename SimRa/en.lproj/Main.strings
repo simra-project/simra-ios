@@ -241,3 +241,10 @@
 
 /* Class = "UIButton"; normalTitle = "Closest"; ObjectID = "0Ac-hH-O0E"; */
 "0Ac-hH-O0E.normalTitle" = "Closest";
+
+/* Class = "UITableViewSection"; headerTitle = "General Settings"; ObjectID = "32b-Vh-PWn"; */
+"32b-Vh-PWn.headerTitle" = "General Settings";
+
+/* Class = "UILabel"; text = "Online AI Ride Analysis"; ObjectID = "tf0-as-NvS"; */
+"tf0-as-NvS.text" = "Online AI Ride Analysis";
+

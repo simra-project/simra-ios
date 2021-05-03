@@ -768,6 +768,45 @@ from www.flaticon.com</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="General Settings" id="32b-Vh-PWn">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="bNC-hJ-pvw">
+                                        <rect key="frame" x="0.0" y="386.50000069358134" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bNC-hJ-pvw" id="PVu-cY-i5O">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online AI Ride Analysis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tf0-as-NvS">
+                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="alG-Sb-Lm2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lNh-LP-qHw">
+                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="31" id="Hs0-ac-l42"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="AIChanged:" destination="NGZ-Ib-TCI" eventType="valueChanged" id="c6s-4V-hWa"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="lNh-LP-qHw" firstAttribute="centerY" secondItem="PVu-cY-i5O" secondAttribute="centerY" id="700-ry-0uY"/>
+                                                <constraint firstItem="tf0-as-NvS" firstAttribute="centerY" secondItem="PVu-cY-i5O" secondAttribute="centerY" id="8VI-NK-K9B"/>
+                                                <constraint firstAttribute="trailing" secondItem="lNh-LP-qHw" secondAttribute="trailing" constant="20" symbolic="YES" id="Cmb-iq-4Fy"/>
+                                                <constraint firstItem="lNh-LP-qHw" firstAttribute="leading" secondItem="tf0-as-NvS" secondAttribute="trailing" constant="8" symbolic="YES" id="J1k-Nu-5kc"/>
+                                                <constraint firstItem="tf0-as-NvS" firstAttribute="leading" secondItem="PVu-cY-i5O" secondAttribute="leading" constant="20" symbolic="YES" id="h5N-lU-FAd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="NGZ-Ib-TCI" id="o0d-QH-shl"/>
@@ -776,6 +815,7 @@ from www.flaticon.com</string>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="hQw-y7-3KJ"/>
                     <connections>
+                        <outlet property="AI" destination="lNh-LP-qHw" id="P0T-gj-N8s"/>
                         <outlet property="bikeType" destination="7N9-JX-3gY" id="LG9-b4-RnF"/>
                         <outlet property="childSeat" destination="N55-ke-qlw" id="csZ-cm-z1x"/>
                         <outlet property="position" destination="gxn-9i-OrV" id="xcg-tY-9Hp"/>
@@ -2263,7 +2303,7 @@ from www.flaticon.com</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="EUT-E4-1tq"/>
+        <segue reference="2hm-aX-QV5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Simra" width="300" height="186"/>
