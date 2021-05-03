@@ -120,22 +120,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hy8-yG-bWd">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Hy8-yG-bWd">
                                                     <rect key="frame" x="20" y="7" width="280" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="oHt-t2-wu1"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <state key="normal" title="About"/>
                                                     <connections>
                                                         <action selector="aboutPressed:" destination="Zrj-ys-gys" eventType="touchUpInside" id="0zt-sb-Sab"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Hy8-yG-bWd" firstAttribute="leading" secondItem="jxU-bE-qns" secondAttribute="leading" constant="20" symbolic="YES" id="G88-Br-Xdd"/>
-                                                <constraint firstItem="Hy8-yG-bWd" firstAttribute="centerY" secondItem="jxU-bE-qns" secondAttribute="centerY" id="KXm-RG-2ss"/>
-                                                <constraint firstAttribute="trailing" secondItem="Hy8-yG-bWd" secondAttribute="trailing" constant="20" symbolic="YES" id="gPB-fn-Q5p"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Tug-GQ-2NO">
@@ -145,22 +138,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XcY-SK-4YC">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="XcY-SK-4YC">
                                                     <rect key="frame" x="20" y="7" width="280" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="mdA-Jy-lCA"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <state key="normal" title="Privacy"/>
                                                     <connections>
                                                         <action selector="privacyPressed:" destination="Zrj-ys-gys" eventType="touchUpInside" id="F4y-Xo-aFy"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="XcY-SK-4YC" secondAttribute="trailing" constant="20" symbolic="YES" id="08U-Je-NVg"/>
-                                                <constraint firstItem="XcY-SK-4YC" firstAttribute="leading" secondItem="ZMj-4K-QfI" secondAttribute="leading" constant="20" symbolic="YES" id="HMU-0A-cgl"/>
-                                                <constraint firstItem="XcY-SK-4YC" firstAttribute="centerY" secondItem="ZMj-4K-QfI" secondAttribute="centerY" id="u23-92-5rJ"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ajx-DX-0M1">
@@ -170,22 +156,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QeF-cV-htR">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="QeF-cV-htR">
                                                     <rect key="frame" x="20" y="7" width="280" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="1j1-1Q-wfj"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <state key="normal" title="How To"/>
                                                     <connections>
                                                         <action selector="howtoPressed:" destination="Zrj-ys-gys" eventType="touchUpInside" id="rdy-ZR-CNc"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="QeF-cV-htR" firstAttribute="leading" secondItem="EYs-HS-qlx" secondAttribute="leading" constant="20" symbolic="YES" id="I4j-es-zYj"/>
-                                                <constraint firstItem="QeF-cV-htR" firstAttribute="centerY" secondItem="EYs-HS-qlx" secondAttribute="centerY" id="LFD-Ps-yBc"/>
-                                                <constraint firstAttribute="trailing" secondItem="QeF-cV-htR" secondAttribute="trailing" constant="20" symbolic="YES" id="hrB-6V-uMf"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Khc-gb-LB0">
@@ -195,22 +174,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vwj-ml-5PX">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="vwj-ml-5PX">
                                                     <rect key="frame" x="20" y="7" width="280" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="wGZ-HI-FpD"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <state key="normal" title="Feedback"/>
                                                     <connections>
                                                         <action selector="feedbackPressed:" destination="Zrj-ys-gys" eventType="touchUpInside" id="qbg-fs-gdp"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="vwj-ml-5PX" firstAttribute="centerY" secondItem="bjt-9o-maV" secondAttribute="centerY" id="9UU-It-mYe"/>
-                                                <constraint firstAttribute="trailing" secondItem="vwj-ml-5PX" secondAttribute="trailing" constant="20" symbolic="YES" id="Uep-8N-WCW"/>
-                                                <constraint firstItem="vwj-ml-5PX" firstAttribute="leading" secondItem="bjt-9o-maV" secondAttribute="leading" constant="20" symbolic="YES" id="fUS-7M-AZ5"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rxz-bU-byc">
@@ -220,22 +192,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DY1-7h-Asu">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="DY1-7h-Asu">
                                                     <rect key="frame" x="20" y="7" width="280" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="eWo-10-s4r"/>
-                                                    </constraints>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <state key="normal" title="Imprint"/>
                                                     <connections>
                                                         <action selector="imprintPressed:" destination="Zrj-ys-gys" eventType="touchUpInside" id="hNO-Fp-J10"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="DY1-7h-Asu" secondAttribute="trailing" constant="20" symbolic="YES" id="bSg-BN-9JL"/>
-                                                <constraint firstItem="DY1-7h-Asu" firstAttribute="centerY" secondItem="8as-5V-Wva" secondAttribute="centerY" id="pzJ-1l-9Pf"/>
-                                                <constraint firstItem="DY1-7h-Asu" firstAttribute="leading" secondItem="8as-5V-Wva" secondAttribute="leading" constant="20" symbolic="YES" id="xth-Ly-B40"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="rpD-ll-SMT" style="IBUITableViewCellStyleDefault" id="cWX-0Q-Z5a">
@@ -2275,7 +2240,7 @@ from www.flaticon.com</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2hm-aX-QV5"/>
+        <segue reference="EUT-E4-1tq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Simra" width="300" height="186"/>
