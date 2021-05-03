@@ -1006,7 +1006,7 @@ from www.flaticon.com</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adherence to Rules" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbI-gv-mnl">
-                                                    <rect key="frame" x="20" y="20" width="149" height="21"/>
+                                                    <rect key="frame" x="20" y="20" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="xoT-Oh-UYy"/>
                                                     </constraints>
@@ -1029,7 +1029,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Never" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVw-dc-Kk6">
-                                                    <rect key="frame" x="20" y="61" width="46" height="21"/>
+                                                    <rect key="frame" x="20" y="61" width="136" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="q7E-Oj-xxb"/>
                                                     </constraints>
@@ -1037,8 +1037,8 @@ from www.flaticon.com</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39Z-h9-cEF">
-                                                    <rect key="frame" x="246" y="61" width="54" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39Z-h9-cEF">
+                                                    <rect key="frame" x="164" y="61" width="136" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="hDp-Qn-Yio"/>
                                                     </constraints>
@@ -1050,13 +1050,16 @@ from www.flaticon.com</string>
                                             <constraints>
                                                 <constraint firstItem="l5Z-9d-AwY" firstAttribute="top" secondItem="39Z-h9-cEF" secondAttribute="bottom" id="2bV-1p-ofd"/>
                                                 <constraint firstItem="hbI-gv-mnl" firstAttribute="leading" secondItem="CnW-1S-LOx" secondAttribute="leading" constant="20" symbolic="YES" id="BDD-uH-K2c"/>
+                                                <constraint firstItem="39Z-h9-cEF" firstAttribute="width" secondItem="rVw-dc-Kk6" secondAttribute="width" id="DhZ-C1-r88"/>
                                                 <constraint firstAttribute="trailing" secondItem="l5Z-9d-AwY" secondAttribute="trailing" constant="20" symbolic="YES" id="I8h-gT-BBy"/>
                                                 <constraint firstItem="hbI-gv-mnl" firstAttribute="top" secondItem="CnW-1S-LOx" secondAttribute="top" constant="20" symbolic="YES" id="NZ8-Sb-alk"/>
                                                 <constraint firstItem="l5Z-9d-AwY" firstAttribute="leading" secondItem="CnW-1S-LOx" secondAttribute="leading" constant="20" symbolic="YES" id="TJW-Yq-bQ1"/>
                                                 <constraint firstItem="l5Z-9d-AwY" firstAttribute="top" secondItem="rVw-dc-Kk6" secondAttribute="bottom" id="XMm-wV-bQG"/>
                                                 <constraint firstAttribute="bottom" secondItem="l5Z-9d-AwY" secondAttribute="bottom" constant="20" symbolic="YES" id="gTB-iP-LwV"/>
+                                                <constraint firstItem="39Z-h9-cEF" firstAttribute="leading" secondItem="rVw-dc-Kk6" secondAttribute="trailing" constant="8" symbolic="YES" id="kXL-eQ-u72"/>
                                                 <constraint firstItem="rVw-dc-Kk6" firstAttribute="leading" secondItem="CnW-1S-LOx" secondAttribute="leading" constant="20" symbolic="YES" id="lPN-yH-Hzo"/>
                                                 <constraint firstAttribute="trailing" secondItem="39Z-h9-cEF" secondAttribute="trailing" constant="20" symbolic="YES" id="nFY-rC-7nF"/>
+                                                <constraint firstItem="wvb-7H-gmb" firstAttribute="leading" secondItem="hbI-gv-mnl" secondAttribute="trailing" constant="8" symbolic="YES" id="pMB-9o-Mhf"/>
                                                 <constraint firstAttribute="trailing" secondItem="wvb-7H-gmb" secondAttribute="trailing" constant="20" symbolic="YES" id="yMf-gU-fFo"/>
                                                 <constraint firstItem="wvb-7H-gmb" firstAttribute="top" secondItem="CnW-1S-LOx" secondAttribute="top" constant="20" symbolic="YES" id="ydL-wg-hxo"/>
                                             </constraints>
