@@ -238,3 +238,6 @@
 
 /* Class = "UILabel"; text = "Delivery Van"; ObjectID = "39Z-h9-cEF"; */
 "39Z-h9-cEF.text" = "Always";
+
+/* Class = "UIButton"; normalTitle = "Closest"; ObjectID = "0Ac-hH-O0E"; */
+"0Ac-hH-O0E.normalTitle" = "Closest";

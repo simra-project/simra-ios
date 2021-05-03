@@ -1,0 +1,108 @@
+/* MyTrips View Context menu title */
+"Actions" = "Aktionen";
+
+/* Cancel */
+"Cancel" = "Abbrechen";
+
+/* Closest Regions to your Location */
+"Closest Regions to your Location" = "Die nächstgelegenen Regionen";
+
+/* Completed */
+"Completed" = "Komplett";
+
+/* Configure your Email, please! */
+"Configure your Email, please!" = "Bitte konfigurieren Sie ihre Mail App";
+
+/* Dear SimRa Team */
+"Dear SimRa Team" = "Liebes SimRa Team";
+
+/* Delete */
+"Delete" = "Löschen";
+
+/* Confirmation button for delete My Trips table row */
+"Delete locally" = "Lokal Löschen";
+
+/* Don't show this again */
+"Don't show this again" = "Dieses nicht wieder anzeigen";
+
+/* Done */
+"Done" = "Fertig";
+
+/* Edited */
+"Edited" = "Geändert";
+
+/* Feedback SimRa */
+"Feedback SimRa" = "Rückmeldung SimRa";
+
+/* Finish */
+"Finish" = "Ziel";
+
+/* How To */
+"How To" = "How To";
+
+/* If not, you may access it via Settings/How To */
+"If not, you may access it via Settings/How To later" = "Wenn nicht, können Sie dies später unter Einstellungen/How To abrufen";
+
+/* Later */
+"Later" = "Später";
+
+/* MyTrips View Context menu export title */
+"Manual Export" = "Manueller Export";
+
+/* Error message if region is not set yet */
+"Missing Region" = "Fehlende Region";
+
+/* New */
+"New" = "Neu";
+
+/* Not Recording */
+"Not Recording" = "Keine Aufzeichnung";
+
+/* Not Uploaded */
+"Not Uploaded" = "Nicht Hochgeladen";
+
+/* OK */
+"OK" = "OK";
+
+/* Please choose a Region */
+"Please choose a Region" = "Bitte wählen Sie eine Region aus";
+
+/* Profile Running */
+"Profile Running" = "Profile Running";
+
+/* Profile UploadError */
+"Profile UploadError" = "Profile UploadError";
+
+/* Re-Upload */
+"Re-Upload" = "Nochmals hochladen";
+
+/* Recording */
+"Recording" = "Aufzeichnung";
+
+/* Running */
+"Running" = "Running";
+
+/* SimRa */
+"SimRa" = "SimRa";
+
+/* SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results */
+"SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results." = "SimRa unterstützt eine Vielzahl an Regionen. Möchten Sie eine Region einstellen, um Ihren Beitrag zu verbessern? Dadurch können wir pro Region aussagekräftigere Ergebnisse liefern.";
+
+/* Start */
+"Start" = "Start";
+
+/* Upload */
+"Upload" = "Hochladen";
+
+/* Uploaded */
+"Uploaded" = "Hochgeladen";
+
+/* UploadError */
+"UploadError" = "UploadError";
+
+/* Would you like to view the User Manual now? */
+"Would you like to view the User Manual now?" = "Möchten Sie jetzt die Anleitung ansehen?";
+
+/* Yes */
+"Yes" = "Ja";
+

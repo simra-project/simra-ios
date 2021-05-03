@@ -72,7 +72,9 @@
     self.age.arrayIndex = [ad.defaults integerForKey:@"ageId"];
     self.sex.arrayIndex = [ad.defaults integerForKey:@"sexId"];
     self.region.arrayIndex = ad.regions.filteredRegionId;
-    if (!ad.regions.regionSelected) {
+    if (!ad.regions.regionSelected ||
+        [ad.regions.currentRegion.identifier isEqualToString:@"other"] ||
+        !ad.regions.selectedIsOneOfThe3ClosestsRegions) {
         self.region.textColor = [UIColor redColor];
     } else {
         if (@available(iOS 13.0, *)) {
@@ -144,6 +146,53 @@
                          [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"],
                          [NSLocale currentLocale].languageCode
                          ];
+}
+
+- (IBAction)closestPressed:(UIButton *)sender {
+    self.ac = [UIAlertController
+               alertControllerWithTitle:NSLocalizedString(@"Closest Regions to your Location",
+                                                          @"Closest Regions to your Location")
+               message:nil
+               preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *aac = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel",
+                                                                          @"Cancel")
+                                                  style:UIAlertActionStyleCancel
+                                                handler:^(UIAlertAction * _Nonnull action) {
+        //
+    }];
+    [self.ac addAction:aac];
+
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (ad.regions.closestsRegions.count > 0) {
+        UIAlertAction *aa0 = [UIAlertAction actionWithTitle:[ad.regions.closestsRegions[0] localizedDescription]
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+            [ad.regions selectPosition:ad.regions.closestsRegions[0].position];
+            [self update];
+        }];
+        [self.ac addAction:aa0];
+    }
+    if (ad.regions.closestsRegions.count > 1) {
+        UIAlertAction *aa1 = [UIAlertAction actionWithTitle:[ad.regions.closestsRegions[1] localizedDescription]
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+            [ad.regions selectPosition:ad.regions.closestsRegions[1].position];
+            [self update];
+        }];
+        [self.ac addAction:aa1];
+    }
+    if (ad.regions.closestsRegions.count > 2) {
+        UIAlertAction *aa2 = [UIAlertAction actionWithTitle:[ad.regions.closestsRegions[2] localizedDescription]
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+            [ad.regions selectPosition:ad.regions.closestsRegions[2].position];
+            [self update];
+        }];
+        [self.ac addAction:aa2];
+    }
+
+    [self presentViewController:self.ac animated:TRUE completion:nil];
 }
 
 - (IBAction)aboutPressed:(UIButton *)sender {

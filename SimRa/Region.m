@@ -26,4 +26,22 @@
     }
 }
 
+- (CLLocation *)location {
+    if (self.lat.doubleValue == 0.0 && self.lon.doubleValue == 0.0) {
+        return nil;
+    }
+    CLLocation *myLocation = [[CLLocation alloc] initWithLatitude:self.lat.doubleValue
+                                                        longitude:self.lon.doubleValue];
+    return myLocation;
+}
+
+- (CLLocationDistance)distanceFrom:(CLLocation *)location {
+    CLLocation *myLocation = self.location;
+    if (!myLocation || !location) {
+        return 400000000;
+    }
+    CLLocationDistance myDistance = [myLocation distanceFromLocation:location];
+    return myDistance;
+}
+
 @end

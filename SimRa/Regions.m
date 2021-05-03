@@ -15,11 +15,15 @@
 #else
 #define GET_HOST @"vm2.mcc.tu-berlin.de:8082"
 #endif
-#define GET_VERSION 10
+#define GET_VERSION 12
 
 @interface Regions ()
 @property (strong, nonatomic) NSMutableArray <Region *> *regions;
 @property (nonatomic) NSInteger regionId;
+@property (nonatomic) NSInteger regionsId;
+@property (nonatomic) NSInteger lastSeenRegionsId;
+@property (nonatomic) BOOL loaded;
+@property (strong, nonatomic) NSMutableArray <Region *> *closestsRegions;
 
 @end
 
@@ -28,9 +32,10 @@
 - (void)refresh {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;
-    urlString = [NSString stringWithFormat:@"%@//%@/check/regions?clientHash=%@",
-                 GET_SCHEME, GET_HOST,
-                 NSString.clientHash];
+    urlString = [NSString stringWithFormat:@"%@//%@/%d/check-regions?clientHash=%@&lastSeenRegionsID=%ld",
+                 GET_SCHEME, GET_HOST, GET_VERSION,
+                 NSString.clientHash,
+                 (long)self.lastSeenRegionsId];
     [request setHTTPMethod:@"GET"];
     [request setURL:[NSURL URLWithString:urlString]];
 
@@ -75,27 +80,41 @@
     NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"dataString %@", dataString);
 
-    self.regions = [[NSMutableArray alloc] init];
-
     NSArray <NSString *> *lines = [dataString componentsSeparatedByString:@"\n"];
     NSLog(@"lines %@", lines);
-    for (NSString *line in lines) {
-        NSMutableArray <NSString *> *fields = [[line componentsSeparatedByString:@"="] mutableCopy];
-        NSLog(@"fields %@", fields);
-        if (fields.count == 3) {
-            if ([fields[0] hasPrefix:@"!"]) {
-                fields[0] = [fields[0] substringFromIndex:1];
-                fields[2] = [NSString stringWithFormat:@"!%@",
-                             fields[2]];
+
+    if (dataString.length > 0 && lines.count > 0 && lines[0].length > 1) {
+        self.regionsId = [lines[0] substringFromIndex:1].integerValue;
+        self.regions = [[NSMutableArray alloc] init];
+        for (NSInteger i = 1; i < lines.count; i++) {
+            NSString *line = lines[i];
+            NSMutableArray <NSString *> *fields = [[line componentsSeparatedByString:@"="] mutableCopy];
+            NSLog(@"fields %@", fields);
+            if (fields.count >= 3) {
+                if ([fields[0] hasPrefix:@"!"]) {
+                    fields[0] = [fields[0] substringFromIndex:1];
+                    fields[2] = [NSString stringWithFormat:@"!%@",
+                                 fields[2]];
+                }
+                Region *region = [[Region alloc] init];
+                region.position = i - 1;
+                region.englishDescription = fields[0];
+                region.germanDescription = fields[1];
+                region.identifier = fields[2];
+                if (fields.count >= 4) {
+                    NSString *coords = fields[3];
+                    NSArray <NSString *> *latlon = [coords componentsSeparatedByString:@","];
+                    if (latlon.count == 2) {
+                        region.lat = [NSNumber numberWithDouble:latlon[0].doubleValue];
+                        region.lon = [NSNumber numberWithDouble:latlon[1].doubleValue];
+                    }
+                }
+                [self.regions addObject:region];
             }
-            Region *region = [[Region alloc] init];
-            region.englishDescription = fields[0];
-            region.germanDescription = fields[1];
-            region.identifier = fields[2];
-            [self.regions addObject:region];
         }
+        [self save];
     }
-    [self save];
+    self.loaded = true;
 }
 
 - (void)save {
@@ -105,6 +124,8 @@
         dictRegion[@"identifier"] = region.identifier;
         dictRegion[@"englishDescription"] = region.englishDescription;
         dictRegion[@"germanDescription"] = region.germanDescription;
+        dictRegion[@"lat"] = region.lat;
+        dictRegion[@"lon"] = region.lon;
         [arrayRegions addObject:dictRegion];
     }
 
@@ -114,6 +135,14 @@
         self.regionId = 0;
     }
     [[NSUserDefaults standardUserDefaults] setInteger:self.regionId forKey:@"regionId"];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.regionId forKey:@"regionId"];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.regionsId forKey:@"regionsId"];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.lastSeenRegionsId forKey:@"lastSeenRegionsId"];
+}
+
+- (void)seen {
+    self.lastSeenRegionsId = self.regionsId;
+    [self save];
 }
 
 - (instancetype)init {
@@ -122,16 +151,22 @@
 
     if (arrayRegions) {
         self.regions = [[NSMutableArray alloc] init];
+        NSInteger position = 0;
         for (NSDictionary *dictRegion in arrayRegions) {
             Region *region = [[Region alloc] init];
+            region.position = position++;
             region.identifier = dictRegion[@"identifier"];
             region.englishDescription = dictRegion[@"englishDescription"];
             region.germanDescription = dictRegion[@"germanDescription"];
+            region.lat = dictRegion[@"lat"];
+            region.lon = dictRegion[@"lon"];
             [self.regions addObject:region];
         }
     }
 
     self.regionId = [[NSUserDefaults standardUserDefaults] integerForKey:@"regionId"];
+    self.lastSeenRegionsId = [[NSUserDefaults standardUserDefaults] integerForKey:@"lastSeenRegionsId"];
+    self.regionsId = [[NSUserDefaults standardUserDefaults] integerForKey:@"regionsId"];
 
     if (!self.regions) {
         self.regions = [[NSMutableArray alloc] init];
@@ -195,6 +230,13 @@
     [self save];
 }
 
+- (void)selectPosition:(NSInteger)position {
+    if (position < self.regions.count) {
+        self.regionId = position;
+        [self save];
+    }
+}
+
 - (NSArray<NSString *> *)regionTexts {
     NSMutableArray <NSString *> *texts = [[NSMutableArray alloc] init];
     for (Region *region in self.regions) {
@@ -207,6 +249,43 @@
         }
     }
     return texts;
+}
+
+- (void)computeClosestsRegions:(CLLocation *)location {
+    self.closestsRegions = [[NSMutableArray alloc] init];
+    for (Region *region in self.regions) {
+        if (![region.identifier hasPrefix:@"!"]) {
+            BOOL inserted = false;
+            CLLocationDistance regionDistance = [region distanceFrom:location];
+            for (NSInteger i = 0; i < self.closestsRegions.count; i++) {
+                CLLocationDistance sortedRegionDistance = [self.closestsRegions[i] distanceFrom:location];
+                if (regionDistance < sortedRegionDistance) {
+                    [self.closestsRegions insertObject:region atIndex:i];
+                    inserted = TRUE;
+                    break;
+                }
+            }
+            if (!inserted) {
+                [self.closestsRegions addObject:region];
+            }
+        }
+    }
+    for (NSInteger i = 0; i < self.closestsRegions.count; i++) {
+        NSLog(@"Region #%03ld/%03ld: %@ %.0f",
+              i,
+              self.closestsRegions[i].position,
+              self.closestsRegions[i].identifier,
+              [self.closestsRegions[i] distanceFrom:location]);
+
+    }
+}
+
+- (BOOL)selectedIsOneOfThe3ClosestsRegions {
+    return (self.closestsRegions.count < 1 ||
+            (self.closestsRegions.count > 0 && self.regionId == self.closestsRegions[0].position) ||
+            (self.closestsRegions.count > 1 && self.regionId == self.closestsRegions[1].position) ||
+            (self.closestsRegions.count > 2 && self.regionId == self.closestsRegions[2].position)
+            );
 }
 
 - (Region *)currentRegion {

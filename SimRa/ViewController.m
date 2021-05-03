@@ -13,6 +13,7 @@
 #import "NSTimeInterval+hms.h"
 #import "MyTripsTVC.h"
 #import "News.h"
+#import "Regions.h"
 
 @interface MyAnnotation: NSObject <MKAnnotation>
 @property (strong, nonatomic) CLLocation *location;
@@ -47,6 +48,7 @@
 @property (strong, nonatomic) UIAlertController *ac;
 @property (nonatomic) NSInteger queued;
 
+@property (nonatomic) BOOL initialMessagePassed;
 
 @end
 
@@ -92,10 +94,15 @@
               forKeyPath:@"newsVersion"
                  options:NSKeyValueObservingOptionNew
                  context:nil];
+    [ad.regions addObserver:self
+                 forKeyPath:@"loaded"
+                    options:NSKeyValueObservingOptionNew
+                    context:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    //[ad.defaults setBool:FALSE forKey:@"initialMessage"];
     if (![ad.defaults boolForKey:@"initialMessage"]) {
         [ad.defaults setBool:TRUE forKey:@"initialMessage"];
         self.ac = [UIAlertController
@@ -109,14 +116,22 @@
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
             [self showHowTo];
+            self.initialMessagePassed = TRUE;
+            [self checkRegions];
         }];
         [self.ac addAction:aay];
 
         UIAlertAction *aac = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel")
                                                       style:UIAlertActionStyleCancel
-                                                    handler:nil];
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+            self.initialMessagePassed = TRUE;
+            [self checkRegions];
+        }];
         [self.ac addAction:aac];
         [self presentViewController:self.ac animated:TRUE completion:nil];
+    } else {
+        self.initialMessagePassed = TRUE;
+        [self checkRegions];
     }
 }
 
@@ -128,6 +143,60 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
                                        options:@{}
                              completionHandler:nil];
+}
+
+- (void)checkRegions {
+    if (!self.initialMessagePassed) {
+        return;
+    }
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    if (!ad.regions.loaded) {
+        return;
+    }
+    if ([ad.defaults boolForKey:@"suppressRegionMessage"]) {
+        return;
+    }
+
+    if (ad.regions.closestsRegions) {
+        return;
+    }
+
+    CLLocation *myLocation = self.mapView.userLocation.location;
+    [ad.regions computeClosestsRegions:myLocation];
+
+    if ((ad.regions.regionsId > ad.regions.lastSeenRegionsId &&
+            (ad.regions.regionId == 0 || [ad.regions.currentRegion.identifier isEqualToString:@"other"])
+         ) || !ad.regions.selectedIsOneOfThe3ClosestsRegions) {
+        [ad.regions seen];
+
+        self.ac = [UIAlertController
+                   alertControllerWithTitle:NSLocalizedString(@"Please choose a Region",
+                                                              @"Please choose a Region")
+                   message:NSLocalizedString(@"SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results.",
+                                             @"SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results.")
+                   preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *aad = [UIAlertAction actionWithTitle:NSLocalizedString(@"Don't show this again",
+                                                                              @"Don't show this again")
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+            [ad.defaults setBool:TRUE forKey:@"suppressRegionMessage"];
+        }];
+        [self.ac addAction:aad];
+
+        UIAlertAction *aal = [UIAlertAction actionWithTitle:NSLocalizedString(@"Later", @"Later")
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:nil];
+        [self.ac addAction:aal];
+
+        UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", @"Yes")
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+            [self performSegueWithIdentifier:@"editRegion" sender:nil];
+        }];
+        [self.ac addAction:aay];
+
+        [self presentViewController:self.ac animated:TRUE completion:nil];
+    }
 }
 
 - (IBAction)playButtonPressed:(UIBarButtonItem *)sender {
@@ -193,6 +262,12 @@
 
     if ([keyPath isEqualToString:@"newsVersion"]) {
         [self performSegueWithIdentifier:@"showNews" sender:nil];
+    }
+
+    if ([keyPath isEqualToString:@"loaded"]) {
+        [self performSelectorOnMainThread:@selector(checkRegions)
+                               withObject:nil
+                            waitUntilDone:NO];
     }
 }
 
