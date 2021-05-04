@@ -678,96 +678,86 @@
                  self.version];
     csvString = [csvString stringByAppendingString:@"lat,lon,X,Y,Z,timeStamp,acc,a,b,c,obsDistanceLeft1,obsDistanceLeft2,obsDistanceRight1,obsDistanceRight2,obsClosePassEvent,XL,YL,ZL,RX,RY,RZ,RC\n"];
     [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
-    
+
+    NSMutableDictionary <NSNumber *, NSString *> *locationLines = [[NSMutableDictionary alloc] init];
     for (TripLocation *tripLocation in self.tripLocations) {
         CLLocationDegrees lat = tripLocation.location.coordinate.latitude;
         CLLocationDegrees lon = tripLocation.location.coordinate.longitude;
         CLLocationAccuracy horizontalAccuray = tripLocation.location.horizontalAccuracy;
         TripGyro *gyro = tripLocation.gyro;
 
-        if (tripLocation.tripMotions.count > 0) {
-            for (TripMotion *tripMotion in tripLocation.tripMotions) {
-                if (lat == 0.0 && lon == 0.0) {
-                    csvString = @",,";
-                } else {
-                    csvString = [NSString stringWithFormat:@"%f,%f,",
-                                 lat,
-                                 lon];
-                    lat = 0.0;
-                    lon = 0.0;
-                }
+        csvString = [NSString stringWithFormat:@"%f,%f,",
+                     lat,
+                     lon];
 
-                csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%.0f,",
-                             tripMotion.x * 9.81,
-                             tripMotion.y * 9.81,
-                             tripMotion.z * 9.81,
-                             tripMotion.timestamp * 1000.0];
+        csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%.0f,",
+                     0.0,
+                     0.0,
+                     0.0,
+                     tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0];
 
-                if (horizontalAccuray == -1.0) {
-                    csvString = [csvString stringByAppendingString:@","];
-                } else {
-                    csvString = [csvString stringByAppendingFormat:@"%f,",
-                                 horizontalAccuray];
-                    horizontalAccuray = -1;
-                }
-
-                if (!gyro) {
-                    csvString = [csvString stringByAppendingString:@",,,"];
-                } else {
-                    csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,",
-                                 gyro.x,
-                                 gyro.y,
-                                 gyro.z];
-                    gyro = nil;
-                }
-
-                csvString = [csvString stringByAppendingString:@",,,,,"]; // OBS Values
-                csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%f,%f,%f,%f",
-                             tripMotion.xl * 9.81,
-                             tripMotion.yl * 9.81,
-                             tripMotion.zl * 9.81,
-                             tripMotion.xr,
-                             tripMotion.yr,
-                             tripMotion.zr,
-                             tripMotion.cr];
-
-                csvString = [csvString stringByAppendingString:@"\n"];
-
-                [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
-            }
+        if (horizontalAccuray == -1.0) {
+            csvString = [csvString stringByAppendingString:@","];
         } else {
-            csvString = [NSString stringWithFormat:@"%f,%f,",
-                         lat,
-                         lon];
+            csvString = [csvString stringByAppendingFormat:@"%f,",
+                         horizontalAccuray];
+            horizontalAccuray = -1;
+        }
+
+        if (!gyro) {
+            csvString = [csvString stringByAppendingString:@",,,"];
+        } else {
+            csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,",
+                         gyro.x,
+                         gyro.y,
+                         gyro.z];
+            gyro = nil;
+        }
+
+        csvString = [csvString stringByAppendingString:@",,,,,"]; // OBS Values
+        csvString = [csvString stringByAppendingString:@",,,,,,"]; // Linear Giro Values
+        csvString = [csvString stringByAppendingString:@"\n"];
+
+        NSNumber *locationTime = [NSNumber numberWithDouble:tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0];
+
+        locationLines[locationTime] = csvString;
+    }
+
+    for (TripLocation *tripLocation in self.tripLocations) {
+        for (TripMotion *tripMotion in tripLocation.tripMotions) {
+            csvString = @",,";
 
             csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%.0f,",
-                         0.0,
-                         0.0,
-                         0.0,
-                         tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0];
+                         tripMotion.x * 9.81,
+                         tripMotion.y * 9.81,
+                         tripMotion.z * 9.81,
+                         tripMotion.timestamp * 1000.0];
 
-            if (horizontalAccuray == -1.0) {
-                csvString = [csvString stringByAppendingString:@","];
-            } else {
-                csvString = [csvString stringByAppendingFormat:@"%f,",
-                             horizontalAccuray];
-                horizontalAccuray = -1;
-            }
+            csvString = [csvString stringByAppendingString:@","];
 
-            if (!gyro) {
-                csvString = [csvString stringByAppendingString:@",,,"];
-            } else {
-                csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,",
-                             gyro.x,
-                             gyro.y,
-                             gyro.z];
-                gyro = nil;
-            }
-
+            csvString = [csvString stringByAppendingString:@",,,"];
             csvString = [csvString stringByAppendingString:@",,,,,"]; // OBS Values
-            csvString = [csvString stringByAppendingString:@",,,,,,"]; // Linear Giro Values
-            csvString = [csvString stringByAppendingString:@"\n"];
+            csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%f,%f,%f,%f",
+                         tripMotion.xl * 9.81,
+                         tripMotion.yl * 9.81,
+                         tripMotion.zl * 9.81,
+                         tripMotion.xr,
+                         tripMotion.yr,
+                         tripMotion.zr,
+                         tripMotion.cr];
 
+            csvString = [csvString stringByAppendingString:@"\n"];
+            NSNumber *motionTime = [NSNumber numberWithDouble:tripMotion.timestamp * 1000.0];
+
+            while (locationLines.count > 0) {
+                NSNumber *locationTime = [locationLines.allKeys sortedArrayUsingSelector:@selector(compare:)].firstObject;
+                if (locationTime.doubleValue < motionTime.doubleValue) {
+                    [fh writeData:[locationLines[locationTime] dataUsingEncoding:NSUTF8StringEncoding]];
+                    [locationLines removeObjectForKey:locationTime];
+                } else {
+                    break;
+                }
+            }
             [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
         }
     }
