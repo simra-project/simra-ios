@@ -42,7 +42,7 @@
     };
 
     for (NSString *line in ad.news.newsLines) {
-        if ([line rangeOfString:@"-"].location == 0) {
+        if ([line rangeOfString:@"-"].location == 0 || [line rangeOfString:@"i"].location == 0) {
             [as appendAttributedString:
              [[NSMutableAttributedString alloc] initWithString:[line substringFromIndex:1]
                                                     attributes:attributesNormal]];
