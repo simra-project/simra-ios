@@ -1091,8 +1091,7 @@
     if (!self.tripAnnotations) {
         TripLocation *location = self.tripLocations.firstObject;
         TripAnnotation *annotation = [[TripAnnotation alloc] init];
-        annotation.incidentId = 0;
-        annotation.comment = @"3fzr";
+        annotation.incidentId = -5;
         location.tripAnnotation = annotation;
         saveNecessary = TRUE;
     }
