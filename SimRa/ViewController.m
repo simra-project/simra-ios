@@ -153,6 +153,7 @@
     if (!ad.regions.loaded) {
         return;
     }
+
     if ([ad.defaults boolForKey:@"suppressRegionMessage"]) {
         return;
     }
@@ -164,16 +165,22 @@
     CLLocation *myLocation = self.mapView.userLocation.location;
     [ad.regions computeClosestsRegions:myLocation];
 
-    if ((ad.regions.regionsId > ad.regions.lastSeenRegionsId &&
+    if (![ad.defaults boolForKey:@"onceRegionMessage"] ||
+        (ad.regions.regionsId > ad.regions.lastSeenRegionsId &&
             (ad.regions.regionId == 0 || [ad.regions.currentRegion.identifier isEqualToString:@"other"])
          ) || !ad.regions.selectedIsOneOfThe3ClosestsRegions) {
+        [ad.defaults setBool:TRUE forKey:@"onceRegionMessage"];
+
         [ad.regions seen];
 
+        NSString *message = [NSString stringWithFormat:@"%@ %@",
+                             NSLocalizedString(@"Please choose your correct region, so that we can analyse your ride correctly. Your selected region:",
+                                                       @"Please choose your correct region, so that we can analyse your ride correctly. Your selected region:"),
+                             ad.regions.regionId == 0 ? ad.regions.currentRegion.identifier : ad.regions.currentRegion.localizedDescription];
         self.ac = [UIAlertController
                    alertControllerWithTitle:NSLocalizedString(@"Please choose a Region",
                                                               @"Please choose a Region")
-                   message:NSLocalizedString(@"SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results.",
-                                             @"SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results.")
+                   message: message
                    preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *aad = [UIAlertAction actionWithTitle:NSLocalizedString(@"Don't show this again",
                                                                               @"Don't show this again")

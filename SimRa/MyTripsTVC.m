@@ -254,10 +254,18 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 - (IBAction)uploadPressed:(UIBarButtonItem *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if (!ad.regions.regionSelected) {
+        NSString *message = [NSString stringWithFormat:@"%@ %@",
+                             NSLocalizedString(@"Please choose your correct region, so that we can analyse your ride correctly. Your selected region:",
+                                                       @"Please choose your correct region, so that we can analyse your ride correctly. Your selected region:"),
+                             ad.regions.regionId == 0 ? ad.regions.currentRegion.identifier : ad.regions.currentRegion.localizedDescription];
+
+
         UIAlertController *ac = [UIAlertController
-                                 alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
-                                 message:NSLocalizedString(@"Missing Region", @"Error message if region is not set yet")
+                                 alertControllerWithTitle:NSLocalizedString(@"Please choose a Region",
+                                                                            @"Please choose a Region")
+                                 message: message
                                  preferredStyle:UIAlertControllerStyleAlert];
+
         UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {

@@ -49,9 +49,6 @@
 /* MyTrips View Context menu export title */
 "Manual Export" = "Manual Export";
 
-/* Error message if region is not set yet */
-"Missing Region" = "Missing Region";
-
 /* New */
 "New" = "New";
 
@@ -86,7 +83,7 @@
 "SimRa" = "SimRa";
 
 /* SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results */
-"SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results." = "SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results.";
+"Please choose your correct region, so that we can analyse your ride correctly. Your selected region:" = "Please choose your correct region, so that we can analyse your ride correctly. Your selected region:";
 
 /* Start */
 "Start" = "Start";
