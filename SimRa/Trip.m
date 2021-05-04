@@ -1280,11 +1280,18 @@
                         for (NSInteger i = 1; i < array.count; i++) {
                             NSNumber *interval = array[i];
                             for (TripLocation *tripLocation in self.tripLocations) {
+                                if (round(tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0) == interval.doubleValue) {
+                                    if (!tripLocation.tripAnnotation) {
+                                        tripLocation.tripAnnotation = [[TripAnnotation alloc] init];
+                                    }
+                                    break;
+                                }
                                 for (TripMotion *tripMotion in tripLocation.tripMotions) {
                                     if (round(tripMotion.timestamp * 1000.0) == interval.doubleValue) {
                                         if (!tripLocation.tripAnnotation) {
                                             tripLocation.tripAnnotation = [[TripAnnotation alloc] init];
                                         }
+                                        break;
                                     }
                                 }
                             }
