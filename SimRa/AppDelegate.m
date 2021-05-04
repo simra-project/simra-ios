@@ -25,16 +25,8 @@
     self.trips = [[Trips alloc] init];
     [self.trips save];
 
-    NSURL *bundleURL = [NSBundle mainBundle].bundleURL;
-    NSURL *baseURL = [bundleURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.lproj",
-                                                      [NSLocale currentLocale].languageCode]];
-    NSURL *constantsURL = [baseURL URLByAppendingPathComponent:@"constants.plist"];
+    NSURL *constantsURL = [[NSBundle mainBundle] URLForResource:@"constants" withExtension:@"plist"];
     self.constants = [NSDictionary dictionaryWithContentsOfURL:constantsURL];
-    if (!self.constants) {
-        baseURL = [bundleURL URLByAppendingPathComponent:@"Base.lproj"];
-        constantsURL = [baseURL URLByAppendingPathComponent:@"constants.plist"];
-        self.constants = [NSDictionary dictionaryWithContentsOfURL:constantsURL];
-    }
 
     return YES;
 }
