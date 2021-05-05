@@ -70,6 +70,9 @@
 /* Profile UploadError */
 "Profile UploadError" = "Profile UploadError";
 
+/* Upload Context */
+"Upload" = "Upload";
+
 /* Re-Upload */
 "Re-Upload" = "Re-Upload";
 
@@ -103,3 +106,8 @@
 /* Yes */
 "Yes" = "Yes";
 
+/* Table Select All */
+"All" = "All";
+
+/* Table Select None */
+"None" = "None";

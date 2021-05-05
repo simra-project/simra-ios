@@ -73,11 +73,11 @@
                                         <rect key="frame" x="0.0" y="24.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8bY-Dy-320" id="Qtp-5g-v9i">
-                                            <rect key="frame" x="0.0" y="0.0" width="293" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="294.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vCg-lZ-qrN">
-                                                    <rect key="frame" x="16" y="0.0" width="269" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="270.5" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -93,11 +93,11 @@
                                         <rect key="frame" x="0.0" y="68.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDA-LC-U9t" id="73d-ic-Igy">
-                                            <rect key="frame" x="0.0" y="0.0" width="293" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="294.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TX3-yP-atN">
-                                                    <rect key="frame" x="16" y="0.0" width="269" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="270.5" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -207,11 +207,11 @@
                                         <rect key="frame" x="0.0" y="381.50000034679067" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cWX-0Q-Z5a" id="Uz7-ks-bXw">
-                                            <rect key="frame" x="0.0" y="0.0" width="293" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="294.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Credits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rpD-ll-SMT">
-                                                    <rect key="frame" x="16" y="0.0" width="269" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="270.5" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1603,16 +1603,16 @@ from www.flaticon.com</string>
         <scene sceneID="l3r-EA-Rm6">
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="PYd-3I-T6G" customClass="MyTripsTVC" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jyQ-XJ-aOD">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jyQ-XJ-aOD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="trip" textLabel="zPk-B6-o6t" detailTextLabel="VTO-Vt-8RE" style="IBUITableViewCellStyleSubtitle" id="slg-JG-I5k">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="trip" textLabel="zPk-B6-o6t" detailTextLabel="VTO-Vt-8RE" style="IBUITableViewCellStyleSubtitle" id="slg-JG-I5k">
                                 <rect key="frame" x="0.0" y="24.5" width="320" height="55.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="slg-JG-I5k" id="PX8-Pe-e2k">
-                                    <rect key="frame" x="0.0" y="0.0" width="266" height="55.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="294.5" height="55.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zPk-B6-o6t">
@@ -1631,9 +1631,6 @@ from www.flaticon.com</string>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="j7e-Gg-2dc" kind="show" identifier="edit:" trigger="accessoryAction" id="ssR-Nf-9L8"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1641,16 +1638,28 @@ from www.flaticon.com</string>
                             <outlet property="delegate" destination="PYd-3I-T6G" id="4OB-lE-3mJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Trips" id="pq7-Kn-x7k">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Upload" id="MJ7-9y-XJz">
+                    <toolbarItems>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="T71-qR-1hx"/>
+                        <barButtonItem title="Upload" id="krP-3i-mxQ">
                             <connections>
-                                <action selector="uploadPressed:" destination="PYd-3I-T6G" id="jkC-Mn-b9y"/>
+                                <action selector="uploadPressed:" destination="PYd-3I-T6G" id="Jk0-uJ-qiG"/>
                             </connections>
                         </barButtonItem>
-                    </navigationItem>
-                    <nil key="simulatedBottomBarMetrics"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="rTW-z6-NpA"/>
+                        <barButtonItem title="Delete Locally" id="0PE-Xy-GGU">
+                            <connections>
+                                <action selector="deletePressed:" destination="PYd-3I-T6G" id="WWy-H9-TF8"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="bzv-Zl-xoV"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="My Trips" id="pq7-Kn-x7k"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="deleteButton" destination="0PE-Xy-GGU" id="Uq2-Ok-jMc"/>
+                        <outlet property="uploadButton" destination="krP-3i-mxQ" id="Qhe-Ko-Nfz"/>
                         <segue destination="c8U-8m-Y77" kind="show" identifier="profile" id="i6e-Cg-Mdt"/>
+                        <segue destination="j7e-Gg-2dc" kind="show" identifier="editTrip:" id="boq-wS-O3v"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cVh-Or-W9n" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2240,7 +2249,7 @@ from www.flaticon.com</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="EUT-E4-1tq"/>
+        <segue reference="i6e-Cg-Mdt"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Simra" width="300" height="186"/>

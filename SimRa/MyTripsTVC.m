@@ -20,6 +20,12 @@
 @property (strong, nonatomic) UIAlertController *ac;
 @property (strong, nonatomic) NSMutableDictionary <NSNumber *, TripInfo *> *localTripInfos;
 @property (strong, nonatomic) NSMutableDictionary <NSNumber *, TripInfo *> *uploadedTripInfos;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *uploadButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
+@property (strong, nonatomic) UIBarButtonItem *editButton;
+@property (strong, nonatomic) UIBarButtonItem *doneButton;
+@property (strong, nonatomic) UIBarButtonItem *allButton;
+@property (strong, nonatomic) UIBarButtonItem *noneButton;
 @end
 
 @implementation MyTripsTVC
@@ -59,48 +65,144 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    self.editButton = [[UIBarButtonItem alloc]
+                       initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                       target:self
+                       action:@selector(editToggle:)];
+    self.doneButton = [[UIBarButtonItem alloc]
+                       initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                       target:self
+                       action:@selector(editToggle:)];
+    self.allButton = [[UIBarButtonItem alloc]
+                      initWithTitle:NSLocalizedString(@"All", @"Table Select All")
+                      style:UIBarButtonItemStylePlain
+                      target:self
+                      action:@selector(selectAll:)];
+    self.noneButton = [[UIBarButtonItem alloc]
+                       initWithTitle:NSLocalizedString(@"None", @"Table Select None")
+                       style:UIBarButtonItemStylePlain
+                       target:self
+                       action:@selector(selectNone:)];
+
+    NSMutableArray<UIBarButtonItem *> *r = [self.navigationItem.rightBarButtonItems mutableCopy];
+    if (!r) {
+        r = [[NSMutableArray alloc] init];
+    }
+    [r addObject:self.editButton];
+    [self.navigationItem setRightBarButtonItems:r animated:TRUE];
+}
+
+- (IBAction)selectAll:(id)sender {
+    NSMutableArray<UIBarButtonItem *> *l = [self.navigationItem.leftBarButtonItems mutableCopy];
+    if (!l) {
+        l = [[NSMutableArray alloc] init];
+    } else {
+        [l removeLastObject];
+    }
+    [l addObject:self.noneButton];
+    [self.navigationItem setLeftBarButtonItems:l animated:TRUE];
+    for (NSInteger i = 0; i < self.localTripInfos.count; i++) {
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] animated:FALSE scrollPosition:UITableViewScrollPositionNone];
+    }
+    for (NSInteger i = 0; i < self.uploadedTripInfos.count; i++) {
+        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1] animated:FALSE scrollPosition:UITableViewScrollPositionNone];
+    }
+    [self setUIElements];
+}
+
+- (IBAction)selectNone:(id)sender {
+    NSMutableArray<UIBarButtonItem *> *l = [self.navigationItem.leftBarButtonItems mutableCopy];
+    if (!l) {
+        l = [[NSMutableArray alloc] init];
+    } else {
+        [l removeLastObject];
+    }
+    [l addObject:self.allButton];
+    [self.navigationItem setLeftBarButtonItems:l animated:TRUE];
+    for (NSInteger i = 0; i < self.localTripInfos.count; i++) {
+        [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] animated:FALSE];
+    }
+    for (NSInteger i = 0; i < self.uploadedTripInfos.count; i++) {
+        [self.tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1] animated:FALSE];
+    }
+    [self setUIElements];
+}
+
+- (IBAction)editToggle:(id)sender {
+    [self.tableView setEditing:!self.tableView.editing animated:TRUE];
+    NSMutableArray<UIBarButtonItem *> *l = [self.navigationItem.leftBarButtonItems mutableCopy];
+    if (!l) {
+        l = [[NSMutableArray alloc] init];
+    }
+    NSMutableArray<UIBarButtonItem *> *r = [self.navigationItem.rightBarButtonItems mutableCopy];
+    if (!r) {
+        r = [[NSMutableArray alloc] init];
+    } else {
+        [r removeLastObject];
+    }
+    if (self.tableView.editing) {
+        [r addObject:self.doneButton];
+        [l addObject:self.allButton];
+        [self.navigationController setToolbarHidden:FALSE];
+        [self setUIElements];
+    } else {
+        [r addObject:self.editButton];
+        if (l.count > 0) {
+            [l removeLastObject];
+        }
+        [self.navigationController setToolbarHidden:TRUE];
+    }
+    [self.navigationItem setLeftBarButtonItems:l animated:TRUE];
+    [self.navigationItem setRightBarButtonItems:r animated:TRUE];
+}
+- (IBAction)uploadPressed:(UIBarButtonItem *)sender {
+    if ([self checkRegion]) {
+        for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
+            if (indexPath.section == 0) {
+                [self doUpload:indexPath];
+            }
+        }
+    }
+}
+
+- (IBAction)deletePressed:(UIBarButtonItem *)sender {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
+        TripInfo *tripInfo = [self getTripInfo:indexPath];
+        [ad.trips deleteTripWithIdentifier:tripInfo.identifier];
+    }
+    [self.tableView performBatchUpdates:^{
+        for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        }
+    } completion:^(BOOL finished) {
+        [self getTripInfos];
+        [self setUIElements];
+    }];
+}
+
+- (void)setUIElements {
+    if (self.tableView.indexPathsForSelectedRows.count > 0) {
+        self.uploadButton.enabled = TRUE;
+        self.deleteButton.enabled = TRUE;
+    } else {
+        self.uploadButton.enabled = FALSE;
+        self.deleteButton.enabled = FALSE;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
     if (self.preselectedTrip) {
-        [self performSegueWithIdentifier:@"edit:" sender:nil];
-    } else {
-        self.navigationItem.rightBarButtonItem.enabled = FALSE;
-        if (self.tableView.indexPathForSelectedRow) {
-            [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:FALSE];
-        }
+        [self performSegueWithIdentifier:@"editTrip:" sender:nil];
     }
     [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self adjustSelection];
-}
-
-- (void)adjustSelection {
-    self.navigationItem.rightBarButtonItem.enabled = FALSE;
-
-    if (self.tableView.indexPathForSelectedRow) {
-        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:FALSE];
-    }
-
-    [self getTripInfos];
-
-    if (self.localTripInfos.count > 0) {
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                                    animated:FALSE
-                              scrollPosition:UITableViewScrollPositionMiddle];
-        self.navigationItem.rightBarButtonItem.enabled = TRUE;
-    }
 }
 
 #pragma mark - Table view data source
@@ -176,40 +278,58 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 }
 
 // Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return YES;
+//}
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        return indexPath;
-    } else {
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section > 0) {
         return nil;
     }
+    UIContextualAction *uploadAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal
+                                                                               title:NSLocalizedString(@"Upload", @"Upload Context")
+                                                                             handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        if ([self checkRegion]) {
+            [self doUpload:indexPath];
+        }
+    }];
+    uploadAction.backgroundColor = [UIColor systemBlueColor];
+    UISwipeActionsConfiguration *sac = [UISwipeActionsConfiguration configurationWithActions:@[uploadAction]];
+    sac.performsFirstActionWithFullSwipe = TRUE;
+    return sac;
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.navigationItem.rightBarButtonItem.enabled = TRUE;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NSLocalizedString(@"Delete locally", @"Confirmation button for delete My Trips table row");
-}
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive
+                                                                               title:NSLocalizedString(@"Delete locally", @"Confirmation button for delete My Trips table row")
+                                                                             handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
         TripInfo *tripInfo = [self getTripInfo:indexPath];
         AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [ad.trips deleteTripWithIdentifier:tripInfo.identifier];
         [tableView performBatchUpdates:^{
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         } completion:^(BOOL finished) {
-            [self performSelector:@selector(adjustSelection) withObject:nil afterDelay:1.0];
+            [self getTripInfos];
         }];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }];
+    UISwipeActionsConfiguration *sac = [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
+    sac.performsFirstActionWithFullSwipe = TRUE;
+    return sac;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!tableView.editing) {
+        [self performSegueWithIdentifier:@"editTrip:" sender:[tableView cellForRowAtIndexPath:indexPath]];
+    } else {
+        [self setUIElements];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self setUIElements];
 }
 
 - (UIContextMenuConfiguration *)tableView:(UITableView *)tableView contextMenuConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point  API_AVAILABLE(ios(13.0)){
@@ -232,7 +352,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"edit:"] &&
+    if ([segue.identifier isEqualToString:@"editTrip:"] &&
         [segue.destinationViewController isKindOfClass:[TripEditVC class]]) {
         TripEditVC *tripEditVC = (TripEditVC *)segue.destinationViewController;
         if ([sender isKindOfClass:[UITableViewCell class]]) {
@@ -251,7 +371,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
     }
 }
 
-- (IBAction)uploadPressed:(UIBarButtonItem *)sender {
+- (BOOL)checkRegion {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     if (!ad.regions.regionSelected) {
         NSString *message = [NSString stringWithFormat:@"%@ %@",
@@ -273,22 +393,24 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                     }];
         [ac addAction:aay];
         [self presentViewController:ac animated:TRUE completion:nil];
-    } else {
-        if (self.tableView.indexPathForSelectedRow) {
-            TripInfo *tripInfo = [self getTripInfo:self.tableView.indexPathForSelectedRow];
-            Trip *trip = [[Trip alloc] initFromStorage:tripInfo.identifier];
-            [trip uploadFile:@"ride"
-              WithController:self
-                       error:@selector(completionError:)
-                  completion:@selector(completionResponse:)];
-
-            self.ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
-                                                          message:NSLocalizedString(@"Running", @"Running")
-                                                   preferredStyle:UIAlertControllerStyleAlert];
-
-            [self presentViewController:self.ac animated:TRUE completion:nil];
-        }
+        return FALSE;
     }
+    return TRUE;
+}
+
+- (void)doUpload:(NSIndexPath *)indexPath {
+    TripInfo *tripInfo = [self getTripInfo:indexPath];
+    Trip *trip = [[Trip alloc] initFromStorage:tripInfo.identifier];
+    [trip uploadFile:@"ride"
+      WithController:self
+               error:@selector(completionError:)
+          completion:@selector(completionResponse:)];
+
+    self.ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Upload", @"Upload")
+                                                  message:NSLocalizedString(@"Running", @"Running")
+                                           preferredStyle:UIAlertControllerStyleAlert];
+
+    [self presentViewController:self.ac animated:TRUE completion:nil];
 }
 
 - (void)completionError:(NSError *)connectionError {
@@ -303,7 +425,6 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         [self.tableView reloadData];
-                                                        [self adjustSelection];
                                                     }];
         [ac addAction:aay];
         [self presentViewController:ac animated:TRUE completion:nil];
@@ -364,7 +485,6 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
-                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -380,7 +500,6 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
-                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -398,7 +517,6 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
                                                         [self.tableView reloadData];
-                                                        [self adjustSelection];
                                                     }];
         [ac addAction:aay];
         [self presentViewController:ac animated:TRUE completion:nil];
@@ -431,9 +549,9 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 }
 
 - (void)positiveCompletionResponseTrips:(NSInteger)statusCode withText:(NSString *)text {
+#if 0 // postponed implementation
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
-#if 0 // postponed implementation
     for (NSNumber *key in [ad.trips.tripInfos.allKeys sortedArrayUsingSelector:@selector(compare:)]) {
         TripInfo *tripInfo = ad.trips.tripInfos[key];
         NSLog(@"positiveCompletionResponseTrips %ld (%ld/%ld/%d)",
@@ -463,9 +581,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
         }
     }
 #endif // postponed implementation
-
     [self.tableView reloadData];
-    [self adjustSelection];
 }
 
 - (void)negativeCompletionResponseTrips:(NSInteger)statusCode withText:(NSString *)text {
@@ -480,7 +596,6 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
-                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -496,7 +611,6 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                   style:UIAlertActionStyleDefault
                                                 handler:^(UIAlertAction * _Nonnull action) {
                                                     [self.tableView reloadData];
-                                                    [self adjustSelection];
                                                 }];
     [self.ac addAction:aay];
     [self presentViewController:self.ac animated:TRUE completion:nil];

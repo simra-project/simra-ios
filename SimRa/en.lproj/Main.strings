@@ -2,17 +2,20 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "03L-ez-qcN"; */
 "03L-ez-qcN.title" = "Settings";
 
+/* Class = "UIButton"; normalTitle = "Closest"; ObjectID = "0Ac-hH-O0E"; */
+"0Ac-hH-O0E.normalTitle" = "Closest";
+
+/* Class = "UIBarButtonItem"; title = "Delete Locally"; ObjectID = "0PE-Xy-GGU"; */
+"0PE-Xy-GGU.title" = "Delete Locally";
+
 /* Class = "UINavigationItem"; title = "Edit Trip"; ObjectID = "1cV-GU-tdF"; */
 "1cV-GU-tdF.title" = "Edit Trip";
-
-/* Class = "UINavigationItem"; title = "Trip Detail"; ObjectID = "zMa-cg-HEi"; */
-"zMa-cg-HEi.title" = "Trip Detail";
 
 /* Class = "UITableViewSection"; headerTitle = "Setup"; ObjectID = "1uD-bL-KPo"; */
 "1uD-bL-KPo.headerTitle" = "Setup";
 
-/* Class = "UITextField"; text = "abc"; ObjectID = "1vL-kn-Fgp"; */
-"1vL-kn-Fgp.text" = "abc";
+/* Class = "UILabel"; text = "Average Distance"; ObjectID = "1xw-dA-InH"; */
+"1xw-dA-InH.text" = "Average Distance";
 
 /* Class = "UILabel"; text = "Bicycle"; ObjectID = "2Zr-zX-WNu"; */
 "2Zr-zX-WNu.text" = "Bicycle";
@@ -20,14 +23,32 @@
 /* Class = "UINavigationItem"; title = "What Happened?"; ObjectID = "2gw-Rs-NjF"; */
 "2gw-Rs-NjF.title" = "What Happened?";
 
+/* Class = "UITableViewSection"; headerTitle = "General Settings"; ObjectID = "32b-Vh-PWn"; */
+"32b-Vh-PWn.headerTitle" = "General Settings";
+
+/* Class = "UILabel"; text = "Always"; ObjectID = "39Z-h9-cEF"; */
+"39Z-h9-cEF.text" = "Always";
+
 /* Class = "UILabel"; text = "Incidents"; ObjectID = "4ED-g6-RgE"; */
 "4ED-g6-RgE.text" = "Incidents";
+
+/* Class = "UILabel"; text = "Child Seat"; ObjectID = "50k-vz-Uwh"; */
+"50k-vz-Uwh.text" = "Child Seat";
 
 /* Class = "UINavigationItem"; title = "Profile"; ObjectID = "5WU-PW-83o"; */
 "5WU-PW-83o.title" = "Profile";
 
+/* Class = "UIBarButtonItem"; title = "Trips"; ObjectID = "5h9-tM-U6A"; */
+"5h9-tM-U6A.title" = "Trips";
+
 /* Class = "UITableViewSection"; headerTitle = "Privacy: Hide part of your trips"; ObjectID = "8Fn-ss-h83"; */
 "8Fn-ss-h83.headerTitle" = "Privacy: Hide part of your trips";
+
+/* Class = "UILabel"; text = "Thereof Scary"; ObjectID = "AbA-66-1FG"; */
+"AbA-66-1FG.text" = "Thereof Scary";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "Axe-mV-OS5"; */
+"Axe-mV-OS5.normalTitle" = "OK";
 
 /* Class = "UILabel"; text = "Region"; ObjectID = "Ble-fg-2cq"; */
 "Ble-fg-2cq.text" = "Region";
@@ -41,11 +62,20 @@
 /* Class = "UITableViewSection"; headerTitle = "SimRa"; ObjectID = "Cks-n4-XGj"; */
 "Cks-n4-XGj.headerTitle" = "SimRa";
 
+/* Class = "UILabel"; text = "Average Speed"; ObjectID = "D3n-2Y-FbO"; */
+"D3n-2Y-FbO.text" = "Average Speed";
+
 /* Class = "UIButton"; normalTitle = "Imprint"; ObjectID = "DY1-7h-Asu"; */
 "DY1-7h-Asu.normalTitle" = "Imprint";
 
 /* Class = "UILabel"; text = "Passenger Car"; ObjectID = "FDw-TH-ScJ"; */
 "FDw-TH-ScJ.text" = "Passenger Car";
+
+/* Class = "UILabel"; text = "E-Scooter"; ObjectID = "FRX-9C-cpb"; */
+"FRX-9C-cpb.text" = "E-Scooter";
+
+/* Class = "UITextView"; text = "Created my free logo at https://LogoMakr.com"; ObjectID = "FlT-0A-Udk"; */
+"FlT-0A-Udk.text" = "Created my free logo at https://LogoMakr.com";
 
 /* Class = "UILabel"; text = "Cycling Experience"; ObjectID = "Gt8-Qt-Vdn"; */
 "Gt8-Qt-Vdn.text" = "Cycling Experience";
@@ -62,9 +92,6 @@
 /* Class = "UILabel"; text = "Type"; ObjectID = "Jxq-AX-FsN"; */
 "Jxq-AX-FsN.text" = "Type";
 
-/* Class = "UILabel"; text = "Type"; ObjectID = "qIW-lA-oYU"; */
-"qIW-lA-oYU.text" = "Type";
-
 /* Class = "UILabel"; text = "Pedestrian"; ObjectID = "Khh-Xv-Ynq"; */
 "Khh-Xv-Ynq.text" = "Pedestrian";
 
@@ -77,17 +104,32 @@
 /* Class = "UILabel"; text = "Duration"; ObjectID = "NAd-7W-hyb"; */
 "NAd-7W-hyb.text" = "Duration";
 
+/* Class = "UIBarButtonItem"; title = "Start"; ObjectID = "NeF-Te-cJc"; */
+"NeF-Te-cJc.title" = "Start";
+
 /* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "Py2-VK-zVn"; */
 "Py2-VK-zVn.title" = "Item";
 
 /* Class = "UILabel"; text = "Initial Seconds"; ObjectID = "Q3v-22-57Y"; */
 "Q3v-22-57Y.text" = "Initial Seconds";
 
+/* Class = "UILabel"; text = "Detail"; ObjectID = "QbR-cf-yoT"; */
+"QbR-cf-yoT.text" = "Detail";
+
 /* Class = "UIButton"; normalTitle = "How To"; ObjectID = "QeF-cV-htR"; */
 "QeF-cV-htR.normalTitle" = "How To";
 
+/* Class = "UINavigationItem"; title = "News"; ObjectID = "ST0-cS-qrH"; */
+"ST0-cS-qrH.title" = "News";
+
+/* Class = "UINavigationItem"; title = "Credits"; ObjectID = "SUc-tM-AYx"; */
+"SUc-tM-AYx.title" = "Credits";
+
 /* Class = "UILabel"; text = "Incident"; ObjectID = "SvM-GS-sso"; */
 "SvM-GS-sso.text" = "Incident";
+
+/* Class = "UILabel"; text = "CO2 Saved"; ObjectID = "TUw-ey-TsK"; */
+"TUw-ey-TsK.text" = "CO2 Saved";
 
 /* Class = "UILabel"; text = "Settings"; ObjectID = "TX3-yP-atN"; */
 "TX3-yP-atN.text" = "Settings";
@@ -95,17 +137,17 @@
 /* Class = "UITableViewSection"; headerTitle = "Attributes"; ObjectID = "U5K-Jr-VAV"; */
 "U5K-Jr-VAV.headerTitle" = "Attributes";
 
+/* Class = "UIBarButtonItem"; title = "Set Default"; ObjectID = "VDG-DB-ai5"; */
+"VDG-DB-ai5.title" = "Set Default";
+
+/* Class = "UIBarButtonItem"; title = "Clip"; ObjectID = "VHZ-9D-W3q"; */
+"VHZ-9D-W3q.title" = "Clip";
+
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "VTO-Vt-8RE"; */
 "VTO-Vt-8RE.text" = "Subtitle";
 
 /* Class = "UILabel"; text = "Trailer"; ObjectID = "VhB-wN-SnI"; */
 "VhB-wN-SnI.text" = "Trailer";
-
-/* Class = "UILabel"; text = "Trailer"; ObjectID = "uOP-ce-kGd"; */
-"uOP-ce-kGd.text" = "Trailer";
-
-/* Class = "UITextField"; text = "012345678901234567890123"; ObjectID = "XMw-Cr-Mre"; */
-"XMw-Cr-Mre.text" = "012345678901234567890123";
 
 /* Class = "UIButton"; normalTitle = "Privacy"; ObjectID = "XcY-SK-4YC"; */
 "XcY-SK-4YC.normalTitle" = "Privacy";
@@ -113,17 +155,20 @@
 /* Class = "UITableViewSection"; headerTitle = "Other Traffic Participants"; ObjectID = "Z6B-Or-wWS"; */
 "Z6B-Or-wWS.headerTitle" = "Other Traffic Participants";
 
+/* Class = "UITextView"; text = "Icons made by\nFreepik www.freepik.com\nfrom www.flaticon.com"; ObjectID = "agv-he-9aQ"; */
+"agv-he-9aQ.text" = "Icons made by\nFreepik www.freepik.com\nfrom www.flaticon.com";
+
 /* Class = "UITableViewSection"; headerTitle = "Statistics"; ObjectID = "b5d-GW-6xP"; */
 "b5d-GW-6xP.headerTitle" = "Statistics";
 
 /* Class = "UITableViewSection"; headerTitle = "Comment"; ObjectID = "bow-5B-qsa"; */
 "bow-5B-qsa.headerTitle" = "Comment";
 
+/* Class = "UIBarButtonItem"; title = "Stop"; ObjectID = "dZi-32-hxA"; */
+"dZi-32-hxA.title" = "Stop";
+
 /* Class = "UILabel"; text = "Child Seat"; ObjectID = "eXq-aF-Bmm"; */
 "eXq-aF-Bmm.text" = "Child Seat";
-
-/* Class = "UILabel"; text = "Child Seat"; ObjectID = "50k-vz-Uwh"; */
-"50k-vz-Uwh.text" = "Child Seat";
 
 /* Class = "UILabel"; text = "Initial Meters"; ObjectID = "gLu-uM-5dG"; */
 "gLu-uM-5dG.text" = "Initial Meters";
@@ -134,6 +179,12 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "hQw-y7-3KJ"; */
 "hQw-y7-3KJ.title" = "Settings";
 
+/* Class = "UILabel"; text = "Adherence to Rules"; ObjectID = "hbI-gv-mnl"; */
+"hbI-gv-mnl.text" = "Adherence to Rules";
+
+/* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "hzM-QB-nuc"; */
+"hzM-QB-nuc.title" = "Settings";
+
 /* Class = "UILabel"; text = "Time Slots"; ObjectID = "iFd-cr-Crk"; */
 "iFd-cr-Crk.text" = "Time Slots";
 
@@ -143,14 +194,17 @@
 /* Class = "UILabel"; text = "Position of your iPhone"; ObjectID = "iuW-2T-zPq"; */
 "iuW-2T-zPq.text" = "Position of your iPhone";
 
-/* Class = "UILabel"; text = "Version"; ObjectID = "ysy-Na-eJd"; */
-"ysy-Na-eJd.text" = "Version";
-
 /* Class = "UILabel"; text = "Taxi"; ObjectID = "j7W-tE-H1P"; */
 "j7W-tE-H1P.text" = "Taxi";
 
+/* Class = "UIBarButtonItem"; title = "Upload"; ObjectID = "krP-3i-mxQ"; */
+"krP-3i-mxQ.title" = "Upload";
+
 /* Class = "UILabel"; text = "Rides"; ObjectID = "nrt-bo-qSo"; */
 "nrt-bo-qSo.text" = "Rides";
+
+/* Class = "UILabel"; text = "Average Idle Time"; ObjectID = "oBk-eL-4Fm"; */
+"oBk-eL-4Fm.text" = "Average Idle Time";
 
 /* Class = "UINavigationItem"; title = "My Trips"; ObjectID = "pq7-Kn-x7k"; */
 "pq7-Kn-x7k.title" = "My Trips";
@@ -158,29 +212,35 @@
 /* Class = "UILabel"; text = "Idle"; ObjectID = "psv-hA-tkp"; */
 "psv-hA-tkp.text" = "Idle";
 
-/* Class = "UILabel"; text = "Thereof Scary"; ObjectID = "AbA-66-1FG"; */
-"AbA-66-1FG.text" = "Thereof Scary";
+/* Class = "UILabel"; text = "Type"; ObjectID = "qIW-lA-oYU"; */
+"qIW-lA-oYU.text" = "Type";
+
+/* Class = "UILabel"; text = "Never"; ObjectID = "rVw-dc-Kk6"; */
+"rVw-dc-Kk6.text" = "Never";
+
+/* Class = "UILabel"; text = "Credits"; ObjectID = "rpD-ll-SMT"; */
+"rpD-ll-SMT.text" = "Credits";
+
+/* Class = "UILabel"; text = "Online AI Ride Analysis"; ObjectID = "tf0-as-NvS"; */
+"tf0-as-NvS.text" = "Online AI Ride Analysis";
 
 /* Class = "UILabel"; text = "Distance"; ObjectID = "tir-BI-xQG"; */
 "tir-BI-xQG.text" = "Distance";
 
-/* Class = "UILabel"; text = "Average Distance"; ObjectID = "1xw-dA-InH"; */
-"1xw-dA-InH.text" = "Average Distance";
-
-/* Class = "UILabel"; text = "Average Idle Time"; ObjectID = "oBk-eL-4Fm"; */
-"oBk-eL-4Fm.text" = "Average Idle Time";
-
-/* Class = "UILabel"; text = "Average Speed"; ObjectID = "D3n-2Y-FbO"; */
-"D3n-2Y-FbO.text" = "Average Speed";
-
-/* Class = "UILabel"; text = "CO2 Saved"; ObjectID = "TUw-ey-TsK"; */
-"TUw-ey-TsK.text" = "CO2 Saved";
-
 /* Class = "UILabel"; text = "55"; ObjectID = "ts0-v6-Oh2"; */
 "ts0-v6-Oh2.text" = "55";
 
+/* Class = "UILabel"; text = "Trailer"; ObjectID = "uOP-ce-kGd"; */
+"uOP-ce-kGd.text" = "Trailer";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "up5-sQ-cWf"; */
+"up5-sQ-cWf.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
 /* Class = "UILabel"; text = "Profile"; ObjectID = "vCg-lZ-qrN"; */
 "vCg-lZ-qrN.text" = "Profile";
+
+/* Class = "UITextView"; text = "TTRangeSlider ByTom Thorpe is provided under the MIT license https://cocoapods.org/pods/TTRangeSlider"; ObjectID = "vbZ-lE-wRt"; */
+"vbZ-lE-wRt.text" = "TTRangeSlider ByTom Thorpe is provided under the MIT license https://cocoapods.org/pods/TTRangeSlider";
 
 /* Class = "UIButton"; normalTitle = "Feedback"; ObjectID = "vwj-ml-5PX"; */
 "vwj-ml-5PX.normalTitle" = "Feedback";
@@ -197,8 +257,11 @@
 /* Class = "UILabel"; text = "Motorcycle"; ObjectID = "yNs-N4-TFw"; */
 "yNs-N4-TFw.text" = "Motorcycle";
 
-/* Class = "UILabel"; text = "E-Scooter"; ObjectID = "FRX-9C-cpb"; */
-"FRX-9C-cpb.text" = "E-Scooter";
+/* Class = "UILabel"; text = "Version"; ObjectID = "ysy-Na-eJd"; */
+"ysy-Na-eJd.text" = "Version";
+
+/* Class = "UINavigationItem"; title = "Trip Detail"; ObjectID = "zMa-cg-HEi"; */
+"zMa-cg-HEi.title" = "Trip Detail";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "zPk-B6-o6t"; */
 "zPk-B6-o6t.text" = "Title";
@@ -208,43 +271,3 @@
 
 /* Class = "UILabel"; text = "Delivery Van"; ObjectID = "zmb-dx-KDO"; */
 "zmb-dx-KDO.text" = "Delivery Van";
-
-/* Class = "UIBarButtonItem"; title = "Clip"; ObjectID = "VHZ-9D-W3q"; */
-"VHZ-9D-W3q.title" = "Clip";
-
-/* Class = "UIBarButtonItem"; title = "Upload"; ObjectID = "MJ7-9y-XJz"; */
-"MJ7-9y-XJz.title" = "Upload";
-
-/* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "hzM-QB-nuc"; */
-"hzM-QB-nuc.title" = "Settings";
-
-/* Class = "UIBarButtonItem"; title = "Trips"; ObjectID = "5h9-tM-U6A"; */
-"5h9-tM-U6A.title" = "Trips";
-
-/* Class = "UIBarButtonItem"; title = "Start"; ObjectID = "NeF-Te-cJc"; */
-"NeF-Te-cJc.title" = "Record";
-
-/* Class = "UIBarButtonItem"; title = "Stop"; ObjectID = "dZi-32-hxA"; */
-"dZi-32-hxA.title" = "Stop";
-
-/* Class = "UIBarButtonItem"; title = "Set Default"; ObjectID = "VDG-DB-ai5"; */
-"VDG-DB-ai5.title" = "Set Default";
-
-/* Class = "UILabel"; text = "Adherence to Rules"; ObjectID = "hbI-gv-mnl"; */
-"hbI-gv-mnl.text" = "Adherence to Rules";
-
-/* Class = "UILabel"; text = "Never"; ObjectID = "rVw-dc-Kk6"; */
-"rVw-dc-Kk6.text" = "Never";
-
-/* Class = "UILabel"; text = "Delivery Van"; ObjectID = "39Z-h9-cEF"; */
-"39Z-h9-cEF.text" = "Always";
-
-/* Class = "UIButton"; normalTitle = "Closest"; ObjectID = "0Ac-hH-O0E"; */
-"0Ac-hH-O0E.normalTitle" = "Closest";
-
-/* Class = "UITableViewSection"; headerTitle = "General Settings"; ObjectID = "32b-Vh-PWn"; */
-"32b-Vh-PWn.headerTitle" = "General Settings";
-
-/* Class = "UILabel"; text = "Online AI Ride Analysis"; ObjectID = "tf0-as-NvS"; */
-"tf0-as-NvS.text" = "Online AI Ride Analysis";
-

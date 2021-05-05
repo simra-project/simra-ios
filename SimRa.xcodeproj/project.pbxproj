@@ -85,7 +85,6 @@
 		8471D0E325E25EE4003F154E /* News.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
 		8471D0E825E2DC5B003F154E /* NewsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsVC.h; sourceTree = "<group>"; };
 		8471D0E925E2DC5B003F154E /* NewsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsVC.m; sourceTree = "<group>"; };
-		848337FF22532B7600342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		848338002253C6A200342285 /* server.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = server.cer; sourceTree = "<group>"; };
 		8483380A2253E2AF00342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/constants.plist; sourceTree = "<group>"; };
 		8483380B2253E2C700342285 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/constants.plist; sourceTree = "<group>"; };
@@ -117,6 +116,7 @@
 		84E36108224E0721003847E8 /* TripEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripEditVC.m; sourceTree = "<group>"; };
 		84E3610A224E0759003847E8 /* AnnotationTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnnotationTVC.h; sourceTree = "<group>"; };
 		84E3610B224E0759003847E8 /* AnnotationTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnnotationTVC.m; sourceTree = "<group>"; };
+		84FE95E62642B76800536D93 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimRa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimRa.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimRa/Pods-SimRa.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -516,8 +516,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				84DD1E8D224C0027004895F9 /* Base */,
-				848337FF22532B7600342285 /* en */,
 				84121643225757A4006F9E2C /* de */,
+				84FE95E62642B76800536D93 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
