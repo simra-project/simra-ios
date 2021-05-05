@@ -433,6 +433,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 - (void)positiveCompletionResponseTrips:(NSInteger)statusCode withText:(NSString *)text {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
+#if 0 // postponed implementation
     for (NSNumber *key in [ad.trips.tripInfos.allKeys sortedArrayUsingSelector:@selector(compare:)]) {
         TripInfo *tripInfo = ad.trips.tripInfos[key];
         NSLog(@"positiveCompletionResponseTrips %ld (%ld/%ld/%d)",
@@ -461,6 +462,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
             return;
         }
     }
+#endif // postponed implementation
 
     [self.tableView reloadData];
     [self adjustSelection];

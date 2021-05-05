@@ -445,7 +445,7 @@
     if (!self.tripAnnotations) {
         TripLocation *location = self.tripLocations.firstObject;
         TripAnnotation *annotation = [[TripAnnotation alloc] init];
-        annotation.incidentId = -6;
+        annotation.incidentId = -5;
         location.tripAnnotation = annotation;
     }
 
@@ -1010,7 +1010,7 @@
     NSInteger tripValidAnnotations = 0;
     for (TripLocation *tripLocation in self.tripLocations) {
         if (tripLocation.tripAnnotation) {
-            if (tripLocation.tripAnnotation.incidentId > 0)
+            if (tripLocation.tripAnnotation.incidentId != 0)
                 tripValidAnnotations++;
         }
     }

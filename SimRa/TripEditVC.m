@@ -235,7 +235,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (!self.initialTripDetail) {
+    if (!self.trip.uploaded && !self.initialTripDetail) {
         self.initialTripDetail = TRUE;
         [self performSegueWithIdentifier:@"tripDetail:" sender:nil];
     }
@@ -307,9 +307,11 @@
     }
     if (self.trip.uploaded || self.trip.statisticsAdded) {
         self.navigationItem.rightBarButtonItem.enabled = FALSE;
+        self.detailButton.enabled = FALSE;
         self.rangeSlider.hidden = TRUE;
     } else {
         self.navigationItem.rightBarButtonItem.enabled = TRUE;
+        self.detailButton.enabled = TRUE;
         self.rangeSlider.hidden = FALSE;
     }
     
@@ -349,7 +351,7 @@
             NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
             
             for (TripLocation *tripLocation in self.trip.tripLocations) {
-                if (tripLocation.tripAnnotation) {
+                if (tripLocation.tripAnnotation && tripLocation.tripAnnotation.incidentId >= 0) {
                     TripPoint *tripPoint = [[TripPoint alloc] init];
                     tripPoint.title = incidents[tripLocation.tripAnnotation.incidentId];
                     tripPoint.tripLocation = tripLocation;
