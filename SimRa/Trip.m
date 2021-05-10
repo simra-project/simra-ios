@@ -768,7 +768,7 @@
 - (void)startRecording {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     self.deferredSecs = [ad.defaults integerForKey:@"deferredSecs"];
-    self.deferredMeters = [ad.defaults integerForKey:@"deferredSecs"];
+    self.deferredMeters = [ad.defaults integerForKey:@"deferredMeters"];
     self.bikeTypeId = [ad.defaults integerForKey:@"bikeTypeId"];
     self.positionId = [ad.defaults integerForKey:@"positionId"];
     self.childseat = [ad.defaults integerForKey:@"childSeat"];
