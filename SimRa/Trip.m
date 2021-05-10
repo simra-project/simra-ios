@@ -771,7 +771,7 @@
     self.deferredMeters = [ad.defaults integerForKey:@"deferredSecs"];
     self.bikeTypeId = [ad.defaults integerForKey:@"bikeTypeId"];
     self.positionId = [ad.defaults integerForKey:@"positionId"];
-    self.childseat = [ad.defaults integerForKey:@"childseat"];
+    self.childseat = [ad.defaults integerForKey:@"childSeat"];
     self.trailer = [ad.defaults boolForKey:@"trailer"];
 
     if (ad.mm.isGyroAvailable) {
