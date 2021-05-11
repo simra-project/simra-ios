@@ -14,44 +14,145 @@
 #import "DSBarChart.h"
 
 @interface SettingsTVC ()
-@property (weak, nonatomic) IBOutlet IdPicker *age;
-@property (weak, nonatomic) IBOutlet IdPicker *sex;
-@property (weak, nonatomic) IBOutlet IdPicker *region;
-@property (weak, nonatomic) IBOutlet IdPicker *experience;
-@property (weak, nonatomic) IBOutlet IdPicker *position;
-@property (weak, nonatomic) IBOutlet IdPicker *bikeType;
-@property (weak, nonatomic) IBOutlet UISwitch *childSeat;
-@property (weak, nonatomic) IBOutlet UISwitch *trailer;
-@property (weak, nonatomic) IBOutlet UISlider *startSecs;
-@property (weak, nonatomic) IBOutlet UISlider *startMeters;
-@property (weak, nonatomic) IBOutlet UILabel *startSecsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *startMetersLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *AI;
 
-@property (weak, nonatomic) IBOutlet UILabel *totalRides;
-@property (weak, nonatomic) IBOutlet UILabel *totalLength;
-@property (weak, nonatomic) IBOutlet UILabel *totalDuration;
-@property (weak, nonatomic) IBOutlet UILabel *totalIncidents;
-@property (weak, nonatomic) IBOutlet UILabel *totalIdle;
-@property (weak, nonatomic) IBOutlet UIView *totalSlots;
 @property (weak, nonatomic) IBOutlet UILabel *version;
-@property (weak, nonatomic) IBOutlet UILabel *scaryEvents;
-@property (weak, nonatomic) IBOutlet UILabel *totalCO2;
-@property (weak, nonatomic) IBOutlet UILabel *averageSpeed;
-@property (weak, nonatomic) IBOutlet UISwitch *behaviourSwitch;
-@property (weak, nonatomic) IBOutlet UISlider *behaviourSlider;
-@property (weak, nonatomic) IBOutlet UILabel *averageDistance;
-@property (weak, nonatomic) IBOutlet UILabel *averageIdle;
 
 @property (strong, nonatomic) UIAlertController *ac;
 
 @end
 
+
+@interface ProfileTVC()
+
+@property (weak, nonatomic) IBOutlet IdPicker *age;
+@property (weak, nonatomic) IBOutlet IdPicker *sex;
+@property (weak, nonatomic) IBOutlet IdPicker *region;
+@property (weak, nonatomic) IBOutlet IdPicker *experience;
+@property (weak, nonatomic) IBOutlet UISwitch *behaviourSwitch;
+@property (weak, nonatomic) IBOutlet UISlider *behaviourSlider;
+@property (weak, nonatomic) IBOutlet UILabel *totalRides;
+@property (weak, nonatomic) IBOutlet UILabel *totalLength;
+@property (weak, nonatomic) IBOutlet UILabel *averageDistance;
+@property (weak, nonatomic) IBOutlet UILabel *totalCO2;
+@property (weak, nonatomic) IBOutlet UILabel *totalDuration;
+@property (weak, nonatomic) IBOutlet UILabel *totalIdle;
+@property (weak, nonatomic) IBOutlet UILabel *averageIdle;
+@property (weak, nonatomic) IBOutlet UILabel *averageSpeed;
+@property (weak, nonatomic) IBOutlet UILabel *totalIncidents;
+@property (weak, nonatomic) IBOutlet UILabel *scaryEvents;
+@property (weak, nonatomic) IBOutlet UIView *totalSlots;
+
+@property (strong, nonatomic) UIAlertController *ac;
+
+@end
+
+
+@interface TripSettingsTVC()
+
+@property (weak, nonatomic) IBOutlet UISlider *startSecs;
+@property (weak, nonatomic) IBOutlet UISlider *startMeters;
+@property (weak, nonatomic) IBOutlet UILabel *startSecsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *startMetersLabel;
+@property (weak, nonatomic) IBOutlet IdPicker *bikeType;
+@property (weak, nonatomic) IBOutlet IdPicker *position;
+@property (weak, nonatomic) IBOutlet UISwitch *childSeat;
+@property (weak, nonatomic) IBOutlet UISwitch *trailer;
+@property (weak, nonatomic) IBOutlet UISwitch *AI;
+
+@end
+
+
 @implementation SettingsTVC
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [self update];
 }
+
+- (void)update {
+    self.version.text = [NSString stringWithFormat:@"%@-%@-%@",
+                         [NSBundle mainBundle].infoDictionary[@"CFBundleName"],
+                         [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"],
+                         [NSLocale currentLocale].languageCode
+                         ];
+}
+
+- (IBAction)aboutPressed:(UIButton *)sender {
+    NSString *urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/en/";
+    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
+        urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/de/";
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+                                                            options:@{}
+                                                  completionHandler:nil];
+}
+
+- (IBAction)privacyPressed:(UIButton *)sender {
+    NSString *urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/privacy_policy_statement/parameter/en";
+    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
+        urlString = @"https://www.mcc.tu-berlin.de/menue/forschung/projekte/simra/datenschutzerklaerung/parameter/de/";
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+                                       options:@{}
+                             completionHandler:nil];
+}
+
+- (IBAction)howtoPressed:(UIButton *)sender {
+    NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
+    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
+        urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+                                       options:@{}
+                             completionHandler:nil];
+}
+
+- (IBAction)feedbackPressed:(UIButton *)sender {
+    if (MFMailComposeViewController.canSendMail) {
+        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+        controller.mailComposeDelegate = self;
+        [controller setToRecipients:@[@"ask@mcc.tu-berlin.de"]];
+        [controller setSubject:NSLocalizedString(@"Feedback SimRa", @"Feedback SimRa")];
+        [controller setMessageBody:NSLocalizedString(@"Dear SimRa Team", @"Dear SimRa Team")
+                            isHTML:NO];
+        [self presentViewController:controller animated:TRUE completion:nil];
+    } else {
+        self.ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"SimRa", @"SimRa")
+                                                      message:NSLocalizedString(@"Configure your Email, please!", @"Configure your Email, please!")
+                                               preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *aad = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
+                                                      style:UIAlertActionStyleDefault
+                                                    handler:nil];
+        [self.ac addAction:aad];
+        [self presentViewController:self.ac animated:TRUE completion:nil];
+        return;
+
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error {
+    if (result == MFMailComposeResultSent) {
+        NSLog(@"sent");
+    }
+    [self dismissViewControllerAnimated:TRUE completion:nil];
+}
+
+- (IBAction)imprintPressed:(UIButton *)sender {
+    NSString *urlString = @"https://www.tu-berlin.de/servicemenue/impressum/parameter/en/mobil/";
+    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
+        urlString = @"https://www.tu-berlin.de/servicemenue/impressum/parameter/mobil/";
+    }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+                                       options:@{}
+                             completionHandler:nil];
+}
+
+@end
+
+@implementation ProfileTVC
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -61,8 +162,6 @@
     self.sex.array = [ad.constants mutableArrayValueForKey:@"sexes"];
     self.region.array = [ad.regions regionTexts];
     self.experience.array = [ad.constants mutableArrayValueForKey:@"experiences"];
-    self.bikeType.array = [ad.constants mutableArrayValueForKey:@"bikeTypes"];
-    self.position.array = [ad.constants mutableArrayValueForKey:@"positions"];
 
     [self update];
 }
@@ -131,23 +230,6 @@
     chrt.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     chrt.bounds = self.totalSlots.bounds;
     [self.totalSlots addSubview:chrt];
-
-    self.bikeType.arrayIndex = [ad.defaults integerForKey:@"bikeTypeId"];
-    self.position.arrayIndex = [ad.defaults integerForKey:@"positionId"];
-
-    self.startSecs.value = [ad.defaults integerForKey:@"deferredSecs"];
-    self.startSecsLabel.text = [ad.defaults stringForKey:@"deferredSecs"];
-    self.startMeters.value = [ad.defaults integerForKey:@"deferredMeters"];
-    self.startMetersLabel.text = [ad.defaults stringForKey:@"deferredMeters"];
-    self.childSeat.on = [ad.defaults boolForKey:@"childSeat"];
-    self.trailer.on = [ad.defaults boolForKey:@"trailer"];
-    self.AI.on = [ad.defaults boolForKey:@"AI"];
-
-    self.version.text = [NSString stringWithFormat:@"%@-%@-%@",
-                         [NSBundle mainBundle].infoDictionary[@"CFBundleName"],
-                         [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"],
-                         [NSLocale currentLocale].languageCode
-                         ];
 }
 
 - (IBAction)closestPressed:(UIButton *)sender {
@@ -197,77 +279,6 @@
     [self presentViewController:self.ac animated:TRUE completion:nil];
 }
 
-- (IBAction)aboutPressed:(UIButton *)sender {
-    NSString *urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/en/";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/de/";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                                            options:@{}
-                                                  completionHandler:nil];
-}
-- (IBAction)privacyPressed:(UIButton *)sender {
-    NSString *urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/privacy_policy_statement/parameter/en";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"https://www.mcc.tu-berlin.de/menue/forschung/projekte/simra/datenschutzerklaerung/parameter/de/";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
-}
-
-- (IBAction)howtoPressed:(UIButton *)sender {
-    NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
-}
-
-- (IBAction)feedbackPressed:(UIButton *)sender {
-    if (MFMailComposeViewController.canSendMail) {
-        MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
-        controller.mailComposeDelegate = self;
-        [controller setToRecipients:@[@"ask@mcc.tu-berlin.de"]];
-        [controller setSubject:NSLocalizedString(@"Feedback SimRa", @"Feedback SimRa")];
-        [controller setMessageBody:NSLocalizedString(@"Dear SimRa Team", @"Dear SimRa Team")
-                            isHTML:NO];
-        [self presentViewController:controller animated:TRUE completion:nil];
-    } else {
-        self.ac = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"SimRa", @"SimRa")
-                                                      message:NSLocalizedString(@"Configure your Email, please!", @"Configure your Email, please!")
-                                               preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *aad = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:nil];
-        [self.ac addAction:aad];
-        [self presentViewController:self.ac animated:TRUE completion:nil];
-        return;
-
-    }
-}
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError *)error {
-    if (result == MFMailComposeResultSent) {
-        NSLog(@"sent");
-    }
-    [self dismissViewControllerAnimated:TRUE completion:nil];
-}
-
-- (IBAction)imprintPressed:(UIButton *)sender {
-    NSString *urlString = @"https://www.tu-berlin.de/servicemenue/impressum/parameter/en/mobil/";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"https://www.tu-berlin.de/servicemenue/impressum/parameter/mobil/";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
-}
-
 - (IBAction)ageChanged:(IdPicker *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setInteger:sender.arrayIndex forKey:@"ageId"];
@@ -287,6 +298,47 @@
 - (IBAction)experienceChanged:(IdPicker *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setInteger:sender.arrayIndex forKey:@"experienceId"];
+}
+
+- (IBAction)behaviourSwitchChanged:(UISwitch *)sender {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ad.defaults setBool:sender.on forKey:@"behaviour"];
+    [self update];
+}
+
+- (IBAction)behaviourSliderChanged:(UISlider *)sender {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
+    [self update];
+}
+
+@end
+
+@implementation TripSettingsTVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    self.bikeType.array = [ad.constants mutableArrayValueForKey:@"bikeTypes"];
+    self.position.array = [ad.constants mutableArrayValueForKey:@"positions"];
+
+    [self update];
+}
+
+- (void)update {
+    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    self.bikeType.arrayIndex = [ad.defaults integerForKey:@"bikeTypeId"];
+    self.position.arrayIndex = [ad.defaults integerForKey:@"positionId"];
+
+    self.startSecs.value = [ad.defaults integerForKey:@"deferredSecs"];
+    self.startSecsLabel.text = [ad.defaults stringForKey:@"deferredSecs"];
+    self.startMeters.value = [ad.defaults integerForKey:@"deferredMeters"];
+    self.startMetersLabel.text = [ad.defaults stringForKey:@"deferredMeters"];
+    self.childSeat.on = [ad.defaults boolForKey:@"childSeat"];
+    self.trailer.on = [ad.defaults boolForKey:@"trailer"];
+    self.AI.on = [ad.defaults boolForKey:@"AI"];
 }
 
 - (IBAction)deferredSecsChanged:(UISlider *)sender {
@@ -319,18 +371,6 @@
 - (IBAction)trailerChanged:(UISwitch *)sender {
     AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
     [ad.defaults setBool:sender.on forKey:@"trailer"];
-}
-
-- (IBAction)behaviourSwitchChanged:(UISwitch *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [ad.defaults setBool:sender.on forKey:@"behaviour"];
-    [self update];
-}
-
-- (IBAction)behaviourSliderChanged:(UISlider *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
-    [self update];
 }
 
 - (IBAction)AIChanged:(UISwitch *)sender {

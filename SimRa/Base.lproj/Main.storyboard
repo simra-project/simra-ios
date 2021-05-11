@@ -448,7 +448,7 @@ from www.flaticon.com</string>
         <!--Settings-->
         <scene sceneID="Hvw-2j-48M">
             <objects>
-                <tableViewController id="NGZ-Ib-TCI" customClass="SettingsTVC" sceneMemberID="viewController">
+                <tableViewController id="NGZ-Ib-TCI" customClass="TripSettingsTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GgM-U6-Tm7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -767,7 +767,7 @@ from www.flaticon.com</string>
         <!--Profile-->
         <scene sceneID="kp2-gB-Jaw">
             <objects>
-                <tableViewController id="c8U-8m-Y77" customClass="SettingsTVC" sceneMemberID="viewController">
+                <tableViewController id="c8U-8m-Y77" customClass="ProfileTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MC9-9e-Hh9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2133,7 +2133,7 @@ from www.flaticon.com</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="i6e-Cg-Mdt"/>
+        <segue reference="EUT-E4-1tq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Simra" width="300" height="186"/>
