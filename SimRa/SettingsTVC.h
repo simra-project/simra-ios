@@ -15,4 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface ProfileTVC : UITableViewController
+
+@end
+
+@interface TripSettingsTVC : UITableViewController
+
+@end
+
 NS_ASSUME_NONNULL_END
