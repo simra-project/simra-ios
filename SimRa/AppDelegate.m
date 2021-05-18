@@ -61,14 +61,18 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-- (void)showHowTo {
-    NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
+- (void)openURL:(NSDictionary<NSString*, NSString*> *)dict {
+    NSString* lang = [[NSBundle preferredLocalizationsFromArray:[dict allKeys]] firstObject];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString: dict[lang]]
                                        options:@{}
                              completionHandler:nil];
+}
+
+- (void)showHowTo {
+    [self openURL:@{
+        @"en" : @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf",
+        @"de" : @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf"
+    }];
 }
 
 @end

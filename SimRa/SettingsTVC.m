@@ -79,23 +79,17 @@
 }
 
 - (IBAction)aboutPressed:(UIButton *)sender {
-    NSString *urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/en/";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/de/";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                                            options:@{}
-                                                  completionHandler:nil];
+    [[AppDelegate sharedDelegate] openURL:@{
+        @"en" : @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/en/",
+        @"de" : @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/de/"
+    }];
 }
 
 - (IBAction)privacyPressed:(UIButton *)sender {
-    NSString *urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/privacy_policy_statement/parameter/en";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"https://www.mcc.tu-berlin.de/menue/forschung/projekte/simra/datenschutzerklaerung/parameter/de/";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
+    [[AppDelegate sharedDelegate] openURL:@{
+        @"en" : @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/privacy_policy_statement/parameter/en",
+        @"de" : @"https://www.mcc.tu-berlin.de/menue/forschung/projekte/simra/datenschutzerklaerung/parameter/de/"
+    }];
 }
 
 - (IBAction)howtoPressed:(UIButton *)sender {
@@ -135,13 +129,10 @@
 }
 
 - (IBAction)imprintPressed:(UIButton *)sender {
-    NSString *urlString = @"https://www.tu-berlin.de/servicemenue/impressum/parameter/en/mobil/";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"https://www.tu-berlin.de/servicemenue/impressum/parameter/mobil/";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
+    [[AppDelegate sharedDelegate] openURL:@{
+        @"en" : @"https://www.tu-berlin.de/servicemenue/impressum/parameter/en/mobil/",
+        @"de" : @"https://www.tu-berlin.de/servicemenue/impressum/parameter/mobil/"
+    }];
 }
 
 @end

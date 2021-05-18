@@ -28,6 +28,7 @@
 + (AppDelegate*)sharedDelegate;
 
 - (void)showHowTo;
+- (void)openURL:(NSDictionary<NSString*, NSString*> *)dict;
 
 @end
 
