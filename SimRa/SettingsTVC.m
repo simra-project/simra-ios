@@ -99,13 +99,7 @@
 }
 
 - (IBAction)howtoPressed:(UIButton *)sender {
-    NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
+    [[AppDelegate sharedDelegate] showHowTo];
 }
 
 - (IBAction)feedbackPressed:(UIButton *)sender {

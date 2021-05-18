@@ -115,7 +115,7 @@
         UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
-            [self showHowTo];
+            [ad showHowTo];
             self.initialMessagePassed = TRUE;
             [self checkRegions];
         }];
@@ -133,16 +133,6 @@
         self.initialMessagePassed = TRUE;
         [self checkRegions];
     }
-}
-
-- (void)showHowTo {
-    NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
 }
 
 - (void)checkRegions {

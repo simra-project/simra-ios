@@ -27,5 +27,7 @@
 
 + (AppDelegate*)sharedDelegate;
 
+- (void)showHowTo;
+
 @end
 
