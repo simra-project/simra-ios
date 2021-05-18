@@ -156,7 +156,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     self.age.array = [ad.constants mutableArrayValueForKey:@"ages"];
     self.sex.array = [ad.constants mutableArrayValueForKey:@"sexes"];
@@ -167,7 +167,7 @@
 }
 
 - (void)update {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     self.age.arrayIndex = [ad.defaults integerForKey:@"ageId"];
     self.sex.arrayIndex = [ad.defaults integerForKey:@"sexId"];
@@ -247,7 +247,7 @@
     }];
     [self.ac addAction:aac];
 
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     if (ad.regions.closestsRegions.count > 0) {
         UIAlertAction *aa0 = [UIAlertAction actionWithTitle:[ad.regions.closestsRegions[0] localizedDescription]
                                                       style:UIAlertActionStyleDefault
@@ -280,34 +280,34 @@
 }
 
 - (IBAction)ageChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.arrayIndex forKey:@"ageId"];
 }
 
 - (IBAction)sexChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.arrayIndex forKey:@"sexId"];
 }
 
 - (IBAction)regionChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.regions selectId:sender.arrayIndex];
     [self update];
 }
 
 - (IBAction)experienceChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.arrayIndex forKey:@"experienceId"];
 }
 
 - (IBAction)behaviourSwitchChanged:(UISwitch *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setBool:sender.on forKey:@"behaviour"];
     [self update];
 }
 
 - (IBAction)behaviourSliderChanged:(UISlider *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
     [self update];
 }
@@ -318,7 +318,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     self.bikeType.array = [ad.constants mutableArrayValueForKey:@"bikeTypes"];
     self.position.array = [ad.constants mutableArrayValueForKey:@"positions"];
@@ -327,7 +327,7 @@
 }
 
 - (void)update {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     self.bikeType.arrayIndex = [ad.defaults integerForKey:@"bikeTypeId"];
     self.position.arrayIndex = [ad.defaults integerForKey:@"positionId"];
@@ -342,39 +342,39 @@
 }
 
 - (IBAction)deferredSecsChanged:(UISlider *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.value forKey:@"deferredSecs"];
     [self update];
 }
 
 - (IBAction)deferredMetersChanged:(UISlider *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.value forKey:@"deferredMeters"];
     [self update];
 }
 
 - (IBAction)bikeTypeChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.arrayIndex forKey:@"bikeTypeId"];
 }
 
 - (IBAction)positionChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.arrayIndex forKey:@"positionId"];
 }
 
 - (IBAction)childSeatChanged:(UISwitch *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setBool:sender.on forKey:@"childSeat"];
 }
 
 - (IBAction)trailerChanged:(UISwitch *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setBool:sender.on forKey:@"trailer"];
 }
 
 - (IBAction)AIChanged:(UISwitch *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setBool:sender.on forKey:@"AI"];
 }
 

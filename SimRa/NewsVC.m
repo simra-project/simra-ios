@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     NSMutableAttributedString *as = [[NSMutableAttributedString alloc] init];
 
     UIFont *font = [UIFont systemFontOfSize:17 weight:UIFontWeightSemibold];

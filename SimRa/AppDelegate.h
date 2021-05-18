@@ -25,5 +25,7 @@
 @property (strong, nonatomic) Regions *regions;
 @property (strong, nonatomic) News *news;
 
++ (AppDelegate*)sharedDelegate;
+
 @end
 
