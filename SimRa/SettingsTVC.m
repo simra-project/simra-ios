@@ -143,10 +143,10 @@
     [super viewWillAppear:animated];
     AppDelegate *ad = [AppDelegate sharedDelegate];
 
-    self.age.array = [ad.constants mutableArrayValueForKey:@"ages"];
-    self.sex.array = [ad.constants mutableArrayValueForKey:@"sexes"];
+    self.age.array = [ad.constants valueForKey:@"ages"];
+    self.sex.array = [ad.constants valueForKey:@"sexes"];
     self.region.array = [ad.regions regionTexts];
-    self.experience.array = [ad.constants mutableArrayValueForKey:@"experiences"];
+    self.experience.array = [ad.constants valueForKey:@"experiences"];
 
     [self update];
 }
@@ -305,8 +305,8 @@
     [super viewWillAppear:animated];
     AppDelegate *ad = [AppDelegate sharedDelegate];
 
-    self.bikeType.array = [ad.constants mutableArrayValueForKey:@"bikeTypes"];
-    self.position.array = [ad.constants mutableArrayValueForKey:@"positions"];
+    self.bikeType.array = [ad.constants valueForKey:@"bikeTypes"];
+    self.position.array = [ad.constants valueForKey:@"positions"];
 
     [self update];
 }
