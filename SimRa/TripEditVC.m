@@ -347,7 +347,7 @@
         
         if (!self.tripPoints) {
             self.tripPoints = [[NSMutableArray alloc] init];
-            AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            AppDelegate *ad = [AppDelegate sharedDelegate];
             NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
             
             for (TripLocation *tripLocation in self.trip.tripLocations) {
@@ -479,7 +479,7 @@ calloutAccessoryControlTapped:(UIControl *)control {
     if (!self.trip.uploaded && !self.trip.statisticsAdded) {
         
         if (sender.state == UIGestureRecognizerStateBegan) {
-            AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            AppDelegate *ad = [AppDelegate sharedDelegate];
             NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
             
             CGPoint p = [sender locationInView:self.mapView];

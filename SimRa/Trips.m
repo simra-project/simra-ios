@@ -30,7 +30,7 @@
 @implementation Trips
 - (instancetype)init {
     self = [super init];
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     self.version = [ad.defaults integerForKey:@"version"];
     self.uploaded = [ad.defaults boolForKey:@"uploaded"];
     self.fileHash = [ad.defaults stringForKey:@"fileHash"];
@@ -158,7 +158,7 @@
     csvString = [csvString stringByAppendingString:@"\n"];
     [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
     
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     csvString = [NSString stringWithFormat:@"%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%@,%ld",
                  [ad.defaults integerForKey:@"ageId"],
                  [ad.defaults integerForKey:@"sexId"],
@@ -186,7 +186,7 @@
 }
 
 - (void)save {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:self.version
                      forKey:[@"version" withRegionId:ad.regions.regionId]];
     [ad.defaults setBool:self.uploaded
@@ -198,7 +198,7 @@
 }
 
 - (void)addTripToStatistics:(Trip *)trip {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     [self addTripToStatistics:trip regionId:0];
     if (ad.regions.regionSelected) {
@@ -207,7 +207,7 @@
 }
 
 - (void)addTripToStatistics:(Trip *)trip regionId:(NSInteger)regionId {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     NSInteger totalRides = [ad.defaults
                             integerForKey:[@"totalRides" withRegionId:regionId]];
@@ -261,7 +261,7 @@
 }
 
 - (void)uploadFile:(NSString *)name WithController:(id)controller error:(SEL)error completion:(SEL)completion {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     self.version = [ad.defaults integerForKey:[@"version"
                                                withRegionId:ad.regions.regionId]];

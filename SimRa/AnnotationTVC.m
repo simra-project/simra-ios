@@ -37,7 +37,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     self.incident.array = [ad.constants mutableArrayValueForKey:@"incidents"];
 
     [self update];

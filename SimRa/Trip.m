@@ -55,7 +55,7 @@
 + (NSArray <NSNumber *> *)allStoredIdentifiers {
     NSMutableArray <NSNumber *> *all = [[NSMutableArray alloc] init];
 
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     NSArray <NSString *> *allKeys = [ad.defaults.dictionaryRepresentation.allKeys sortedArrayUsingSelector:@selector(compare:)];
     NSLog(@"TripInfo allStoredIdentifiers %@", allKeys);
 
@@ -96,7 +96,7 @@
 - (instancetype)initFromStorage:(NSInteger)identifier {
     NSLog(@"TripInfo initFromStorage %ld", identifier);
     
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     NSDictionary *dict = [ad.defaults objectForKey:[NSString stringWithFormat:@"TripInfo-%ld",
                                                     identifier]];
 
@@ -209,7 +209,7 @@
 - (instancetype)init {
     self = [super init];
     
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     NSInteger identifier = [ad.defaults integerForKey:@"lastTripId"];
     identifier ++;
     self.identifier = identifier;
@@ -227,7 +227,7 @@
 + (NSArray<NSNumber *> *)allStoredIdentifiers {
     NSMutableArray <NSNumber *> *all = [[NSMutableArray alloc] init];
 
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     NSArray <NSString *> *allKeys = [ad.defaults.dictionaryRepresentation.allKeys sortedArrayUsingSelector:@selector(compare:)];
 
     for (NSString *key in allKeys) {
@@ -269,7 +269,7 @@
 
 - (instancetype)initFromStorage:(NSInteger)identifier {
     NSLog(@"Trip initFromStorage %ld", identifier);
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     NSDictionary *dict = [ad.defaults objectForKey:[NSString stringWithFormat:@"Trip-%ld",
                                                     identifier]];
 
@@ -289,7 +289,7 @@
 
 + (void)deleteFromStorage:(NSInteger)identifier {
     // Delete in UserDefaults
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", identifier]];
     [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", identifier]];
 
@@ -766,7 +766,7 @@
 }
 
 - (void)startRecording {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     self.deferredSecs = [ad.defaults integerForKey:@"deferredSecs"];
     self.deferredMeters = [ad.defaults integerForKey:@"deferredMeters"];
     self.bikeTypeId = [ad.defaults integerForKey:@"bikeTypeId"];
@@ -896,7 +896,7 @@
 }
 
 - (void)stopRecording {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [self.timer invalidate];
     if (ad.mm.isGyroActive) {
         [ad.mm stopGyroUpdates];
@@ -924,7 +924,7 @@
         self.startLocation = location;
     }
     
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     NSInteger deferredSecs = [ad.defaults integerForKey:@"deferredSecs"];
     NSInteger deferredMeters = [ad.defaults integerForKey:@"deferredMeters"];
     if ((deferredSecs == 0 || [[NSDate alloc] init].timeIntervalSince1970 - self.startLocation.timestamp.timeIntervalSince1970 > deferredSecs) &&
@@ -978,7 +978,7 @@
         if (!self.lastLocation ||
             location.timestamp.timeIntervalSince1970 - self.lastLocation.timestamp.timeIntervalSince1970 >= LOCATION_FREQUENCE) {
 
-            AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            AppDelegate *ad = [AppDelegate sharedDelegate];
             CMGyroData *gyroData = ad.mm.gyroData;
 
             NSLog(@"[Trip] addLocation:%@ withGyroData:%@", location, gyroData);
@@ -1075,7 +1075,7 @@
 }
 
 - (void)uploadFile:(NSString *)name WithController:(id)controller error:(SEL)error completion:(SEL)completion {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     BOOL saveNecessary = FALSE;
     // remove unedited annotations
@@ -1113,7 +1113,7 @@
 }
 
 - (void)save {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.trips updateTrip:self];
 
     // Store in FileSystem

@@ -79,33 +79,21 @@
 }
 
 - (IBAction)aboutPressed:(UIButton *)sender {
-    NSString *urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/en/";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/de/";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                                            options:@{}
-                                                  completionHandler:nil];
+    [[AppDelegate sharedDelegate] openURL:@{
+        @"en" : @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/en/",
+        @"de" : @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/de/"
+    }];
 }
 
 - (IBAction)privacyPressed:(UIButton *)sender {
-    NSString *urlString = @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/privacy_policy_statement/parameter/en";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"https://www.mcc.tu-berlin.de/menue/forschung/projekte/simra/datenschutzerklaerung/parameter/de/";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
+    [[AppDelegate sharedDelegate] openURL:@{
+        @"en" : @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/privacy_policy_statement/parameter/en",
+        @"de" : @"https://www.mcc.tu-berlin.de/menue/forschung/projekte/simra/datenschutzerklaerung/parameter/de/"
+    }];
 }
 
 - (IBAction)howtoPressed:(UIButton *)sender {
-    NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
+    [[AppDelegate sharedDelegate] showHowTo];
 }
 
 - (IBAction)feedbackPressed:(UIButton *)sender {
@@ -141,13 +129,10 @@
 }
 
 - (IBAction)imprintPressed:(UIButton *)sender {
-    NSString *urlString = @"https://www.tu-berlin.de/servicemenue/impressum/parameter/en/mobil/";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"https://www.tu-berlin.de/servicemenue/impressum/parameter/mobil/";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
+    [[AppDelegate sharedDelegate] openURL:@{
+        @"en" : @"https://www.tu-berlin.de/servicemenue/impressum/parameter/en/mobil/",
+        @"de" : @"https://www.tu-berlin.de/servicemenue/impressum/parameter/mobil/"
+    }];
 }
 
 @end
@@ -156,7 +141,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     self.age.array = [ad.constants mutableArrayValueForKey:@"ages"];
     self.sex.array = [ad.constants mutableArrayValueForKey:@"sexes"];
@@ -167,7 +152,7 @@
 }
 
 - (void)update {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     self.age.arrayIndex = [ad.defaults integerForKey:@"ageId"];
     self.sex.arrayIndex = [ad.defaults integerForKey:@"sexId"];
@@ -247,7 +232,7 @@
     }];
     [self.ac addAction:aac];
 
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     if (ad.regions.closestsRegions.count > 0) {
         UIAlertAction *aa0 = [UIAlertAction actionWithTitle:[ad.regions.closestsRegions[0] localizedDescription]
                                                       style:UIAlertActionStyleDefault
@@ -280,34 +265,34 @@
 }
 
 - (IBAction)ageChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.arrayIndex forKey:@"ageId"];
 }
 
 - (IBAction)sexChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.arrayIndex forKey:@"sexId"];
 }
 
 - (IBAction)regionChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.regions selectId:sender.arrayIndex];
     [self update];
 }
 
 - (IBAction)experienceChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.arrayIndex forKey:@"experienceId"];
 }
 
 - (IBAction)behaviourSwitchChanged:(UISwitch *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setBool:sender.on forKey:@"behaviour"];
     [self update];
 }
 
 - (IBAction)behaviourSliderChanged:(UISlider *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
     [self update];
 }
@@ -318,7 +303,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     self.bikeType.array = [ad.constants mutableArrayValueForKey:@"bikeTypes"];
     self.position.array = [ad.constants mutableArrayValueForKey:@"positions"];
@@ -327,7 +312,7 @@
 }
 
 - (void)update {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     self.bikeType.arrayIndex = [ad.defaults integerForKey:@"bikeTypeId"];
     self.position.arrayIndex = [ad.defaults integerForKey:@"positionId"];
@@ -342,39 +327,39 @@
 }
 
 - (IBAction)deferredSecsChanged:(UISlider *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.value forKey:@"deferredSecs"];
     [self update];
 }
 
 - (IBAction)deferredMetersChanged:(UISlider *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.value forKey:@"deferredMeters"];
     [self update];
 }
 
 - (IBAction)bikeTypeChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.arrayIndex forKey:@"bikeTypeId"];
 }
 
 - (IBAction)positionChanged:(IdPicker *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:sender.arrayIndex forKey:@"positionId"];
 }
 
 - (IBAction)childSeatChanged:(UISwitch *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setBool:sender.on forKey:@"childSeat"];
 }
 
 - (IBAction)trailerChanged:(UISwitch *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setBool:sender.on forKey:@"trailer"];
 }
 
 - (IBAction)AIChanged:(UISwitch *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setBool:sender.on forKey:@"AI"];
 }
 

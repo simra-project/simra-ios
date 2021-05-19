@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     self.bikeType.array = [ad.constants mutableArrayValueForKey:@"bikeTypes"];
     self.position.array = [ad.constants mutableArrayValueForKey:@"positions"];
@@ -73,7 +73,7 @@
 }
 
 - (IBAction)setDefaultPressed:(UIBarButtonItem *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:self.trip.bikeTypeId forKey:@"bikeTypeId"];
     [ad.defaults setInteger:self.trip.positionId forKey:@"positionId"];
     [ad.defaults setBool:self.trip.childseat forKey:@"childSeat"];

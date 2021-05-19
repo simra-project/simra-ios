@@ -33,7 +33,7 @@
 - (void)getTripInfos {
     self.localTripInfos = [[NSMutableDictionary alloc] init];
     self.uploadedTripInfos = [[NSMutableDictionary alloc] init];
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     for (TripInfo *tripInfo in ad.trips.tripInfos.allValues) {
         if (tripInfo.uploaded && !tripInfo.edited) {
             self.uploadedTripInfos[[NSNumber numberWithInteger:tripInfo.identifier]] = tripInfo;
@@ -167,7 +167,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 }
 
 - (IBAction)deletePressed:(UIBarButtonItem *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     for (NSIndexPath *indexPath in self.tableView.indexPathsForSelectedRows) {
         TripInfo *tripInfo = [self getTripInfo:indexPath];
         [ad.trips deleteTripWithIdentifier:tripInfo.identifier];
@@ -303,7 +303,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
                                                                                title:NSLocalizedString(@"Delete locally", @"Confirmation button for delete My Trips table row")
                                                                              handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
         TripInfo *tripInfo = [self getTripInfo:indexPath];
-        AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        AppDelegate *ad = [AppDelegate sharedDelegate];
         [ad.trips deleteTripWithIdentifier:tripInfo.identifier];
         [tableView performBatchUpdates:^{
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
@@ -372,7 +372,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 }
 
 - (BOOL)checkRegion {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     if (!ad.regions.regionSelected) {
         NSString *message = [NSString stringWithFormat:@"%@ %@",
                              NSLocalizedString(@"Please choose your correct region, so that we can analyse your ride correctly. Your selected region:",
@@ -457,7 +457,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 }
 
 - (void)positiveCompletionResponse:(NSInteger)statusCode withText:(NSString *)text {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.trips uploadFile:@"profile"
           WithController:self
                    error:@selector(completionErrorTrips:)
@@ -550,7 +550,7 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 
 - (void)positiveCompletionResponseTrips:(NSInteger)statusCode withText:(NSString *)text {
 #if 0 // postponed implementation
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     for (NSNumber *key in [ad.trips.tripInfos.allKeys sortedArrayUsingSelector:@selector(compare:)]) {
         TripInfo *tripInfo = ad.trips.tripInfos[key];

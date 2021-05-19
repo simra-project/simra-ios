@@ -89,7 +89,7 @@
 
     self.dummyButton.title = NSLocalizedString(@"Not Recording", @"Not Recording");
 
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.news addObserver:self
               forKeyPath:@"newsVersion"
                  options:NSKeyValueObservingOptionNew
@@ -101,7 +101,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     //[ad.defaults setBool:FALSE forKey:@"initialMessage"];
     if (![ad.defaults boolForKey:@"initialMessage"]) {
         [ad.defaults setBool:TRUE forKey:@"initialMessage"];
@@ -115,7 +115,7 @@
         UIAlertAction *aay = [UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"OK")
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
-            [self showHowTo];
+            [ad showHowTo];
             self.initialMessagePassed = TRUE;
             [self checkRegions];
         }];
@@ -135,21 +135,11 @@
     }
 }
 
-- (void)showHowTo {
-    NSString *urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf";
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        urlString = @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf";
-    }
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]
-                                       options:@{}
-                             completionHandler:nil];
-}
-
 - (void)checkRegions {
     if (!self.initialMessagePassed) {
         return;
     }
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     if (!ad.regions.loaded) {
         return;
     }
@@ -207,7 +197,7 @@
 }
 
 - (IBAction)playButtonPressed:(UIBarButtonItem *)sender {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     self.trip = [ad.trips newTrip];
     [self.trip startRecording];
 
@@ -286,7 +276,7 @@
 }
 
 - (IBAction)newsSeen:(UIStoryboardSegue *)unwindSegue {
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.news seen];
     [self dismissViewControllerAnimated:TRUE completion:nil];
 }
@@ -315,7 +305,7 @@
 
         if (self.trip) {
             if (self.trip.lastLocation) {
-                AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                AppDelegate *ad = [AppDelegate sharedDelegate];
                 NSInteger deferredSecs = [ad.defaults integerForKey:@"deferredSecs"];
                 NSTimeInterval seconds = [self.trip.lastLocation.timestamp timeIntervalSinceDate:self.trip.startLocation.timestamp] - deferredSecs;
                 NSInteger deferredMeters = [ad.defaults integerForKey:@"deferredMeters"];

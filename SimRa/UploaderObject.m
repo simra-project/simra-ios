@@ -65,7 +65,7 @@
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"data:\n%@", string);
 
-    AppDelegate *ad = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    AppDelegate *ad = [AppDelegate sharedDelegate];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;

@@ -25,5 +25,10 @@
 @property (strong, nonatomic) Regions *regions;
 @property (strong, nonatomic) News *news;
 
++ (AppDelegate*)sharedDelegate;
+
+- (void)showHowTo;
+- (void)openURL:(NSDictionary<NSString*, NSString*> *)dict;
+
 @end
 
