@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0970067372FFAB52EE7B49B4 /* Pods_SimRa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */; };
+		6383AC412657E9B00038F3AE /* ProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC402657E9B00038F3AE /* ProfileTVC.m */; };
+		6383AC4A2657EBF60038F3AE /* TripsSettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC492657EBF60038F3AE /* TripsSettingsTVC.m */; };
 		840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AC224D125800488B31 /* MyTripsTVC.m */; };
 		840E20B0224D190400488B31 /* SettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AF224D190400488B31 /* SettingsTVC.m */; };
 		8418D52E22562148000A1D10 /* UploaderObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418D52D22562148000A1D10 /* UploaderObject.m */; };
@@ -56,6 +58,10 @@
 
 /* Begin PBXFileReference section */
 		471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimRa.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimRa/Pods-SimRa.release.xcconfig"; sourceTree = "<group>"; };
+		6383AC3F2657E9B00038F3AE /* ProfileTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileTVC.h; sourceTree = "<group>"; };
+		6383AC402657E9B00038F3AE /* ProfileTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileTVC.m; sourceTree = "<group>"; };
+		6383AC482657EBF60038F3AE /* TripsSettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripsSettingsTVC.h; sourceTree = "<group>"; };
+		6383AC492657EBF60038F3AE /* TripsSettingsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripsSettingsTVC.m; sourceTree = "<group>"; };
 		840E20AB224D125800488B31 /* MyTripsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTripsTVC.h; sourceTree = "<group>"; };
 		840E20AC224D125800488B31 /* MyTripsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTripsTVC.m; sourceTree = "<group>"; };
 		840E20AE224D190400488B31 /* SettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTVC.h; sourceTree = "<group>"; };
@@ -164,6 +170,239 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6383AC1C2657E6EE0038F3AE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				848338042253CA0D00342285 /* constants.plist */,
+				848338002253C6A200342285 /* server.cer */,
+				84DD1E92224C0028004895F9 /* Assets.xcassets */,
+				845FD035225D71FE0041568E /* Hash-Suffix.h */,
+				845FD034225D71E90041568E /* Hash-Suffix.h.sample */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6383AC1D2657E6F50038F3AE /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				6383AC2F2657E8950038F3AE /* Models */,
+				6383AC212657E71D0038F3AE /* Utility */,
+				6383AC1F2657E7150038F3AE /* Modules */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		6383AC1E2657E6FC0038F3AE /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				84DD1E98224C0028004895F9 /* main.m */,
+				84DD1E86224C0027004895F9 /* AppDelegate.h */,
+				84DD1E87224C0027004895F9 /* AppDelegate.m */,
+				8421D68F2254B4E50056B62C /* LaunchScreen.storyboard */,
+				84DD1E8C224C0027004895F9 /* Main.storyboard */,
+				84DD1E97224C0028004895F9 /* Info.plist */,
+				84564AF622549B1100D46132 /* Localizable.strings */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		6383AC1F2657E7150038F3AE /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				6383AC2E2657E7B90038F3AE /* MapVC */,
+				6383AC2C2657E76E0038F3AE /* AnnotationTVC */,
+				6383AC2B2657E7680038F3AE /* TripDetails */,
+				6383AC2A2657E7600038F3AE /* TripEdit */,
+				6383AC522657EC5A0038F3AE /* ProfileTVC */,
+				6383AC562657EC660038F3AE /* TripsSettingsTVC */,
+				6383AC282657E7540038F3AE /* Settings */,
+				6383AC272657E74B0038F3AE /* MyTripsTVC */,
+				6383AC252657E73E0038F3AE /* News */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		6383AC212657E71D0038F3AE /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				6383AC342657E9400038F3AE /* Helper */,
+				6383AC352657E9680038F3AE /* DSBarChart */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		6383AC252657E73E0038F3AE /* News */ = {
+			isa = PBXGroup;
+			children = (
+				8471D0E825E2DC5B003F154E /* NewsVC.h */,
+				8471D0E925E2DC5B003F154E /* NewsVC.m */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		6383AC262657E7440038F3AE /* AnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				84DD1EC3224CEAB6004895F9 /* AnnotationView.h */,
+				84DD1EC4224CEAB6004895F9 /* AnnotationView.m */,
+			);
+			path = AnnotationView;
+			sourceTree = "<group>";
+		};
+		6383AC272657E74B0038F3AE /* MyTripsTVC */ = {
+			isa = PBXGroup;
+			children = (
+				840E20AB224D125800488B31 /* MyTripsTVC.h */,
+				840E20AC224D125800488B31 /* MyTripsTVC.m */,
+			);
+			path = MyTripsTVC;
+			sourceTree = "<group>";
+		};
+		6383AC282657E7540038F3AE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				840E20AE224D190400488B31 /* SettingsTVC.h */,
+				840E20AF224D190400488B31 /* SettingsTVC.m */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		6383AC292657E7580038F3AE /* IdPicker */ = {
+			isa = PBXGroup;
+			children = (
+				849CA145224D3C6600CE45EB /* IdPicker.h */,
+				849CA146224D3C6600CE45EB /* IdPicker.m */,
+			);
+			path = IdPicker;
+			sourceTree = "<group>";
+		};
+		6383AC2A2657E7600038F3AE /* TripEdit */ = {
+			isa = PBXGroup;
+			children = (
+				84E36107224E0721003847E8 /* TripEditVC.h */,
+				84E36108224E0721003847E8 /* TripEditVC.m */,
+			);
+			path = TripEdit;
+			sourceTree = "<group>";
+		};
+		6383AC2B2657E7680038F3AE /* TripDetails */ = {
+			isa = PBXGroup;
+			children = (
+				845467E9227B0ABD0060E06D /* TripDetailTVC.h */,
+				845467EA227B0ABD0060E06D /* TripDetailTVC.m */,
+			);
+			path = TripDetails;
+			sourceTree = "<group>";
+		};
+		6383AC2C2657E76E0038F3AE /* AnnotationTVC */ = {
+			isa = PBXGroup;
+			children = (
+				84E3610A224E0759003847E8 /* AnnotationTVC.h */,
+				84E3610B224E0759003847E8 /* AnnotationTVC.m */,
+			);
+			path = AnnotationTVC;
+			sourceTree = "<group>";
+		};
+		6383AC2E2657E7B90038F3AE /* MapVC */ = {
+			isa = PBXGroup;
+			children = (
+				84DD1E89224C0027004895F9 /* ViewController.h */,
+				84DD1E8A224C0027004895F9 /* ViewController.m */,
+			);
+			path = MapVC;
+			sourceTree = "<group>";
+		};
+		6383AC2F2657E8950038F3AE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6383AC332657E8E50038F3AE /* UploaderObject */,
+				6383AC322657E8DD0038F3AE /* News */,
+				6383AC312657E8D00038F3AE /* Regions */,
+				6383AC262657E7440038F3AE /* AnnotationView */,
+				6383AC292657E7580038F3AE /* IdPicker */,
+				6383AC302657E89A0038F3AE /* Trips */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6383AC302657E89A0038F3AE /* Trips */ = {
+			isa = PBXGroup;
+			children = (
+				84DD1EC0224CD9BF004895F9 /* Trips.h */,
+				84DD1EC1224CD9BF004895F9 /* Trips.m */,
+				84DD1EBD224CD9A6004895F9 /* Trip.h */,
+				84DD1EBE224CD9A6004895F9 /* Trip.m */,
+			);
+			path = Trips;
+			sourceTree = "<group>";
+		};
+		6383AC312657E8D00038F3AE /* Regions */ = {
+			isa = PBXGroup;
+			children = (
+				8470352A23D6D0810041AAFB /* Region.h */,
+				8470352B23D6D0810041AAFB /* Region.m */,
+				8470352D23D6D0DA0041AAFB /* Regions.h */,
+				8470352E23D6D0DA0041AAFB /* Regions.m */,
+			);
+			path = Regions;
+			sourceTree = "<group>";
+		};
+		6383AC322657E8DD0038F3AE /* News */ = {
+			isa = PBXGroup;
+			children = (
+				8471D0E225E25EE4003F154E /* News.h */,
+				8471D0E325E25EE4003F154E /* News.m */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		6383AC332657E8E50038F3AE /* UploaderObject */ = {
+			isa = PBXGroup;
+			children = (
+				8418D52C22562148000A1D10 /* UploaderObject.h */,
+				8418D52D22562148000A1D10 /* UploaderObject.m */,
+			);
+			path = UploaderObject;
+			sourceTree = "<group>";
+		};
+		6383AC342657E9400038F3AE /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				8421D6912254B6F40056B62C /* NSTimeInterval+hms.h */,
+				8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */,
+				8421D68B2254AE710056B62C /* NSString+hashCode.h */,
+				8421D68C2254AE710056B62C /* NSString+hashCode.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		6383AC352657E9680038F3AE /* DSBarChart */ = {
+			isa = PBXGroup;
+			children = (
+				8421D6942254BAA30056B62C /* DSBarChart.h */,
+				8421D6952254BAA30056B62C /* DSBarChart.m */,
+			);
+			path = DSBarChart;
+			sourceTree = "<group>";
+		};
+		6383AC522657EC5A0038F3AE /* ProfileTVC */ = {
+			isa = PBXGroup;
+			children = (
+				6383AC3F2657E9B00038F3AE /* ProfileTVC.h */,
+				6383AC402657E9B00038F3AE /* ProfileTVC.m */,
+			);
+			path = ProfileTVC;
+			sourceTree = "<group>";
+		};
+		6383AC562657EC660038F3AE /* TripsSettingsTVC */ = {
+			isa = PBXGroup;
+			children = (
+				6383AC482657EBF60038F3AE /* TripsSettingsTVC.h */,
+				6383AC492657EBF60038F3AE /* TripsSettingsTVC.m */,
+			);
+			path = TripsSettingsTVC;
+			sourceTree = "<group>";
+		};
 		84DD1E7A224C0027004895F9 = {
 			isa = PBXGroup;
 			children = (
@@ -189,54 +428,9 @@
 		84DD1E85224C0027004895F9 /* SimRa */ = {
 			isa = PBXGroup;
 			children = (
-				84DD1E86224C0027004895F9 /* AppDelegate.h */,
-				84DD1E87224C0027004895F9 /* AppDelegate.m */,
-				84DD1E89224C0027004895F9 /* ViewController.h */,
-				84DD1E8A224C0027004895F9 /* ViewController.m */,
-				8471D0E825E2DC5B003F154E /* NewsVC.h */,
-				8471D0E925E2DC5B003F154E /* NewsVC.m */,
-				84DD1EC3224CEAB6004895F9 /* AnnotationView.h */,
-				84DD1EC4224CEAB6004895F9 /* AnnotationView.m */,
-				840E20AB224D125800488B31 /* MyTripsTVC.h */,
-				840E20AC224D125800488B31 /* MyTripsTVC.m */,
-				840E20AE224D190400488B31 /* SettingsTVC.h */,
-				840E20AF224D190400488B31 /* SettingsTVC.m */,
-				849CA145224D3C6600CE45EB /* IdPicker.h */,
-				849CA146224D3C6600CE45EB /* IdPicker.m */,
-				84E36107224E0721003847E8 /* TripEditVC.h */,
-				84E36108224E0721003847E8 /* TripEditVC.m */,
-				845467E9227B0ABD0060E06D /* TripDetailTVC.h */,
-				845467EA227B0ABD0060E06D /* TripDetailTVC.m */,
-				84E3610A224E0759003847E8 /* AnnotationTVC.h */,
-				84E3610B224E0759003847E8 /* AnnotationTVC.m */,
-				84DD1EC0224CD9BF004895F9 /* Trips.h */,
-				84DD1EC1224CD9BF004895F9 /* Trips.m */,
-				84DD1EBD224CD9A6004895F9 /* Trip.h */,
-				84DD1EBE224CD9A6004895F9 /* Trip.m */,
-				8470352A23D6D0810041AAFB /* Region.h */,
-				8470352B23D6D0810041AAFB /* Region.m */,
-				8470352D23D6D0DA0041AAFB /* Regions.h */,
-				8470352E23D6D0DA0041AAFB /* Regions.m */,
-				8471D0E225E25EE4003F154E /* News.h */,
-				8471D0E325E25EE4003F154E /* News.m */,
-				8418D52C22562148000A1D10 /* UploaderObject.h */,
-				8418D52D22562148000A1D10 /* UploaderObject.m */,
-				8421D68B2254AE710056B62C /* NSString+hashCode.h */,
-				8421D68C2254AE710056B62C /* NSString+hashCode.m */,
-				845FD035225D71FE0041568E /* Hash-Suffix.h */,
-				845FD034225D71E90041568E /* Hash-Suffix.h.sample */,
-				8421D6912254B6F40056B62C /* NSTimeInterval+hms.h */,
-				8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */,
-				8421D6942254BAA30056B62C /* DSBarChart.h */,
-				8421D6952254BAA30056B62C /* DSBarChart.m */,
-				8421D68F2254B4E50056B62C /* LaunchScreen.storyboard */,
-				84DD1E8C224C0027004895F9 /* Main.storyboard */,
-				84DD1E92224C0028004895F9 /* Assets.xcassets */,
-				84DD1E97224C0028004895F9 /* Info.plist */,
-				848338042253CA0D00342285 /* constants.plist */,
-				84564AF622549B1100D46132 /* Localizable.strings */,
-				84DD1E98224C0028004895F9 /* main.m */,
-				848338002253C6A200342285 /* server.cer */,
+				6383AC1E2657E6FC0038F3AE /* SupportingFiles */,
+				6383AC1D2657E6F50038F3AE /* Source */,
+				6383AC1C2657E6EE0038F3AE /* Resources */,
 			);
 			path = SimRa;
 			sourceTree = "<group>";
@@ -448,7 +642,9 @@
 				840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */,
 				845467EB227B0ABD0060E06D /* TripDetailTVC.m in Sources */,
 				8421D68D2254AE710056B62C /* NSString+hashCode.m in Sources */,
+				6383AC412657E9B00038F3AE /* ProfileTVC.m in Sources */,
 				84DD1E99224C0028004895F9 /* main.m in Sources */,
+				6383AC4A2657EBF60038F3AE /* TripsSettingsTVC.m in Sources */,
 				8471D0E425E25EE4003F154E /* News.m in Sources */,
 				8471D0EA25E2DC5B003F154E /* NewsVC.m in Sources */,
 				849CA147224D3C6600CE45EB /* IdPicker.m in Sources */,
@@ -654,7 +850,7 @@
 					"DEBUG=1",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
-				INFOPLIST_FILE = simra/Info.plist;
+				INFOPLIST_FILE = simra/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -678,7 +874,7 @@
 				DEVELOPMENT_TEAM = C652JFWU23;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
-				INFOPLIST_FILE = simra/Info.plist;
+				INFOPLIST_FILE = simra/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
