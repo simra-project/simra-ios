@@ -237,11 +237,7 @@
     NSMutableArray <NSString *> *texts = [[NSMutableArray alloc] init];
     for (Region *region in self.regions) {
         if (![region.identifier hasPrefix:@"!"]) {
-            if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-                [texts addObject:region.germanDescription];
-            } else {
-                [texts addObject:region.englishDescription];
-            }
+            [texts addObject:region.localizedDescription];
         }
     }
     return texts;
