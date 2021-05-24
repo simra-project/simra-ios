@@ -26,6 +26,7 @@
 @property (strong, nonatomic) News *news;
 
 + (AppDelegate*)sharedDelegate;
++(void)write:(int)version;
 
 - (void)showHowTo;
 - (void)openURL:(NSDictionary<NSString*, NSString*> *)dict;

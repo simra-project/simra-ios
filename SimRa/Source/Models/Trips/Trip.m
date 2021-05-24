@@ -9,6 +9,7 @@
 #import "Trip.h"
 #import "AppDelegate.h"
 #import "NSString+hashCode.h"
+#import "SimRa-Swift.h"
 
 @implementation TripAnnotation
 @end
@@ -213,8 +214,9 @@
     NSInteger identifier = [ad.defaults integerForKey:@"lastTripId"];
     identifier ++;
     self.identifier = identifier;
-    [ad.defaults setInteger:identifier forKey:@"lastTripId"];
-    
+//    [ad.defaults setInteger:identifier forKey:@"lastTripId"];
+    [Utility saveIntWithKey:@"lastTripId" value:identifier];
+
     self.edited = FALSE;
     self.uploaded = FALSE;
     self.statisticsAdded = FALSE;
@@ -289,9 +291,12 @@
 
 + (void)deleteFromStorage:(NSInteger)identifier {
     // Delete in UserDefaults
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", identifier]];
-    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", identifier]];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+    [Utility removeWithKey:[NSString stringWithFormat:@"Trip-%ld", identifier]];
+    [Utility removeWithKey:[NSString stringWithFormat:@"TripInfo-%ld", identifier]];
+
+//    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", identifier]];
+//    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", identifier]];
 
     // Delete in Filesystem
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -1136,12 +1141,19 @@
     // Delete from UserDefaults
 #if 0
     NSDictionary *tripDict = self.asDictionary;
-    [ad.defaults setObject:tripDict forKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
+//    [ad.defaults setObject:tripDict forKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
+//    [Utility saveIntWithKey:@"lastTripId" value:1];
+    [Utility saveWithKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier] value:tripDict];
     NSDictionary *tripInfoDict = self.tripInfo.asDictionary;
-    [ad.defaults setObject:tripInfoDict forKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
+//    [ad.defaults setObject:tripInfoDict forKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
+    [Utility saveWithKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier] value:tripInfoDict];
+
 #else
-    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
-    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
+    [Utility removeWithKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
+    [Utility removeWithKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
+
+//    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
+//    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
 #endif
 }
 

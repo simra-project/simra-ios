@@ -104,7 +104,9 @@
     AppDelegate *ad = [AppDelegate sharedDelegate];
     //[ad.defaults setBool:FALSE forKey:@"initialMessage"];
     if (![ad.defaults boolForKey:@"initialMessage"]) {
-        [ad.defaults setBool:TRUE forKey:@"initialMessage"];
+//        [ad.defaults setBool:TRUE forKey:@"initialMessage"];
+        [Utility saveBoolWithKey:@"initialMessage" value:TRUE];
+
         self.ac = [UIAlertController
                    alertControllerWithTitle:NSLocalizedString(@"How To", @"How To")
                    message:[NSString stringWithFormat:@"%@\n\n%@",
@@ -159,7 +161,8 @@
         (ad.regions.regionsId > ad.regions.lastSeenRegionsId &&
             (ad.regions.regionId == 0 || [ad.regions.currentRegion.identifier isEqualToString:@"other"])
          ) || !ad.regions.selectedIsOneOfThe3ClosestsRegions) {
-        [ad.defaults setBool:TRUE forKey:@"onceRegionMessage"];
+//        [ad.defaults setBool:TRUE forKey:@"onceRegionMessage"];
+        [Utility saveBoolWithKey:@"onceRegionMessage" value:TRUE];
 
         [ad.regions seen];
 
@@ -176,7 +179,9 @@
                                                                               @"Don't show this again")
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
-            [ad.defaults setBool:TRUE forKey:@"suppressRegionMessage"];
+//            [ad.defaults setBool:TRUE forKey:@"suppressRegionMessage"];
+            [Utility saveBoolWithKey:@"suppressRegionMessage" value:TRUE];
+
         }];
         [self.ac addAction:aad];
 

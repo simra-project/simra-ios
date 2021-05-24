@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "SimRa-Swift.h"
 @interface AppDelegate ()
 @end
 
@@ -27,13 +27,17 @@
     self.mm = [[CMMotionManager alloc] init];
     self.trips = [[Trips alloc] init];
     [self.trips save];
-
+    NSDictionary *dict = [Utility getUserPreferenceFileData];
+    
+    NSLog(@"%@",dict);
     NSURL *constantsURL = [[NSBundle mainBundle] URLForResource:@"constants" withExtension:@"plist"];
     self.constants = [NSDictionary dictionaryWithContentsOfURL:constantsURL];
 
     return YES;
 }
-
++(void)write:(int)version{
+    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>version</key>
+	<integer>1</integer>
+	<key>uploaded</key>
+	<false/>
+	<key>fileHash</key>
+	<string></string>
+	<key>filePasswd</key>
+	<string></string>
+	<key>copyStatisticsOnce</key>
+	<false/>
+	<key>totalRides</key>
+	<integer>0</integer>
+	<key>totalDuration</key>
+	<integer>0</integer>
+	<key>totalIncidents</key>
+	<integer>0</integer>
+	<key>totalLength</key>
+	<integer>0</integer>
+	<key>totalIdle</key>
+	<integer>0</integer>
+	<key>numberOfScary</key>
+	<integer>0</integer>
+	<key>ageId</key>
+	<integer>0</integer>
+	<key>sexId</key>
+	<integer>0</integer>
+	<key>experienceId</key>
+	<integer>0</integer>
+	<key>behaviourValue</key>
+	<integer>0</integer>
+	<key>lastTripId</key>
+	<integer>0</integer>
+	<key>deferredSecs</key>
+	<integer>0</integer>
+	<key>deferredMeters</key>
+	<integer>0</integer>
+	<key>bikeTypeId</key>
+	<integer>0</integer>
+	<key>positionId</key>
+	<integer>0</integer>
+	<key>childSeat</key>
+	<integer>0</integer>
+	<key>totalSlots</key>
+	<array/>
+	<key>behaviour</key>
+	<false/>
+	<key>initialMessage</key>
+	<false/>
+	<key>suppressRegionMessage</key>
+	<false/>
+	<key>onceRegionMessage</key>
+	<false/>
+	<key>AI</key>
+	<false/>
+	<key>Trips</key>
+	<dict/>
+	<key>TripsInfo</key>
+	<dict/>
+</dict>
+</plist>

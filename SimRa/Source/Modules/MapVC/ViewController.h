@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "SimRa-Swift.h"
 
 @interface ViewController : UIViewController <MKMapViewDelegate>
 

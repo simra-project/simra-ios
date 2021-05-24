@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Trip.h"
+#import "SimRa-Swift.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

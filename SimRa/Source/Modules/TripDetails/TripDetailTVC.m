@@ -73,11 +73,19 @@
 }
 
 - (IBAction)setDefaultPressed:(UIBarButtonItem *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setInteger:self.trip.bikeTypeId forKey:@"bikeTypeId"];
-    [ad.defaults setInteger:self.trip.positionId forKey:@"positionId"];
-    [ad.defaults setBool:self.trip.childseat forKey:@"childSeat"];
-    [ad.defaults setBool:self.trip.trailer forKey:@"trailer"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+//    [ad.defaults setInteger:self.trip.bikeTypeId forKey:@"bikeTypeId"];
+    [Utility saveIntWithKey:@"bikeTypeId" value:self.trip.bikeTypeId];
+
+//    [ad.defaults setInteger:self.trip.positionId forKey:@"positionId"];
+    [Utility saveIntWithKey:@"positionId" value:self.trip.positionId];
+
+//    [ad.defaults setBool:self.trip.childseat forKey:@"childSeat"];
+    //    [ad.defaults setBool:self.trip.trailer forKey:@"trailer"];
+
+    [Utility saveBoolWithKey:@"childSeat" value:self.trip.childseat];
+    [Utility saveBoolWithKey:@"trailer" value:self.trip.trailer];
+
 }
 
 @end

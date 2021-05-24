@@ -8,6 +8,7 @@
 
 #import "Regions.h"
 #import "NSString+hashCode.h"
+#import "SimRa-Swift.h"
 
 #define GET_SCHEME @"https:"
 #ifdef DEBUG
@@ -129,15 +130,19 @@
         [arrayRegions addObject:dictRegion];
     }
 
-    [[NSUserDefaults standardUserDefaults] setObject:arrayRegions forKey:@"regions"];
-
+//    [[NSUserDefaults standardUserDefaults] setObject:arrayRegions forKey:@"regions"];
+    [Utility saveWithKey:@"regions" value:arrayRegions];
     if (self.regionId < 0 || self.regionId > self.regions.count) {
         self.regionId = 0;
     }
-    [[NSUserDefaults standardUserDefaults] setInteger:self.regionId forKey:@"regionId"];
-    [[NSUserDefaults standardUserDefaults] setInteger:self.regionId forKey:@"regionId"];
-    [[NSUserDefaults standardUserDefaults] setInteger:self.regionsId forKey:@"regionsId"];
-    [[NSUserDefaults standardUserDefaults] setInteger:self.lastSeenRegionsId forKey:@"lastSeenRegionsId"];
+//    [[NSUserDefaults standardUserDefaults] setInteger:self.regionId forKey:@"regionId"];
+//    [[NSUserDefaults standardUserDefaults] setInteger:self.regionsId forKey:@"regionsId"];
+//    [[NSUserDefaults standardUserDefaults] setInteger:self.lastSeenRegionsId forKey:@"lastSeenRegionsId"];
+    [Utility saveIntWithKey:@"regionId" value:self.regionId];
+    [Utility saveIntWithKey:@"regionsId" value:self.regionsId];
+    [Utility saveIntWithKey:@"lastSeenRegionsId" value:self.lastSeenRegionsId];
+
+    
 }
 
 - (void)seen {

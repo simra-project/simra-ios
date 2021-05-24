@@ -55,40 +55,52 @@
 }
 
 - (IBAction)deferredSecsChanged:(UISlider *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setInteger:sender.value forKey:@"deferredSecs"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+//    [ad.defaults setInteger:sender.value forKey:@"deferredSecs"];
+    [Utility saveIntWithKey:@"deferredSecs" value:sender.value];
     [self update];
 }
 
 - (IBAction)deferredMetersChanged:(UISlider *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setInteger:sender.value forKey:@"deferredMeters"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+//    [ad.defaults setInteger:sender.value forKey:@"deferredMeters"];
+    [Utility saveIntWithKey:@"deferredMeters" value:sender.value];
     [self update];
 }
 
 - (IBAction)bikeTypeChanged:(IdPicker *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setInteger:sender.arrayIndex forKey:@"bikeTypeId"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+//    [ad.defaults setInteger:sender.arrayIndex forKey:@"bikeTypeId"];
+    [Utility saveIntWithKey:@"bikeTypeId" value:sender.arrayIndex];
+
 }
 
 - (IBAction)positionChanged:(IdPicker *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setInteger:sender.arrayIndex forKey:@"positionId"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+//    [ad.defaults setInteger:sender.arrayIndex forKey:@"positionId"];
+    [Utility saveIntWithKey:@"positionId" value:sender.arrayIndex];
+
 }
 
 - (IBAction)childSeatChanged:(UISwitch *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setBool:sender.on forKey:@"childSeat"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+//    [ad.defaults setBool:sender.on forKey:@"childSeat"];
+    [Utility saveBoolWithKey:@"childSeat" value:sender.on];
+
 }
 
 - (IBAction)trailerChanged:(UISwitch *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setBool:sender.on forKey:@"trailer"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+//    [ad.defaults setBool:sender.on forKey:@"trailer"];
+    [Utility saveBoolWithKey:@"trailer" value:sender.on];
+
 }
 
 - (IBAction)AIChanged:(UISwitch *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setBool:sender.on forKey:@"AI"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+//    [ad.defaults setBool:sender.on forKey:@"AI"];
+    [Utility saveBoolWithKey:@"AI" value:sender.on];
+
 }
 
 @end

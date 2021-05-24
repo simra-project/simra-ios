@@ -10,6 +10,10 @@
 		0970067372FFAB52EE7B49B4 /* Pods_SimRa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */; };
 		6383AC412657E9B00038F3AE /* ProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC402657E9B00038F3AE /* ProfileTVC.m */; };
 		6383AC4A2657EBF60038F3AE /* TripsSettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC492657EBF60038F3AE /* TripsSettingsTVC.m */; };
+		6383AC682657F3F80038F3AE /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC672657F3F80038F3AE /* Utility.swift */; };
+		6383AC6D2657F48D0038F3AE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC6C2657F48D0038F3AE /* Constants.swift */; };
+		6383AC752657FD2C0038F3AE /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC742657FD2C0038F3AE /* UserPreferences.swift */; };
+		6383AC7A265805BF0038F3AE /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6383AC79265805BF0038F3AE /* UserPreferences.plist */; };
 		840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AC224D125800488B31 /* MyTripsTVC.m */; };
 		840E20B0224D190400488B31 /* SettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AF224D190400488B31 /* SettingsTVC.m */; };
 		8418D52E22562148000A1D10 /* UploaderObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418D52D22562148000A1D10 /* UploaderObject.m */; };
@@ -62,6 +66,11 @@
 		6383AC402657E9B00038F3AE /* ProfileTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileTVC.m; sourceTree = "<group>"; };
 		6383AC482657EBF60038F3AE /* TripsSettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripsSettingsTVC.h; sourceTree = "<group>"; };
 		6383AC492657EBF60038F3AE /* TripsSettingsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripsSettingsTVC.m; sourceTree = "<group>"; };
+		6383AC662657F3F70038F3AE /* SimRa-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimRa-Bridging-Header.h"; sourceTree = "<group>"; };
+		6383AC672657F3F80038F3AE /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		6383AC6C2657F48D0038F3AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6383AC742657FD2C0038F3AE /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		6383AC79265805BF0038F3AE /* UserPreferences.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UserPreferences.plist; sourceTree = "<group>"; };
 		840E20AB224D125800488B31 /* MyTripsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTripsTVC.h; sourceTree = "<group>"; };
 		840E20AC224D125800488B31 /* MyTripsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTripsTVC.m; sourceTree = "<group>"; };
 		840E20AE224D190400488B31 /* SettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTVC.h; sourceTree = "<group>"; };
@@ -178,6 +187,7 @@
 				84DD1E92224C0028004895F9 /* Assets.xcassets */,
 				845FD035225D71FE0041568E /* Hash-Suffix.h */,
 				845FD034225D71E90041568E /* Hash-Suffix.h.sample */,
+				6383AC79265805BF0038F3AE /* UserPreferences.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -186,7 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				6383AC2F2657E8950038F3AE /* Models */,
-				6383AC212657E71D0038F3AE /* Utility */,
+				6383AC212657E71D0038F3AE /* Utils */,
 				6383AC1F2657E7150038F3AE /* Modules */,
 			);
 			path = Source;
@@ -222,13 +232,16 @@
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		6383AC212657E71D0038F3AE /* Utility */ = {
+		6383AC212657E71D0038F3AE /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				6383AC342657E9400038F3AE /* Helper */,
 				6383AC352657E9680038F3AE /* DSBarChart */,
+				6383AC672657F3F80038F3AE /* Utility.swift */,
+				6383AC662657F3F70038F3AE /* SimRa-Bridging-Header.h */,
+				6383AC6C2657F48D0038F3AE /* Constants.swift */,
 			);
-			path = Utility;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		6383AC252657E73E0038F3AE /* News */ = {
@@ -321,6 +334,7 @@
 				6383AC262657E7440038F3AE /* AnnotationView */,
 				6383AC292657E7580038F3AE /* IdPicker */,
 				6383AC302657E89A0038F3AE /* Trips */,
+				6383AC742657FD2C0038F3AE /* UserPreferences.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -522,6 +536,7 @@
 				TargetAttributes = {
 					84DD1E82224C0027004895F9 = {
 						CreatedOnToolsVersion = 10.2;
+						LastSwiftMigration = 1240;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -568,6 +583,7 @@
 				84DD1E93224C0028004895F9 /* Assets.xcassets in Resources */,
 				848338022253CA0D00342285 /* constants.plist in Resources */,
 				8421D6902254B4E50056B62C /* LaunchScreen.storyboard in Resources */,
+				6383AC7A265805BF0038F3AE /* UserPreferences.plist in Resources */,
 				84DD1E8E224C0027004895F9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,6 +647,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6383AC752657FD2C0038F3AE /* UserPreferences.swift in Sources */,
 				8470352C23D6D0810041AAFB /* Region.m in Sources */,
 				84DD1E8B224C0027004895F9 /* ViewController.m in Sources */,
 				84DD1EBF224CD9A6004895F9 /* Trip.m in Sources */,
@@ -647,12 +664,14 @@
 				6383AC4A2657EBF60038F3AE /* TripsSettingsTVC.m in Sources */,
 				8471D0E425E25EE4003F154E /* News.m in Sources */,
 				8471D0EA25E2DC5B003F154E /* NewsVC.m in Sources */,
+				6383AC682657F3F80038F3AE /* Utility.swift in Sources */,
 				849CA147224D3C6600CE45EB /* IdPicker.m in Sources */,
 				84DD1E88224C0027004895F9 /* AppDelegate.m in Sources */,
 				8418D52E22562148000A1D10 /* UploaderObject.m in Sources */,
 				8421D6932254B6F40056B62C /* NSTimeInterval+hms.m in Sources */,
 				8421D6962254BAA30056B62C /* DSBarChart.m in Sources */,
 				8470352F23D6D0DA0041AAFB /* Regions.m in Sources */,
+				6383AC6D2657F48D0038F3AE /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,9 +860,11 @@
 			baseConfigurationReference = CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 18;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = C652JFWU23;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -859,6 +880,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Source/Utils/SimRa-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -868,9 +892,11 @@
 			baseConfigurationReference = 471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 18;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = C652JFWU23;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
@@ -883,6 +909,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Source/Utils/SimRa-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -890,6 +918,7 @@
 		84DD1EB6224C0028004895F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
@@ -909,6 +938,7 @@
 		84DD1EB7224C0028004895F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
@@ -928,6 +958,7 @@
 		84DD1EB9224C0028004895F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
 				INFOPLIST_FILE = simraUITests/Info.plist;
@@ -946,6 +977,7 @@
 		84DD1EBA224C0028004895F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C652JFWU23;
 				INFOPLIST_FILE = simraUITests/Info.plist;

@@ -164,13 +164,17 @@
 }
 
 - (IBAction)ageChanged:(IdPicker *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setInteger:sender.arrayIndex forKey:@"ageId"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+//    [ad.defaults setInteger:sender.arrayIndex forKey:@"ageId"];
+    [Utility saveIntWithKey:@"ageId" value:sender.arrayIndex];
+
 }
 
 - (IBAction)sexChanged:(IdPicker *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setInteger:sender.arrayIndex forKey:@"sexId"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+//    [ad.defaults setInteger:sender.arrayIndex forKey:@"sexId"];
+    [Utility saveIntWithKey:@"sexId" value:sender.arrayIndex];
+
 }
 
 - (IBAction)regionChanged:(IdPicker *)sender {
@@ -180,19 +184,24 @@
 }
 
 - (IBAction)experienceChanged:(IdPicker *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setInteger:sender.arrayIndex forKey:@"experienceId"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+    [Utility saveIntWithKey:@"experienceId" value:sender.arrayIndex];
+
+//    [ad.defaults setInteger:sender.arrayIndex forKey:@"experienceId"];
 }
 
 - (IBAction)behaviourSwitchChanged:(UISwitch *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setBool:sender.on forKey:@"behaviour"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+    [Utility saveBoolWithKey:@"behaviour" value:sender.on];
+//    [ad.defaults setBool:sender.on forKey:@"behaviour"];
     [self update];
 }
 
 - (IBAction)behaviourSliderChanged:(UISlider *)sender {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
+//    AppDelegate *ad = [AppDelegate sharedDelegate];
+    [Utility saveIntWithKey:@"behaviourValue" value:round(sender.value)];
+
+//    [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
     [self update];
 }
 

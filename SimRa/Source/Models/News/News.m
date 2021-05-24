@@ -8,6 +8,7 @@
 
 #import "News.h"
 #import "NSString+hashCode.h"
+#import "SimRa-Swift.h"
 
 #define GET_SCHEME @"https:"
 #ifdef DEBUG
@@ -104,7 +105,8 @@
 }
 
 - (void)seen {
-    [[NSUserDefaults standardUserDefaults] setInteger:self.newsVersion forKey:@"newsVersion"];
+//    [[NSUserDefaults standardUserDefaults] setInteger:self.newsVersion forKey:@"newsVersion"];
+    [Utility saveIntWithKey:@"newsVersion" value:self.newsVersion];
 }
 
 @end
