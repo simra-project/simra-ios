@@ -1,16 +1,20 @@
 PODS:
+  - SSZipArchive (2.2.3)
   - TTRangeSlider (1.0.7)
 
 DEPENDENCIES:
+  - SSZipArchive
   - TTRangeSlider
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - SSZipArchive
     - TTRangeSlider
 
 SPEC CHECKSUMS:
+  SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   TTRangeSlider: 8cf72eca457c3b700c92eb0074be908c986e25ec
 
-PODFILE CHECKSUM: 3720380b35e554a09a997594573b4319f5b8837f
+PODFILE CHECKSUM: 9f44db54ee990f3d48e9aeca33d0819cf711f931
 
-COCOAPODS: 1.10.0.rc.1
+COCOAPODS: 1.10.0

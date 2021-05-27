@@ -259,11 +259,12 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="version" destination="QbR-cf-yoT" id="tnR-He-B4J"/>
+                        <outlet property="versionCell" destination="zS8-SF-nTN" id="bZ5-2P-9lr"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3B-Kr-Puk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1895.625" y="-134.1549295774648"/>
+            <point key="canvasLocation" x="2244" y="-145"/>
         </scene>
         <!--NewsVC-->
         <scene sceneID="Pgz-Xt-pem">
@@ -2133,7 +2134,7 @@ from www.flaticon.com</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="i6e-Cg-Mdt"/>
+        <segue reference="EUT-E4-1tq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Simra" width="300" height="186"/>

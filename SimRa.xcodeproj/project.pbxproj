@@ -13,7 +13,7 @@
 		6383AC682657F3F80038F3AE /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC672657F3F80038F3AE /* Utility.swift */; };
 		6383AC6D2657F48D0038F3AE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC6C2657F48D0038F3AE /* Constants.swift */; };
 		6383AC752657FD2C0038F3AE /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC742657FD2C0038F3AE /* UserPreferences.swift */; };
-		6383AC7A265805BF0038F3AE /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6383AC79265805BF0038F3AE /* UserPreferences.plist */; };
+		63882B7F265C474400E147D9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63882B7E265C474400E147D9 /* Extensions.swift */; };
 		840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AC224D125800488B31 /* MyTripsTVC.m */; };
 		840E20B0224D190400488B31 /* SettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AF224D190400488B31 /* SettingsTVC.m */; };
 		8418D52E22562148000A1D10 /* UploaderObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418D52D22562148000A1D10 /* UploaderObject.m */; };
@@ -70,7 +70,7 @@
 		6383AC672657F3F80038F3AE /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		6383AC6C2657F48D0038F3AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6383AC742657FD2C0038F3AE /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
-		6383AC79265805BF0038F3AE /* UserPreferences.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = UserPreferences.plist; sourceTree = "<group>"; };
+		63882B7E265C474400E147D9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		840E20AB224D125800488B31 /* MyTripsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTripsTVC.h; sourceTree = "<group>"; };
 		840E20AC224D125800488B31 /* MyTripsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTripsTVC.m; sourceTree = "<group>"; };
 		840E20AE224D190400488B31 /* SettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTVC.h; sourceTree = "<group>"; };
@@ -187,7 +187,6 @@
 				84DD1E92224C0028004895F9 /* Assets.xcassets */,
 				845FD035225D71FE0041568E /* Hash-Suffix.h */,
 				845FD034225D71E90041568E /* Hash-Suffix.h.sample */,
-				6383AC79265805BF0038F3AE /* UserPreferences.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -240,6 +239,7 @@
 				6383AC672657F3F80038F3AE /* Utility.swift */,
 				6383AC662657F3F70038F3AE /* SimRa-Bridging-Header.h */,
 				6383AC6C2657F48D0038F3AE /* Constants.swift */,
+				63882B7E265C474400E147D9 /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -583,7 +583,6 @@
 				84DD1E93224C0028004895F9 /* Assets.xcassets in Resources */,
 				848338022253CA0D00342285 /* constants.plist in Resources */,
 				8421D6902254B4E50056B62C /* LaunchScreen.storyboard in Resources */,
-				6383AC7A265805BF0038F3AE /* UserPreferences.plist in Resources */,
 				84DD1E8E224C0027004895F9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,6 +667,7 @@
 				849CA147224D3C6600CE45EB /* IdPicker.m in Sources */,
 				84DD1E88224C0027004895F9 /* AppDelegate.m in Sources */,
 				8418D52E22562148000A1D10 /* UploaderObject.m in Sources */,
+				63882B7F265C474400E147D9 /* Extensions.swift in Sources */,
 				8421D6932254B6F40056B62C /* NSTimeInterval+hms.m in Sources */,
 				8421D6962254BAA30056B62C /* DSBarChart.m in Sources */,
 				8470352F23D6D0DA0041AAFB /* Regions.m in Sources */,

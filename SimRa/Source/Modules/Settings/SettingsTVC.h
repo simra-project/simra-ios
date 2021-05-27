@@ -10,6 +10,7 @@
 #import <MessageUI/MessageUI.h>
 
 NS_ASSUME_NONNULL_BEGIN
+static const int minimumTripsToSend = 2;
 
 @interface SettingsTVC : UITableViewController <MFMailComposeViewControllerDelegate>
 

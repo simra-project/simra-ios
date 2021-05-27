@@ -111,3 +111,13 @@
 
 /* Table Select None */
 "None" = "None";
+
+/* Acknowledgement to send configuration*/
+"Attention! Only tap the Continue button, if you were asked to do so by the SimRa team. By Pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides." = "Attention! Only tap the Continue button, if you were asked to do so by the SimRa team. By Pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides.";
+
+"Send local app data to SimRa team" = "Send local app data to SimRa team";
+
+"Do you also want to send rides?" = "Do you also want to send rides?";
+"Yes, all" = "Yes, all";
+"Yes, the last" = "Yes, the last";
+"No, don't send any rides" = "No, don't send any rides";

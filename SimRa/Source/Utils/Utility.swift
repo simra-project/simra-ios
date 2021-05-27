@@ -8,8 +8,11 @@
 
 import UIKit
 class Utility: NSObject{
+    @objc static func getDocumentDirectory()->String?{
+        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
+    }
     @objc static func getUserPreferenceFilePath()->String{
-        if let documentDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first{
+        if let documentDirectory = getDocumentDirectory(){
             return documentDirectory.appending("/\(Constants.userPreferenceFileName).plist")
         }
         return ""
@@ -33,6 +36,9 @@ class Utility: NSObject{
             let plistXML = FileManager.default.contents(atPath: path)!
             do {//convert the data to a dictionary and handle errors.
                 plistData = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propertyListFormat) as! [String:Any]
+                let defaults = getUserDefaults()
+                UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+                defaults.register(defaults: plistData)
                 
 
             } catch {
@@ -50,17 +56,20 @@ class Utility: NSObject{
     }
     
     private static func writeToPreferenceFile(){
-        let path = Utility.getUserPreferenceFilePath()
+        let path = getUserPreferenceFilePath()
         let preference = UserDefaults.standard.dictionaryRepresentation() as NSDictionary
         let isWritten = preference.write(toFile: path, atomically: true)
         print("data written: %@", isWritten)
     }
     
-    
-    @objc static func remove(key: String){
+    private static func getUserDefaults()-> UserDefaults{
         let appDel = UIApplication.shared.delegate as! AppDelegate
-        let defaults = appDel.defaults
-        defaults?.removeObject(forKey: key)
+        return appDel.defaults
+
+    }
+    @objc static func remove(key: String){
+        let defaults = getUserDefaults()
+        defaults.removeObject(forKey: key)
         Utility.writeToPreferenceFile()
 
     }
@@ -68,9 +77,8 @@ class Utility: NSObject{
     
     @objc static func save(key: String, value : Any){
         
-        let appDel = UIApplication.shared.delegate as! AppDelegate
-        let defaults = appDel.defaults
-        defaults?.setValue(value, forKey: key)
+        let defaults = getUserDefaults()
+        defaults.setValue(value, forKey: key)
         Utility.writeToPreferenceFile()
     }
     @objc static func saveBool(key: String, value: Bool){
@@ -102,25 +110,5 @@ class Utility: NSObject{
         Utility.save(key: key, value: val)
     }
     
-//    @objc static func getFileData(){
-//        
-//        
-//       
-//    }
-//    @objc static func writeData(){
-//        let preferences = Preferences(uploaded:false)
-//        let encoder = PropertyListEncoder()
-//        encoder.outputFormat = .xml
-//        
-//        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("\(Constants.userPreferenceFileName).plist")
-//        
-//        do {
-//            let data = try encoder.encode(preferences)
-//            try data.write(to: path)
-//        } catch {
-//            print(error)
-//        }
-//    }
-    
-    
 }
+
