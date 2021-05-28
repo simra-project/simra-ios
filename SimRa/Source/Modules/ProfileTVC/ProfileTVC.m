@@ -178,6 +178,8 @@
 }
 
 - (IBAction)regionChanged:(IdPicker *)sender {
+    [Utility loadRegionBasedPreferenceFileDataWithRegionId:sender.arrayIndex];
+
     AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.regions selectId:sender.arrayIndex];
     [self update];

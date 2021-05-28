@@ -132,16 +132,20 @@
 
 //    [[NSUserDefaults standardUserDefaults] setObject:arrayRegions forKey:@"regions"];
     [Utility saveWithKey:@"regions" value:arrayRegions];
-    if (self.regionId < 0 || self.regionId > self.regions.count) {
-        self.regionId = 0;
-    }
-//    [[NSUserDefaults standardUserDefaults] setInteger:self.regionId forKey:@"regionId"];
+    
+   
 //    [[NSUserDefaults standardUserDefaults] setInteger:self.regionsId forKey:@"regionsId"];
 //    [[NSUserDefaults standardUserDefaults] setInteger:self.lastSeenRegionsId forKey:@"lastSeenRegionsId"];
     [Utility saveIntWithKey:@"regionId" value:self.regionId];
     [Utility saveIntWithKey:@"regionsId" value:self.regionsId];
     [Utility saveIntWithKey:@"lastSeenRegionsId" value:self.lastSeenRegionsId];
-
+    if (self.regionId < 0 || self.regionId > self.regions.count || self.regionId == nil) {
+        self.regionId = 0;
+    }
+//    if (self.regionId == 0 || self.regionId < 0){
+//        //create region specific profile
+//        [Utility getPreferenceFilePathWithRegionWithRegionId:self.regionId];
+//    }
     
 }
 

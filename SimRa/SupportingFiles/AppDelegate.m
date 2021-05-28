@@ -19,9 +19,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *dict = [Utility getUserPreferenceFileData];
-    NSLog(@"Path to user preference file: %@", [Utility getUserPreferenceFilePath]);
     self.regions = [[Regions alloc] init];
+    NSDictionary *dict = [Utility getMainUserPreferenceFileData];
+    NSDictionary *region_dict = [Utility getRegionBasedPreferenceFileDataWithRegionId:self.regions.filteredRegionId];
+    
+
+    NSLog(@"Path to user preference file: %@", [Utility getMainUserPreferenceFilePath]);
     self.news = [[News alloc] init];
     self.lm = [[CLLocationManager alloc] init];
     [self.lm requestWhenInUseAuthorization];
@@ -30,6 +33,7 @@
     [self.trips save];
     
     NSLog(@"%@",dict);
+    NSLog(@"%@",region_dict);
     NSURL *constantsURL = [[NSBundle mainBundle] URLForResource:@"constants" withExtension:@"plist"];
     self.constants = [NSDictionary dictionaryWithContentsOfURL:constantsURL];
 

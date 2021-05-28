@@ -11,15 +11,8 @@ class Utility: NSObject{
     @objc static func getDocumentDirectory()->String?{
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
     }
-    @objc static func getUserPreferenceFilePath()->String{
-        if let documentDirectory = getDocumentDirectory(){
-            return documentDirectory.appending("/\(Constants.userPreferenceFileName).plist")
-        }
-        return ""
-    }
-    @objc static func getPreferenceFile()->Bool{
-        return checkIfFileExist(path: Utility.getUserPreferenceFilePath())
-    }
+    
+    
     @objc static func checkIfFileExist(path: String)->Bool{
         let fileManager = FileManager.default
         if(!fileManager.fileExists(atPath: path)){
@@ -27,8 +20,9 @@ class Utility: NSObject{
         }
         return true
     }
-    @objc static func getUserPreferenceFileData()->[String: Any]{
-        let path = Utility.getUserPreferenceFilePath()
+   
+    @objc static func getFileData(path: String)->[String: Any]{
+//        let path = Utility.getMainUserPreferenceFilePath()
         var propertyListFormat =  PropertyListSerialization.PropertyListFormat.xml //Format of the Property List.
         var plistData: [String: Any] = [:]
 
@@ -47,19 +41,35 @@ class Utility: NSObject{
         }
         else{
             let preference = UserDefaults.standard.dictionaryRepresentation() as NSDictionary
-            let isWritten = preference.write(toFile: path, atomically: true)
+            let isWritten =  preference.write(toFile: path, atomically: true)
             print("data written: %@", isWritten)
             plistData = preference as! [String : Any]
             
         }
         return plistData
     }
-    
-    private static func writeToPreferenceFile(){
-        let path = getUserPreferenceFilePath()
+    private static func writeToMainPreferenceFile(){
+        let path = getMainUserPreferenceFilePath()
+        writeToPreferenceFile(path: path)
+    }
+    private static func writeToRegionBasedPreferenceFile(){
+        let appDel = UIApplication.shared.delegate as! AppDelegate
+        if appDel.regions != nil{
+            let currentRegion = appDel.regions.filteredRegionId()
+            let regionBasedPrefFile = getPreferenceFilePathWithRegion(regionId: currentRegion)
+            writeToPreferenceFile(path: regionBasedPrefFile)
+        }
+    }
+    private static func writeToPreferenceFile(path: String){
         let preference = UserDefaults.standard.dictionaryRepresentation() as NSDictionary
-        let isWritten = preference.write(toFile: path, atomically: true)
-        print("data written: %@", isWritten)
+        var isWritten = false
+//        if checkIfFileExist(path: path){
+            isWritten = preference.write(toFile: path, atomically: true)
+//        }
+//        else{
+//            
+//        }
+        print("data written: %@ at %@", isWritten, path)
     }
     
     private static func getUserDefaults()-> UserDefaults{
@@ -70,7 +80,8 @@ class Utility: NSObject{
     @objc static func remove(key: String){
         let defaults = getUserDefaults()
         defaults.removeObject(forKey: key)
-        Utility.writeToPreferenceFile()
+        Utility.writeToMainPreferenceFile()
+        Utility.writeToRegionBasedPreferenceFile()
 
     }
     
@@ -79,7 +90,8 @@ class Utility: NSObject{
         
         let defaults = getUserDefaults()
         defaults.setValue(value, forKey: key)
-        Utility.writeToPreferenceFile()
+        Utility.writeToMainPreferenceFile()
+        Utility.writeToRegionBasedPreferenceFile()
     }
     @objc static func saveBool(key: String, value: Bool){
         let val = value as Any
@@ -110,5 +122,47 @@ class Utility: NSObject{
         Utility.save(key: key, value: val)
     }
     
+    
 }
 
+extension Utility{
+    @objc static func getMainUserPreferenceFilePath()->String{
+        if let documentDirectory = getDocumentDirectory(){
+            return documentDirectory.appending("/\(Constants.userPreferenceFileName).plist")
+        }
+        return ""
+    }
+    @objc static func getPreferenceFilePathWithRegion(regionId: Int)->String{
+        if let documentDirectory = getDocumentDirectory(){
+            return documentDirectory.appending("/\(Constants.userPreferenceFileName)_\(regionId).plist")
+        }
+        return ""
+    }
+    @objc static func getMainUserPreferenceFileData()-> [String: Any]{
+        return getFileData(path: getMainUserPreferenceFilePath())
+    }
+    @objc static func getRegionBasedPreferenceFileData(regionId : Int)->[String:Any]{
+        let path = getPreferenceFilePathWithRegion(regionId: regionId)
+        return getFileData(path: path)
+    }
+    @objc static func loadRegionBasedPreferenceFileData(regionId:Int){
+        let path = getPreferenceFilePathWithRegion(regionId: regionId)
+
+        var propertyListFormat =  PropertyListSerialization.PropertyListFormat.xml //Format of the Property List.
+        var plistData: [String: Any] = [:]
+        
+        if Utility.checkIfFileExist(path: path){
+            let plistXML = FileManager.default.contents(atPath: path)!
+            do {//convert the data to a dictionary and handle errors.
+                plistData = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propertyListFormat) as! [String:Any]
+                let defaults = getUserDefaults()
+                UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+                defaults.register(defaults: plistData)
+                
+                
+            } catch {
+                print("Error reading plist: \(error), format: \(propertyListFormat)")
+            }
+        }
+    }
+}

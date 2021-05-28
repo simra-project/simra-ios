@@ -115,7 +115,7 @@
     NSData *zipData = [NSData dataWithContentsOfFile:zipFilePath];
     
     NSString *urlString = [NSString stringWithFormat:@"https://vm2.mcc.tu-berlin.de:8082/12/debug?clientHash=%@",NSString.clientHash];
-    /* creating URL request to send data */    
+    /* creating URL request to send data */
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
     [request setURL:[NSURL URLWithString:urlString]];
