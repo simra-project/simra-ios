@@ -30,9 +30,10 @@ class Utility: NSObject{
             let plistXML = FileManager.default.contents(atPath: path)!
             do {//convert the data to a dictionary and handle errors.
                 plistData = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propertyListFormat) as! [String:Any]
-                let defaults = getUserDefaults()
-                UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
-                defaults.register(defaults: plistData)
+                return plistData
+//                let defaults = getUserDefaults()
+//                UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+//                defaults.register(defaults: plistData)
                 
 
             } catch {
@@ -147,15 +148,17 @@ extension Utility{
     }
     @objc static func loadRegionBasedPreferenceFileData(regionId:Int){
         let path = getPreferenceFilePathWithRegion(regionId: regionId)
-
+        _ = loadPreferenceInUserDefaults(path: path)
+    }
+    static private func loadPreferenceInUserDefaults(path: String)-> UserDefaults{
         var propertyListFormat =  PropertyListSerialization.PropertyListFormat.xml //Format of the Property List.
         var plistData: [String: Any] = [:]
-        
+        var defaults = UserDefaults.standard
+
         if Utility.checkIfFileExist(path: path){
             let plistXML = FileManager.default.contents(atPath: path)!
             do {//convert the data to a dictionary and handle errors.
                 plistData = try PropertyListSerialization.propertyList(from: plistXML, options: .mutableContainersAndLeaves, format: &propertyListFormat) as! [String:Any]
-                let defaults = getUserDefaults()
                 UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
                 defaults.register(defaults: plistData)
                 
@@ -164,5 +167,10 @@ extension Utility{
                 print("Error reading plist: \(error), format: \(propertyListFormat)")
             }
         }
+        return defaults
+    }
+    @objc static func loadUserDefaults()->UserDefaults{
+        let path = Utility.getMainUserPreferenceFilePath()
+        return loadPreferenceInUserDefaults(path: path)
     }
 }

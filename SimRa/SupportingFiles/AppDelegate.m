@@ -18,10 +18,8 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.defaults = [NSUserDefaults standardUserDefaults];
+    self.defaults = [Utility loadUserDefaults];
     self.regions = [[Regions alloc] init];
-    NSDictionary *dict = [Utility getMainUserPreferenceFileData];
-    NSDictionary *region_dict = [Utility getRegionBasedPreferenceFileDataWithRegionId:self.regions.filteredRegionId];
     
 
     NSLog(@"Path to user preference file: %@", [Utility getMainUserPreferenceFilePath]);
@@ -31,9 +29,6 @@
     self.mm = [[CMMotionManager alloc] init];
     self.trips = [[Trips alloc] init];
     [self.trips save];
-    
-    NSLog(@"%@",dict);
-    NSLog(@"%@",region_dict);
     NSURL *constantsURL = [[NSBundle mainBundle] URLForResource:@"constants" withExtension:@"plist"];
     self.constants = [NSDictionary dictionaryWithContentsOfURL:constantsURL];
 
