@@ -38,7 +38,7 @@
     [super viewWillAppear:animated];
 
     AppDelegate *ad = [AppDelegate sharedDelegate];
-    self.incident.array = [ad.constants mutableArrayValueForKey:@"incidents"];
+    self.incident.array = [ad.constants valueForKey:@"incidents"];
 
     [self update];
 }
