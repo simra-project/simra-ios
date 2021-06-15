@@ -1078,7 +1078,7 @@
 
     return idle;
 }
-
+// comes here first
 - (void)uploadFile:(NSString *)name WithController:(id)controller error:(SEL)error completion:(SEL)completion {
     AppDelegate *ad = [AppDelegate sharedDelegate];
 

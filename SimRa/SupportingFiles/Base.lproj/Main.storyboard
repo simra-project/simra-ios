@@ -1299,7 +1299,7 @@ from www.flaticon.com</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TJ7-ro-h9l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2988.75" y="-134.1549295774648"/>
+            <point key="canvasLocation" x="2989" y="-134"/>
         </scene>
         <!--Trip Detail-->
         <scene sceneID="qgk-KA-JYm">
@@ -1589,7 +1589,7 @@ from www.flaticon.com</string>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2989" y="-999"/>
+            <point key="canvasLocation" x="2989" y="-1194"/>
         </scene>
         <!--What Happened?-->
         <scene sceneID="URV-Ns-Rgp">
@@ -2134,7 +2134,7 @@ from www.flaticon.com</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="EUT-E4-1tq"/>
+        <segue reference="2hm-aX-QV5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Simra" width="300" height="186"/>

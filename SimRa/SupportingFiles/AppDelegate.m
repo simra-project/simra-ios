@@ -18,11 +18,14 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.defaults = [Utility loadUserDefaults];
+    self.defaults = [NSUserDefaults standardUserDefaults];
+    [self createPrefsFiles];
+
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
     self.regions = [[Regions alloc] init];
     
 
-    NSLog(@"Path to user preference file: %@", [Utility getMainUserPreferenceFilePath]);
+    NSLog(@"Path to user preference file: %@", [Utility getDocumentDirectory]);
     self.news = [[News alloc] init];
     self.lm = [[CLLocationManager alloc] init];
     [self.lm requestWhenInUseAuthorization];
@@ -34,8 +37,12 @@
 
     return YES;
 }
-+(void)write:(int)version{
-    
+-(void)createPrefsFiles{
+    [Utility createSimraPrefs];
+    [Utility createAppsPrefs];
+    [Utility createProfilePrefs];
+    [Utility createKeyPrefs];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

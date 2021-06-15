@@ -11,6 +11,15 @@ typealias Action = () -> ()
 
 extension UIAlertController {
     
+    @objc static func showAlert(title: String, message: String?,  style : Style, buttonFirstTitle: String,  buttonFirstAction: @escaping Action, over viewController: UIViewController) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: style)
+        
+        ac.addAction(UIAlertAction(title: buttonFirstTitle, style: .default, handler: { (_) in
+            buttonFirstAction()
+        }))
+                
+        viewController.present(ac, animated: true)
+    }
     @objc static func showAlert(title: String, message: String?,  style : Style, buttonFirstTitle: String, buttonSecondTitle: String, buttonFirstAction: @escaping Action, buttonSecondAction : @escaping Action, over viewController: UIViewController) {
         let ac = UIAlertController(title: title, message: message, preferredStyle: style)
         

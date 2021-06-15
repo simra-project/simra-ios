@@ -401,6 +401,8 @@ NSInteger revertedSort(id num1, id num2, void *context) {
 - (void)doUpload:(NSIndexPath *)indexPath {
     TripInfo *tripInfo = [self getTripInfo:indexPath];
     Trip *trip = [[Trip alloc] initFromStorage:tripInfo.identifier];
+    
+    
     [trip uploadFile:@"ride"
       WithController:self
                error:@selector(completionError:)

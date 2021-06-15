@@ -50,72 +50,130 @@
 - (void)didTapOnVersion:(UITapGestureRecognizer*)sender {
     NSLog(@"hello taps");
     
-    [UIAlertController showAlertWithTitle: NSLocalizedString(@"Send local app data to SimRa team", @"Send local app data to SimRa team") message: NSLocalizedString(@"Attention! Only tap the Continue button, if you were asked to do so by the SimRa team. By Pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides.", @"Attention! Only tap the Continue button, if you were asked to do so by the SimRa team. By Pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides.") style: UIAlertControllerStyleAlert buttonFirstTitle:@"Cancel" buttonSecondTitle:@"Confirm" buttonFirstAction:^{
+    [UIAlertController showAlertWithTitle: NSLocalizedString(@"Send local app data to SimRa team", @"Send local app data to SimRa team") message: NSLocalizedString(@"Attention! Only tap the Continue button, if you were asked to do so by the SimRa team. By Pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides.", @"Attention! Only tap the Continue button, if you were asked to do so by the SimRa team. By Pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides.") style: UIAlertControllerStyleAlert buttonFirstTitle:NSLocalizedString(@"Cancel", @"Cancel") buttonSecondTitle:NSLocalizedString(@"OK",@"OK") buttonFirstAction:^{
         NSLog(@"Cancel pressed");
     } buttonSecondAction:^{
         NSLog(@"Confirm Pressed");
+        [Utility writeSimRaPrefs];
         [self showTotalRidesAlert];
     } over:self];
 }
 -(NSString *)getTripsSizeGetAllTrips:(BOOL)allTrips{
    
     int totalTrips = ad.trips.tripInfos.count;
-    if (!allTrips && totalTrips > minimumTripsToSend){
-        totalTrips = minimumTripsToSend;
-    }
+    int count = 0;
     long long totalBytes = 0;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory
                                                       inDomains:NSUserDomainMask].firstObject;
-    for (int i = 1; i <= totalTrips ; i ++){
-        NSLog(@"%d",i);
-        NSURL *tripURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Trip-%d.json", i]];
-        NSURL *tripInfoURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"TripInfo-%d.json", i]];
+    if (!allTrips && totalTrips > minimumTripsToSend){
+//        [[NSFileManager defaultManager] createDirectoryAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"/Documents/"]
+//                                  withIntermediateDirectories:YES attributes:nil error:nil];
 
-        NSNumber *fileSizeValueForTripInfo = nil;
-        NSNumber *fileSizeValueForTrip = nil;
-        NSError *fileSizeError = nil;
-        [tripURL getResourceValue:&fileSizeValueForTrip
-                           forKey:NSURLFileSizeKey
-                            error:&fileSizeError];
-        [tripInfoURL getResourceValue:&fileSizeValueForTripInfo
-                           forKey:NSURLFileSizeKey
-                            error:&fileSizeError];
-
-        if (fileSizeValueForTrip && fileSizeValueForTripInfo) {
-            totalBytes += [fileSizeValueForTrip longLongValue];
-            totalBytes += [fileSizeValueForTripInfo longLongValue];
-
-        }
-        else {
-            NSLog(@"error getting size for url %@ error was %@", tripURL, fileSizeError);
+        count = abs(totalTrips - minimumTripsToSend);
+        for (int i = totalTrips; i > count ; i --){
+            NSLog(@"%d",i);
+            NSURL *tripURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Trip-%d.json", i]];
+            NSURL *tripInfoURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"TripInfo-%d.json", i]];
+            NSNumber *fileSizeValueForTripInfo = nil;
+            NSNumber *fileSizeValueForTrip = nil;
+            NSError *fileSizeError = nil;
+            [tripURL getResourceValue:&fileSizeValueForTrip
+                               forKey:NSURLFileSizeKey
+                                error:&fileSizeError];
+            [tripInfoURL getResourceValue:&fileSizeValueForTripInfo
+                                   forKey:NSURLFileSizeKey
+                                    error:&fileSizeError];
+            
+            if (fileSizeValueForTrip && fileSizeValueForTripInfo) {
+                totalBytes += [fileSizeValueForTrip longLongValue];
+                totalBytes += [fileSizeValueForTripInfo longLongValue];
+                
+            }
+            else {
+                NSLog(@"error getting size for url %@ error was %@", tripURL, fileSizeError);
+            }
         }
     }
+    else{
+        for (int i = 1; i <= totalTrips ; i ++){
+            NSLog(@"%d",i);
+            NSURL *tripURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Trip-%d.json", i]];
+            NSURL *tripInfoURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"TripInfo-%d.json", i]];
+            NSNumber *fileSizeValueForTripInfo = nil;
+            NSNumber *fileSizeValueForTrip = nil;
+            NSError *fileSizeError = nil;
+            [tripURL getResourceValue:&fileSizeValueForTrip
+                               forKey:NSURLFileSizeKey
+                                error:&fileSizeError];
+            [tripInfoURL getResourceValue:&fileSizeValueForTripInfo
+                                   forKey:NSURLFileSizeKey
+                                    error:&fileSizeError];
+            
+            if (fileSizeValueForTrip && fileSizeValueForTripInfo) {
+                totalBytes += [fileSizeValueForTrip longLongValue];
+                totalBytes += [fileSizeValueForTripInfo longLongValue];
+                
+            }
+            else {
+                NSLog(@"error getting size for url %@ error was %@", tripURL, fileSizeError);
+            }
+        }
+    }
+
+    
     NSString *displayFileSize = [NSByteCountFormatter stringFromByteCount:totalBytes
                                                                countStyle:NSByteCountFormatterCountStyleFile];
     return displayFileSize;
 
 }
--(NSString* )createZipFilesWithPath{
+-(NSString* )createZipFilesWithPath:(BOOL)allTrips{
+    //copy document folder into temp
+    //
     NSString * documentDirectory = [Utility getDocumentDirectory];
     NSString *tempDir = NSTemporaryDirectory();
+    NSMutableArray *pathsArr = [[NSMutableArray alloc]initWithArray:[Utility getAllDocumentsPrefLinks] copyItems:YES];
+    int totalTrips = ad.trips.tripInfos.count;
+    int count = 0;
+
+    if (!allTrips && totalTrips > minimumTripsToSend){
+        count = abs(totalTrips - minimumTripsToSend);
+        for (int i = totalTrips; i > count ; i --){
+                NSString * pathTrip = [NSString stringWithFormat:@"%@/Trip-%d.json",Utility.getDocumentDirectory,i];
+                NSString * pathTripInfo = [NSString stringWithFormat:@"%@/TripInfo-%d.json",Utility.getDocumentDirectory,i];
+            [pathsArr addObject: pathTrip];
+            [pathsArr addObject: pathTripInfo];
+
+        }
+//        + (BOOL)createZipFileAtPath:(NSString *)path withFilesAtPaths:(NSArray<NSString *> *)paths
+    }
+    else{
+        for (int i = 1; i <= totalTrips ; i ++){
+            NSString * pathTrip = [NSString stringWithFormat:@"%@/Trip-%d.json",Utility.getDocumentDirectory,i];
+            NSString * pathTripInfo = [NSString stringWithFormat:@"%@/TripInfo-%d.json",Utility.getDocumentDirectory,i];
+            [pathsArr addObject: pathTrip];
+            [pathsArr addObject: pathTripInfo];
+        }
+    }
     NSString* zipfile = @"";
     zipfile = [tempDir stringByAppendingPathComponent:[NSString stringWithFormat:@"/Logger.zip"]];
     NSLog(@"%@",zipfile);
-    BOOL isZipCreated=[SSZipArchive createZipFileAtPath:zipfile withContentsOfDirectory:documentDirectory];
+    BOOL isZipCreated=[SSZipArchive createZipFileAtPath:zipfile withFilesAtPaths:pathsArr];
     if (!isZipCreated){
         NSLog(@"Zip file cannot be created");
     }
     return zipfile;
 }
--(void)sendZipToServer{
-    NSString *fileName = @"Logger.zip";
-    NSString *zipFilePath = [self createZipFilesWithPath];
+
+-(void)sendZipToServerWithAllTrips:(BOOL)allTrips{
+    NSString *zipFilePath = [self createZipFilesWithPath:allTrips];
     NSLog(@"Zip file Created at Path : %@",zipFilePath);
     NSData *zipData = [NSData dataWithContentsOfFile:zipFilePath];
     
-    NSString *urlString = [NSString stringWithFormat:@"https://vm2.mcc.tu-berlin.de:8082/12/debug?clientHash=%@",NSString.clientHash];
-    /* creating URL request to send data */
+    NSString *urlString = [NSString stringWithFormat:@"https://vm1.mcc.tu-berlin.de:8082/12/debug?clientHash=%@",NSString.clientHash];
+    urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+
+//     creating URL request to send data
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
     [request setURL:[NSURL URLWithString:urlString]];
@@ -123,26 +181,26 @@
     [request setHTTPMethod:@"POST"];
     
     NSString *boundary = @"*****";
+    NSString *lineEnd = @"\r\n";
+    NSString *twoHyphens = @"--";
     
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    
-    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
     [request addValue:@"Keep-Alive" forHTTPHeaderField:@"Connection"];
-    /* adding content as a body to post */
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data;boundary=%@",boundary];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+//     adding content as a body to post
     
     NSMutableData *body = [NSMutableData data];
     
-    NSString *header = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\".%@\"\r\n",[fileName stringByDeletingPathExtension],[fileName pathExtension]];
     
-    [body appendData:[[NSString stringWithFormat:@"-–%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    
+    [body appendData:[[NSString stringWithFormat:@"%@%@%@",twoHyphens,boundary,lineEnd] dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString *header = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\";filename=\"zip.zip\"\r\n"];
     [body appendData:[[NSString stringWithString:header] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"%@",lineEnd] dataUsingEncoding:NSUTF8StringEncoding]];
     
     [body appendData:[NSData dataWithData:zipData]];
     
-    [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"%@",lineEnd] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"%@%@%@%@",twoHyphens,boundary,twoHyphens,lineEnd] dataUsingEncoding:NSUTF8StringEncoding]];
 
     [request setHTTPBody:body];
     NSURLSession *session = [NSURLSession sharedSession];
@@ -150,22 +208,39 @@
                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                       {
         // do something with the data
+        if (error != nil){
+            NSLog(@"upload error:%@",error);
+        }
+        else{
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
         NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+            if (httpResponse.statusCode == 200){
+                NSLog(@"upload success：%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [UIAlertController showAlertWithTitle:NSLocalizedString(@"SimRa", @"SimRa")  message:NSLocalizedString(@"Files uploaded successfully", @"Files uploaded") style:UIAlertControllerStyleAlert buttonFirstTitle:NSLocalizedString(@"Ok", @"Ok") buttonFirstAction:^{
+                        
+                    } over:self];
+                });
 
-        NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-        NSData * responseData = [requestReply dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-        NSLog(@"requestReply: %@", jsonDict);
+            }
+            else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [UIAlertController showAlertWithTitle:NSLocalizedString(@"SimRa", @"SimRa")  message:NSLocalizedString(@"Something went wrong. Please try again later", @"Something went wrong. Please try again later") style:UIAlertControllerStyleAlert buttonFirstTitle:NSLocalizedString(@"Ok", @"Ok") buttonFirstAction:^{
+                        
+                    } over:self];
+                });
+
+
+            }
+        }
     }];
     [dataTask resume];
-//    NSData *returnData = [[NSURLSession alloc] init];
-    
-//    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding] ;
     
 
 
 }
+
+
 -(void)showTotalRidesAlert{
     // get all trips
     
@@ -185,7 +260,7 @@
                                      style:UIAlertActionStyleDefault
                                      handler:^(UIAlertAction * action) {
         //Handle your yes please button action here
-        [self sendZipToServer];
+        [self sendZipToServerWithAllTrips:true];
     }];
     [alert addAction:allRidesButton];
 
@@ -196,7 +271,7 @@
                                      actionWithTitle:fewRidesTitle
                                      style:UIAlertActionStyleDefault
                                      handler:^(UIAlertAction * action) {
-        //Handle no, thanks button
+        [self sendZipToServerWithAllTrips:false];
     }];
     [alert addAction:fewRidesButton];
     }

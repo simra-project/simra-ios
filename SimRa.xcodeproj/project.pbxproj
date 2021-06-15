@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0970067372FFAB52EE7B49B4 /* Pods_SimRa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */; };
+		63143E5726665AD000997995 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63143E5626665AD000997995 /* Enums.swift */; };
 		6383AC412657E9B00038F3AE /* ProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC402657E9B00038F3AE /* ProfileTVC.m */; };
 		6383AC4A2657EBF60038F3AE /* TripsSettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC492657EBF60038F3AE /* TripsSettingsTVC.m */; };
 		6383AC682657F3F80038F3AE /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC672657F3F80038F3AE /* Utility.swift */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimRa.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimRa/Pods-SimRa.release.xcconfig"; sourceTree = "<group>"; };
+		63143E5626665AD000997995 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		6383AC3F2657E9B00038F3AE /* ProfileTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileTVC.h; sourceTree = "<group>"; };
 		6383AC402657E9B00038F3AE /* ProfileTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileTVC.m; sourceTree = "<group>"; };
 		6383AC482657EBF60038F3AE /* TripsSettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripsSettingsTVC.h; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				6383AC662657F3F70038F3AE /* SimRa-Bridging-Header.h */,
 				6383AC6C2657F48D0038F3AE /* Constants.swift */,
 				63882B7E265C474400E147D9 /* Extensions.swift */,
+				63143E5626665AD000997995 /* Enums.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				84DD1E99224C0028004895F9 /* main.m in Sources */,
 				6383AC4A2657EBF60038F3AE /* TripsSettingsTVC.m in Sources */,
 				8471D0E425E25EE4003F154E /* News.m in Sources */,
+				63143E5726665AD000997995 /* Enums.swift in Sources */,
 				8471D0EA25E2DC5B003F154E /* NewsVC.m in Sources */,
 				6383AC682657F3F80038F3AE /* Utility.swift in Sources */,
 				849CA147224D3C6600CE45EB /* IdPicker.m in Sources */,

@@ -38,7 +38,9 @@
     
     [self update];
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [Utility writeSimRaPrefs];
+}
 - (void)update {
     AppDelegate *ad = [AppDelegate sharedDelegate];
     
@@ -52,6 +54,8 @@
     self.childSeat.on = [ad.defaults boolForKey:@"childSeat"];
     self.trailer.on = [ad.defaults boolForKey:@"trailer"];
     self.AI.on = [ad.defaults boolForKey:@"AI"];
+    
+
 }
 
 - (IBAction)deferredSecsChanged:(UISlider *)sender {

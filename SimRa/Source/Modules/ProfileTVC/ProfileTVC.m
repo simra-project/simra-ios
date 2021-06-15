@@ -49,7 +49,9 @@
     
     [self update];
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+    [self writeToProfilePlist];
+}
 - (void)update {
     AppDelegate *ad = [AppDelegate sharedDelegate];
     
@@ -115,7 +117,11 @@
     chrt.bounds = self.totalSlots.bounds;
     [self.totalSlots addSubview:chrt];
 }
+-(void)writeToProfilePlist{
+    [Utility writeProfile];
 
+     
+}
 - (IBAction)closestPressed:(UIButton *)sender {
     self.ac = [UIAlertController
                alertControllerWithTitle:NSLocalizedString(@"Closest Regions to your Location",
@@ -178,7 +184,8 @@
 }
 
 - (IBAction)regionChanged:(IdPicker *)sender {
-    [Utility loadRegionBasedPreferenceFileDataWithRegionId:sender.arrayIndex];
+//    [Utility loadRegionBasedPreferenceFileDataWithRegionId:sender.arrayIndex];
+    [Utility saveIntWithKey:@"selected" value:sender.arrayIndex];
 
     AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.regions selectId:sender.arrayIndex];
@@ -188,7 +195,7 @@
 - (IBAction)experienceChanged:(IdPicker *)sender {
 //    AppDelegate *ad = [AppDelegate sharedDelegate];
     [Utility saveIntWithKey:@"experienceId" value:sender.arrayIndex];
-
+    
 //    [ad.defaults setInteger:sender.arrayIndex forKey:@"experienceId"];
 }
 

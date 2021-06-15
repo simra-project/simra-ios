@@ -9,7 +9,7 @@
 #import "UploaderObject.h"
 #import "AppDelegate.h"
 #import "NSString+hashCode.h"
-
+#import "SimRa-Swift.h"
 // This is only necessary because the backend uses a self signed
 // certificate currently
 // If the certificate will be replaced by a certificate issued
@@ -57,7 +57,7 @@
 - (void)save {
     // must override
 }
-
+//second
 - (void)uploadFile:(NSString *)name WithController:(id)controller error:(SEL)error completion:(SEL)completion {
     NSURL *csvFile = self.csvFile;
 
@@ -70,6 +70,11 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;
     if (self.fileHash && self.filePasswd) {
+        if ([self.fileHash  isEqual: @""] || [self.filePasswd  isEqual: @""]){
+            NSArray *keyPass = [Utility getKeyPasswrdForRegion];
+            self.fileHash = keyPass[0];
+            self.filePasswd = keyPass[1];
+        }
         urlString = [NSString stringWithFormat:@"%@//%@/%d/%@?fileHash=%@&filePassword=%@&loc=%@&clientHash=%@",
                      UPLOAD_SCHEME, UPLOAD_HOST, UPLOAD_VERSION,
                      name,
@@ -107,7 +112,7 @@
                          NSError *connectionError) {
 
          NSError *fmError;
-         [[NSFileManager defaultManager] removeItemAtURL:csvFile error:&fmError];
+//         [[NSFileManager defaultManager] removeItemAtURL:csvFile error:&fmError];
 
          if (connectionError) {
              NSLog(@"connectionError %@", connectionError);
@@ -128,6 +133,10 @@
                          if (components.count == 2) {
                              self.fileHash = components[0];
                              self.filePasswd = components[1];
+                             // store here keys and password
+                             NSString *key = [NSString stringWithFormat:@"Profile_%ld",(long)ad.regions.regionId];
+                             NSString *value = [NSString stringWithFormat:@"%@,%@",self.fileHash,self.filePasswd];
+                             [Utility writeToKeyPrefsWithKey:key val:value];
                          }
                      }
                      self.version++;

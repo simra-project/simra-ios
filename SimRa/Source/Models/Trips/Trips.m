@@ -154,7 +154,8 @@
 - (NSURL *)csvFile {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSURL *temporaryDirectory = fm.temporaryDirectory;
-    NSURL *fileURL = [temporaryDirectory URLByAppendingPathComponent:@"trips.csv"];
+//    NSURL *directory = [NSURL URLWithString:[Utility getDocumentDirectory]];
+    NSURL *fileURL = [temporaryDirectory URLByAppendingPathComponent:@"/trips.csv"];
     [fm createFileAtPath:fileURL.path
                 contents:[[NSData alloc] init]
               attributes:nil];
@@ -218,9 +219,14 @@
 //                    forKey:[@"filePasswd" withRegionId:ad.regions.regionId]];
     [Utility saveStringWithKey:[@"fileHash" withRegionId:ad.regions.regionId] value:self.fileHash];
     [Utility saveStringWithKey:[@"filePasswd" withRegionId:ad.regions.regionId] value:self.filePasswd];
-
+    [self saveUploadedTripToPlist];
+    
+    
 }
 
+-(void)saveUploadedTripToPlist{
+    [Utility writeRegionBasedProfile];
+}
 - (void)addTripToStatistics:(Trip *)trip {
     AppDelegate *ad = [AppDelegate sharedDelegate];
 
@@ -295,6 +301,8 @@
 //    [ad.defaults setObject:totalSlots
 //                    forKey:[@"totalSlots" withRegionId:regionId]];
     [Utility saveArrayWithKey:[@"totalSlots" withRegionId:regionId] value:totalSlots];
+
+    [Utility writeProfile];
 
 }
 
