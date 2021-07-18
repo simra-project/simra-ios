@@ -23,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UISwitch *childSeat;
 @property (weak, nonatomic) IBOutlet UISwitch *trailer;
 @property (weak, nonatomic) IBOutlet UISwitch *AI;
+@property (weak, nonatomic) IBOutlet UISwitch *openBikeSensorSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *btnOpenBikeSensorSettings;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraintOBSbtn;
 
 @end
 
@@ -43,7 +46,8 @@
 }
 - (void)update {
     AppDelegate *ad = [AppDelegate sharedDelegate];
-    
+    self.openBikeSensorSwitch.on = [ad.defaults boolForKey:@"openBikeSensor"];
+    [self openBikeSensorConfig:self.openBikeSensorSwitch.on];
     self.bikeType.arrayIndex = [ad.defaults integerForKey:@"bikeTypeId"];
     self.position.arrayIndex = [ad.defaults integerForKey:@"positionId"];
     
@@ -106,5 +110,24 @@
     [Utility saveBoolWithKey:@"AI" value:sender.on];
 
 }
+- (IBAction)openBikeSensorChanged:(UISwitch *)sender {
+    [self openBikeSensorConfig:sender.on];
+}
+-(void)openBikeSensorConfig:(BOOL)on{
+    self.btnOpenBikeSensorSettings.hidden = !on;
+    if (!on){
+        self.heightConstraintOBSbtn.constant = 0;
+    }
+    else{
+        self.heightConstraintOBSbtn.constant = 35;
+    }
+    [self.view layoutIfNeeded];
+    [Utility saveBoolWithKey:@"openBikeSensor" value:on];
+
+}
+- (IBAction)didTapOBSConfigBtn:(id)sender {
+//    [self.navigationController performSegueWithIdentifier:@"obsConfig" sender:self];
+}
+
 
 @end

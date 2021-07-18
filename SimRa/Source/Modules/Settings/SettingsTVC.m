@@ -67,8 +67,6 @@
     NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory
                                                       inDomains:NSUserDomainMask].firstObject;
     if (!allTrips && totalTrips > minimumTripsToSend){
-//        [[NSFileManager defaultManager] createDirectoryAtPath:[NSTemporaryDirectory() stringByAppendingPathComponent:@"/Documents/"]
-//                                  withIntermediateDirectories:YES attributes:nil error:nil];
 
         count = abs(totalTrips - minimumTripsToSend);
         for (int i = totalTrips; i > count ; i --){
@@ -292,9 +290,6 @@
     UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapOnVersion:)];
     tapGesture.numberOfTapsRequired = 1;
     [self.versionCell addGestureRecognizer:tapGesture];
-    //    tapGesture.delegate = self;
-    
-    
 }
 - (void)update {
     self.version.text = [NSString stringWithFormat:@"%@-%@-%@",
@@ -361,4 +356,9 @@
     }];
 }
 
+- (IBAction)openBikeSensorSwitch:(id)sender {
+}
+
+- (IBAction)btnOpenBikeSensorSettings:(id)sender {
+}
 @end

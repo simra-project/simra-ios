@@ -8,11 +8,11 @@
 
 #import "AppDelegate.h"
 #import "SimRa-Swift.h"
+#import "BLEManager.h"
 @interface AppDelegate ()
+
 @end
-
 @implementation AppDelegate
-
 + (AppDelegate*)sharedDelegate {
     return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
@@ -34,8 +34,26 @@
     [self.trips save];
     NSURL *constantsURL = [[NSBundle mainBundle] URLForResource:@"constants" withExtension:@"plist"];
     self.constants = [NSDictionary dictionaryWithContentsOfURL:constantsURL];
-
+//    self.bleManager = [BluetoothManager getInstance];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNotificationForBluetooth:)
+                                                 name:nil
+                                               object:[BluetoothManager getInstance]];
+//    BLEManager * test = [BLEManager sharedManager];
+//    test.someProperty = @"hamza";
     return YES;
+}
+- (void) receiveNotificationForBluetooth:(NSNotification *) notification{
+    NSString * notificationName = notification.name;
+    if ([notificationName isEqualToString:@"disconnectNotif"]){
+
+        NSLog(@"Peripheral Disconnected");
+       UIViewController * topController =  [UIApplication sharedApplication].keyWindow.rootViewController.presentedViewController;
+        [UIAlertController showAlertWithTitle:@"SimRa" message:@"Device disconnected" style:UIAlertControllerStyleAlert buttonFirstTitle:@"Return" buttonFirstAction:^{} over:topController];
+    }
+    else if ([notificationName isEqualToString:@"characteristicNotif"]){
+        
+    }
 }
 -(void)createPrefsFiles{
     [Utility createSimraPrefs];

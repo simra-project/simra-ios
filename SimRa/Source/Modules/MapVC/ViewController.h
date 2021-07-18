@@ -12,6 +12,7 @@
 
 @interface ViewController : UIViewController <MKMapViewDelegate>
 
+@property (nonatomic, strong) BluetoothManager *bleManager;
 
 @end
 

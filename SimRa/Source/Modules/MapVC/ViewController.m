@@ -14,7 +14,7 @@
 #import "MyTripsTVC.h"
 #import "News.h"
 #import "Regions.h"
-
+#import "BLEManager.h"
 @interface MyAnnotation: NSObject <MKAnnotation>
 @property (strong, nonatomic) CLLocation *location;
 - (instancetype)initWithLocation:(CLLocation *)location;
@@ -47,16 +47,17 @@
 
 @property (strong, nonatomic) UIAlertController *ac;
 @property (nonatomic) NSInteger queued;
+@property (strong, nonatomic) UIButton *openBikeSensorConfigButton;
 
 @property (nonatomic) BOOL initialMessagePassed;
 
 @end
 
 @implementation ViewController
-
+@synthesize bleManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.mapView.delegate = self;
     self.mapView.showsScale = TRUE;
     self.mapView.showsCompass = TRUE;
@@ -66,7 +67,6 @@
     self.trackingButton = [MKUserTrackingButton userTrackingButtonWithMapView:self.mapView];
     self.trackingButton.translatesAutoresizingMaskIntoConstraints = false;
     [self.view addSubview:self.trackingButton];
-
     NSLayoutConstraint *a = [NSLayoutConstraint constraintWithItem:self.trackingButton
                                                          attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual
                                                             toItem:self.view.safeAreaLayoutGuide
@@ -81,7 +81,7 @@
                                                           constant:-10];
 
     [NSLayoutConstraint activateConstraints:@[a, b]];
-
+    [self setupOpenBikeSensor];
     self.playButton.enabled = TRUE;
     self.stopButton.enabled = FALSE;
     self.navigationItem.leftBarButtonItem.enabled = TRUE;
@@ -90,6 +90,8 @@
     self.dummyButton.title = NSLocalizedString(@"Not Recording", @"Not Recording");
 
     AppDelegate *ad = [AppDelegate sharedDelegate];
+    
+
     [ad.news addObserver:self
               forKeyPath:@"newsVersion"
                  options:NSKeyValueObservingOptionNew
@@ -98,8 +100,39 @@
                  forKeyPath:@"loaded"
                     options:NSKeyValueObservingOptionNew
                     context:nil];
-}
+    [self setupBluetooth];
 
+//    bleManager = BluetoothManager.shared;
+    
+//    NSLog(@"%@",test.someProperty);
+}
+-(void)setupBluetooth{
+    bleManager = [BluetoothManager getInstance];
+//    [bleManager initCBCentralManager];
+//    NSMutableArray *delegates = [bleManager.delegates mutableCopy];
+//    [delegates addObject:self];
+//    bleManager.delegates = [delegates copy];
+    if (bleManager.connectedPeripheral != nil){
+        [bleManager disconnectPeripheral];
+    }
+    bleManager.delegate = self;
+}
+-(void)viewDidDisappear:(BOOL)animated{
+//    [bleManager removeMultipleDelegateInstance:self];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    AppDelegate *ad = [AppDelegate sharedDelegate];
+    
+    BOOL showHideOpenBikeSensor = [ad.defaults boolForKey:@"openBikeSensor"];
+    
+    [self showHideOpenBikeSensorConfigButton:showHideOpenBikeSensor];
+    NSLog([bleManager connected] ? @"Yes" : @"No");
+    NSLog(@" Name of the connected device: %@",bleManager.connectedPeripheral.name);
+//    if (![ad.defaults boolForKey:@"openBikeSensor"]){
+//        [self.openBikeSensorConfigButton setEnabled:NO];
+//        [self.openBikeSensorConfigButton setTintColor: [UIColor clearColor]];
+//    }
+}
 - (void)viewDidAppear:(BOOL)animated {
     AppDelegate *ad = [AppDelegate sharedDelegate];
     //[ad.defaults setBool:FALSE forKey:@"initialMessage"];
@@ -136,7 +169,48 @@
         [self checkRegions];
     }
 }
-
+-(void)setupOpenBikeSensor{
+    self.openBikeSensorConfigButton = [[UIButton alloc]init];
+    self.openBikeSensorConfigButton.translatesAutoresizingMaskIntoConstraints = false;
+    [self.openBikeSensorConfigButton setBackgroundImage:[UIImage imageNamed:@"bluetooth"] forState:UIControlStateNormal];
+    [self.openBikeSensorConfigButton addTarget:self action:@selector(didTapOnOBSConfig) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.openBikeSensorConfigButton];
+    NSLayoutConstraint *bottomConstraintOBS = [NSLayoutConstraint constraintWithItem:self.openBikeSensorConfigButton
+                                                                           attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.view.safeAreaLayoutGuide
+                                                                           attribute:NSLayoutAttributeBottom
+                                                                          multiplier:1
+                                                                            constant:-70];
+    NSLayoutConstraint *trainlingConstraintOBS = [NSLayoutConstraint constraintWithItem:self.openBikeSensorConfigButton
+                                                                              attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual
+                                                                                 toItem:self.view.safeAreaLayoutGuide
+                                                                              attribute:NSLayoutAttributeTrailing
+                                                                             multiplier:1
+                                                                               constant:-10];
+    NSLayoutConstraint *widthConstraintOBS = [NSLayoutConstraint constraintWithItem:self.openBikeSensorConfigButton
+                                                                          attribute:NSLayoutAttributeWidth
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:nil
+                                                                          attribute: NSLayoutAttributeNotAnAttribute
+                                                                         multiplier:1
+                                                                           constant:40];
+    NSLayoutConstraint *heightConstraintOBS = [NSLayoutConstraint constraintWithItem:self.openBikeSensorConfigButton
+                                                                           attribute:NSLayoutAttributeHeight
+                                                                           relatedBy:NSLayoutRelationEqual
+                                                                              toItem:nil
+                                                                           attribute: NSLayoutAttributeNotAnAttribute
+                                                                          multiplier:1
+                                                                            constant:40];
+    
+    [NSLayoutConstraint activateConstraints:@[bottomConstraintOBS,trainlingConstraintOBS,widthConstraintOBS,heightConstraintOBS]];
+}
+-(void)didTapOnOBSConfig{
+    [self performSegueWithIdentifier:@"obsConfig" sender:self];
+    
+}
+-(void)showHideOpenBikeSensorConfigButton:(BOOL)showBtn{
+    [self.openBikeSensorConfigButton setHidden:!showBtn];
+}
 - (void)checkRegions {
     if (!self.initialMessagePassed) {
         return;
