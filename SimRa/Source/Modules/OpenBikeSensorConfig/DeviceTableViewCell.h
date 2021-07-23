@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DeviceTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *deviceNameLabel;
--(void)configCell:(CBPeripheral *)peripheral;
+-(void)configCell:(CBPeripheral *)peripheral row:(int)row;
 -(void)configEmptyCell:(NSString *)str;
 @end
 

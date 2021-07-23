@@ -7,7 +7,7 @@
 //
 
 import CoreBluetooth
-
+import TTGSnackbar
 @objc public class BluetoothManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     @objc var _manager : CBCentralManager?
@@ -26,7 +26,8 @@ import CoreBluetooth
     @objc var logs = [String]()
     @objc private(set) var connectedPeripheral : CBPeripheral?
     @objc private(set) var connectedServices : [CBService]?
-    
+    @objc var characteristicsDic = [CBUUID : [CBCharacteristic]]()
+
     /// Save the single instance
     static private var instance : BluetoothManager {
         return sharedInstance
@@ -89,6 +90,18 @@ import CoreBluetooth
         _manager?.stopScan()
     }
     
+    @objc func addCharacteristics(_ service : CBService){
+        characteristicsDic[service.uuid] = service.characteristics
+    }
+    @objc func getSpecificCharacteristic(_ service : CBService , _ characteristicUUID : String)-> CBCharacteristic?{
+        if let storedService = characteristicsDic[service.uuid]{
+            if let index = storedService.firstIndex(where: {$0.uuid.uuidString == characteristicUUID}){
+                return storedService[index]
+            }
+
+        }
+        return nil
+    }
     /**
      The method provides for connecting the special peripheral
      
@@ -110,9 +123,23 @@ import CoreBluetooth
             _manager?.cancelPeripheralConnection(connectedPeripheral!)
             startScanPeripheral()
             connectedPeripheral = nil
+            characteristicsDic.removeAll()
         }
     }
     
+    @objc func showConnectedState(){
+        guard connectedPeripheral != nil else { return }
+        guard let peripheralName = connectedPeripheral?.name else { return }
+        
+        let snackbar = TTGSnackbar(message: "\(peripheralName) connected", duration: .middle)
+        snackbar.cornerRadius = 2
+        
+        // Change separate line back color
+//        snackbar.separateViewBackgroundColor = .
+        
+        snackbar.animationType = .slideFromTopBackToTop
+        snackbar.show()
+    }
     /**
      The method provides for the user who want to obtain the descriptor
      
@@ -268,6 +295,7 @@ import CoreBluetooth
         }
         connected = true
         connectedPeripheral = peripheral
+        self.showConnectedState()
 //        delegates.forEach{ delegate in
             delegate?.didConnectedPeripheral?(peripheral)
 //        }
@@ -398,9 +426,23 @@ import CoreBluetooth
 //            }
             return
         }
+        guard let data = characteristic.value else {
+            delegate?.didFailToReadValueForCharacteristic?(error!)
+
+            return
+        }
+      
 //        delegates.forEach{ delegate in
             delegate?.didReadValueForCharacteristic?(characteristic)
 //        }
     }
-    
+    @objc func getByteArray(characteristic : CBCharacteristic)-> [UInt8]{
+        guard let data = characteristic.value else {
+            return []
+        }
+        let numberOfBytes = data.count
+        var byteArray = [UInt8](repeating: 0, count: numberOfBytes)
+        (data as NSData).getBytes(&byteArray, length: numberOfBytes)
+        return byteArray
+    }
 }

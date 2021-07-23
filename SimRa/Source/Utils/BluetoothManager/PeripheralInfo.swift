@@ -11,12 +11,15 @@ import CoreBluetooth
 class PeripheralInfos: NSObject {
     @objc let peripheral: CBPeripheral
     @objc var RSSI: Int = 0
+    @objc var name: String
+
     @objc var advertisementData: [String: Any] = [:]
     @objc var lastUpdatedTimeInterval: TimeInterval
     
     @objc init(_ peripheral: CBPeripheral) {
         self.peripheral = peripheral
         self.lastUpdatedTimeInterval = Date().timeIntervalSince1970
+        self.name = peripheral.name ?? ""
     }
     
     static func == (lhs: PeripheralInfos, rhs: PeripheralInfos) -> Bool {

@@ -19,8 +19,8 @@
 
     // Configure the view for the selected state
 }
--(void)configCell:(CBPeripheral *)peripheral{
-    self.deviceNameLabel.text = peripheral.name;
+-(void)configCell:(CBPeripheral *)peripheral row:(int)row{
+    self.deviceNameLabel.text = [NSString stringWithFormat:@"%d- %@",row, peripheral.name];
 }
 -(void)configEmptyCell:(NSString *)str{
     self.deviceNameLabel.text = str;

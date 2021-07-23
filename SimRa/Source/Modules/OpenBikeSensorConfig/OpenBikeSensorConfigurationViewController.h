@@ -11,7 +11,7 @@
 #import "SimRa-Swift.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface OpenBikeSensorConfigurationViewController : UIViewController<UIPickerViewDelegate, UIPickerViewDataSource,UITableViewDelegate, UITableViewDataSource, BluetoothDelegate>
+@interface OpenBikeSensorConfigurationViewController : UIViewController<UIPickerViewDelegate, UIPickerViewDataSource,UITableViewDelegate, UITableViewDataSource, BluetoothDelegate, CBPeripheralDelegate>
 @property (nonatomic) BluetoothManager *bleManager;
 //@property (strong, nonatomic) CBCentralManager *centralManager;
 //@property (strong, nonatomic) CBPeripheral *obsPeripheral;

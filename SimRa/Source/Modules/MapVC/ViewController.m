@@ -126,12 +126,8 @@
     BOOL showHideOpenBikeSensor = [ad.defaults boolForKey:@"openBikeSensor"];
     
     [self showHideOpenBikeSensorConfigButton:showHideOpenBikeSensor];
-    NSLog([bleManager connected] ? @"Yes" : @"No");
-    NSLog(@" Name of the connected device: %@",bleManager.connectedPeripheral.name);
-//    if (![ad.defaults boolForKey:@"openBikeSensor"]){
-//        [self.openBikeSensorConfigButton setEnabled:NO];
-//        [self.openBikeSensorConfigButton setTintColor: [UIColor clearColor]];
-//    }
+    [self.bleManager showConnectedState];
+
 }
 - (void)viewDidAppear:(BOOL)animated {
     AppDelegate *ad = [AppDelegate sharedDelegate];
