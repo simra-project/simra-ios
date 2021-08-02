@@ -307,26 +307,29 @@
                                  preferredStyle:UIAlertControllerStyleAlert];
     [self presentViewController:ac animated:TRUE completion:nil];
     [self.trip stopRecording];
-    [ac dismissViewControllerAnimated:TRUE completion:nil];
+    [ac dismissViewControllerAnimated:TRUE completion:^{
+        
+        self.recordedTrip = self.trip;
+        [self performSegueWithIdentifier:@"trips:" sender:nil];
+        
+        self.trip = nil;
+        
+        self.annotationView.recording = FALSE;
+        self.annotationView.speed = 0.0;
+        self.annotationView.course = 0.0;
+        self.annotationView.accx = 0.0;
+        self.annotationView.accy = 0.0;
+        self.annotationView.accz = 0.0;
+        [self.annotationView setNeedsDisplay];
+        
+        self.playButton.enabled = TRUE;
+        self.stopButton.enabled = FALSE;
+        self.navigationItem.leftBarButtonItem.enabled = TRUE;
+        self.navigationItem.rightBarButtonItem.enabled = TRUE;
+        self.dummyButton.title = NSLocalizedString(@"Not Recording", @"Not Recording");
+    }];
+//    [ac dismissViewControllerAnimated:TRUE completion:nil];
     
-    self.recordedTrip = self.trip;
-    [self performSegueWithIdentifier:@"trips:" sender:nil];
-
-    self.trip = nil;
-    
-    self.annotationView.recording = FALSE;
-    self.annotationView.speed = 0.0;
-    self.annotationView.course = 0.0;
-    self.annotationView.accx = 0.0;
-    self.annotationView.accy = 0.0;
-    self.annotationView.accz = 0.0;
-    [self.annotationView setNeedsDisplay];
-
-    self.playButton.enabled = TRUE;
-    self.stopButton.enabled = FALSE;
-    self.navigationItem.leftBarButtonItem.enabled = TRUE;
-    self.navigationItem.rightBarButtonItem.enabled = TRUE;
-    self.dummyButton.title = NSLocalizedString(@"Not Recording", @"Not Recording");
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

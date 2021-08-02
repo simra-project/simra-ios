@@ -236,10 +236,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setup];
-//    if (!self.trip.uploaded && !self.initialTripDetail) {
-//        self.initialTripDetail = TRUE;
-//        [self performSegueWithIdentifier:@"tripDetail:" sender:nil];
-//    }
+    if (!self.trip.uploaded && !self.initialTripDetail) {
+        self.initialTripDetail = TRUE;
+        [self performSegueWithIdentifier:@"tripDetail:" sender:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
