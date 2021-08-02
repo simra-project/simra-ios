@@ -33,6 +33,11 @@
 @end
 
 @interface ViewController ()
+{
+    CBCharacteristic * closePassCharacteristic;
+    CBUUID *closePassCharacteristicCBUUID;
+
+}
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *playButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *stopButton;
@@ -57,7 +62,6 @@
 @synthesize bleManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.mapView.delegate = self;
     self.mapView.showsScale = TRUE;
     self.mapView.showsCompass = TRUE;
@@ -108,26 +112,26 @@
 }
 -(void)setupBluetooth{
     bleManager = [BluetoothManager getInstance];
-//    [bleManager initCBCentralManager];
-//    NSMutableArray *delegates = [bleManager.delegates mutableCopy];
-//    [delegates addObject:self];
-//    bleManager.delegates = [delegates copy];
     if (bleManager.connectedPeripheral != nil){
         [bleManager disconnectPeripheral];
     }
-    bleManager.delegate = self;
+    closePassCharacteristicCBUUID = [CBUUID UUIDWithString: @"1FE7FAF9-CE63-4236-0004-000000000003"];
+}
+-(void)setupConnectedBluetoothDevice{
+    if ([self.bleManager connected]){
+        [self.bleManager showConnectedState];
+        bleManager.delegate = self;
+        NSArray *serviceArr = [NSArray arrayWithObject:closePassCharacteristicCBUUID];
+        [self.bleManager.connectedPeripheral discoverServices:serviceArr];
+    }
 }
 -(void)viewDidDisappear:(BOOL)animated{
-//    [bleManager removeMultipleDelegateInstance:self];
 }
 -(void)viewWillAppear:(BOOL)animated{
     AppDelegate *ad = [AppDelegate sharedDelegate];
-    
     BOOL showHideOpenBikeSensor = [ad.defaults boolForKey:@"openBikeSensor"];
-    
     [self showHideOpenBikeSensorConfigButton:showHideOpenBikeSensor];
-    [self.bleManager showConnectedState];
-
+    [self setupConnectedBluetoothDevice];
 }
 - (void)viewDidAppear:(BOOL)animated {
     AppDelegate *ad = [AppDelegate sharedDelegate];
@@ -358,13 +362,15 @@
 
 - (void)update {
     self.queued--;
-    //NSLog(@"Queued O: %ld", (long)self.queued);
+//    NSLog(@"Queued O: %ld", (long)self.queued);
+
     if (!self.queued) {
         if (self.annotationView) {
             self.annotationView.recording = self.trip != nil;
             if (self.trip) {
                 if (self.trip.lastLocation) {
-                    //NSLog(@"update lastLocation %@", self.trip.lastLocation);
+                    
+//                    NSLog(@"update lastLocation %f", self.trip.lastLocation.coordinate.latitude);
                     self.annotationView.speed = self.trip.lastLocation.speed;
                     self.annotationView.course = self.trip.lastLocation.course;
                 }
@@ -437,4 +443,51 @@
         }
     }
 }
+
+# pragma mark -
+# pragma mark - Core Bluetooth
+
+-(void)didDiscoverCharacteritics:(CBService *)service{
+    [self connectToClosePassCharacteristic:service];
+}
+-(void)connectToClosePassCharacteristic:(CBService *)service{
+    closePassCharacteristic = [self.bleManager getSpecificCharacteristic:service.UUID :closePassCharacteristicCBUUID.UUIDString];
+    if (closePassCharacteristic != nil){
+        [self.bleManager discoverDescriptor:closePassCharacteristic];
+        [self .bleManager setNotificationWithEnable:YES forCharacteristic:closePassCharacteristic];
+
+    }
+}
+- (void)didDiscoverDescriptors:(CBCharacteristic *)characteristic{
+    NSLog(@"CharacteristicController --> didDiscoverDescriptors");
+    
+    if ([characteristic.UUID.UUIDString isEqualToString:closePassCharacteristic.UUID.UUIDString]){
+        closePassCharacteristic = characteristic;
+    }
+}
+
+- (void)didReadValueForCharacteristic:(CBCharacteristic *)characteristic{
+//    NSLog(@"CharacteristicController --> didReadValueForCharacteristic");
+    NSArray<NSNumber *> *byteArray = [self.bleManager getByteArrayWithCharacteristic:characteristic];
+    
+    if ([characteristic.UUID.UUIDString isEqualToString:closePassCharacteristic.UUID.UUIDString]){
+//        NSLog(@"closs pass characteristic:");
+//        NSLog(@"Data: %@",byteArray);
+        
+        NSNumber * leftSensor = [self.bleManager compareLeftSensorLeastSignificantBitWithBytes:byteArray];
+        
+        NSNumber * rightSensor = [self.bleManager compareRightSensorLeastSignificantBitWithBytes:byteArray];
+//        NSLog(@"LEFT SENSOR: %@",leftSensor);
+//        NSLog(@"RIGHT SENSOR: %@",rightSensor);
+        if (!self.playButton.isEnabled){
+            [self.trip storeClosePassValueForTripWithLeftSensorVal:leftSensor rightSensorVal:rightSensor];
+        }
+
+    }
+    
+}
+- (void)didDiscoverServices:(CBPeripheral *)peripheral{
+    [self.bleManager discoverCharacteristics];
+}
+
 @end

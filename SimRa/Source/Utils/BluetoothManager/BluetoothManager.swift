@@ -93,8 +93,8 @@ import TTGSnackbar
     @objc func addCharacteristics(_ service : CBService){
         characteristicsDic[service.uuid] = service.characteristics
     }
-    @objc func getSpecificCharacteristic(_ service : CBService , _ characteristicUUID : String)-> CBCharacteristic?{
-        if let storedService = characteristicsDic[service.uuid]{
+    @objc func getSpecificCharacteristic(_ serviceUUID : CBUUID , _ characteristicUUID : String)-> CBCharacteristic?{
+        if let storedService = characteristicsDic[serviceUUID]{
             if let index = storedService.firstIndex(where: {$0.uuid.uuidString == characteristicUUID}){
                 return storedService[index]
             }
@@ -119,6 +119,7 @@ import TTGSnackbar
      The method provides for disconnecting with the peripheral which has connected
      */
     @objc func disconnectPeripheral() {
+        self.showDisconnectedState()
         if connectedPeripheral != nil {
             _manager?.cancelPeripheralConnection(connectedPeripheral!)
             startScanPeripheral()
@@ -130,13 +131,18 @@ import TTGSnackbar
     @objc func showConnectedState(){
         guard connectedPeripheral != nil else { return }
         guard let peripheralName = connectedPeripheral?.name else { return }
-        
         let snackbar = TTGSnackbar(message: "\(peripheralName) connected", duration: .middle)
         snackbar.cornerRadius = 2
-        
-        // Change separate line back color
-//        snackbar.separateViewBackgroundColor = .
-        
+        snackbar.backgroundColor = UIColor.green
+        snackbar.animationType = .slideFromTopBackToTop
+        snackbar.show()
+    }
+    @objc func showDisconnectedState(){
+        guard connectedPeripheral != nil else { return }
+        guard let peripheralName = connectedPeripheral?.name else { return }
+        let snackbar = TTGSnackbar(message: "\(peripheralName) disconnected", duration: .middle)
+        snackbar.cornerRadius = 2
+        snackbar.backgroundColor = UIColor.red
         snackbar.animationType = .slideFromTopBackToTop
         snackbar.show()
     }
@@ -407,7 +413,8 @@ import TTGSnackbar
 //        delegates.forEach{ delegate in
             delegate?.didDisconnectPeripheral?(peripheral)
 //        }
-        notifCenter.post(name: NSNotification.Name(rawValue: PeripheralNotificationKeys.DisconnectNotif.rawValue), object: self)
+        self.showDisconnectedState()
+//        notifCenter.post(name: NSNotification.Name(rawValue: PeripheralNotificationKeys.DisconnectNotif.rawValue), object: self)
     }
     
     /**
@@ -444,5 +451,13 @@ import TTGSnackbar
         var byteArray = [UInt8](repeating: 0, count: numberOfBytes)
         (data as NSData).getBytes(&byteArray, length: numberOfBytes)
         return byteArray
+    }
+    @objc func compareLeftSensorLeastSignificantBit(bytes : [UInt8])->NSNumber{
+        let lsb = ((bytes[5] & 0xFF) << 8 ) | (bytes[4] & 0xFF);
+        return NSNumber(value: lsb)
+    }
+    @objc func compareRightSensorLeastSignificantBit(bytes : [UInt8])->NSNumber{
+        let lsb = ((bytes[7] & 0xFF) << 8 ) | (bytes[6] & 0xFF);
+        return NSNumber(value: lsb)
     }
 }

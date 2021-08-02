@@ -80,14 +80,15 @@
 }
 - (void)viewWillDisappear:(BOOL)animated {
     NSLog(@"Scanning stopped");
+
     [bleManager stopScanPeripheral];
+    [self.bleManager setNotificationWithEnable:NO forCharacteristic:sensorCharacteristic];
+
     [super viewWillDisappear:animated];
 }
 -(void)setupBluetooth{
     bleManager = [BluetoothManager getInstance];
     bleManager.delegate = self;
- 
-
     if (bleManager.connected != true){
         devicesHeightConstraint.constant = HEIGHT_DEVICE_VIEW;
         [self.activityIndicator startAnimating];
@@ -95,12 +96,17 @@
         [self.devicesTableView reloadData];
         [scanningView setHidden:NO];
         [offsetView setHidden:YES];
-
     }
     else{
         devicesHeightConstraint.constant = 0;
         [scanningView setHidden:YES];
         [offsetView setHidden:NO];
+//        sensorCharacteristic = [
+        sensorCharacteristic = [bleManager getSpecificCharacteristic:_oBSServiceUUID :@"1FE7FAF9-CE63-4236-0004-000000000002"];
+        if (sensorCharacteristic != nil){
+            [self.bleManager setNotificationWithEnable:YES forCharacteristic:sensorCharacteristic];
+
+        }
 
     }
     [self.view layoutIfNeeded];
@@ -242,14 +248,14 @@
 
 }
 -(void)connectToOffsetCharacteristic:(CBService *)service{
-    offSetCharacteristic = [self.bleManager getSpecificCharacteristic:service :self.offsetCharacteristicCBUUID.UUIDString];
+    offSetCharacteristic = [self.bleManager getSpecificCharacteristic:service.UUID :self.offsetCharacteristicCBUUID.UUIDString];
     if (offSetCharacteristic != nil){
         [self.bleManager discoverDescriptor:offSetCharacteristic];
         [self.bleManager readValueForCharacteristicWithCharacteristic:offSetCharacteristic];
     }
 }
 -(void)connectToSensorDistanceCharacteristic:(CBService *)service{
-    sensorCharacteristic = [self.bleManager getSpecificCharacteristic:service :_sensorDistanceCharacteristicCBUUID.UUIDString];
+    sensorCharacteristic = [self.bleManager getSpecificCharacteristic:service.UUID :_sensorDistanceCharacteristicCBUUID.UUIDString];
     if (sensorCharacteristic != nil){
         [self.bleManager discoverDescriptor:sensorCharacteristic];
         [self .bleManager setNotificationWithEnable:YES forCharacteristic:sensorCharacteristic];
@@ -261,8 +267,8 @@
 
     if ([characteristic.UUID.UUIDString isEqualToString:sensorCharacteristic.UUID.UUIDString]){
         NSLog(@"Sensor characteristic:");
-        NSNumber *leftSensorVal = byteArray[4];
-        NSNumber * rightSensorVal = byteArray[6];
+        NSNumber *leftSensorVal = [self.bleManager compareLeftSensorLeastSignificantBitWithBytes:byteArray];// byteArray[4];
+        NSNumber * rightSensorVal = [self.bleManager compareRightSensorLeastSignificantBitWithBytes:byteArray];//byteArray[6];
         [self setClosePassBarColorWithDistance:[leftSensorVal intValue]];
     }
     else {
@@ -342,22 +348,6 @@
     }
   
 }
-/*
- private void setClosePassBarColor(int distanceInCm) {
- int maxColorValue = Math.min(distanceInCm, 200); // 200 cm ist maximum, das grün
- // Algoritmus found https://stackoverflow.com/questions/340209/generate-colors-between-red-and-green-for-a-power-meter
- // Da n zwischen 0 -100 liegen soll und das maximum 200 ist, dann halbieren immer den Wert.
- int normalizedValue = maxColorValue / 2;
- int red = (255 * (100 - normalizedValue)) / 100;
- int green = (255 * normalizedValue) / 100;
- int blue = 0;
- // Color und Progress sind abhängig
- binding.progressBarClosePass.setProgressTintList(ColorStateList.valueOf(Color.rgb(red, green, blue)));
- binding.progressBarClosePass.setProgress(normalizedValue);
- }
-
- */
-
 -(void)setClosePassBarColorWithDistance: (int)distance{
     NSLog(@"res: %.f", fmin(5,10));
     

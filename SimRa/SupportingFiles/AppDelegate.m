@@ -35,10 +35,10 @@
     NSURL *constantsURL = [[NSBundle mainBundle] URLForResource:@"constants" withExtension:@"plist"];
     self.constants = [NSDictionary dictionaryWithContentsOfURL:constantsURL];
 //    self.bleManager = [BluetoothManager getInstance];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(receiveNotificationForBluetooth:)
-//                                                 name:nil
-//                                               object:[BluetoothManager getInstance]];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNotificationForBluetooth:)
+                                                 name:nil
+                                               object:[BluetoothManager getInstance]];
 //    BLEManager * test = [BLEManager sharedManager];
 //    test.someProperty = @"hamza";
     return YES;

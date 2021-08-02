@@ -235,11 +235,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (!self.trip.uploaded && !self.initialTripDetail) {
-        self.initialTripDetail = TRUE;
-        [self performSegueWithIdentifier:@"tripDetail:" sender:nil];
-    }
     [self setup];
+//    if (!self.trip.uploaded && !self.initialTripDetail) {
+//        self.initialTripDetail = TRUE;
+//        [self performSegueWithIdentifier:@"tripDetail:" sender:nil];
+//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -317,7 +317,10 @@
     
     self.rangeSlider.minValue = 0;
     self.rangeSlider.maxValue = self.trip.tripLocations.count - 1;
-    
+//    if (self.trip.closePassArr.count > 0){
+//        [self addClosePassAnnotations];
+////        NSLog(@"%@",)
+//    }
     if (self.trip.tripLocations.count > 0) {
         if (!self.tripTrack) {
             self.tripTrack = [[TripTrack alloc] init];
@@ -355,7 +358,6 @@
                     TripPoint *tripPoint = [[TripPoint alloc] init];
                     tripPoint.title = incidents[tripLocation.tripAnnotation.incidentId];
                     tripPoint.tripLocation = tripLocation;
-                    
                     [self.tripPoints addObject:tripPoint];
                     [self.mapView addAnnotation:tripPoint];
                 }
@@ -467,14 +469,44 @@ calloutAccessoryControlTapped:(UIControl *)control {
             TripPoint *tripPoint = (TripPoint *)view.annotation;
             tripPoint.tripLocation.tripAnnotation = nil;
             //NSLog(@"before %@", mapView.annotations);
-            [mapView removeAnnotation:tripPoint];
             //NSLog(@"after %@", mapView.annotations);
-            [self.tripPoints removeObject:tripPoint];
+            for (int i = 0; i <= self.tripPoints.count; i++){
+                TripPoint * tp = self.tripPoints[i];
+                if ([tp isEqual:tripPoint]){
+                    [self.tripPoints removeObjectAtIndex:i];
+                    break;
+                }
+            }
+//            [self.tripPoints removeObject:tripPoint];
+            [mapView removeAnnotation:tripPoint];
             self.changed = TRUE;
         }
     }
 }
-
+-(void)addClosePassAnnotations{
+    if(!self.trip.uploaded && !self.trip.statisticsAdded){
+//        for (ClosePassInfo *closePassInfo in self.trip.closePassArr){
+//
+//            CLLocation *lastLocationForClosePass = closePassInfo.location;
+//            AppDelegate *ad = [AppDelegate sharedDelegate];
+//            NSArray <NSString *> *incidents = [ad.constants mutableArrayValueForKey:@"incidents"];
+//            TripLocation *closestTripLocation = self.trip.tripLocations.firstObject;
+//            CLLocationDistance closestDistance = [closestTripLocation.location distanceFromLocation:lastLocationForClosePass];
+//            for (TripLocation *tripLocation in self.trip.tripLocations) {
+//                if ([tripLocation.location distanceFromLocation:lastLocationForClosePass] < closestDistance) {
+//                    closestDistance = [tripLocation.location distanceFromLocation:lastLocationForClosePass];
+//                    closestTripLocation = tripLocation;
+//                }
+//            }
+//            closestTripLocation.tripAnnotation = closePassInfo.tripAnnotation;
+//            TripPoint *tripPoint = [[TripPoint alloc] init];
+//            tripPoint.title = incidents[closePassInfo.tripAnnotation.incidentId];
+//            tripPoint.tripLocation = closestTripLocation;
+//            [self.tripPoints addObject:tripPoint];
+//            [self.mapView addAnnotation:tripPoint];
+//        }
+    }
+}
 - (IBAction)longPressed:(UILongPressGestureRecognizer *)sender {
     if (!self.trip.uploaded && !self.trip.statisticsAdded) {
         
@@ -533,6 +565,10 @@ calloutAccessoryControlTapped:(UIControl *)control {
         TripPoint *tripPoint = (TripPoint *)sender;
         annotationTVC.tripAnnotation = tripPoint.tripLocation.tripAnnotation;
         annotationTVC.changed = FALSE;
+//        annotationTVC.isClosePassAdded = tripPoint.closePassAdded;
+//        if (tripPoint.closePassAdded){
+//            annotationTVC.closePassInfo = tripPoint.closePassInfo;
+//        }
     }
     if ([segue.destinationViewController isKindOfClass:[TripDetailTVC class]]) {
         TripDetailTVC *tripDetailTVC = (TripDetailTVC *)segue.destinationViewController;

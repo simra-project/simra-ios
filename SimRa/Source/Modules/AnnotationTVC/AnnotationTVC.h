@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AnnotationTVC : UITableViewController <UITextViewDelegate>
 @property (weak, nonatomic) TripAnnotation *tripAnnotation;
 @property (nonatomic) BOOL changed;
+//@property (weak, nonatomic) NSDictionary *closePassInfo;
+//@property (nonatomic) BOOL isClosePassAdded;
 
 @end
 

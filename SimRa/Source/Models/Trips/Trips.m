@@ -204,7 +204,7 @@
 }
 
 - (void)save {
-    AppDelegate *ad = [AppDelegate sharedDelegate];
+     AppDelegate *ad = [AppDelegate sharedDelegate];
 //    [ad.defaults setInteger:self.version
 //                     forKey:[@"version" withRegionId:ad.regions.regionId]];
     [Utility saveIntWithKey:[@"version" withRegionId:ad.regions.regionId] value:self.version];

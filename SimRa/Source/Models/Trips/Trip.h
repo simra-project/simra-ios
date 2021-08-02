@@ -50,12 +50,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) double z;
 @end
 
+@interface ClosePassInfo: NSObject
+
+@property (strong, nonatomic) CLLocation * location;
+//@property (strong, nonatomic, nullable) TripAnnotation *tripAnnotation;
+@property (strong, nonatomic) NSNumber * rightSensorValue;
+@property (strong, nonatomic) NSNumber * leftSensorValue;
+
+@end
+
 @interface TripLocation : NSObject
 @property (strong, nonatomic) CLLocation *location;
 @property (strong, nonatomic) TripGyro *gyro;
 @property (strong, nonatomic) NSMutableArray <TripMotion *> *tripMotions;
 @property (strong, nonatomic, nullable) TripAnnotation *tripAnnotation;
+@property (strong, nonatomic) ClosePassInfo *closePassInfo;
 @end
+
+
 
 @interface TripInfo : NSObject
 @property (nonatomic) NSInteger identifier;
@@ -83,6 +95,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) CLLocation *lastLocation;
 @property (strong, nonatomic, readonly) TripMotion *lastTripMotion;
 @property (strong, nonatomic) NSMutableArray <TripLocation *> *tripLocations;
+//@property (strong, nonatomic)     NSMutableArray<ClosePassInfo *> * closePassArr;
+
 @property (nonatomic, readonly) NSInteger deferredSecs;
 @property (nonatomic, readonly) NSInteger deferredMeters;
 @property (nonatomic) NSInteger bikeTypeId;
@@ -108,6 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)idle;
 - (TripInfo *)tripInfo;
 - (void)successfullyReUploaded;
+-(void)storeClosePassValueForTripWithLeftSensorVal: (NSNumber *)leftSensorVal rightSensorVal: (NSNumber *)rightSensorVal;
 @end
 
 NS_ASSUME_NONNULL_END
