@@ -462,27 +462,20 @@
     }
 }
 - (void)didDiscoverDescriptors:(CBCharacteristic *)characteristic{
-    NSLog(@"CharacteristicController --> didDiscoverDescriptors");
-    
     if ([characteristic.UUID.UUIDString isEqualToString:closePassCharacteristic.UUID.UUIDString]){
         closePassCharacteristic = characteristic;
     }
 }
 
 - (void)didReadValueForCharacteristic:(CBCharacteristic *)characteristic{
-//    NSLog(@"CharacteristicController --> didReadValueForCharacteristic");
     NSArray<NSNumber *> *byteArray = [self.bleManager getByteArrayWithCharacteristic:characteristic];
-    
+    //when the close pass button is pressed
     if ([characteristic.UUID.UUIDString isEqualToString:closePassCharacteristic.UUID.UUIDString]){
-//        NSLog(@"closs pass characteristic:");
-//        NSLog(@"Data: %@",byteArray);
-        
+        //get left and right sensor values
         NSNumber * leftSensor = [self.bleManager compareLeftSensorLeastSignificantBitWithBytes:byteArray];
-        
         NSNumber * rightSensor = [self.bleManager compareRightSensorLeastSignificantBitWithBytes:byteArray];
-//        NSLog(@"LEFT SENSOR: %@",leftSensor);
-//        NSLog(@"RIGHT SENSOR: %@",rightSensor);
         if (!self.playButton.isEnabled){
+            // if recording the trip, store values in the trip.
             [self.trip storeClosePassValueForTripWithLeftSensorVal:leftSensor rightSensorVal:rightSensor];
         }
 

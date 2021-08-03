@@ -417,8 +417,12 @@
             tripPoint = (TripPoint *)annotation;
             if (tripPoint.tripLocation.tripAnnotation.incidentId == 0) {
                 pinAnnotationView.pinTintColor = [UIColor orangeColor];
+                [[pinAnnotationView superview] sendSubviewToBack:pinAnnotationView];
+
             } else {
                 pinAnnotationView.pinTintColor = [UIColor blueColor];
+                [[pinAnnotationView superview] bringSubviewToFront:pinAnnotationView];
+
             }
         } else {
             pinAnnotationView.pinTintColor = MKPinAnnotationView.purplePinColor;;
@@ -445,7 +449,27 @@
         return nil;
     }
 }
-
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    for (MKAnnotationView * annView in views) {
+        TripPoint *tripPoint;
+        if ([annView isKindOfClass:[TripPoint class]]) {
+            tripPoint = (TripPoint *)annView;
+            if (tripPoint.tripLocation.tripAnnotation.incidentId == 1) {
+                [[annView superview] bringSubviewToFront:annView];
+            } else {
+                [[annView superview] sendSubviewToBack:annView];
+            }
+        }
+//        if annView is
+//        TopBottomAnnotation * ann = (TopBottomAnnotation *) [annView annotation];
+//        if ([ann top]) {
+//            [[annView superview] bringSubviewToFront:annView];
+//        } else {
+//            [[annView superview] sendSubviewToBack:annView];
+//        }
+    }
+    
+}
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView
             rendererForOverlay:(id<MKOverlay>)overlay {
     if ([overlay isKindOfClass:[TripTrack class]]) {

@@ -679,23 +679,21 @@
     return tripLocationDict;
 }
 -(void)storeClosePassValueForTripWithLeftSensorVal: (NSNumber *)leftSensorVal rightSensorVal: (NSNumber *)rightSensorVal{
+    //create a closePassInfo object
+    //create a trip annotation object
+    //store it in the last location captured
+    //these are then saved and retrieved after the recording of the trip is finished.
     ClosePassInfo *closePassInfo = [[ClosePassInfo alloc]init];
     closePassInfo.leftSensorValue = leftSensorVal;
     closePassInfo.rightSensorValue = rightSensorVal;
-//    closePassInfo.location = self.lastLocation;
-    TripAnnotation *tripAnnotation = [[TripAnnotation alloc] init];
-    tripAnnotation.incidentId = 1;
-    tripAnnotation.comment = [NSString stringWithFormat:@"Open Bike Sensor Close Pass incident reading\n Left Sensor: %@\n Right Sensor: %@\n", leftSensorVal, rightSensorVal];
-//    //    closePassInfo.tripAnnotation = tripAnnotation;
-    self.tripLocations.lastObject.tripAnnotation = tripAnnotation;
-//    .incidentId = 1;
-//    self.tripLocations.lastObject.tripAnnotation.comment = [NSString stringWithFormat:@"Open Bike Sensor Close Pass incident reading\n Left Sensor: %@\n Right Sensor: %@\n", leftSensorVal, rightSensorVal];
+//    TripAnnotation *tripAnnotation = [[TripAnnotation alloc] init];
+//    tripAnnotation.incidentId = 1;
+//    tripAnnotation.comment = [NSString stringWithFormat:@"Open Bike Sensor Close Pass incident reading\n Left Sensor: %@\n Right Sensor: %@\n", leftSensorVal, rightSensorVal];
+//    self.tripLocations.lastObject.tripAnnotation = tripAnnotation;
+
     self.tripLocations.lastObject.closePassInfo = closePassInfo;
     NSLog(@"close pass left sensor value: %@",self.tripLocations.lastObject.closePassInfo.leftSensorValue);
     NSLog(@"close pass right sensor value: %@",self.tripLocations.lastObject.closePassInfo.rightSensorValue);
-
-
-    //    [self.closePassArr addObject:closePassInfo];
     NSLog(@"Close pass value stored");
 }
 
@@ -1013,8 +1011,21 @@
     if ([ad.defaults boolForKey:@"AI"]) {
         [self AIIncidentDetection];
     } else {
-        if (![BluetoothManager getInstance].connected){
+//        if (![BluetoothManager getInstance].connected){
             [self offlineIncidentDectection];
+//        }
+    }
+    for ( int i = 0; i < _tripLocations.count; i++){
+        TripLocation *tripLoc = _tripLocations[i];
+        if (tripLoc.closePassInfo != nil){
+            NSLog(@"%f Lat", tripLoc.location.coordinate.latitude);
+            NSLog(@"%f long", tripLoc.location.coordinate.longitude);
+
+            TripAnnotation *tripAnnotation = [[TripAnnotation alloc] init];
+            tripAnnotation.incidentId = 1;
+            tripAnnotation.comment = [NSString stringWithFormat:@"Open Bike Sensor Close Pass incident reading\n Left Sensor: %@\n Right Sensor: %@\n", tripLoc.closePassInfo.leftSensorValue, tripLoc.closePassInfo.rightSensorValue];
+//            self.tripLocations.lastObject.tripAnnotation = tripAnnotation;
+            _tripLocations[i].tripAnnotation = tripAnnotation;
         }
     }
     
