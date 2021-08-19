@@ -108,6 +108,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)idle;
 - (TripInfo *)tripInfo;
 - (void)successfullyReUploaded;
+- (NSURL *)gpxFile;
+- (NSURL *)geoJSONFile;
+- (NSURL *)kmlFile;
+
 @end
 
 NS_ASSUME_NONNULL_END

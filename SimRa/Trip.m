@@ -765,6 +765,107 @@
     return fileURL;
 }
 
+- (NSURL *)gpxFile {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSURL *temporaryDirectory = fm.temporaryDirectory;
+    NSURL *fileURL = [temporaryDirectory URLByAppendingPathComponent:@"trip.gpx"];
+    [fm createFileAtPath:fileURL.path
+                contents:[[NSData alloc] init]
+              attributes:nil];
+    NSFileHandle *fh = [NSFileHandle fileHandleForWritingAtPath:fileURL.path];
+
+    NSString *csvString;
+
+    csvString = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n";
+    [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+    csvString = @"<gpx version=\"1.1\" creator=\"SimRa iOS\"><trk><trkseg>\n";
+    [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    for (TripLocation *tripLocation in self.tripLocations) {
+        CLLocationDegrees lat = tripLocation.location.coordinate.latitude;
+        CLLocationDegrees lon = tripLocation.location.coordinate.longitude;
+
+        csvString = [NSString stringWithFormat:@"<trkpt lat=\"%f\" lon=\"%f\"></trkpt>\n",
+                     lat,
+                     lon];
+        [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+
+    csvString = @"</trkseg></trk></gpx>\n";
+    [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [fh closeFile];
+    return fileURL;
+}
+
+- (NSURL *)geoJSONFile {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSURL *temporaryDirectory = fm.temporaryDirectory;
+    NSURL *fileURL = [temporaryDirectory URLByAppendingPathComponent:@"trip.geojson"];
+    [fm createFileAtPath:fileURL.path
+                contents:[[NSData alloc] init]
+              attributes:nil];
+    NSFileHandle *fh = [NSFileHandle fileHandleForWritingAtPath:fileURL.path];
+
+    NSString *csvString;
+    BOOL separator = FALSE;
+
+    csvString = @"{\"type\":\"LineString\",\"coordinates\":[\n";
+    [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    for (TripLocation *tripLocation in self.tripLocations) {
+        CLLocationDegrees lat = tripLocation.location.coordinate.latitude;
+        CLLocationDegrees lon = tripLocation.location.coordinate.longitude;
+
+        csvString = [NSString stringWithFormat:@"%@[%f,%f]\n",
+                     separator ? @"," : @"",
+                     lon,
+                     lat];
+        separator = TRUE;
+        [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+
+    csvString = @"]}\n";
+    [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [fh closeFile];
+    return fileURL;
+}
+
+- (NSURL *)kmlFile {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSURL *temporaryDirectory = fm.temporaryDirectory;
+    NSURL *fileURL = [temporaryDirectory URLByAppendingPathComponent:@"trip.kml"];
+    [fm createFileAtPath:fileURL.path
+                contents:[[NSData alloc] init]
+              attributes:nil];
+    NSFileHandle *fh = [NSFileHandle fileHandleForWritingAtPath:fileURL.path];
+
+    NSString *csvString;
+
+    csvString = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n";
+    [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+    csvString = @"<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document><Placemark id=\"Simra\"><LineString id=\"Simra\"><coordinates>\n";
+    [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    for (TripLocation *tripLocation in self.tripLocations) {
+        CLLocationDegrees lat = tripLocation.location.coordinate.latitude;
+        CLLocationDegrees lon = tripLocation.location.coordinate.longitude;
+
+        csvString = [NSString stringWithFormat:@"%f,%f\n",
+                     lon,
+                     lat];
+        [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+
+    csvString = @"</coordinates></LineString></Placemark></Document></kml>\n";
+    [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [fh closeFile];
+    return fileURL;
+}
+
+
 - (void)startRecording {
     AppDelegate *ad = [AppDelegate sharedDelegate];
     self.deferredSecs = [ad.defaults integerForKey:@"deferredSecs"];

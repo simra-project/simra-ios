@@ -49,6 +49,15 @@
 /* MyTrips View Context menu export title */
 "Manual Export" = "Manueller Export";
 
+/* MyTrips View Context menu export GPX title */
+"GPX Export" = "GPX Export";
+
+/* MyTrips View Context menu export GeoJSON title */
+"GeoJSON Export" = "GeoJSON Export";
+
+/* MyTrips View Context menu export KML title */
+"KML Export" = "KML Export";
+
 /* New */
 "New" = "Neu";
 
