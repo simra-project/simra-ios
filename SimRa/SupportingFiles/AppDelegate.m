@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "SimRa-Swift.h"
-#import "BLEManager.h"
 @interface AppDelegate ()
 
 @end
@@ -31,16 +30,13 @@
     [self.lm requestWhenInUseAuthorization];
     self.mm = [[CMMotionManager alloc] init];
     self.trips = [[Trips alloc] init];
-    [self.trips save];
+    [self.trips     save];
     NSURL *constantsURL = [[NSBundle mainBundle] URLForResource:@"constants" withExtension:@"plist"];
     self.constants = [NSDictionary dictionaryWithContentsOfURL:constantsURL];
-//    self.bleManager = [BluetoothManager getInstance];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveNotificationForBluetooth:)
                                                  name:nil
                                                object:[BluetoothManager getInstance]];
-//    BLEManager * test = [BLEManager sharedManager];
-//    test.someProperty = @"hamza";
     return YES;
 }
 - (void) receiveNotificationForBluetooth:(NSNotification *) notification{

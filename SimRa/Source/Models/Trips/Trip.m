@@ -678,7 +678,7 @@
     }
     return tripLocationDict;
 }
--(void)storeClosePassValueForTripWithLeftSensorVal: (NSNumber *)leftSensorVal rightSensorVal: (NSNumber *)rightSensorVal{
+-(void)storeClosePassValueForTripWithLeftSensorVal: (NSNumber *)leftSensorVal rightSensorVal: (NSNumber *)rightSensorVal {
     //create a closePassInfo object
     //create a trip annotation object
     //store it in the last location captured
@@ -686,17 +686,17 @@
     ClosePassInfo *closePassInfo = [[ClosePassInfo alloc]init];
     closePassInfo.leftSensorValue = leftSensorVal;
     closePassInfo.rightSensorValue = rightSensorVal;
-//    TripAnnotation *tripAnnotation = [[TripAnnotation alloc] init];
-//    tripAnnotation.incidentId = 1;
-//    tripAnnotation.comment = [NSString stringWithFormat:@"Open Bike Sensor Close Pass incident reading\n Left Sensor: %@\n Right Sensor: %@\n", leftSensorVal, rightSensorVal];
-//    self.tripLocations.lastObject.tripAnnotation = tripAnnotation;
-
     self.tripLocations.lastObject.closePassInfo = closePassInfo;
     NSLog(@"close pass left sensor value: %@",self.tripLocations.lastObject.closePassInfo.leftSensorValue);
     NSLog(@"close pass right sensor value: %@",self.tripLocations.lastObject.closePassInfo.rightSensorValue);
     NSLog(@"Close pass value stored");
 }
-
+-(void)storeClosePassValuesForTripCSVWithLeftSensor1Val: (NSNumber *)leftSensor1Val leftSensor2Val: (NSNumber *)leftSensor2Val rightSensor1Val: (NSNumber *)rightSensor1Val rightSensor2Val: (NSNumber *)rightSensor2Val{
+    self.tripLocations.lastObject.closePassInfo.leftSensor1Value = leftSensor1Val;
+    self.tripLocations.lastObject.closePassInfo.leftSensor2Value = leftSensor1Val;
+    self.tripLocations.lastObject.closePassInfo.rightSensor1Value = rightSensor1Val;
+    self.tripLocations.lastObject.closePassInfo.rightSensor2Value = rightSensor2Val;
+}
 
 - (NSData *)asJSONData {
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self.asDictionary
@@ -812,7 +812,21 @@
             gyro = nil;
         }
         
-        csvString = [csvString stringByAppendingString:@",,,,,"]; // OBS Values
+        NSString *isClosePassEvent = @"0"; // means false
+        NSString *leftSensorVal1 = @"";
+        NSString *leftSensorVal2 = @"";
+        NSString *rightSensorVal1 = @"";
+        NSString *rightSensorVal2 = @"";
+
+        if (tripLocation.closePassInfo != nil){
+            isClosePassEvent = @"1";
+            leftSensorVal1 = tripLocation.closePassInfo.leftSensor1Value.stringValue;
+            leftSensorVal2 = tripLocation.closePassInfo.leftSensor2Value.stringValue;
+            rightSensorVal1 = tripLocation.closePassInfo.rightSensor1Value.stringValue;
+            rightSensorVal2 = tripLocation.closePassInfo.rightSensor2Value.stringValue;
+        }
+        
+        csvString = [csvString stringByAppendingFormat:@"%@,%@,%@,%@,%@",leftSensorVal1,leftSensorVal2,rightSensorVal1,rightSensorVal2,isClosePassEvent]; // OBS Values
         csvString = [csvString stringByAppendingString:@",,,,,,"]; // Linear Giro Values
         csvString = [csvString stringByAppendingString:@"\n"];
         

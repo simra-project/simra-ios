@@ -54,9 +54,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong, nonatomic) CLLocation * location;
 //@property (strong, nonatomic, nullable) TripAnnotation *tripAnnotation;
-@property (strong, nonatomic) NSNumber * rightSensorValue;
-@property (strong, nonatomic) NSNumber * leftSensorValue;
+@property (strong, nonatomic) NSNumber * rightSensorValue; // total value
+@property (strong, nonatomic) NSNumber * leftSensorValue; // total value
+@property (strong, nonatomic) NSNumber * leftSensor1Value; // individual
+@property (strong, nonatomic) NSNumber * leftSensor2Value; // individual
+@property (strong, nonatomic) NSNumber * rightSensor1Value;// individual
+@property (strong, nonatomic) NSNumber * rightSensor2Value;// individual
 
+@property (nonatomic) int detectionType;
+// detection type == 1 = user tapped the button
+// detection type == 2 = automatic detection
 @end
 
 @interface TripLocation : NSObject
@@ -123,6 +130,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (TripInfo *)tripInfo;
 - (void)successfullyReUploaded;
 -(void)storeClosePassValueForTripWithLeftSensorVal: (NSNumber *)leftSensorVal rightSensorVal: (NSNumber *)rightSensorVal;
+-(void)storeClosePassValuesForTripCSVWithLeftSensor1Val: (NSNumber *)leftSensor1Val leftSensor2Val: (NSNumber *)leftSensor2Val rightSensor1Val: (NSNumber *)rightSensor1Val rightSensor2Val: (NSNumber *)rightSensor2Val;
+
 @end
 
 NS_ASSUME_NONNULL_END

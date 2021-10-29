@@ -38,6 +38,7 @@ This app needs permission to access your location data in order to show you your
 This app needs permission to access your location data in order to show you your location on the map and to record your rides.</string>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>bluetooth-central</string>
 		<string>location</string>
 	</array>

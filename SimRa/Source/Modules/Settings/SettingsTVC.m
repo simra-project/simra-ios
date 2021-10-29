@@ -143,7 +143,6 @@
             [pathsArr addObject: pathTripInfo];
 
         }
-//        + (BOOL)createZipFileAtPath:(NSString *)path withFilesAtPaths:(NSArray<NSString *> *)paths
     }
     else{
         for (int i = 1; i <= totalTrips ; i ++){
@@ -167,15 +166,11 @@
     NSString *zipFilePath = [self createZipFilesWithPath:allTrips];
     NSLog(@"Zip file Created at Path : %@",zipFilePath);
     NSData *zipData = [NSData dataWithContentsOfFile:zipFilePath];
-    
     NSString *urlString = [NSString stringWithFormat:@"https://vm1.mcc.tu-berlin.de:8082/12/debug?clientHash=%@",NSString.clientHash];
     urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
-
 //     creating URL request to send data
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    
     [request setURL:[NSURL URLWithString:urlString]];
-    
     [request setHTTPMethod:@"POST"];
     
     NSString *boundary = @"*****";
@@ -186,26 +181,19 @@
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data;boundary=%@",boundary];
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
 //     adding content as a body to post
-    
     NSMutableData *body = [NSMutableData data];
-    
-    
     [body appendData:[[NSString stringWithFormat:@"%@%@%@",twoHyphens,boundary,lineEnd] dataUsingEncoding:NSUTF8StringEncoding]];
     NSString *header = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\";filename=\"zip.zip\"\r\n"];
     [body appendData:[[NSString stringWithString:header] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"%@",lineEnd] dataUsingEncoding:NSUTF8StringEncoding]];
-    
     [body appendData:[NSData dataWithData:zipData]];
-    
     [body appendData:[[NSString stringWithFormat:@"%@",lineEnd] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"%@%@%@%@",twoHyphens,boundary,twoHyphens,lineEnd] dataUsingEncoding:NSUTF8StringEncoding]];
-
     [request setHTTPBody:body];
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request
                                                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
                                       {
-        // do something with the data
         if (error != nil){
             NSLog(@"upload error:%@",error);
         }
@@ -216,7 +204,6 @@
                 NSLog(@"upload success：%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [UIAlertController showAlertWithTitle:NSLocalizedString(@"SimRa", @"SimRa")  message:NSLocalizedString(@"Files uploaded successfully", @"Files uploaded") style:UIAlertControllerStyleAlert buttonFirstTitle:NSLocalizedString(@"Ok", @"Ok") buttonFirstAction:^{
-                        
                     } over:self];
                 });
 
@@ -227,15 +214,10 @@
                         
                     } over:self];
                 });
-
-
             }
         }
     }];
     [dataTask resume];
-    
-
-
 }
 
 

@@ -101,61 +101,13 @@
         devicesHeightConstraint.constant = 0;
         [scanningView setHidden:YES];
         [offsetView setHidden:NO];
-//        sensorCharacteristic = [
         sensorCharacteristic = [bleManager getSpecificCharacteristic:_oBSServiceUUID :@"1FE7FAF9-CE63-4236-0004-000000000002"];
         if (sensorCharacteristic != nil){
             [self.bleManager setNotificationWithEnable:YES forCharacteristic:sensorCharacteristic];
-
         }
-
     }
     [self.view layoutIfNeeded];
-
 }
-
-/*
--(void)setupPickerViewDataSource{
-    self.distanceArr = [[NSMutableArray alloc]init];
-    
-    for (int i = 1 ; i <= 60 ; i ++){
-        [self.distanceArr addObject: [NSNumber numberWithInt: i]];
-    }
-}
-
-#pragma mark -
-#pragma mark PickerView DataSource
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
-        return [self.distanceArr count];
-    
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component
-{
-        return [NSString stringWithFormat:@"%@",[self.distanceArr objectAtIndex:row]];
-}
-#pragma mark -
-#pragma mark PickerView Delegate
-
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
-      inComponent:(NSInteger)component
-{
-   
-        NSString *resultString = [[NSString alloc] initWithFormat:
-                                  @"Distance: %@",
-                                  [self.distanceArr objectAtIndex:row]];
-        NSLog(@"%@",resultString);
-}
-
- */
 
 #pragma mark -
 #pragma mark - Custom functions
@@ -199,7 +151,6 @@
 - (void)didUpdateState:(CBManagerState)state{
     if (state == CBManagerStateUnsupported){
         [self.bleManager stopScanPeripheral];;
-//        [self.bleManager disconnectPeripheral];
         [_activityIndicator stopAnimating];
     }
     else if (state != CBManagerStatePoweredOn) {
@@ -208,15 +159,9 @@
     }
     else{
         NSLog(@"start scanning");
-//    if (state == CBManagerStatePoweredOn) {
         // Scan for devices
         [_activityIndicator startAnimating];
         [self.bleManager startScanPeripheral];
-        
-//
-//        [_centralManager scanForPeripheralsWithServices:services options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
-//        NSLog(@"Scanning started");
-        
     }
     
 }
@@ -236,7 +181,6 @@
 }
 - (void)didDiscoverDescriptors:(CBCharacteristic *)characteristic{
     NSLog(@"CharacteristicController --> didDiscoverDescriptors");
-
     if ([characteristic.UUID.UUIDString isEqualToString:sensorCharacteristic.UUID.UUIDString]){
         sensorCharacteristic = characteristic;
     }
@@ -245,7 +189,6 @@
             offSetCharacteristic = characteristic;
         }
     }
-
 }
 -(void)connectToOffsetCharacteristic:(CBService *)service{
     offSetCharacteristic = [self.bleManager getSpecificCharacteristic:service.UUID :self.offsetCharacteristicCBUUID.UUIDString];
@@ -310,7 +253,6 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     DeviceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"deviceCell" forIndexPath:indexPath];
-//    cell.configCell
     if (testing){
         cell.deviceNameLabel.text = _discoveredDummyDevices[indexPath.row];
     }
@@ -329,10 +271,7 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if ([_discoveredDevices count] != 0){
         [self showConfirmationToConnectForRow:(int)indexPath.row];
-        
-//    }
 }
 
 -(void)showConfirmationToConnectForRow:(int)row{
@@ -350,7 +289,6 @@
 }
 -(void)setClosePassBarColorWithDistance: (int)distance{
     NSLog(@"res: %.f", fmin(5,10));
-    
     int maxColorValue = fmin(distance,200);
     float normalizedValue = maxColorValue / 2;
     float red = (255 * (100 - normalizedValue)) / 100;
@@ -362,160 +300,5 @@
 
         [self.barProgressView setProgress:(float)distance/255];
     });
-    
-//    self.barProgressView.progress = 1;
 }
-/*
-#pragma mark -
-#pragma mark CoreBluetooth Delegate
-
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
-    // You should test all scenarios
-    if (central.state != CBManagerStatePoweredOn) {
-        NSLog(@"Not on");
-        return;
-    }
-    
-    if (central.state == CBManagerStatePoweredOn) {
-        // Scan for devices
-        [_activityIndicator startAnimating];
-        NSArray *services = [NSArray arrayWithObjects:
-                             _oBSServiceUUID,
-                             nil];
-
-        [_centralManager scanForPeripheralsWithServices:services options:@{ CBCentralManagerScanOptionAllowDuplicatesKey : @YES }];
-        NSLog(@"Scanning started");
-        
-    }
-}
-- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI{
-    NSLog(@"%@", peripheral.name);
-    _obsPeripheral = peripheral;
-//    [_centralManager stopScan];
-    [_discoveredDevices addObject:peripheral];
-    [_devicesTableView reloadData];
-    
-//    [_centralManager connectPeripheral:_obsPeripheral options:nil];
-//    _obsPeripheral.delegate = self;
-//    1FE7FAF9-CE63-4236-0004-000000000000
-//    if ([peripheral.name isEqualToString:@"OpenBikeSensor-84f8"]){
-//        self.discoveredPeripheral = peripheral;
-//        [_centralManager connectPeripheral:peripheral options:nil];
-//    }
-    
-    //    2021-07-12 19:01:17.699742+0200 SimRa[8017:303480] <CBPeripheral: 0x282798be0, identifier = DD5C96C9-BB84-2CE8-63AB-8FD28E40175C, name = OpenBikeSensor-84f8, mtu = 0, state = disconnected>
-
-}
-- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral{
-    NSLog(@"%@ connected",peripheral.name);
-    [_centralManager stopScan];
-    [_activityIndicator stopAnimating];
-
-    // connecting to only obs service
-    NSArray * services = [NSArray arrayWithObject:_oBSServiceUUID];
-    [peripheral discoverServices:services];
-}
-//- (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error{
-//    for (CBCharacteristic *characteristic in service.characteristics){
-//        if ([characteristic.UUID.UUIDString containsString:@"DD5C96C9"]){
-//            NSLog(@"Here");
-//            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
-//            break;
-//        }
-//    }
-//
-//}
-- (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error{
-    for (CBService *service in peripheral.services){
-        NSLog(@"SERVICE: %@",service);
-//
-        [peripheral discoverCharacteristics:@[_sensorDistanceCharacteristicCBUUID] forService:service];
-//        NSLog(@"CHARACTERISTICS %@",service.characteristics);
-//        if ([service.UUID.UUIDString isEqualToString:@"DD5C96C9-BB84-2CE8-63AB-8FD28E40175C"]){
-//            [peripheral discoverCharacteristics:nil forService:service];
-//        }
-    }
-}
-- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
-    if (service.characteristics == nil){
-        return;
-    }
-    for (CBCharacteristic * characteristic in service.characteristics){
-        if ([[characteristic.UUID UUIDString] isEqualToString:[_sensorDistanceCharacteristicCBUUID UUIDString]]) {
-            [peripheral setNotifyValue:YES forCharacteristic:characteristic];
-//                        [peripheral readValueForCharacteristic:characteristic];
-
-        }
-
-//        if (characteristric.properties == CBCharacteristicPropertyRead){
-//            NSLog(@"CHARACTERISTIC: %@ properties contain .read", characteristric);
-////            [peripheral readValueForCharacteristic:characteristric];
-//        }
-//
-//        if (characteristric.properties == CBCharacteristicPropertyNotify){
-//            NSLog(@"CHARACTERISTIC: %@ properties contain .notify", characteristric);
-////            [peripheral readValueForCharacteristic:characteristric];
-//            NSLog(@"CHARACTERISTIC UUID: %@", characteristric.UUID);
-//            NSLog(@"Sensor Distance CHARACTERISTIC UUID: %@", _sensorDistanceCharacteristicCBUUID.UUIDString);
-//
-////            if (characteristric.UUID == _sensorDistanceCharacteristicCBUUID){
-//                [peripheral setNotifyValue:YES forCharacteristic:characteristric];
-////            }
-//        }
-    }
-}
-//- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
-//    if ([[characteristic.UUID UUIDString] isEqualToString:_sensorDistanceCharacteristicCBUUID.UUIDString]){
-//        NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-//        NSLog(@"sensorDistance VALUE OF CHARACTERISTIC: %@", stringFromData);
-//    }
-//    else if ([[characteristic.UUID UUIDString] isEqualToString: _closeByCharacteristicCBUUID.UUIDString]){
-//        NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-//        NSLog(@"CLOSEBY VALUE OF CHARACTERISTIC: %@", stringFromData);
-//    }
-//    else if ([[characteristic.UUID UUIDString] isEqualToString: _timeCharacteristicCBUUID.UUIDString]){
-//        NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-//        NSLog(@"Time VALUE OF CHARACTERISTIC: %@", stringFromData);
-//    }
-//    else if ([[characteristic.UUID UUIDString] isEqualToString: _offsetCharacteristicCBUUID.UUIDString]){
-//        NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-//        NSLog(@"Offset VALUE OF CHARACTERISTIC: %@", stringFromData);
-//    }
-//    else if ([[characteristic.UUID UUIDString] isEqualToString: _trackIdCharacteristicCBUUID.UUIDString]){
-//        NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-//        NSLog(@"track VALUE OF CHARACTERISTIC: %@", stringFromData);
-//    }
-//    else{
-//        NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-//        NSLog(@"Other VALUE OF CHARACTERISTIC: %@", stringFromData);
-//    }
-//
-//}
-- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    if (error) {
-        NSLog(@"Error");
-        return;
-    }
-    
-    NSString *stringFromData = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
-            NSLog(@"Other VALUE OF CHARACTERISTIC: %@", stringFromData);
-
-    // Have we got everything we need?
-//    if ([stringFromData isEqualToString:@"EOM"]) {
-//
-//        [_textview setText:[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]];
-//
-//        [peripheral setNotifyValue:NO forCharacteristic:characteristic];
-//
-//        [_centralManager cancelPeripheralConnection:peripheral];
-//    }
-//
-//    [_data appendData:characteristic.value];
-}
-
-
--(NSString *)getData:(CBCharacteristic *)characteristic{
-    return @"";
-}
- */
 @end

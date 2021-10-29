@@ -915,7 +915,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 18;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = ANX5TTFR29;
+				DEVELOPMENT_TEAM = QEZBL3G4WB;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"DEBUG=1",
@@ -927,7 +927,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 18;
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.testing";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fraunhofer.FAMIUM-SAND-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Source/Utils/SimRa-Bridging-Header.h";
@@ -947,7 +947,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 18;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = ANX5TTFR29;
+				DEVELOPMENT_TEAM = QEZBL3G4WB;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/SupportingFiles/Info.plist;
@@ -956,7 +956,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 18;
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.testing";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fraunhofer.FAMIUM-SAND-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Source/Utils/SimRa-Bridging-Header.h";

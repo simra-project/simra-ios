@@ -9,7 +9,6 @@
 import CoreBluetooth
 import TTGSnackbar
 @objc public class BluetoothManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
-    
     @objc var _manager : CBCentralManager?
     @objc var delegate : BluetoothDelegate?
     @objc private(set) var connected = false
@@ -32,14 +31,12 @@ import TTGSnackbar
     static private var instance : BluetoothManager {
         return sharedInstance
     }
-    
     private static let sharedInstance = BluetoothManager()
     
     private override init() {
         super.init()
         initCBCentralManager()
     }
-    
     // MARK: Custom functions
     /**
      Initialize CBCentralManager instance
@@ -50,7 +47,6 @@ import TTGSnackbar
         _manager = CBCentralManager(delegate: self, queue: nil, options: dic)
         
     }
-    
     /**
      Singleton pattern method
      
@@ -59,37 +55,25 @@ import TTGSnackbar
     @objc static func getInstance() -> BluetoothManager {
         return instance
     }
-    
-    
     /**
      Singleton pattern method
-     
      - returns: Bluetooth single instance
      */
 //    @objc static func getInstance() -> BluetoothManager {
 //        return instance
 //    }
-    
     /**
      The method provides for starting scan near by peripheral
      */
     @objc func startScanPeripheral() {
         _manager?.scanForPeripherals(withServices: [PeripheralCBUUID.obsServiceUUID.getCBUUID()], options:nil)
     }
-    
-//    @objc func removeMultipleDelegateInstance(_ delegate : BluetoothDelegate){
-//
-//        if let index = delegates.firstIndex(where: { $0 === delegate }) {
-//            delegates.remove(at: index)
-//        }
-//    }
     /**
      The method provides for stopping scan near by peripheral
      */
     @objc func stopScanPeripheral() {
         _manager?.stopScan()
     }
-    
     @objc func addCharacteristics(_ service : CBService){
         characteristicsDic[service.uuid] = service.characteristics
     }
@@ -127,7 +111,9 @@ import TTGSnackbar
             characteristicsDic.removeAll()
         }
     }
-    
+    /**
+     The method displays connected state
+     */
     @objc func showConnectedState(){
         guard connectedPeripheral != nil else { return }
         guard let peripheralName = connectedPeripheral?.name else { return }
@@ -137,6 +123,9 @@ import TTGSnackbar
         snackbar.animationType = .slideFromTopBackToTop
         snackbar.show()
     }
+    /**
+     The method displays that the peripheral is disconnected
+     */
     @objc func showDisconnectedState(){
         guard connectedPeripheral != nil else { return }
         guard let peripheralName = connectedPeripheral?.name else { return }
@@ -148,7 +137,6 @@ import TTGSnackbar
     }
     /**
      The method provides for the user who want to obtain the descriptor
-     
      - parameter characteristic: The character which user want to obtain descriptor
      */
     @objc func discoverDescriptor(_ characteristic: CBCharacteristic) {
@@ -156,7 +144,6 @@ import TTGSnackbar
             connectedPeripheral?.discoverDescriptors(for: characteristic)
         }
     }
-    
     /**
      The method is invoked when connect peripheral is timeout
      
@@ -169,7 +156,6 @@ import TTGSnackbar
             timeoutMonitor = nil
         }
     }
-    
     /**
      This method is invoked when interrogate peripheral is timeout
      
@@ -177,13 +163,8 @@ import TTGSnackbar
      */
     @objc func integrrogateTimeout(_ timer: Timer) {
         disconnectPeripheral()
-//        // delegates.forEach { delegate in
             delegate?.didFailedToInterrogate?((timer.userInfo as! CBPeripheral))
-
-//        }
-
     }
-    
     /**
      This method provides for discovering the characteristics.
      */
@@ -199,7 +180,6 @@ import TTGSnackbar
             connectedPeripheral!.discoverCharacteristics(nil, for: service)
         }
     }
-    
     /**
      Read characteristic value from the peripheral
      
@@ -211,7 +191,6 @@ import TTGSnackbar
         }
         connectedPeripheral?.readValue(for: characteristic)
     }
-    
     /**
      Start or stop listening for the value update action
      
@@ -224,7 +203,6 @@ import TTGSnackbar
         }
         connectedPeripheral?.setNotifyValue(enable, for: characteristic)
     }
-    
     /**
      Write value to the peripheral which is connected
      
@@ -238,7 +216,6 @@ import TTGSnackbar
         }
         connectedPeripheral?.writeValue(data, for: characteristic, type: type)
     }
-    
     // MARK: Delegate
     /**
     Invoked whenever the central manager's state has been updated.
@@ -261,13 +238,9 @@ import TTGSnackbar
             break
         }
         if let state = self.state {
-//            // // delegates.forEach { delegate in
                 delegate?.didUpdateState?(state)
-//            }
-
         }
     }
-    
     /**
      This method is invoked while scanning, upon the discovery of peripheral by central
      
@@ -279,13 +252,8 @@ import TTGSnackbar
      */
     @objc public func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("Bluetooth Manager --> didDiscoverPeripheral, RSSI:\(RSSI)")
-        // delegates.forEach { delegate in
-//            delegate?.didUpdateState?(state)
-
-            delegate?.didDiscoverPeripheral?(peripheral, advertisementData: advertisementData, RSSI: RSSI)
-//        }
+        delegate?.didDiscoverPeripheral?(peripheral, advertisementData: advertisementData, RSSI: RSSI)
     }
-    
     /**
      This method is invoked when a connection succeeded
      
@@ -302,15 +270,12 @@ import TTGSnackbar
         connected = true
         connectedPeripheral = peripheral
         self.showConnectedState()
-//        delegates.forEach{ delegate in
             delegate?.didConnectedPeripheral?(peripheral)
-//        }
         stopScanPeripheral()
         peripheral.delegate = self
         peripheral.discoverServices(nil)
         interrogateMonitor = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(self.integrrogateTimeout(_:)), userInfo: peripheral, repeats: false)
     }
-    
     /**
      This method is invoked where a connection failed.
      
@@ -326,12 +291,8 @@ import TTGSnackbar
             timeoutMonitor = nil
         }
         connected = false
-//        delegates.forEach{ delegate in
-
         delegate?.failToConnectPeripheral?(peripheral, error: error!)
-//        }
     }
-    
     /**
      The method is invoked where services were discovered.
      
@@ -345,18 +306,12 @@ import TTGSnackbar
             print("Bluetooth Manager --> Discover Services Error, error:\(error?.localizedDescription ?? "")")
             return ;
         }
-        
-        // If discover services, then invalidate the timeout monitor
         if interrogateMonitor != nil {
             interrogateMonitor?.invalidate()
             interrogateMonitor = nil
         }
-//        delegates.forEach{ delegate in
-
         delegate?.didDiscoverServices?(peripheral)
-//        }
     }
-    
     /**
      The method is invoked where characteristics were discovered.
      
@@ -368,17 +323,11 @@ import TTGSnackbar
         print("Bluetooth Manager --> didDiscoverCharacteristicsForService")
         if error != nil {
             print("Bluetooth Manager --> Fail to discover characteristics! Error: \(error?.localizedDescription ?? "")")
-//            delegates.forEach{ delegate in
-
             delegate?.didFailToDiscoverCharacteritics?(error!)
-//            }
             return
         }
-//        delegates.forEach{ delegate in
         delegate?.didDiscoverCharacteritics?(service)
-//        }
     }
-    
     /**
      This method is invoked when the peripheral has found the descriptor for the characteristic
      
@@ -390,16 +339,11 @@ import TTGSnackbar
         print("Bluetooth Manager --> didDiscoverDescriptorsForCharacteristic")
         if error != nil {
             print("Bluetooth Manager --> Fail to discover descriptor for characteristic Error:\(error?.localizedDescription ?? "")")
-//            delegates.forEach{ delegate in
                 delegate?.didFailToDiscoverDescriptors?(error!)
-//            }
             return
         }
-//        delegates.forEach{ delegate in
             delegate?.didDiscoverDescriptors?(characteristic)
-//        }
     }
-    
     /**
      This method is invoked when the peripheral has been disconnected.
      
@@ -410,13 +354,9 @@ import TTGSnackbar
     @objc public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("Bluetooth Manager --> didDisconnectPeripheral")
         connected = false
-//        delegates.forEach{ delegate in
             delegate?.didDisconnectPeripheral?(peripheral)
-//        }
         self.showDisconnectedState()
-//        notifCenter.post(name: NSNotification.Name(rawValue: PeripheralNotificationKeys.DisconnectNotif.rawValue), object: self)
     }
-    
     /**
      Thie method is invoked when the user call the peripheral.readValueForCharacteristic
      
@@ -428,9 +368,7 @@ import TTGSnackbar
         print("Bluetooth Manager --> didUpdateValueForCharacteristic")
         if error != nil {
             print("Bluetooth Manager --> Failed to read value for the characteristic. Error:\(error!.localizedDescription)")
-//            delegates.forEach{ delegate in
                 delegate?.didFailToReadValueForCharacteristic?(error!)
-//            }
             return
         }
         guard let data = characteristic.value else {
@@ -438,10 +376,7 @@ import TTGSnackbar
 
             return
         }
-      
-//        delegates.forEach{ delegate in
-            delegate?.didReadValueForCharacteristic?(characteristic)
-//        }
+        delegate?.didReadValueForCharacteristic?(characteristic)
     }
     @objc func getByteArray(characteristic : CBCharacteristic)-> [UInt8]{
         guard let data = characteristic.value else {

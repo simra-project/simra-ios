@@ -10,7 +10,7 @@
 
 @implementation AnnotationView
 
-#define CIRCLE_SIZE 100.0
+#define CIRCLE_SIZE 30.0
 #define CIRCLE_COLOR [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.5]
 
 #define FENCE_COLOR [UIColor colorWithRed:77.0 / 255.0 green:97.0 / 255.0 blue:137.0 / 255.0 alpha:1.0]

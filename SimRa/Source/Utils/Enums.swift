@@ -25,14 +25,6 @@ enum PeripheralNotificationKeys : String { // The notification name of periphera
 
 enum PeripheralCBUUID : String{
     case obsServiceUUID
-    //    _oBSServiceUUID = [CBUUID UUIDWithString:@""];
-    //    _sensorDistanceCharacteristicCBUUID = [CBUUID UUIDWithString:@"1FE7FAF9-CE63-4236-0004-000000000002"];
-    //    _closeByCharacteristicCBUUID = [CBUUID UUIDWithString:@"1FE7FAF9-CE63-4236-0004-000000000003"];
-    //    _timeCharacteristicCBUUID = [CBUUID UUIDWithString:@"1FE7FAF9-CE63-4236-0004-000000000001"];
-    //    _offsetCharacteristicCBUUID = [CBUUID UUIDWithString:@"1FE7FAF9-CE63-4236-0004-000000000004"];
-    //    _trackIdCharacteristicCBUUID = [CBUUID UUIDWithString:@"1FE7FAF9-CE63-4236-0004-000000000005"];
-    //    _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-    
     func getCBUUID()->CBUUID{
         switch self {
         case .obsServiceUUID:

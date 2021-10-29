@@ -36,7 +36,8 @@
 {
     CBCharacteristic * closePassCharacteristic;
     CBUUID *closePassCharacteristicCBUUID;
-
+    CBCharacteristic *sensorDistanceCharacteristic;
+    CBUUID *sensorDistanceCharacteristicCBUUID;
 }
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *playButton;
@@ -67,7 +68,7 @@
     self.mapView.showsCompass = TRUE;
     self.mapView.showsUserLocation = TRUE;
     self.mapView.userTrackingMode = MKUserTrackingModeFollow;
-
+    
     self.trackingButton = [MKUserTrackingButton userTrackingButtonWithMapView:self.mapView];
     self.trackingButton.translatesAutoresizingMaskIntoConstraints = false;
     [self.view addSubview:self.trackingButton];
@@ -116,6 +117,8 @@
         [bleManager disconnectPeripheral];
     }
     closePassCharacteristicCBUUID = [CBUUID UUIDWithString: @"1FE7FAF9-CE63-4236-0004-000000000003"];
+    sensorDistanceCharacteristicCBUUID = [CBUUID UUIDWithString: @"1FE7FAF9-CE63-4236-0004-000000000002"];
+
 }
 -(void)setupConnectedBluetoothDevice{
     if ([self.bleManager connected]){
@@ -413,7 +416,7 @@
             self.annotationView = [[AnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"me"];
         }
 
-        UIImage *image = [UIImage imageNamed:@"SimraSquare"];
+        UIImage *image = [UIImage imageNamed:@"pin"];
         self.annotationView.personImage = image;
 
         self.annotationView.recording = self.trip != nil;
@@ -452,6 +455,13 @@
 
 -(void)didDiscoverCharacteritics:(CBService *)service{
     [self connectToClosePassCharacteristic:service];
+    [self connectToSensorDistanceCharacteristic:service];
+}
+-(void)connectToSensorDistanceCharacteristic:(CBService * )service{
+    sensorDistanceCharacteristic = [self.bleManager getSpecificCharacteristic:service.UUID :sensorDistanceCharacteristicCBUUID.UUIDString];
+    if (sensorDistanceCharacteristic != nil){
+        [self.bleManager discoverDescriptor:sensorDistanceCharacteristic];
+    }
 }
 -(void)connectToClosePassCharacteristic:(CBService *)service{
     closePassCharacteristic = [self.bleManager getSpecificCharacteristic:service.UUID :closePassCharacteristicCBUUID.UUIDString];
@@ -465,6 +475,9 @@
     if ([characteristic.UUID.UUIDString isEqualToString:closePassCharacteristic.UUID.UUIDString]){
         closePassCharacteristic = characteristic;
     }
+    if ([characteristic.UUID.UUIDString isEqualToString:sensorDistanceCharacteristic.UUID.UUIDString]){
+        sensorDistanceCharacteristic = characteristic;
+    }
 }
 
 - (void)didReadValueForCharacteristic:(CBCharacteristic *)characteristic{
@@ -472,13 +485,21 @@
     //when the close pass button is pressed
     if ([characteristic.UUID.UUIDString isEqualToString:closePassCharacteristic.UUID.UUIDString]){
         //get left and right sensor values
+        NSNumber * leftSensor1Val = byteArray[4];
+        NSNumber * leftSensor2Val = byteArray[5];
+        NSNumber * rightSensor1Val = byteArray[1];
+        NSNumber * rightSensor2Val = byteArray[1];
+
         NSNumber * leftSensor = [self.bleManager compareLeftSensorLeastSignificantBitWithBytes:byteArray];
         NSNumber * rightSensor = [self.bleManager compareRightSensorLeastSignificantBitWithBytes:byteArray];
         if (!self.playButton.isEnabled){
             // if recording the trip, store values in the trip.
             [self.trip storeClosePassValueForTripWithLeftSensorVal:leftSensor rightSensorVal:rightSensor];
+            [self.trip storeClosePassValuesForTripCSVWithLeftSensor1Val:leftSensor1Val leftSensor2Val:leftSensor2Val rightSensor1Val:rightSensor1Val rightSensor2Val:rightSensor2Val];
         }
 
+    }
+    if ([characteristic.UUID.UUIDString isEqualToString:sensorDistanceCharacteristic.UUID.UUIDString]){
     }
     
 }
