@@ -13,10 +13,10 @@ For more information see [our website](https://www.digital-future.berlin/en/rese
 
 ## LICENSE
 
- Markup : * SimRa uses [TTRangeSlider](https://github.com/TomThorpe/TTRangeSlider) by Tom Thorpe available under the MIT license.
-          * SimRa uses [SSZipArchive](https://github.com/ZipArchive/ZipArchive) by ZipArchive under the MIT license. 
-          * SimRa uses [TTGSnackbar](https://github.com/zekunyan/TTGSnackbar) by Zekunyan under the MIT license. 
-          * SimRa uses [Loaf](https://github.com/schmidyy/Loaf) by Mat Schmid under the MIT license. 
+* SimRa uses [TTRangeSlider](https://github.com/TomThorpe/TTRangeSlider) by Tom Thorpe available under the MIT license.
+* SimRa uses [SSZipArchive](https://github.com/ZipArchive/ZipArchive) by ZipArchive under the MIT license. 
+* SimRa uses [TTGSnackbar](https://github.com/zekunyan/TTGSnackbar) by Zekunyan under the MIT license. 
+* SimRa uses [Loaf](https://github.com/schmidyy/Loaf) by Mat Schmid under the MIT license. 
 
 
 ## Instructions
