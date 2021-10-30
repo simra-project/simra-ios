@@ -913,14 +913,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< HEAD
 				CURRENT_PROJECT_VERSION = 18;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = QEZBL3G4WB;
-=======
 				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = C652JFWU23;
->>>>>>> ef69a4fab78956a53f136b38fd8e12f97a73410a
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"DEBUG=1",
@@ -931,13 +928,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
 				MARKETING_VERSION = 18;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fraunhofer.FAMIUM-SAND-iOS";
-=======
 				MARKETING_VERSION = 20;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
->>>>>>> ef69a4fab78956a53f136b38fd8e12f97a73410a
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Source/Utils/SimRa-Bridging-Header.h";
@@ -955,14 +949,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< HEAD
 				CURRENT_PROJECT_VERSION = 18;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = QEZBL3G4WB;
-=======
 				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = C652JFWU23;
->>>>>>> ef69a4fab78956a53f136b38fd8e12f97a73410a
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/SupportingFiles/Info.plist;
@@ -970,13 +961,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
 				MARKETING_VERSION = 18;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fraunhofer.FAMIUM-SAND-iOS";
-=======
 				MARKETING_VERSION = 20;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
->>>>>>> ef69a4fab78956a53f136b38fd8e12f97a73410a
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Source/Utils/SimRa-Bridging-Header.h";
