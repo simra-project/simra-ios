@@ -118,15 +118,17 @@
     self.loaded = true;
 }
 
++ (NSArray<NSString*>*)regionPropertyKeys {
+    return @[@"identifier", @"englishDescription", @"germanDescription", @"lat", @"lon"];
+}
+
 - (void)save {
     NSMutableArray *arrayRegions = [[NSMutableArray alloc] init];
     for (Region *region in self.regions) {
         NSMutableDictionary *dictRegion = [[NSMutableDictionary alloc] init];
-        dictRegion[@"identifier"] = region.identifier;
-        dictRegion[@"englishDescription"] = region.englishDescription;
-        dictRegion[@"germanDescription"] = region.germanDescription;
-        dictRegion[@"lat"] = region.lat;
-        dictRegion[@"lon"] = region.lon;
+        for (NSString* strKey in self.class.regionPropertyKeys) {
+            dictRegion[strKey] = [region valueForKey:strKey];
+        }
         [arrayRegions addObject:dictRegion];
     }
 
@@ -164,11 +166,9 @@
         for (NSDictionary *dictRegion in arrayRegions) {
             Region *region = [[Region alloc] init];
             region.position = position++;
-            region.identifier = dictRegion[@"identifier"];
-            region.englishDescription = dictRegion[@"englishDescription"];
-            region.germanDescription = dictRegion[@"germanDescription"];
-            region.lat = dictRegion[@"lat"];
-            region.lon = dictRegion[@"lon"];
+            for (NSString* strKey in self.class.regionPropertyKeys) {
+                 [region setValue: dictRegion[strKey] forKey:strKey];
+            }
             [self.regions addObject:region];
         }
     }
@@ -246,11 +246,7 @@
     NSMutableArray <NSString *> *texts = [[NSMutableArray alloc] init];
     for (Region *region in self.regions) {
         if (![region.identifier hasPrefix:@"!"]) {
-            if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-                [texts addObject:region.germanDescription];
-            } else {
-                [texts addObject:region.englishDescription];
-            }
+            [texts addObject:region.localizedDescription];
         }
     }
     return texts;

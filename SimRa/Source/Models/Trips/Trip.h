@@ -129,8 +129,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)idle;
 - (TripInfo *)tripInfo;
 - (void)successfullyReUploaded;
+<<<<<<< HEAD:SimRa/Source/Models/Trips/Trip.h
 -(void)storeClosePassValueForTripWithLeftSensorVal: (NSNumber *)leftSensorVal rightSensorVal: (NSNumber *)rightSensorVal;
 -(void)storeClosePassValuesForTripCSVWithLeftSensor1Val: (NSNumber *)leftSensor1Val leftSensor2Val: (NSNumber *)leftSensor2Val rightSensor1Val: (NSNumber *)rightSensor1Val rightSensor2Val: (NSNumber *)rightSensor2Val;
+=======
+- (NSURL *)gpxFile;
+- (NSURL *)geoJSONFile;
+- (NSURL *)kmlFile;
+>>>>>>> ef69a4fab78956a53f136b38fd8e12f97a73410a:SimRa/Trip.h
 
 @end
 
