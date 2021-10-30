@@ -338,13 +338,40 @@ NSInteger revertedSort(id num1, id num2, void *context) {
     Trip *trip = [[Trip alloc] initFromStorage:tripInfo.identifier];
 
     UIImage *shareIcon = [UIImage systemImageNamed:@"square.and.arrow.up"];
-    UIAction *exportAction = [UIAction actionWithTitle:NSLocalizedString(@"Manual Export", @"MyTrips View Context menu export title") image:shareIcon identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+
+    UIAction *exportAction = [UIAction actionWithTitle:NSLocalizedString(@"Manual Export", @"MyTrips View Context menu export title")
+                                                 image:shareIcon identifier:nil
+                                               handler:^(__kindof UIAction * _Nonnull action) {
         UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[trip csvFile]] applicationActivities:nil];
         [self presentViewController:activityController animated:true completion:nil];
     }];
     
-    return [UIContextMenuConfiguration configurationWithIdentifier:nil previewProvider:nil actionProvider:^UIMenu * _Nullable(NSArray<UIMenuElement *> * _Nonnull suggestedActions) {
-        return [UIMenu menuWithTitle:NSLocalizedString(@"Actions", @"MyTrips View Context menu title") children:@[exportAction]];
+    UIAction *exportGPXAction = [UIAction actionWithTitle:NSLocalizedString(@"GPX Export", @"MyTrips View Context menu GPX title")
+                                                 image:shareIcon identifier:nil
+                                               handler:^(__kindof UIAction * _Nonnull action) {
+        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[trip gpxFile]] applicationActivities:nil];
+        [self presentViewController:activityController animated:true completion:nil];
+    }];
+
+    UIAction *exportGeoJSONAction = [UIAction actionWithTitle:NSLocalizedString(@"GeoJSON Export", @"MyTrips View Context menu GeoJSON title")
+                                                 image:shareIcon identifier:nil
+                                               handler:^(__kindof UIAction * _Nonnull action) {
+        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[trip geoJSONFile]] applicationActivities:nil];
+        [self presentViewController:activityController animated:true completion:nil];
+    }];
+
+    UIAction *exportKMLAction = [UIAction actionWithTitle:NSLocalizedString(@"KML Export", @"MyTrips View Context menu KML title")
+                                                 image:shareIcon identifier:nil
+                                               handler:^(__kindof UIAction * _Nonnull action) {
+        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[[trip kmlFile]] applicationActivities:nil];
+        [self presentViewController:activityController animated:true completion:nil];
+    }];
+
+    return [UIContextMenuConfiguration configurationWithIdentifier:nil
+                                                   previewProvider:nil
+                                                    actionProvider:^UIMenu * _Nullable(NSArray<UIMenuElement *> * _Nonnull suggestedActions) {
+        return [UIMenu menuWithTitle:NSLocalizedString(@"Actions", @"MyTrips View Context menu title")
+                            children:@[exportAction, exportGPXAction, exportGeoJSONAction, exportKMLAction]];
     }];
 }
 

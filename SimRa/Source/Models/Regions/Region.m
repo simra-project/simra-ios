@@ -11,19 +11,10 @@
 @implementation Region
 
 - (NSString *)localizedDescription {
-    if ([[NSLocale currentLocale].languageCode isEqualToString:@"de"]) {
-        if (self.germanDescription) {
-            return self.germanDescription;
-        } else {
-            return self.identifier;
-        }
-    } else {
-        if (self.englishDescription) {
-            return self.englishDescription;
-        } else {
-            return self.identifier;
-        }
-    }
+    NSString* strLoc = [NSBundle preferredLocalizationsFromArray:@[@"en", @"de"]].firstObject;
+    return
+        ([strLoc isEqualToString: @"de"] ? self.germanDescription : self.englishDescription)
+        ?: self.identifier;
 }
 
 - (CLLocation *)location {

@@ -41,12 +41,21 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     AppDelegate *ad = [AppDelegate sharedDelegate];
+<<<<<<< HEAD:SimRa/Source/Modules/ProfileTVC/ProfileTVC.m
     
     self.age.array = [ad.constants mutableArrayValueForKey:@"ages"];
     self.sex.array = [ad.constants mutableArrayValueForKey:@"sexes"];
     self.region.array = [ad.regions regionTexts];
     self.experience.array = [ad.constants mutableArrayValueForKey:@"experiences"];
     
+=======
+
+    self.age.array = [ad.constants valueForKey:@"ages"];
+    self.sex.array = [ad.constants valueForKey:@"sexes"];
+    self.region.array = [ad.regions regionTexts];
+    self.experience.array = [ad.constants valueForKey:@"experiences"];
+
+>>>>>>> ef69a4fab78956a53f136b38fd8e12f97a73410a:SimRa/SettingsTVC.m
     [self update];
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -138,32 +147,14 @@
     [self.ac addAction:aac];
     
     AppDelegate *ad = [AppDelegate sharedDelegate];
-    if (ad.regions.closestsRegions.count > 0) {
-        UIAlertAction *aa0 = [UIAlertAction actionWithTitle:[ad.regions.closestsRegions[0] localizedDescription]
+    for (NSInteger n=0; n<MIN(ad.regions.closestsRegions.count, 3); ++n) {
+        UIAlertAction *aa = [UIAlertAction actionWithTitle:[ad.regions.closestsRegions[n] localizedDescription]
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
-            [ad.regions selectPosition:ad.regions.closestsRegions[0].position];
+            [ad.regions selectPosition:ad.regions.closestsRegions[n].position];
             [self update];
         }];
-        [self.ac addAction:aa0];
-    }
-    if (ad.regions.closestsRegions.count > 1) {
-        UIAlertAction *aa1 = [UIAlertAction actionWithTitle:[ad.regions.closestsRegions[1] localizedDescription]
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * _Nonnull action) {
-            [ad.regions selectPosition:ad.regions.closestsRegions[1].position];
-            [self update];
-        }];
-        [self.ac addAction:aa1];
-    }
-    if (ad.regions.closestsRegions.count > 2) {
-        UIAlertAction *aa2 = [UIAlertAction actionWithTitle:[ad.regions.closestsRegions[2] localizedDescription]
-                                                      style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * _Nonnull action) {
-            [ad.regions selectPosition:ad.regions.closestsRegions[2].position];
-            [self update];
-        }];
-        [self.ac addAction:aa2];
+        [self.ac addAction:aa];
     }
     
     [self presentViewController:self.ac animated:TRUE completion:nil];
@@ -207,8 +198,29 @@
 }
 
 - (IBAction)behaviourSliderChanged:(UISlider *)sender {
+<<<<<<< HEAD:SimRa/Source/Modules/ProfileTVC/ProfileTVC.m
 //    AppDelegate *ad = [AppDelegate sharedDelegate];
     [Utility saveIntWithKey:@"behaviourValue" value:round(sender.value)];
+=======
+    AppDelegate *ad = [AppDelegate sharedDelegate];
+    [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
+    [self update];
+}
+
+@end
+
+@implementation TripSettingsTVC
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    AppDelegate *ad = [AppDelegate sharedDelegate];
+
+    self.bikeType.array = [ad.constants valueForKey:@"bikeTypes"];
+    self.position.array = [ad.constants valueForKey:@"positions"];
+
+    [self update];
+}
+>>>>>>> ef69a4fab78956a53f136b38fd8e12f97a73410a:SimRa/SettingsTVC.m
 
 //    [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
     [self update];

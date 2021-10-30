@@ -94,8 +94,8 @@
 
 - (void)showHowTo {
     [self openURL:@{
-        @"en" : @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf",
-        @"de" : @"http://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf"
+        @"en" : @"https://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Instructions_IOS.pdf",
+        @"de" : @"https://www.mcc.tu-berlin.de/fileadmin/fg344/simra/SimRa_Anleitung_IOS.pdf"
     }];
 }
 

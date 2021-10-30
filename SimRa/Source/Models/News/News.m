@@ -33,7 +33,7 @@
                  GET_HOST,
                  NSString.clientHash,
                  (long)self.newsVersion,
-                 [NSLocale currentLocale].languageCode
+                 [NSBundle preferredLocalizationsFromArray:@[@"en", @"de"]].firstObject
                  ];
     [request setHTTPMethod:@"GET"];
     [request setURL:[NSURL URLWithString:urlString]];
