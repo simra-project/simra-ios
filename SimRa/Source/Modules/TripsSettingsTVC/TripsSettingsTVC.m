@@ -35,10 +35,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     AppDelegate *ad = [AppDelegate sharedDelegate];
-    
-    self.bikeType.array = [ad.constants mutableArrayValueForKey:@"bikeTypes"];
-    self.position.array = [ad.constants mutableArrayValueForKey:@"positions"];
-    
+    self.bikeType.array = [ad.constants valueForKey:@"bikeTypes"];
+    self.position.array = [ad.constants valueForKey:@"positions"];    
     [self update];
 }
 -(void)viewWillDisappear:(BOOL)animated{

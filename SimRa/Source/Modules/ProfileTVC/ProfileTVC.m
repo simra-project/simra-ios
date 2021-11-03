@@ -41,21 +41,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     AppDelegate *ad = [AppDelegate sharedDelegate];
-<<<<<<< HEAD:SimRa/Source/Modules/ProfileTVC/ProfileTVC.m
-    
-    self.age.array = [ad.constants mutableArrayValueForKey:@"ages"];
-    self.sex.array = [ad.constants mutableArrayValueForKey:@"sexes"];
-    self.region.array = [ad.regions regionTexts];
-    self.experience.array = [ad.constants mutableArrayValueForKey:@"experiences"];
-    
-=======
-
     self.age.array = [ad.constants valueForKey:@"ages"];
     self.sex.array = [ad.constants valueForKey:@"sexes"];
     self.region.array = [ad.regions regionTexts];
     self.experience.array = [ad.constants valueForKey:@"experiences"];
 
->>>>>>> ef69a4fab78956a53f136b38fd8e12f97a73410a:SimRa/SettingsTVC.m
     [self update];
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -198,31 +188,10 @@
 }
 
 - (IBAction)behaviourSliderChanged:(UISlider *)sender {
-<<<<<<< HEAD:SimRa/Source/Modules/ProfileTVC/ProfileTVC.m
 //    AppDelegate *ad = [AppDelegate sharedDelegate];
     [Utility saveIntWithKey:@"behaviourValue" value:round(sender.value)];
-=======
     AppDelegate *ad = [AppDelegate sharedDelegate];
     [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
-    [self update];
-}
-
-@end
-
-@implementation TripSettingsTVC
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-
-    self.bikeType.array = [ad.constants valueForKey:@"bikeTypes"];
-    self.position.array = [ad.constants valueForKey:@"positions"];
-
-    [self update];
-}
->>>>>>> ef69a4fab78956a53f136b38fd8e12f97a73410a:SimRa/SettingsTVC.m
-
-//    [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
     [self update];
 }
 

@@ -80,8 +80,8 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <LocationScenarioReference
-         identifier = "../berlin.gpx"
-         referenceType = "0">
+         identifier = "London, England"
+         referenceType = "1">
       </LocationScenarioReference>
    </LaunchAction>
    <ProfileAction
