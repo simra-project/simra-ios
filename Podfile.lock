@@ -1,16 +1,28 @@
 PODS:
+  - Loaf (0.7.0)
+  - SSZipArchive (2.2.3)
+  - TTGSnackbar (1.10.3)
   - TTRangeSlider (1.0.7)
 
 DEPENDENCIES:
+  - Loaf
+  - SSZipArchive
+  - TTGSnackbar
   - TTRangeSlider
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Loaf
+    - SSZipArchive
+    - TTGSnackbar
     - TTRangeSlider
 
 SPEC CHECKSUMS:
+  Loaf: d69937cd00649f3fa260beb8b7aef0a1feb861ef
+  SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
+  TTGSnackbar: 97c033600de8a9c8f4a093f25a08543a03946bcc
   TTRangeSlider: 8cf72eca457c3b700c92eb0074be908c986e25ec
 
-PODFILE CHECKSUM: 3720380b35e554a09a997594573b4319f5b8837f
+PODFILE CHECKSUM: 3c6e760824b3f4f338520cc8699c22591f309591
 
-COCOAPODS: 1.10.0.rc.1
+COCOAPODS: 1.10.1

@@ -1,2 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-SimRa/Pods-SimRa-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Loaf/Loaf.framework
+${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework
+${BUILT_PRODUCTS_DIR}/TTGSnackbar/TTGSnackbar.framework
 ${BUILT_PRODUCTS_DIR}/TTRangeSlider/TTRangeSlider.framework

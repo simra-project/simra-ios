@@ -1,0 +1,135 @@
+/* MyTrips View Context menu title */
+"Actions" = "Aktionen";
+
+/* Cancel */
+"Cancel" = "Abbrechen";
+
+/* Closest Regions to your Location */
+"Closest Regions to your Location" = "Die nächstgelegenen Regionen";
+
+/* Completed */
+"Completed" = "Komplett";
+
+/* Configure your Email, please! */
+"Configure your Email, please!" = "Bitte konfigurieren Sie ihre Mail App";
+
+/* Dear SimRa Team */
+"Dear SimRa Team" = "Liebes SimRa Team";
+
+/* Delete */
+"Delete" = "Löschen";
+
+/* Confirmation button for delete My Trips table row */
+"Delete locally" = "Lokal Löschen";
+
+/* Don't show this again */
+"Don't show this again" = "Dieses nicht wieder anzeigen";
+
+/* Done */
+"Done" = "Fertig";
+
+/* Edited */
+"Edited" = "Geändert";
+
+/* Feedback SimRa */
+"Feedback SimRa" = "Rückmeldung SimRa";
+
+/* Finish */
+"Finish" = "Ziel";
+
+/* How To */
+"How To" = "How To";
+
+/* If not, you may access it via Settings/How To */
+"If not, you may access it via Settings/How To later" = "Wenn nicht, können Sie dies später unter Einstellungen/How To abrufen";
+
+/* Later */
+"Later" = "Später";
+
+/* MyTrips View Context menu export title */
+"Manual Export" = "Manueller Export";
+
+/* MyTrips View Context menu export GPX title */
+"GPX Export" = "GPX Export";
+
+/* MyTrips View Context menu export GeoJSON title */
+"GeoJSON Export" = "GeoJSON Export";
+
+/* MyTrips View Context menu export KML title */
+"KML Export" = "KML Export";
+
+/* New */
+"New" = "Neu";
+
+/* Not Recording */
+"Not Recording" = "Keine Aufzeichnung";
+
+/* Not Uploaded */
+"Not Uploaded" = "Nicht Hochgeladen";
+
+/* OK */
+"OK" = "OK";
+
+/* Please choose a Region */
+"Please choose a Region" = "Bitte wählen Sie eine Region aus";
+
+/* Profile Running */
+"Profile Running" = "Profile Running";
+
+/* Profile UploadError */
+"Profile UploadError" = "Profile UploadError";
+
+/* Upload Context */
+"Upload" = "Hochladen";
+
+/* Re-Upload */
+"Re-Upload" = "Nochmals hochladen";
+
+/* Recording */
+"Recording" = "Aufzeichnung";
+
+/* Running */
+"Running" = "Running";
+
+/* SimRa */
+"SimRa" = "SimRa";
+
+/* SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results */
+"Please choose your correct region, so that we can analyse your ride correctly. Your selected region:" = "Bitte stellen Sie Ihre Region ein, damit Ihre Daten richtig ausgewertet werden können. Ihre derzeit ausgewählte Region ist:";
+
+/* Start */
+"Start" = "Start";
+
+/* Upload */
+"Upload" = "Hochladen";
+
+/* Uploaded */
+"Uploaded" = "Hochgeladen";
+
+/* UploadError */
+"UploadError" = "UploadError";
+
+/* Would you like to view the User Manual now? */
+"Would you like to view the User Manual now?" = "Möchten Sie jetzt die Anleitung ansehen?";
+
+/* Yes */
+"Yes" = "Ja";
+
+/* Table Select All */
+"All" = "Alle";
+
+/* Table Select None */
+"None" = "Keine";
+
+
+/* Acknowledgement to send configuration*/
+"Attention! Only tap the Continue button, if you were asked to do so by the SimRa team. By Pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides." = "Achtung! Tippen Sie nur dann auf die Schaltfläche Weiter, wenn Sie vom SimRa-Team dazu aufgefordert wurden. Wenn Sie im nächsten Schritt auf die Schaltfläche Hochladen tippen, senden Sie Ihre SimRa-Konfiguration an das SimRa-Team. Sie können auch angeben, ob Sie die letzten 10 Fahrten oder alle Fahrten hochladen möchten.";
+
+"Send local app data to SimRa team" = "Lokale App-Daten an das SimRa-Team senden";
+
+"Do you also want to send rides?" = "Möchten Sie auch Fahrten senden?";
+"Yes, all" = "Ja, alles";
+"Yes, the last" = "Ja, die letzten";
+"No, don't send any rides" = "Nein, schicken Sie keine Fahrten";
+"Files uploaded successfully" = "Dateien erfolgreich hochgeladen";
+"Something went wrong. Please try again later" = "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal";
