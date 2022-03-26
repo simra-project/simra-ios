@@ -492,6 +492,7 @@
 
         NSNumber * leftSensor = [self.bleManager compareLeftSensorLeastSignificantBitWithBytes:byteArray];
         NSNumber * rightSensor = [self.bleManager compareRightSensorLeastSignificantBitWithBytes:byteArray];
+
         if (!self.playButton.isEnabled){
             // if recording the trip, store values in the trip.
             [self.trip storeClosePassValueForTripWithLeftSensorVal:leftSensor rightSensorVal:rightSensor];
@@ -503,6 +504,11 @@
     }
     
 }
+
+- (BOOL)checkIncidentMinimumDistance:(NSNumber *)sensorValue {
+    return sensorValue.intValue < 150;
+}
+
 - (void)didDiscoverServices:(CBPeripheral *)peripheral{
     [self.bleManager discoverCharacteristics];
 }
