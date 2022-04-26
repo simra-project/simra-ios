@@ -111,6 +111,7 @@
     
 //    NSLog(@"%@",test.someProperty);
 }
+
 -(void)setupBluetooth{
     bleManager = [BluetoothManager getInstance];
     if (bleManager.connectedPeripheral != nil){
@@ -120,6 +121,7 @@
     sensorDistanceCharacteristicCBUUID = [CBUUID UUIDWithString: @"1FE7FAF9-CE63-4236-0004-000000000002"];
 
 }
+
 -(void)setupConnectedBluetoothDevice{
     if ([self.bleManager connected]){
         [self.bleManager showConnectedState];
@@ -128,19 +130,20 @@
         [self.bleManager.connectedPeripheral discoverServices:serviceArr];
     }
 }
+
 -(void)viewDidDisappear:(BOOL)animated{
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     AppDelegate *ad = [AppDelegate sharedDelegate];
     BOOL showHideOpenBikeSensor = [ad.defaults boolForKey:@"openBikeSensor"];
     [self showHideOpenBikeSensorConfigButton:showHideOpenBikeSensor];
     [self setupConnectedBluetoothDevice];
 }
+
 - (void)viewDidAppear:(BOOL)animated {
     AppDelegate *ad = [AppDelegate sharedDelegate];
-    //[ad.defaults setBool:FALSE forKey:@"initialMessage"];
     if (![ad.defaults boolForKey:@"initialMessage"]) {
-//        [ad.defaults setBool:TRUE forKey:@"initialMessage"];
         [Utility saveBoolWithKey:@"initialMessage" value:TRUE];
 
         self.ac = [UIAlertController
@@ -171,7 +174,9 @@
         self.initialMessagePassed = TRUE;
         [self checkRegions];
     }
+    [self checkRegions];
 }
+
 -(void)setupOpenBikeSensor{
     self.openBikeSensorConfigButton = [[UIButton alloc]init];
     self.openBikeSensorConfigButton.translatesAutoresizingMaskIntoConstraints = false;
@@ -207,17 +212,21 @@
     
     [NSLayoutConstraint activateConstraints:@[bottomConstraintOBS,trainlingConstraintOBS,widthConstraintOBS,heightConstraintOBS]];
 }
+
 -(void)didTapOnOBSConfig{
     [self performSegueWithIdentifier:@"obsConfig" sender:self];
     
 }
+
 -(void)showHideOpenBikeSensorConfigButton:(BOOL)showBtn{
     [self.openBikeSensorConfigButton setHidden:!showBtn];
 }
+
 - (void)checkRegions {
     if (!self.initialMessagePassed) {
         return;
     }
+    
     AppDelegate *ad = [AppDelegate sharedDelegate];
     if (!ad.regions.loaded) {
         return;
@@ -238,7 +247,6 @@
         (ad.regions.regionsId > ad.regions.lastSeenRegionsId &&
             (ad.regions.regionId == 0 || [ad.regions.currentRegion.identifier isEqualToString:@"other"])
          ) || !ad.regions.selectedIsOneOfThe3ClosestsRegions) {
-//        [ad.defaults setBool:TRUE forKey:@"onceRegionMessage"];
         [Utility saveBoolWithKey:@"onceRegionMessage" value:TRUE];
 
         [ad.regions seen];
@@ -256,7 +264,6 @@
                                                                               @"Don't show this again")
                                                       style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
-//            [ad.defaults setBool:TRUE forKey:@"suppressRegionMessage"];
             [Utility saveBoolWithKey:@"suppressRegionMessage" value:TRUE];
 
         }];
@@ -332,7 +339,6 @@
         self.dummyButton.title = NSLocalizedString(@"Not Recording", @"Not Recording");
     }];
 //    [ac dismissViewControllerAnimated:TRUE completion:nil];
-    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
