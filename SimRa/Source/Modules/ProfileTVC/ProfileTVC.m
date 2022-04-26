@@ -43,7 +43,7 @@
     AppDelegate *ad = [AppDelegate sharedDelegate];
     self.age.array = [ad.constants valueForKey:@"ages"];
     self.sex.array = [ad.constants valueForKey:@"sexes"];
-    self.region.array = [ad.regions regionTexts];
+    self.region.array = [ad.regions regionTextsSorted];
     self.experience.array = [ad.constants valueForKey:@"experiences"];
 
     [self update];
@@ -56,7 +56,7 @@
     
     self.age.arrayIndex = [ad.defaults integerForKey:@"ageId"];
     self.sex.arrayIndex = [ad.defaults integerForKey:@"sexId"];
-    self.region.arrayIndex = ad.regions.filteredRegionId;
+    self.region.arrayIndex = ad.regions.indexForRegionId;
     if (!ad.regions.regionSelected ||
         [ad.regions.currentRegion.identifier isEqualToString:@"other"] ||
         !ad.regions.selectedIsOneOfThe3ClosestsRegions) {
@@ -118,9 +118,8 @@
 }
 -(void)writeToProfilePlist{
     [Utility writeProfile];
-
-     
 }
+
 - (IBAction)closestPressed:(UIButton *)sender {
     self.ac = [UIAlertController
                alertControllerWithTitle:NSLocalizedString(@"Closest Regions to your Location",
@@ -151,47 +150,30 @@
 }
 
 - (IBAction)ageChanged:(IdPicker *)sender {
-//    AppDelegate *ad = [AppDelegate sharedDelegate];
-//    [ad.defaults setInteger:sender.arrayIndex forKey:@"ageId"];
     [Utility saveIntWithKey:@"ageId" value:sender.arrayIndex];
-
 }
 
 - (IBAction)sexChanged:(IdPicker *)sender {
-//    AppDelegate *ad = [AppDelegate sharedDelegate];
-//    [ad.defaults setInteger:sender.arrayIndex forKey:@"sexId"];
     [Utility saveIntWithKey:@"sexId" value:sender.arrayIndex];
-
 }
 
 - (IBAction)regionChanged:(IdPicker *)sender {
-//    [Utility loadRegionBasedPreferenceFileDataWithRegionId:sender.arrayIndex];
-    [Utility saveIntWithKey:@"selected" value:sender.arrayIndex];
-
     AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.regions selectId:sender.arrayIndex];
+    [ad.regions selectIdSorted:sender.arrayIndex];
     [self update];
 }
 
 - (IBAction)experienceChanged:(IdPicker *)sender {
-//    AppDelegate *ad = [AppDelegate sharedDelegate];
     [Utility saveIntWithKey:@"experienceId" value:sender.arrayIndex];
-    
-//    [ad.defaults setInteger:sender.arrayIndex forKey:@"experienceId"];
 }
 
 - (IBAction)behaviourSwitchChanged:(UISwitch *)sender {
-//    AppDelegate *ad = [AppDelegate sharedDelegate];
     [Utility saveBoolWithKey:@"behaviour" value:sender.on];
-//    [ad.defaults setBool:sender.on forKey:@"behaviour"];
     [self update];
 }
 
 - (IBAction)behaviourSliderChanged:(UISlider *)sender {
-//    AppDelegate *ad = [AppDelegate sharedDelegate];
     [Utility saveIntWithKey:@"behaviourValue" value:round(sender.value)];
-    AppDelegate *ad = [AppDelegate sharedDelegate];
-    [ad.defaults setInteger:round(sender.value) forKey:@"behaviourValue"];
     [self update];
 }
 

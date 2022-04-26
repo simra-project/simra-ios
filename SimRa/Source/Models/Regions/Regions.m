@@ -13,6 +13,8 @@
 
 @interface Regions ()
 @property (strong, nonatomic) NSMutableArray <Region *> *regions;
+@property (strong, nonatomic) NSMutableArray <Region *> *regionsSorted;
+
 @property (nonatomic) NSInteger regionId;
 @property (nonatomic) NSInteger regionsId;
 @property (nonatomic) NSInteger lastSeenRegionsId;
@@ -125,23 +127,31 @@
         [arrayRegions addObject:dictRegion];
     }
 
-//    [[NSUserDefaults standardUserDefaults] setObject:arrayRegions forKey:@"regions"];
     [Utility saveWithKey:@"regions" value:arrayRegions];
-    
-   
-//    [[NSUserDefaults standardUserDefaults] setInteger:self.regionsId forKey:@"regionsId"];
-//    [[NSUserDefaults standardUserDefaults] setInteger:self.lastSeenRegionsId forKey:@"lastSeenRegionsId"];
-    [Utility saveIntWithKey:@"regionId" value:self.regionId];
     [Utility saveIntWithKey:@"regionsId" value:self.regionsId];
     [Utility saveIntWithKey:@"lastSeenRegionsId" value:self.lastSeenRegionsId];
-    if (self.regionId < 0 || self.regionId > self.regions.count || self.regionId == nil) {
+    if (self.regionId < 0 || self.regionId > self.regions.count) {
         self.regionId = 0;
     }
-//    if (self.regionId == 0 || self.regionId < 0){
-//        //create region specific profile
-//        [Utility getPreferenceFilePathWithRegionWithRegionId:self.regionId];
-//    }
+    [Utility saveIntWithKey:@"regionId" value:self.regionId];
     
+    self.regionsSorted = [[NSMutableArray alloc] init];
+    for (Region *region in self.regions) {
+        if ([region.identifier hasPrefix:@"!"]) {
+            continue;
+        }
+        if (region.position == 0) {
+            [self.regionsSorted addObject:region];
+        } else {
+            NSUInteger i;
+            for (i = 1; i < self.regionsSorted.count; i++) {
+                if ([region.localizedDescription localizedCompare: self.regionsSorted[i].localizedDescription] == NSOrderedAscending) {
+                    break;
+                }
+            }
+            [self.regionsSorted insertObject:region atIndex:i];
+        }
+    }
 }
 
 - (void)seen {
@@ -212,21 +222,11 @@
     }
 }
 
-- (void)selectId:(NSInteger)Id {
-    NSInteger skipped = 0;
-    self.regionId = 0;
-    for (NSInteger i = 0; i < self.regions.count; i++) {
-        Region *region = self.regions[i];
-        if ([region.identifier hasPrefix:@"!"]) {
-            skipped++;
-        }
-        if (Id + skipped == i) {
-            self.regionId = i;
-            break;
-        }
-    }
+- (void)selectIdSorted:(NSInteger)Id {
+    self.regionId = self.regionsSorted[Id].position;
     [self save];
 }
+
 
 - (void)selectPosition:(NSInteger)position {
     if (position < self.regions.count) {
@@ -235,12 +235,10 @@
     }
 }
 
-- (NSArray<NSString *> *)regionTexts {
+- (NSArray<NSString *> *)regionTextsSorted {
     NSMutableArray <NSString *> *texts = [[NSMutableArray alloc] init];
-    for (Region *region in self.regions) {
-        if (![region.identifier hasPrefix:@"!"]) {
-            [texts addObject:region.localizedDescription];
-        }
+    for (Region *region in self.regionsSorted) {
+        [texts addObject:region.localizedDescription];
     }
     return texts;
 }
@@ -286,18 +284,18 @@
     return self.regions[self.regionId];
 }
 
-- (NSInteger)filteredRegionId {
-    NSInteger skipped = 0;
-    for (NSInteger i = 0; i < self.regions.count; i++) {
-        Region *region = self.regions[i];
-        if ([region.identifier hasPrefix:@"!"]) {
-            skipped++;
-        }
-        if (self.regionId - skipped == i) {
-            return i;
+- (NSInteger)indexForRegionId {
+    NSInteger i;
+    
+    for (i = 0; i < self.regionsSorted.count; i++) {
+        if (self.regionsSorted[i].position == self.regionId) {
+            break;
         }
     }
-    return 0;
+    if (i >= self.regionsSorted.count) {
+        i = 0;
+    }
+    return i;
 }
 
 @end

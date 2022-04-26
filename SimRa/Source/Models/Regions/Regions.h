@@ -21,12 +21,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (BOOL)regionSelected;
-- (NSArray <NSString *> *)regionTexts;
+- (NSArray <NSString *> *)regionTextsSorted;
 - (void)computeClosestsRegions:(CLLocation*)location;
 - (BOOL)selectedIsOneOfThe3ClosestsRegions;
 - (NSInteger)regionId;
-- (NSInteger)filteredRegionId;
-- (void)selectId:(NSInteger)Id;
+- (NSInteger)indexForRegionId;
+- (void)selectIdSorted:(NSInteger)Id;
 - (void)selectPosition:(NSInteger)position;
 - (Region *)currentRegion;
 - (void)seen;
