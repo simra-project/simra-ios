@@ -9,14 +9,7 @@
 #import "Regions.h"
 #import "NSString+hashCode.h"
 #import "SimRa-Swift.h"
-
-#define GET_SCHEME @"https:"
-#ifdef DEBUG
-#define GET_HOST @"vm1.mcc.tu-berlin.de:8082"
-#else
-#define GET_HOST @"vm2.mcc.tu-berlin.de:8082"
-#endif
-#define GET_VERSION 12
+#import "API.h"
 
 @interface Regions ()
 @property (strong, nonatomic) NSMutableArray <Region *> *regions;
@@ -33,8 +26,8 @@
 - (void)refresh {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;
-    urlString = [NSString stringWithFormat:@"%@//%@/%d/check-regions?clientHash=%@&lastSeenRegionsID=%ld",
-                 GET_SCHEME, GET_HOST, GET_VERSION,
+    urlString = [NSString stringWithFormat:@"%@/check-regions?clientHash=%@&lastSeenRegionsID=%ld",
+                 API.APIPrefix,
                  NSString.clientHash,
                  (long)self.lastSeenRegionsId];
     [request setHTTPMethod:@"GET"];

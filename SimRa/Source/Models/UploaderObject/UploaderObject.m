@@ -10,33 +10,7 @@
 #import "AppDelegate.h"
 #import "NSString+hashCode.h"
 #import "SimRa-Swift.h"
-// This is only necessary because the backend uses a self signed
-// certificate currently
-// If the certificate will be replaced by a certificate issued
-// by a trusted CA (e.g. letsencrypt), the code marked with
-// SELF_SIGNED_HACK can go and the entry in Info.plist may
-// be deleted too:
-// <key>NSAppTransportSecurity</key>
-//      <dict>
-//          <key>NSAllowsArbitraryLoads</key>
-//          <true/>
-//      </dict>
-// and the file `server.cer` can be removed from the build
-
-#define SELF_SIGNED_HACK 0
-
-#define UPLOAD_SCHEME @"https:"
-#if SELF_SIGNED_HACK
-#define UPLOAD_HOST @"vm3.mcc.tu-berlin.de:8082"
-#else
-//#define UPLOAD_HOST @"vm3.mcc.tu-berlin.de:8082"
-#ifdef DEBUG
-#define UPLOAD_HOST @"vm3.mcc.tu-berlin.de:8082"
-#else
-#define UPLOAD_HOST @"vm2.mcc.tu-berlin.de:8082"
-#endif
-#endif
-#define UPLOAD_VERSION 10
+#import "API.h"
 
 @interface UploaderObject ()
 
@@ -75,8 +49,8 @@
             self.fileHash = keyPass[0];
             self.filePasswd = keyPass[1];
         }
-        urlString = [NSString stringWithFormat:@"%@//%@/%d/%@?fileHash=%@&filePassword=%@&loc=%@&clientHash=%@",
-                     UPLOAD_SCHEME, UPLOAD_HOST, UPLOAD_VERSION,
+        urlString = [NSString stringWithFormat:@"%@/%@?fileHash=%@&filePassword=%@&loc=%@&clientHash=%@",
+                     API.APIPrefix,
                      name,
                      self.fileHash,
                      self.filePasswd,
@@ -84,8 +58,8 @@
                      NSString.clientHash];
         [request setHTTPMethod:@"PUT"];
     } else {
-        urlString = [NSString stringWithFormat: @"%@//%@/%d/%@?loc=%@&clientHash=%@",
-                     UPLOAD_SCHEME, UPLOAD_HOST, UPLOAD_VERSION,
+        urlString = [NSString stringWithFormat: @"%@/%@?loc=%@&clientHash=%@",
+                     API.APIPrefix,
                      name,
                      ad.regions.currentRegion.identifier,
                      NSString.clientHash];
@@ -100,19 +74,12 @@
 
     NSURLSessionUploadTask *dataTask =
     [
-#if SELF_SIGNED_HACK
-     [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration] delegate:self delegateQueue:nil]
-#else
      [NSURLSession sharedSession]
-#endif
      uploadTaskWithRequest:request
      fromFile:csvFile
      completionHandler:^(NSData *data,
                          NSURLResponse *response,
                          NSError *connectionError) {
-
-         NSError *fmError;
-//         [[NSFileManager defaultManager] removeItemAtURL:csvFile error:&fmError];
 
          if (connectionError) {
              NSLog(@"connectionError %@", connectionError);
@@ -164,29 +131,5 @@
 
     [dataTask resume];
 }
-
-#if SELF_SIGNED_HACK
-- (void)URLSession:(NSURLSession *)session
-didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
- completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler {
-    SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
-    SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, 0);
-    NSData *remoteCertificateData = CFBridgingRelease(SecCertificateCopyData(certificate));
-    NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"server" ofType:@"cer"];
-    NSData *localCertData = [NSData dataWithContentsOfFile:cerPath];
-
-    if ([remoteCertificateData isEqualToData:localCertData])
-    {
-        NSURLCredential *credential = [NSURLCredential credentialForTrust:serverTrust];
-        [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
-        completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
-    }
-    else
-    {
-        [[challenge sender] cancelAuthenticationChallenge:challenge];
-        completionHandler(NSURLSessionAuthChallengeRejectProtectionSpace, nil);
-    }
-}
-#endif
 
 @end

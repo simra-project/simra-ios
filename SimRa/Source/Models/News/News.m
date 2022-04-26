@@ -9,14 +9,7 @@
 #import "News.h"
 #import "NSString+hashCode.h"
 #import "SimRa-Swift.h"
-
-#define GET_SCHEME @"https:"
-#ifdef DEBUG
-#define GET_HOST @"vm1.mcc.tu-berlin.de:8082"
-#else
-#define GET_HOST @"vm2.mcc.tu-berlin.de:8082"
-#endif
-
+#import "API.h"
 
 @interface News ()
 @property (nonatomic) NSInteger newsVersion;
@@ -28,9 +21,8 @@
 - (void)refresh {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;
-    urlString = [NSString stringWithFormat:@"%@//%@/check/news?clientHash=%@&lastSeenNewsID=%ld&newsLanguage=%@",
-                 GET_SCHEME,
-                 GET_HOST,
+    urlString = [NSString stringWithFormat:@"%@/check/news?clientHash=%@&lastSeenNewsID=%ld&newsLanguage=%@",
+                 API.APIPrefix,
                  NSString.clientHash,
                  (long)self.newsVersion,
                  [NSBundle preferredLocalizationsFromArray:@[@"en", @"de"]].firstObject

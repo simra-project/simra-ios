@@ -15,18 +15,8 @@
 #import "SimRa-Swift.h"
 #import <SSZipArchive/SSZipArchive.h>
 #import "NSString+hashCode.h"
-#define UPLOAD_SCHEME @"https:"
-#if SELF_SIGNED_HACK
-#define UPLOAD_HOST @"vm1.mcc.tu-berlin.de:8082"
-#else
-//#define UPLOAD_HOST @"vm3.mcc.tu-berlin.de:8082"
-#ifdef DEBUG
-#define UPLOAD_HOST @"vm1.mcc.tu-berlin.de:8082"
-#else
-#define UPLOAD_HOST @"vm2.mcc.tu-berlin.de:8082"
-#endif
-#endif
-#define UPLOAD_VERSION 12
+#import "API.h"
+
 @interface SettingsTVC ()
 {
     AppDelegate *ad;
@@ -166,7 +156,9 @@
     NSString *zipFilePath = [self createZipFilesWithPath:allTrips];
     NSLog(@"Zip file Created at Path : %@",zipFilePath);
     NSData *zipData = [NSData dataWithContentsOfFile:zipFilePath];
-    NSString *urlString = [NSString stringWithFormat:@"https://vm1.mcc.tu-berlin.de:8082/12/debug?clientHash=%@",NSString.clientHash];
+    NSString *urlString = [NSString stringWithFormat:@"%@/debug?clientHash=%@",
+                           API.APIPrefix,
+                           NSString.clientHash];
     urlString = [urlString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
 //     creating URL request to send data
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

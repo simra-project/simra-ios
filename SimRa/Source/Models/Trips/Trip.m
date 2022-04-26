@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "NSString+hashCode.h"
 #import "SimRa-Swift.h"
+#import "API.h"
 
 @implementation TripAnnotation
 @end
@@ -188,14 +189,6 @@
 }
 
 @end
-
-#define GET_SCHEME @"https:"
-#ifdef DEBUG
-#define GET_HOST @"vm1.mcc.tu-berlin.de:8082"
-#else
-#define GET_HOST @"vm2.mcc.tu-berlin.de:8082"
-#endif
-#define GET_VERSION 12
 
 @interface Trip ()
 @property (nonatomic) NSInteger identifier;
@@ -1486,8 +1479,8 @@
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;
-    urlString = [NSString stringWithFormat:@"%@//%@/%d/classify-ride?clientHash=%@&bikeType=%ld&phoneLocation=%ld",
-                 GET_SCHEME, GET_HOST, GET_VERSION,
+    urlString = [NSString stringWithFormat:@"%@/classify-ride?clientHash=%@&bikeType=%ld&phoneLocation=%ld",
+                 API.APIPrefix,
                  NSString.clientHash,
                  (long)self.bikeTypeId,
                  (long)self.positionId];

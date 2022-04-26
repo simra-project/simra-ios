@@ -23,6 +23,7 @@
 		63FB41A52683563000BF5386 /* OpenBikeSensorConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FB41A42683563000BF5386 /* OpenBikeSensorConfigurationViewController.m */; };
 		840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AC224D125800488B31 /* MyTripsTVC.m */; };
 		840E20B0224D190400488B31 /* SettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AF224D190400488B31 /* SettingsTVC.m */; };
+		840EF31F2817EB78001B6603 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = 840EF31E2817EB78001B6603 /* API.m */; };
 		8418D52E22562148000A1D10 /* UploaderObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418D52D22562148000A1D10 /* UploaderObject.m */; };
 		8421D68D2254AE710056B62C /* NSString+hashCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D68C2254AE710056B62C /* NSString+hashCode.m */; };
 		8421D6902254B4E50056B62C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8421D68F2254B4E50056B62C /* LaunchScreen.storyboard */; };
@@ -92,6 +93,8 @@
 		840E20AC224D125800488B31 /* MyTripsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTripsTVC.m; sourceTree = "<group>"; };
 		840E20AE224D190400488B31 /* SettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTVC.h; sourceTree = "<group>"; };
 		840E20AF224D190400488B31 /* SettingsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsTVC.m; sourceTree = "<group>"; };
+		840EF31D2817EB78001B6603 /* API.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
+		840EF31E2817EB78001B6603 /* API.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
 		84121643225757A4006F9E2C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		8418D52C22562148000A1D10 /* UploaderObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploaderObject.h; sourceTree = "<group>"; };
 		8418D52D22562148000A1D10 /* UploaderObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploaderObject.m; sourceTree = "<group>"; };
@@ -355,6 +358,8 @@
 				6383AC292657E7580038F3AE /* IdPicker */,
 				6383AC302657E89A0038F3AE /* Trips */,
 				6383AC742657FD2C0038F3AE /* UserPreferences.swift */,
+				840EF31D2817EB78001B6603 /* API.h */,
+				840EF31E2817EB78001B6603 /* API.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -574,7 +579,7 @@
 		84DD1E7B224C0027004895F9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin";
 				TargetAttributes = {
 					84DD1E82224C0027004895F9 = {
@@ -695,6 +700,7 @@
 				63DB6241269F0EC800E09EC6 /* DeviceTableViewCell.m in Sources */,
 				84DD1EBF224CD9A6004895F9 /* Trip.m in Sources */,
 				840E20B0224D190400488B31 /* SettingsTVC.m in Sources */,
+				840EF31F2817EB78001B6603 /* API.m in Sources */,
 				84E36109224E0721003847E8 /* TripEditVC.m in Sources */,
 				63534E2126A0677A008B58D6 /* PeripheralInfo.swift in Sources */,
 				63DB6251269F41D900E09EC6 /* BluetoothDelegate.swift in Sources */,
@@ -901,6 +907,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -913,7 +920,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = C652JFWU23;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -926,7 +933,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 21;
+				MARKETING_VERSION = 22;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -945,7 +952,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = C652JFWU23;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -955,7 +962,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 21;
+				MARKETING_VERSION = 22;
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
