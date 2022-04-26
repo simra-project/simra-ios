@@ -1479,11 +1479,9 @@
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;
-    urlString = [NSString stringWithFormat:@"%@/classify-ride?clientHash=%@&bikeType=%ld&phoneLocation=%ld",
+    urlString = [NSString stringWithFormat:@"%@/classify-ride-cyclesense?clientHash=%@&os=iOS",
                  API.APIPrefix,
-                 NSString.clientHash,
-                 (long)self.bikeTypeId,
-                 (long)self.positionId];
+                 NSString.clientHash];
     [request setHTTPMethod:@"POST"];
     [request setURL:[NSURL URLWithString:urlString]];
 
