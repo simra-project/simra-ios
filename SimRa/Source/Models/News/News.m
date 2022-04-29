@@ -22,7 +22,7 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *urlString;
     urlString = [NSString stringWithFormat:@"%@/check/news?clientHash=%@&lastSeenNewsID=%ld&newsLanguage=%@",
-                 API.APIPrefix,
+                 API.APIShortPrefix,
                  NSString.clientHash,
                  (long)self.newsVersion,
                  [NSBundle preferredLocalizationsFromArray:@[@"en", @"de"]].firstObject

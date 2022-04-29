@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface API : NSObject
 + (NSString *)APIPrefix;
++ (NSString *)APIShortPrefix;
 @end
 
 NS_ASSUME_NONNULL_END

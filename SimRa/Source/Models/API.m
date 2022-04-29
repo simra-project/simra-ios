@@ -23,4 +23,12 @@
     NSLog(@"APIprefix: %@", prefix);
     return prefix;
 }
+
++ (NSString *)APIShortPrefix {
+    NSString *prefix = [NSString stringWithFormat:@"%@//%@",
+                        API_SCHEME, API_HOST];
+    NSLog(@"APIprefix: %@", prefix);
+    return prefix;
+}
+
 @end
