@@ -123,8 +123,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)tripAnnotations;
 - (NSInteger)tripValidAnnotations;
 - (NSInteger)numberOfScary;
-- (NSDateInterval *)duration;
-- (NSInteger)length;
+- (NSDateInterval *)duration; //!depends on detailed locations
+- (NSInteger)length; //!depends on detailed locations
 - (NSInteger)idle;
 - (TripInfo *)tripInfo;
 - (void)successfullyReUploaded;

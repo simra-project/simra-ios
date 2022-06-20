@@ -801,7 +801,7 @@
     for (TripLocation *tripLocation in self.tripLocations) {
         CLLocationDegrees lat = tripLocation.location.coordinate.latitude;
         CLLocationDegrees lon = tripLocation.location.coordinate.longitude;
-        CLLocationAccuracy horizontalAccuray = tripLocation.location.horizontalAccuracy;
+        CLLocationAccuracy horizontalAccuracy = tripLocation.location.horizontalAccuracy;
         TripGyro *gyro = tripLocation.gyro;
 
         csvString = [NSString stringWithFormat:@"%f,%f,",
@@ -814,12 +814,12 @@
                      0.0,
                      tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0];
 
-        if (horizontalAccuray == -1.0) {
+        if (horizontalAccuracy == -1.0) {
             csvString = [csvString stringByAppendingString:@","];
         } else {
             csvString = [csvString stringByAppendingFormat:@"%f,",
-                         horizontalAccuray];
-            horizontalAccuray = -1;
+                         horizontalAccuracy];
+            horizontalAccuracy = -1;
         }
 
         if (!gyro) {
