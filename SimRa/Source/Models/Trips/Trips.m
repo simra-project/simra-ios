@@ -11,9 +11,6 @@
 #import "NSString+hashCode.h"
 #import "SimRa-Swift.h"
 
-//#warning DEBUG SIMULATE_NOT_RE_UPLOADED
-//#define SIMULATE_NOT_RE_UPLOADED 2
-
 @interface NSString (withRegionId)
 - (NSString *)withRegionId:(NSInteger)regionId;
 @end
@@ -47,11 +44,6 @@
         NSInteger identifier = anIdentifier.integerValue;
         NSLog(@"loading %ld", (long)identifier);
         TripInfo *tripInfo = [[TripInfo alloc] initFromStorage:identifier];
-#ifdef SIMULATE_NOT_RE_UPLOADED
-        if (tripInfo.identifier <= SIMULATE_NOT_RE_UPLOADED) {
-            tripInfo.reUploaded = FALSE;
-        }
-#endif
         [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:tripInfo.identifier]];
     }
 
@@ -67,11 +59,6 @@
                       (long)identifier, (long)tripInfo.annotationsCount);
                 Trip *trip = [[Trip alloc] initFromStorage:identifier];
                 TripInfo *tripInfo = trip.tripInfo;
-#ifdef SIMULATE_NOT_RE_UPLOADED
-                if (tripInfo.identifier <= SIMULATE_NOT_RE_UPLOADED) {
-                    tripInfo.reUploaded = FALSE;
-                }
-#endif
                 [self.tripInfos setObject:tripInfo forKey:[NSNumber numberWithInteger:trip.identifier]];
                 [trip save];
             } else {
@@ -81,7 +68,6 @@
 
     BOOL copyStatisticsOnce = [ad.defaults boolForKey:@"copyStatisticsOnce"];
     if (!copyStatisticsOnce) {
-//        [ad.defaults setBool:TRUE forKey:@"copyStatisticsOnce"];
         [Utility saveBoolWithKey:@"copyStatisticsOnce" value:TRUE];
         if (ad.regions.regionSelected) {
             [self save];
@@ -100,32 +86,12 @@
                 }
             }
             
-//            [ad.defaults setInteger:totalRides
-//                             forKey:[@"totalRides" withRegionId:ad.regions.regionId]];
             [Utility saveIntWithKey:[@"totalRides" withRegionId:ad.regions.regionId] value:totalRides];
-//
-////            [ad.defaults setInteger:totalDuration
-////                             forKey:[@"totalDuration" withRegionId:ad.regions.regionId]];
             [Utility saveIntWithKey:[@"totalDuration" withRegionId:ad.regions.regionId] value:totalDuration];
-//
-////            [ad.defaults setInteger:totalIncidents
-////                             forKey:[@"totalIncidents" withRegionId:ad.regions.regionId]];
             [Utility saveIntWithKey:[@"totalIncidents" withRegionId:ad.regions.regionId] value:totalIncidents];
-//
-////            [ad.defaults setInteger:totalLength
-////                             forKey:[@"totalLength" withRegionId:ad.regions.regionId]];
             [Utility saveIntWithKey:[@"totalLength" withRegionId:ad.regions.regionId] value:totalLength];
-//
-////            [ad.defaults setInteger:totalIdle
-////                             forKey:[@"totalIdle" withRegionId:ad.regions.regionId]];
             [Utility saveIntWithKey:[@"totalIdle" withRegionId:ad.regions.regionId] value:totalIdle];
-//
-////            [ad.defaults setInteger:numberOfScary
-////                             forKey:[@"numberOfScary" withRegionId:ad.regions.regionId]];
             [Utility saveIntWithKey:[@"numberOfScary" withRegionId:ad.regions.regionId] value:numberOfScary];
-
-//            [ad.defaults setObject:totalSlots
-//                            forKey:[@"totalSlots" withRegionId:ad.regions.regionId]];
             [Utility saveArrayWithKey:[@"totalSlots" withRegionId:ad.regions.regionId] value:totalSlots];
 
         }
@@ -154,7 +120,6 @@
 - (NSURL *)csvFile {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSURL *temporaryDirectory = fm.temporaryDirectory;
-//    NSURL *directory = [NSURL URLWithString:[Utility getDocumentDirectory]];
     NSURL *fileURL = [temporaryDirectory URLByAppendingPathComponent:@"/trips.csv"];
     [fm createFileAtPath:fileURL.path
                 contents:[[NSData alloc] init]
@@ -204,24 +169,12 @@
 }
 
 - (void)save {
-     AppDelegate *ad = [AppDelegate sharedDelegate];
-//    [ad.defaults setInteger:self.version
-//                     forKey:[@"version" withRegionId:ad.regions.regionId]];
+    AppDelegate *ad = [AppDelegate sharedDelegate];
     [Utility saveIntWithKey:[@"version" withRegionId:ad.regions.regionId] value:self.version];
-
-//    [ad.defaults setBool:self.uploaded
-//                  forKey:[@"uploaded" withRegionId:ad.regions.regionId]];
     [Utility saveBoolWithKey:[@"uploaded" withRegionId:ad.regions.regionId] value:self.uploaded];
-
-//    [ad.defaults setObject:self.fileHash
-//                    forKey:[@"fileHash" withRegionId:ad.regions.regionId]];
-//    [ad.defaults setObject:self.filePasswd
-//                    forKey:[@"filePasswd" withRegionId:ad.regions.regionId]];
     [Utility saveStringWithKey:[@"fileHash" withRegionId:ad.regions.regionId] value:self.fileHash];
     [Utility saveStringWithKey:[@"filePasswd" withRegionId:ad.regions.regionId] value:self.filePasswd];
     [self saveUploadedTripToPlist];
-    
-    
 }
 
 -(void)saveUploadedTripToPlist{
@@ -273,33 +226,12 @@
     [totalSlots setObject:[NSNumber numberWithInteger:totalSlots[hour].integerValue + 1] atIndexedSubscript:hour];
     hour = [calendar component:NSCalendarUnitHour fromDate:trip.duration.endDate];
     [totalSlots setObject:[NSNumber numberWithInteger:totalSlots[hour].integerValue + 1] atIndexedSubscript:hour];
-
-//    [ad.defaults setInteger:totalRides
-//                     forKey:[@"totalRides" withRegionId:regionId]];
     [Utility saveIntWithKey:[@"totalRides" withRegionId:regionId] value:totalRides];
-
-//    [ad.defaults setInteger:totalDuration
-//                     forKey:[@"totalDuration" withRegionId:regionId]];
     [Utility saveIntWithKey:[@"totalDuration" withRegionId:regionId] value:totalDuration];
-
-//    [ad.defaults setInteger:totalIncidents
-//                     forKey:[@"totalIncidents" withRegionId:regionId]];
     [Utility saveIntWithKey:[@"totalIncidents" withRegionId:regionId] value:totalIncidents];
-
-//    [ad.defaults setInteger:totalLength
-//                     forKey:[@"totalLength" withRegionId:regionId]];
     [Utility saveIntWithKey:[@"totalLength" withRegionId:regionId] value:totalLength];
-
-//    [ad.defaults setInteger:totalIdle
-//                     forKey:[@"totalIdle" withRegionId:regionId]];
     [Utility saveIntWithKey:[@"totalIdle" withRegionId:regionId] value:totalIdle];
-
-//    [ad.defaults setInteger:numberOfScary
-//                     forKey:[@"numberOfScary" withRegionId:regionId]];
     [Utility saveIntWithKey:[@"numberOfScary" withRegionId:regionId] value:numberOfScary];
-
-//    [ad.defaults setObject:totalSlots
-//                    forKey:[@"totalSlots" withRegionId:regionId]];
     [Utility saveArrayWithKey:[@"totalSlots" withRegionId:regionId] value:totalSlots];
 
     [Utility writeProfile];
