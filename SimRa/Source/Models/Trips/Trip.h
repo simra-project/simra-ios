@@ -120,7 +120,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)deleteFromStorage:(NSInteger)identifier;
 - (void)startRecording;
 - (void)stopRecording;
-- (NSInteger)tripMotions;
 - (NSInteger)tripAnnotations;
 - (NSInteger)tripValidAnnotations;
 - (NSInteger)numberOfScary;

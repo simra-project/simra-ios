@@ -1236,14 +1236,6 @@
     }
 }
 
-- (NSInteger)tripMotions {
-    NSInteger tripMotions = 0;
-    for (TripLocation *tripLocation in self.tripLocations) {
-        tripMotions += tripLocation.tripMotions.count;
-    }
-    return tripMotions;
-}
-
 - (NSInteger)tripAnnotations {
     NSInteger tripAnnotations = 0;
     for (TripLocation *tripLocation in self.tripLocations) {
