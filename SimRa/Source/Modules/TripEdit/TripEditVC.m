@@ -589,10 +589,6 @@ calloutAccessoryControlTapped:(UIControl *)control {
         TripPoint *tripPoint = (TripPoint *)sender;
         annotationTVC.tripAnnotation = tripPoint.tripLocation.tripAnnotation;
         annotationTVC.changed = FALSE;
-//        annotationTVC.isClosePassAdded = tripPoint.closePassAdded;
-//        if (tripPoint.closePassAdded){
-//            annotationTVC.closePassInfo = tripPoint.closePassInfo;
-//        }
     }
     if ([segue.destinationViewController isKindOfClass:[TripDetailTVC class]]) {
         TripDetailTVC *tripDetailTVC = (TripDetailTVC *)segue.destinationViewController;

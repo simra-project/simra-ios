@@ -197,7 +197,7 @@
 @property (strong, nonatomic) TripMotion *lastTripMotion;
 @property (nonatomic) NSInteger deferredSecs;
 @property (nonatomic) NSInteger deferredMeters;
-
+@property (nonatomic) NSFileHandle *motionsFile;
 @property (strong, nonatomic) NSTimer *timer;
 @end
 
@@ -207,12 +207,10 @@
     self = [super init];
 
     AppDelegate *ad = [AppDelegate sharedDelegate];
-    //    self.closePassArr = [[NSMutableArray alloc]init];
 
     NSInteger identifier = [ad.defaults integerForKey:@"lastTripId"];
     identifier ++;
     self.identifier = identifier;
-    //    [ad.defaults setInteger:identifier forKey:@"lastTripId"];
     [Utility saveIntWithKey:@"lastTripId" value:identifier];
 
     self.edited = FALSE;
@@ -288,13 +286,8 @@
 }
 
 + (void)deleteFromStorage:(NSInteger)identifier {
-    // Delete in UserDefaults
-    //    AppDelegate *ad = [AppDelegate sharedDelegate];
     [Utility removeWithKey:[NSString stringWithFormat:@"Trip-%ld", identifier]];
     [Utility removeWithKey:[NSString stringWithFormat:@"TripInfo-%ld", identifier]];
-
-    //    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", identifier]];
-    //    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", identifier]];
 
     // Delete in Filesystem
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -302,14 +295,17 @@
                                                       inDomains:NSUserDomainMask].firstObject;
     NSURL *tripURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"Trip-%ld.json", identifier]];
     NSURL *tripInfoURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"TripInfo-%ld.json", identifier]];
+    NSURL *tripMotionsURL = [documentDirectoryURL URLByAppendingPathComponent:[NSString stringWithFormat:@"TripMotions-%ld.csv", identifier]];
 
     BOOL tripSuccess = [fileManager removeItemAtPath:tripURL.path
                                                error:nil];
     BOOL tripInfoSuccess = [fileManager removeItemAtPath:tripInfoURL.path
                                                    error:nil];
+    BOOL tripMotionsSuccess = [fileManager removeItemAtPath:tripMotionsURL.path
+                                                      error:nil];
 
-    NSLog(@"[Trip] deleteFromStorage tripSuccess=%d tripInfoSuccess=%d",
-          tripSuccess, tripInfoSuccess);
+    NSLog(@"[Trip] deleteFromStorage trip=%d tripInfo=%d tripMotions=%d",
+          tripSuccess, tripInfoSuccess, tripMotionsSuccess);
 }
 
 - (instancetype)initFromDictionary:(NSDictionary *)dict {
@@ -346,28 +342,6 @@
     self.reUploaded = reUploaded.boolValue;
 
     self.tripLocations = [[NSMutableArray alloc] init];
-    //    self.closePassArr = [[NSMutableArray alloc] init];
-    //    NSMutableArray *closePass = [dict objectForKey:@"closePassValues"];
-    //    for (NSDictionary *closePassInfoDict in closePass){
-    //        NSNumber *leftSensor = [closePassInfoDict objectForKey:@"leftSensorVal"];
-    //        NSNumber *rightSensor = [closePassInfoDict objectForKey:@"rightSensorVal"];
-    //        NSNumber *lat = [closePassInfoDict objectForKey:@"lat"];
-    //        NSNumber *lng = [closePassInfoDict objectForKey:@"lng"];
-    //        NSDictionary *annotationDict  = [closePassInfoDict objectForKey:@"tripAnnotation"];
-    //        NSNumber *incidentId = [annotationDict objectForKey:@"incidentId"];
-    //        NSString *comment = [annotationDict objectForKey:@"comment"];
-    //        TripAnnotation *annotation = [[TripAnnotation alloc]init];
-    //        annotation.incidentId = [incidentId intValue];
-    //        annotation.comment = comment;
-    //        ClosePassInfo *closePass = [[ClosePassInfo alloc]init];
-    //        closePass.leftSensorValue = leftSensor;
-    //        closePass.rightSensorValue = rightSensor;
-    //        closePass.location = [[CLLocation alloc]initWithLatitude:[lat doubleValue] longitude:[lng doubleValue]];
-    ////        closePass.tripAnnotation = annotation;
-    //
-    //        [self.closePassArr addObject:closePass];
-    //
-    //    }
 
     NSArray *tripLocations = [dict objectForKey:@"tripLocations"];
     for (NSDictionary *tripLocationDict in tripLocations) {
@@ -507,33 +481,6 @@
     [tripDict setObject:[NSNumber numberWithBool:self.trailer] forKey:@"trailer"];
     [tripDict setObject:[NSNumber numberWithBool:self.statisticsAdded] forKey:@"statisticsAdded"];
     [tripDict setObject:[NSNumber numberWithBool:self.reUploaded] forKey:@"reUploaded"];
-    //    if (!self.closePassArr){
-    //        self.closePassArr = [[NSMutableArray alloc]init];
-    //    }
-    //    NSMutableArray *tripClosePassArray = [[NSMutableArray alloc] init];
-
-    //    for (ClosePassInfo *closePassInfo in self.closePassArr){
-    //        NSNumber *leftSensor =  closePassInfo.leftSensorValue;
-    //        NSNumber *rightSensor = closePassInfo.rightSensorValue;
-    //        CLLocation *lastLocationForClosePass = closePassInfo.location;
-    //        TripAnnotation *tripAnnotation = closePassInfo.tripAnnotation;
-    //
-    //        NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
-    //        [dict setObject:leftSensor forKey:@"leftSensorVal"];
-    //        [dict setObject:rightSensor forKey:@"rightSensorVal"];
-    //        [dict setObject:[NSNumber numberWithDouble:lastLocationForClosePass.coordinate.latitude] forKey:@"lat"];
-    //        [dict setObject:[NSNumber numberWithDouble:lastLocationForClosePass.coordinate.longitude] forKey:@"lng"];
-    //        NSMutableDictionary *tripAnnotationDict = [[NSMutableDictionary alloc] init];
-    //        [tripAnnotationDict
-    //         setObject:[NSNumber numberWithInteger:tripAnnotation.incidentId]
-    //         forKey:@"incidentId"];
-    //            [tripAnnotationDict
-    //             setObject:tripAnnotation.comment
-    //             forKey:@"comment"];
-    //        [dict setObject:tripAnnotationDict forKey:@"tripAnnotation"];
-    //        [tripClosePassArray addObject:dict];
-    //    }
-    //    [tripDict setObject:tripClosePassArray forKey:@"closePassValues"];
 
     NSMutableArray *tripLocationsArray = [[NSMutableArray alloc] init];
     for (TripLocation *tripLocation in self.tripLocations) {
@@ -621,7 +568,6 @@
     }
     [tripLocationDict setObject:tripMotionsArray forKey:@"tripMotions"];
 
-
     if (tripLocation.tripAnnotation) {
         NSMutableDictionary *tripAnnotationDict = [[NSMutableDictionary alloc] init];
         [tripAnnotationDict
@@ -671,46 +617,44 @@
     }
     return tripLocationDict;
 }
--(void)storeClosePassValueForTripWithLeftSensorVal: (NSNumber *)leftSensorVal rightSensorVal: (NSNumber *)rightSensorVal {
+- (void)storeClosePassValueForTripWithLeftSensorVal:(NSNumber *)leftSensorVal
+                                     rightSensorVal:(NSNumber *)rightSensorVal
+                                     leftSensor1Val:(NSNumber *)leftSensor1Val
+                                     leftSensor2Val:(NSNumber *)leftSensor2Val
+                                    rightSensor1Val:(NSNumber *)rightSensor1Val
+                                    rightSensor2Val:(NSNumber *)rightSensor2Val {
     //create a closePassInfo object
-    //create a trip annotation object
     //store it in the last location captured
     //these are then saved and retrieved after the recording of the trip is finished.
     ClosePassInfo *closePassInfo = [[ClosePassInfo alloc]init];
     BOOL isValidLeftSensor = [self checkIncidentMinimumDistance:leftSensorVal];
     BOOL isValidRightSensor = [self checkIncidentMinimumDistance:rightSensorVal];
-    if (isValidLeftSensor){
+    if (isValidLeftSensor) {
         closePassInfo.leftSensorValue = leftSensorVal;
-
     }
-    if (isValidRightSensor){
+    if (isValidRightSensor) {
         closePassInfo.rightSensorValue = rightSensorVal;
-
     }
-    if (isValidLeftSensor || isValidRightSensor){
-        self.tripLocations.lastObject.closePassInfo = closePassInfo;
-        NSLog(@"close pass left sensor value: %@",self.tripLocations.lastObject.closePassInfo.leftSensorValue);
-        NSLog(@"close pass right sensor value: %@",self.tripLocations.lastObject.closePassInfo.rightSensorValue);
-        NSLog(@"Close pass value stored");
-    }
-
-}
-
--(void)storeClosePassValuesForTripCSVWithLeftSensor1Val: (NSNumber *)leftSensor1Val leftSensor2Val: (NSNumber *)leftSensor2Val rightSensor1Val: (NSNumber *)rightSensor1Val rightSensor2Val: (NSNumber *)rightSensor2Val{
-
     if ([self checkIncidentMinimumDistance:leftSensor1Val]) {
-        self.tripLocations.lastObject.closePassInfo.leftSensor1Value = leftSensor1Val;
-
+        closePassInfo.leftSensor1Value = leftSensor1Val;
     }
     if ([self checkIncidentMinimumDistance:leftSensor2Val]){
-        self.tripLocations.lastObject.closePassInfo.leftSensor2Value = leftSensor2Val;
+        closePassInfo.leftSensor2Value = leftSensor2Val;
     }
     if ([self checkIncidentMinimumDistance:rightSensor1Val]){
-        self.tripLocations.lastObject.closePassInfo.rightSensor1Value = rightSensor1Val;
-
+        closePassInfo.rightSensor1Value = rightSensor1Val;
     }
     if ([self checkIncidentMinimumDistance:rightSensor2Val]){
-        self.tripLocations.lastObject.closePassInfo.rightSensor2Value = rightSensor2Val;
+        closePassInfo.rightSensor2Value = rightSensor2Val;
+    }
+
+    if (isValidLeftSensor || isValidRightSensor) {
+        self.tripLocations.lastObject.closePassInfo = closePassInfo;
+        NSLog(@"close pass left sensor value: %@",
+              self.tripLocations.lastObject.closePassInfo.leftSensorValue);
+        NSLog(@"close pass right sensor value: %@",
+              self.tripLocations.lastObject.closePassInfo.rightSensorValue);
+        NSLog(@"Close pass value stored");
     }
 }
 
@@ -729,6 +673,33 @@
     return [self csvFileWithHeader:TRUE];
 }
 
+- (NSString *)motionStringFromTripMotion:(TripMotion *)tripMotion {
+    NSString *csvString = @",,";
+    
+    csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%.0f,",
+                 tripMotion.x * 9.81,
+                 tripMotion.y * 9.81,
+                 tripMotion.z * 9.81,
+                 tripMotion.timestamp * 1000.0];
+    
+    csvString = [csvString stringByAppendingString:@","];
+    
+    csvString = [csvString stringByAppendingString:@",,,"];
+    csvString = [csvString stringByAppendingString:@",,,,,"]; // OBS Values
+    csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%f,%f,%f,%f",
+                 tripMotion.xl * 9.81,
+                 tripMotion.yl * 9.81,
+                 tripMotion.zl * 9.81,
+                 tripMotion.xr,
+                 tripMotion.yr,
+                 tripMotion.zr,
+                 tripMotion.cr];
+    
+    csvString = [csvString stringByAppendingString:@"\n"];
+    
+    return csvString;
+}
+    
 - (NSURL *)csvFileWithHeader:(BOOL)withHeader {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSURL *temporaryDirectory = fm.temporaryDirectory;
@@ -854,31 +825,10 @@
 
         locationLines[locationTime] = csvString;
     }
-
+    
     for (TripLocation *tripLocation in self.tripLocations) {
         for (TripMotion *tripMotion in tripLocation.tripMotions) {
-            csvString = @",,";
-
-            csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%.0f,",
-                         tripMotion.x * 9.81,
-                         tripMotion.y * 9.81,
-                         tripMotion.z * 9.81,
-                         tripMotion.timestamp * 1000.0];
-
-            csvString = [csvString stringByAppendingString:@","];
-
-            csvString = [csvString stringByAppendingString:@",,,"];
-            csvString = [csvString stringByAppendingString:@",,,,,"]; // OBS Values
-            csvString = [csvString stringByAppendingFormat:@"%f,%f,%f,%f,%f,%f,%f",
-                         tripMotion.xl * 9.81,
-                         tripMotion.yl * 9.81,
-                         tripMotion.zl * 9.81,
-                         tripMotion.xr,
-                         tripMotion.yr,
-                         tripMotion.zr,
-                         tripMotion.cr];
-
-            csvString = [csvString stringByAppendingString:@"\n"];
+            csvString = [self motionStringFromTripMotion:tripMotion];
             NSNumber *motionTime = [NSNumber numberWithDouble:tripMotion.timestamp * 1000.0];
 
             while (locationLines.count > 0) {
@@ -893,6 +843,42 @@
             [fh writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
         }
     }
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory
+                                                      inDomains:NSUserDomainMask].firstObject;
+    NSURL *motionsURL = [documentDirectoryURL URLByAppendingPathComponent:
+                         [NSString stringWithFormat:@"TripMotions-%ld.csv", self.identifier]];
+    self.motionsFile = [NSFileHandle fileHandleForReadingAtPath:motionsURL.path];
+    
+    NSString *motionsString = @"";
+    while (TRUE) {
+        NSData *data = [self.motionsFile readDataOfLength:1];
+        if (!data || data.length == 0) {
+            break;
+        }
+        NSString *newCharacter = [[NSString alloc] initWithData:data
+                                                       encoding:NSUTF8StringEncoding];
+        motionsString = [motionsString stringByAppendingString:newCharacter];
+        if ([newCharacter isEqualToString:@"\n"]) {
+            NSArray <NSString *> *array = [motionsString componentsSeparatedByString:@","];
+            NSLog(@"array: %@", array);
+            NSNumber *motionTime = [NSNumber numberWithDouble:array[5].doubleValue];
+            while (locationLines.count > 0) {
+                NSNumber *locationTime = [locationLines.allKeys sortedArrayUsingSelector:@selector(compare:)].firstObject;
+                if (locationTime.doubleValue < motionTime.doubleValue) {
+                    [fh writeData:[locationLines[locationTime] dataUsingEncoding:NSUTF8StringEncoding]];
+                    [locationLines removeObjectForKey:locationTime];
+                } else {
+                    break;
+                }
+            }
+            [fh writeData:[motionsString dataUsingEncoding:NSUTF8StringEncoding]];
+            motionsString = @"";
+        }
+    }
+    [self.motionsFile closeFile];
+
     [fh closeFile];
     return fileURL;
 }
@@ -1006,6 +992,20 @@
     self.positionId = [ad.defaults integerForKey:@"positionId"];
     self.childseat = [ad.defaults integerForKey:@"childSeat"];
     self.trailer = [ad.defaults boolForKey:@"trailer"];
+    
+    // create and open a incremental write file for motions
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory
+                                                      inDomains:NSUserDomainMask].firstObject;
+    NSURL *motionsURL = [documentDirectoryURL URLByAppendingPathComponent:
+                         [NSString stringWithFormat:@"TripMotions-%ld.csv", self.identifier]];
+
+    [fileManager createFileAtPath:motionsURL.path
+                contents:[[NSData alloc] init]
+              attributes:nil];
+
+    self.motionsFile = [NSFileHandle fileHandleForWritingAtPath:motionsURL.path];
+
 
     if (ad.mm.isGyroAvailable) {
         [ad.mm startGyroUpdates];
@@ -1142,13 +1142,13 @@
     }
     [ad.lm stopUpdatingLocation];
     ad.lm.delegate = nil;
+    
+    [self.motionsFile closeFile];
 
     if ([ad.defaults boolForKey:@"AI"]) {
         [self AIIncidentDetection];
     } else {
-        //        if (![BluetoothManager getInstance].connected){
         [self offlineIncidentDectection];
-        //        }
     }
     for ( int i = 0; i < _tripLocations.count; i++){
         TripLocation *tripLoc = _tripLocations[i];
@@ -1159,7 +1159,6 @@
             TripAnnotation *tripAnnotation = [[TripAnnotation alloc] init];
             tripAnnotation.incidentId = 1;
             tripAnnotation.comment = [NSString stringWithFormat:@"Open Bike Sensor Close Pass incident reading\n Left Sensor: %@\n Right Sensor: %@\n", tripLoc.closePassInfo.leftSensorValue, tripLoc.closePassInfo.rightSensorValue];
-            //            self.tripLocations.lastObject.tripAnnotation = tripAnnotation;
             _tripLocations[i].tripAnnotation = tripAnnotation;
         }
     }
@@ -1212,8 +1211,10 @@
         tripMotion.zr = zr;
         tripMotion.cr = cr;
         tripMotion.timestamp = [NSDate date].timeIntervalSince1970;
-        [lastLocation.tripMotions addObject:tripMotion];
+        //[lastLocation.tripMotions addObject:tripMotion];
         self.lastTripMotion = tripMotion;
+        NSString *csvString = [self motionStringFromTripMotion:tripMotion];
+        [self.motionsFile writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
     }
 }
 
@@ -1373,23 +1374,8 @@
     NSLog(@"[Trip] save tripSuccess=%d tripInfoSuccess=%d",
           tripSuccess, tripInfoSuccess);
 
-    // Delete from UserDefaults
-#if 0
-    NSDictionary *tripDict = self.asDictionary;
-    //    [ad.defaults setObject:tripDict forKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
-    //    [Utility saveIntWithKey:@"lastTripId" value:1];
-    [Utility saveWithKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier] value:tripDict];
-    NSDictionary *tripInfoDict = self.tripInfo.asDictionary;
-    //    [ad.defaults setObject:tripInfoDict forKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
-    [Utility saveWithKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier] value:tripInfoDict];
-
-#else
     [Utility removeWithKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
     [Utility removeWithKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
-
-    //    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"Trip-%ld", self.identifier]];
-    //    [ad.defaults removeObjectForKey:[NSString stringWithFormat:@"TripInfo-%ld", self.identifier]];
-#endif
 }
 
 - (TripInfo *)tripInfo {
@@ -1513,19 +1499,11 @@
                                                 for (NSInteger i = 1; i < array.count; i++) {
                                                     NSNumber *interval = array[i];
                                                     for (TripLocation *tripLocation in self.tripLocations) {
-                                                        if (round(tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0) == interval.doubleValue) {
+                                                        if (round(tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0) >= interval.doubleValue) {
                                                             if (!tripLocation.tripAnnotation) {
                                                                 tripLocation.tripAnnotation = [[TripAnnotation alloc] init];
                                                             }
                                                             break;
-                                                        }
-                                                        for (TripMotion *tripMotion in tripLocation.tripMotions) {
-                                                            if (round(tripMotion.timestamp * 1000.0) == interval.doubleValue) {
-                                                                if (!tripLocation.tripAnnotation) {
-                                                                    tripLocation.tripAnnotation = [[TripAnnotation alloc] init];
-                                                                }
-                                                                break;
-                                                            }
                                                         }
                                                     }
                                                 }

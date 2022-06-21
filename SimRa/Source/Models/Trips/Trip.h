@@ -53,7 +53,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ClosePassInfo: NSObject
 
 @property (strong, nonatomic) CLLocation * location;
-//@property (strong, nonatomic, nullable) TripAnnotation *tripAnnotation;
 @property (strong, nonatomic) NSNumber * rightSensorValue; // total value
 @property (strong, nonatomic) NSNumber * leftSensorValue; // total value
 @property (strong, nonatomic) NSNumber * leftSensor1Value; // individual
@@ -102,7 +101,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, readonly) CLLocation *lastLocation;
 @property (strong, nonatomic, readonly) TripMotion *lastTripMotion;
 @property (strong, nonatomic) NSMutableArray <TripLocation *> *tripLocations;
-//@property (strong, nonatomic)     NSMutableArray<ClosePassInfo *> * closePassArr;
 
 @property (nonatomic, readonly) NSInteger deferredSecs;
 @property (nonatomic, readonly) NSInteger deferredMeters;
@@ -128,8 +126,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)idle;
 - (TripInfo *)tripInfo;
 - (void)successfullyReUploaded;
--(void)storeClosePassValueForTripWithLeftSensorVal: (NSNumber *)leftSensorVal rightSensorVal: (NSNumber *)rightSensorVal;
--(void)storeClosePassValuesForTripCSVWithLeftSensor1Val: (NSNumber *)leftSensor1Val leftSensor2Val: (NSNumber *)leftSensor2Val rightSensor1Val: (NSNumber *)rightSensor1Val rightSensor2Val: (NSNumber *)rightSensor2Val;
+-(void)storeClosePassValueForTripWithLeftSensorVal:(NSNumber *)leftSensorVal
+                                    rightSensorVal:(NSNumber *)rightSensorVal
+                                    leftSensor1Val:(NSNumber *)leftSensor1Val
+                                    leftSensor2Val:(NSNumber *)leftSensor2Val
+                                   rightSensor1Val:(NSNumber *)rightSensor1Val
+                                   rightSensor2Val:(NSNumber *)rightSensor2Val;
 - (NSURL *)gpxFile;
 - (NSURL *)geoJSONFile;
 - (NSURL *)kmlFile;

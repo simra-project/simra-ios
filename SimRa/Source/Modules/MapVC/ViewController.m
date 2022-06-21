@@ -474,25 +474,25 @@
     if (closePassCharacteristic != nil){
         [self.bleManager discoverDescriptor:closePassCharacteristic];
         [self .bleManager setNotificationWithEnable:YES forCharacteristic:closePassCharacteristic];
-
     }
 }
 - (void)didDiscoverDescriptors:(CBCharacteristic *)characteristic{
     if ([characteristic.UUID.UUIDString isEqualToString:closePassCharacteristic.UUID.UUIDString]){
         closePassCharacteristic = characteristic;
     }
-    if ([characteristic.UUID.UUIDString isEqualToString:sensorDistanceCharacteristic.UUID.UUIDString]){
+    if ([characteristic.UUID.UUIDString isEqualToString:sensorDistanceCharacteristic.UUID.UUIDString]) {
         sensorDistanceCharacteristic = characteristic;
     }
 }
 
-- (void)didReadValueForCharacteristic:(CBCharacteristic *)characteristic{
+- (void)didReadValueForCharacteristic:(CBCharacteristic *)characteristic {
     NSArray<NSNumber *> *byteArray = [self.bleManager getByteArrayWithCharacteristic:characteristic];
     //when the close pass button is pressed
     if ([characteristic.UUID.UUIDString isEqualToString:closePassCharacteristic.UUID.UUIDString]){
         //get left and right sensor values
         NSNumber * leftSensor1Val = byteArray[4];
         NSNumber * leftSensor2Val = byteArray[5];
+        // CK: not sure if this is right, may be 6 and 7
         NSNumber * rightSensor1Val = byteArray[1];
         NSNumber * rightSensor2Val = byteArray[1];
 
@@ -501,18 +501,16 @@
 
         if (!self.playButton.isEnabled){
             // if recording the trip, store values in the trip.
-            [self.trip storeClosePassValueForTripWithLeftSensorVal:leftSensor rightSensorVal:rightSensor];
-            [self.trip storeClosePassValuesForTripCSVWithLeftSensor1Val:leftSensor1Val leftSensor2Val:leftSensor2Val rightSensor1Val:rightSensor1Val rightSensor2Val:rightSensor2Val];
+            [self.trip storeClosePassValueForTripWithLeftSensorVal:leftSensor
+                                                    rightSensorVal:rightSensor
+                                                    leftSensor1Val:leftSensor1Val
+                                                    leftSensor2Val:leftSensor2Val
+                                                   rightSensor1Val:rightSensor1Val
+                                                   rightSensor2Val:rightSensor2Val];
         }
-
     }
-    if ([characteristic.UUID.UUIDString isEqualToString:sensorDistanceCharacteristic.UUID.UUIDString]){
+    if ([characteristic.UUID.UUIDString isEqualToString:sensorDistanceCharacteristic.UUID.UUIDString]) {
     }
-    
-}
-
-- (BOOL)checkIncidentMinimumDistance:(NSNumber *)sensorValue {
-    return sensorValue.intValue < 150;
 }
 
 - (void)didDiscoverServices:(CBPeripheral *)peripheral{
