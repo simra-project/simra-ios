@@ -384,26 +384,30 @@
                                 speed:speed.doubleValue
                                 timestamp:[NSDate dateWithTimeIntervalSince1970:timestamp.doubleValue]];
 
+        TripLocation *tripLocation = [[TripLocation alloc] init];
+        tripLocation.location = location;
+
         NSNumber *a = [tripLocationDict objectForKey:@"a"];
         NSNumber *b = [tripLocationDict objectForKey:@"b"];
         NSNumber *c = [tripLocationDict objectForKey:@"c"];
 
-        TripGyro *gyro = [[TripGyro alloc] init];
-        gyro.x = a.doubleValue;
-        gyro.y = b.doubleValue;
-        gyro.z = c.doubleValue;
-
-        TripLocation *tripLocation = [[TripLocation alloc] init];
-        tripLocation.location = location;
-        tripLocation.gyro = gyro;
+        if (a && b && c) {
+            TripGyro *gyro = [[TripGyro alloc] init];
+            gyro.x = a.doubleValue;
+            gyro.y = b.doubleValue;
+            gyro.z = c.doubleValue;
+            tripLocation.gyro = gyro;
+        }
+        
         NSNumber *leftSensorValue = [tripLocationDict objectForKey:@"leftSensorVal"];
         NSNumber *rightSensorValue = [tripLocationDict objectForKey:@"rightSensorVal"];
-        if (leftSensorValue != nil && rightSensorValue != nil){
+        if (leftSensorValue && rightSensorValue){
             ClosePassInfo *closePass = [[ClosePassInfo alloc]init];
             closePass.leftSensorValue = leftSensorValue;
             closePass.rightSensorValue = rightSensorValue;
             tripLocation.closePassInfo = closePass;
         }
+        
         tripLocation.tripMotions = [[NSMutableArray alloc] init];
         NSDictionary *tripMotionsArray = [tripLocationDict objectForKey:@"tripMotions"];
         for (NSDictionary *tripMotionDict in tripMotionsArray) {
@@ -524,32 +528,6 @@
     [tripLocationDict
      setObject:[NSNumber numberWithDouble:tripLocation.location.coordinate.longitude]
      forKey:@"lon"];
-    [tripLocationDict
-     setObject:[NSNumber numberWithDouble:tripLocation.location.speed]
-     forKey:@"speed"];
-    [tripLocationDict
-     setObject:[NSNumber numberWithDouble:tripLocation.location.horizontalAccuracy]
-     forKey:@"horizontalAccuracy"];
-    if (tripLocation.closePassInfo != nil && tripLocation.closePassInfo.leftSensorValue != nil && tripLocation.closePassInfo.rightSensorValue != nil){
-        NSNumber *leftSensor =  tripLocation.closePassInfo.leftSensorValue;
-        NSNumber *rightSensor = tripLocation.closePassInfo.rightSensorValue;
-
-        [tripLocationDict
-         setObject:leftSensor
-         forKey:@"leftSensorVal"];
-        [tripLocationDict
-         setObject:rightSensor
-         forKey:@"rightSensorVal"];
-    }
-    [tripLocationDict
-     setObject:[NSNumber numberWithDouble:tripLocation.gyro.x]
-     forKey:@"a"];
-    [tripLocationDict
-     setObject:[NSNumber numberWithDouble:tripLocation.gyro.y]
-     forKey:@"b"];
-    [tripLocationDict
-     setObject:[NSNumber numberWithDouble:tripLocation.gyro.z]
-     forKey:@"c"];
 
     NSMutableArray *tripMotionsArray = [[NSMutableArray alloc] init];
     for (TripMotion *tripMotion in tripLocation.tripMotions) {
@@ -674,8 +652,10 @@
     if (isValidLeftSensor || isValidRightSensor) {
         TripLocation *tripLocation = self.tripLocations.lastObject;
         if (tripLocation) {
-            tripLocation.closePassInfo = closePassInfo;
-            NSString *csvString = [self locationStringFromTripLocation:tripLocation];
+            //CKfast tripLocation.closePassInfo = closePassInfo;
+            NSString *csvString = [self locationStringFromTripLocation:tripLocation
+                                                                  gyro:tripLocation.gyro
+                                                         closePassInfo:closePassInfo];
             [self.locationsFile writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
 
             NSLog(@"Close pass value stored! left sensor value: %@ right sensor value: %@",
@@ -704,11 +684,12 @@
     return [self csvFileWithHeader:TRUE];
 }
 
-- (NSString *)locationStringFromTripLocation:(TripLocation *)tripLocation {
+- (NSString *)locationStringFromTripLocation:(TripLocation *)tripLocation
+                                        gyro:(TripGyro *)gyro
+                               closePassInfo:(ClosePassInfo *)closePassInfo {
     CLLocationDegrees lat = tripLocation.location.coordinate.latitude;
     CLLocationDegrees lon = tripLocation.location.coordinate.longitude;
     CLLocationAccuracy horizontalAccuracy = tripLocation.location.horizontalAccuracy;
-    TripGyro *gyro = tripLocation.gyro;
 
     NSString *csvString = [NSString stringWithFormat:@"%f,%f,",
                            lat,
@@ -744,12 +725,12 @@
     NSString *rightSensorVal1 = @"";
     NSString *rightSensorVal2 = @"";
 
-    if (tripLocation.closePassInfo != nil){
+    if (closePassInfo != nil){
         isClosePassEvent = @"1";
-        leftSensorVal1 = tripLocation.closePassInfo.leftSensor1Value.stringValue;
-        leftSensorVal2 = tripLocation.closePassInfo.leftSensor2Value.stringValue;
-        rightSensorVal1 = tripLocation.closePassInfo.rightSensor1Value.stringValue;
-        rightSensorVal2 = tripLocation.closePassInfo.rightSensor2Value.stringValue;
+        leftSensorVal1 = closePassInfo.leftSensor1Value.stringValue;
+        leftSensorVal2 = closePassInfo.leftSensor2Value.stringValue;
+        rightSensorVal1 = closePassInfo.rightSensor1Value.stringValue;
+        rightSensorVal2 = closePassInfo.rightSensor2Value.stringValue;
     }
 
     csvString = [csvString stringByAppendingFormat:@"%@,%@,%@,%@,%@",leftSensorVal1,leftSensorVal2,rightSensorVal1,rightSensorVal2,isClosePassEvent]; // OBS Values
@@ -877,7 +858,9 @@
 
     NSMutableDictionary <NSNumber *, NSString *> *locationLines = [[NSMutableDictionary alloc] init];
     for (TripLocation *tripLocation in self.tripLocations) {
-        csvString = [self locationStringFromTripLocation:tripLocation];
+        csvString = [self locationStringFromTripLocation:tripLocation
+                                                    gyro:tripLocation.gyro
+                                           closePassInfo:tripLocation.closePassInfo];
         NSNumber *locationTime = [NSNumber numberWithDouble:tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0];
         locationLines[locationTime] = csvString;
     }
@@ -1217,18 +1200,6 @@
     } else {
         [self offlineIncidentDectection];
     }
-    for ( int i = 0; i < _tripLocations.count; i++){
-        TripLocation *tripLoc = _tripLocations[i];
-        if (tripLoc.closePassInfo != nil){
-            NSLog(@"%f Lat", tripLoc.location.coordinate.latitude);
-            NSLog(@"%f long", tripLoc.location.coordinate.longitude);
-
-            TripAnnotation *tripAnnotation = [[TripAnnotation alloc] init];
-            tripAnnotation.incidentId = 1;
-            tripAnnotation.comment = [NSString stringWithFormat:@"Open Bike Sensor Close Pass incident reading\n Left Sensor: %@\n Right Sensor: %@\n", tripLoc.closePassInfo.leftSensorValue, tripLoc.closePassInfo.rightSensorValue];
-            _tripLocations[i].tripAnnotation = tripAnnotation;
-        }
-    }
 
     [self save];
 }
@@ -1251,9 +1222,11 @@
         gyro.x = gyroData.rotationRate.x;
         gyro.y = gyroData.rotationRate.y;
         gyro.z = gyroData.rotationRate.z;
-        newLocation.gyro = gyro;
+        //CKfast newLocation.gyro = gyro;
         [self.tripLocations addObject:newLocation];
-        NSString *csvString = [self locationStringFromTripLocation:newLocation];
+        NSString *csvString = [self locationStringFromTripLocation:newLocation
+                                                              gyro:gyro
+                                                     closePassInfo:nil];
         [self.locationsFile writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
 
         if (lastLocation) {
