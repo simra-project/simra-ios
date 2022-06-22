@@ -73,8 +73,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) ClosePassInfo *closePassInfo;
 @end
 
-
-
 @interface TripInfo : NSObject
 @property (nonatomic) NSInteger identifier;
 @property (nonatomic) NSInteger version;
@@ -92,7 +90,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSArray <NSNumber *> *)allStoredIdentifiers;
 - (instancetype)initFromStorage:(NSInteger)identifier;
-
 @end
 
 @interface Trip : UploaderObject <CLLocationManagerDelegate>
@@ -135,7 +132,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSURL *)gpxFile;
 - (NSURL *)geoJSONFile;
 - (NSURL *)kmlFile;
-
 @end
 
 NS_ASSUME_NONNULL_END
