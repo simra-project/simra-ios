@@ -15,7 +15,15 @@
 @implementation TripAnnotation
 @end
 
+@interface TripMotion ()
+@end
+
 @implementation TripMotion
+- (instancetype)init {
+    self = [super init];
+    return self;
+}
+
 @end
 
 @implementation ClosePassInfo
@@ -24,34 +32,29 @@
 @implementation TripGyro
 @end
 
+@interface TripLocation ()
+@property (nonatomic) double minOfMotionsX;
+@property (nonatomic) double minOfMotionsY;
+@property (nonatomic) double minOfMotionsZ;
+@property (nonatomic) double maxOfMotionsX;
+@property (nonatomic) double maxOfMotionsY;
+@property (nonatomic) double maxOfMotionsZ;
+@end
+
 @implementation TripLocation
+
 - (instancetype)init {
     self = [super init];
     self.tripMotions = [[NSMutableArray alloc] init];
-    return self;
-}
+    
+    self.minOfMotionsX = 0.0;
+    self.minOfMotionsY = 0.0;
+    self.minOfMotionsZ = 0.0;
+    self.maxOfMotionsX = 0.0;
+    self.maxOfMotionsY = 0.0;
+    self.maxOfMotionsZ = 0.0;
 
-- (CMAcceleration)minMaxOfMotions {
-    if (self.tripMotions.count > 0) {
-        CMAcceleration minOfMotions = {0.0, 0.0, 0.0};
-        CMAcceleration maxOfMotions = {0.0, 0.0, 0.0};
-        for (TripMotion *tripMotion in self.tripMotions) {
-            minOfMotions.x = MIN(minOfMotions.x, tripMotion.x);
-            minOfMotions.y = MIN(minOfMotions.y, tripMotion.y);
-            minOfMotions.z = MIN(minOfMotions.z, tripMotion.z);
-            maxOfMotions.x = MAX(maxOfMotions.x, tripMotion.x);
-            maxOfMotions.y = MAX(maxOfMotions.y, tripMotion.y);
-            maxOfMotions.z = MAX(maxOfMotions.z, tripMotion.z);
-        }
-        CMAcceleration resultAcceleration;
-        resultAcceleration.x = maxOfMotions.x - minOfMotions.x;
-        resultAcceleration.y = maxOfMotions.y - minOfMotions.y;
-        resultAcceleration.z = maxOfMotions.z - minOfMotions.z;
-        return resultAcceleration;
-    } else {
-        CMAcceleration defaultAcceleration = {0.0, 0.0, 0.0};
-        return defaultAcceleration;
-    }
+    return self;
 }
 
 @end
@@ -197,7 +200,14 @@
 @property (strong, nonatomic) TripMotion *lastTripMotion;
 @property (nonatomic) NSInteger deferredSecs;
 @property (nonatomic) NSInteger deferredMeters;
-@property (nonatomic) NSFileHandle *motionsFile;
+@property (strong, nonatomic) NSFileHandle *motionsFile;
+@property (strong, nonatomic) TripLocation *largestXMotion;
+@property (strong, nonatomic) TripLocation *secondLargestXMotion;
+@property (strong, nonatomic) TripLocation *largestYMotion;
+@property (strong, nonatomic) TripLocation *secondLargestYMotion;
+@property (strong, nonatomic) TripLocation *largestZMotion;
+@property (strong, nonatomic) TripLocation *secondLargestZMotion;
+
 @property (strong, nonatomic) NSTimer *timer;
 @end
 
@@ -219,6 +229,14 @@
     self.reUploaded = FALSE;
     self.tripLocations = [[NSMutableArray alloc] init];
     self.AIVersion = 0;
+    
+    self.largestXMotion = nil;
+    self.secondLargestXMotion = nil;
+    self.largestYMotion = nil;
+    self.secondLargestYMotion = nil;
+    self.largestZMotion = nil;
+    self.secondLargestZMotion = nil;
+
     return self;
 }
 
@@ -1171,6 +1189,8 @@
         self.startLocation = location;
     }
 
+    TripLocation *lastLocation = self.tripLocations.lastObject;
+    
     AppDelegate *ad = [AppDelegate sharedDelegate];
     NSInteger deferredSecs = [ad.defaults integerForKey:@"deferredSecs"];
     NSInteger deferredMeters = [ad.defaults integerForKey:@"deferredMeters"];
@@ -1184,6 +1204,56 @@
         gyro.z = gyroData.rotationRate.z;
         newLocation.gyro = gyro;
         [self.tripLocations addObject:newLocation];
+        
+        if (lastLocation) {
+            double lastX = lastLocation.maxOfMotionsX - lastLocation.minOfMotionsX;
+            if (self.largestXMotion) {
+                double largestX = self.largestXMotion.maxOfMotionsX - self.largestXMotion.minOfMotionsX;
+                if (lastX > largestX) {
+                    self.secondLargestXMotion = self.largestXMotion;
+                    self.largestXMotion = lastLocation;
+                } else if (self.secondLargestXMotion) {
+                    double secondLargestX = self.secondLargestXMotion.maxOfMotionsX - self.secondLargestXMotion.minOfMotionsX;
+                    if (lastX > secondLargestX) {
+                        self.secondLargestXMotion = lastLocation;
+                    }
+                }
+            } else {
+                self.largestXMotion = lastLocation;
+            }
+            
+            double lastY = lastLocation.maxOfMotionsY - lastLocation.minOfMotionsY;
+            if (self.largestYMotion) {
+                double largestY = self.largestYMotion.maxOfMotionsY - self.largestYMotion.minOfMotionsY;
+                if (lastY > largestY) {
+                    self.secondLargestYMotion = self.largestYMotion;
+                    self.largestYMotion = lastLocation;
+                } else if (self.secondLargestYMotion) {
+                    double secondLargestY = self.secondLargestYMotion.maxOfMotionsY - self.secondLargestYMotion.minOfMotionsY;
+                    if (lastY > secondLargestY) {
+                        self.secondLargestYMotion = lastLocation;
+                    }
+                }
+            } else {
+                self.largestYMotion = lastLocation;
+            }
+
+            double lastZ = lastLocation.maxOfMotionsZ - lastLocation.minOfMotionsZ;
+            if (self.largestZMotion) {
+                double largestZ = self.largestZMotion.maxOfMotionsZ - self.largestZMotion.minOfMotionsZ;
+                if (lastZ > largestZ) {
+                    self.secondLargestZMotion = self.largestZMotion;
+                    self.largestZMotion = lastLocation;
+                } else if (self.secondLargestZMotion) {
+                    double secondLargestZ = self.secondLargestZMotion.maxOfMotionsZ - self.secondLargestZMotion.minOfMotionsZ;
+                    if (lastZ > secondLargestZ) {
+                        self.secondLargestZMotion = lastLocation;
+                    }
+                }
+            } else {
+                self.largestZMotion = lastLocation;
+            }
+        }
     }
 }
 
@@ -1215,6 +1285,13 @@
         self.lastTripMotion = tripMotion;
         NSString *csvString = [self motionStringFromTripMotion:tripMotion];
         [self.motionsFile writeData:[csvString dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        lastLocation.minOfMotionsX = MIN(lastLocation.minOfMotionsX, tripMotion.x);
+        lastLocation.minOfMotionsY = MIN(lastLocation.minOfMotionsY, tripMotion.y);
+        lastLocation.minOfMotionsZ = MIN(lastLocation.minOfMotionsZ, tripMotion.z);
+        lastLocation.maxOfMotionsX = MAX(lastLocation.maxOfMotionsX, tripMotion.x);
+        lastLocation.maxOfMotionsY = MAX(lastLocation.maxOfMotionsY, tripMotion.y);
+        lastLocation.maxOfMotionsZ = MAX(lastLocation.maxOfMotionsZ, tripMotion.z);
     }
 }
 
@@ -1396,60 +1473,24 @@
 }
 
 - (void)offlineIncidentDectection {
-    TripLocation *largestXMotion;
-    TripLocation *secondLargestXMotion;
-    TripLocation *largestYMotion;
-    TripLocation *secondLargestYMotion;
-    TripLocation *largestZMotion;
-    TripLocation *secondLargestZMotion;
-
-    double largestX = 0.0;
-    double secondLargestX = 0.0;
-    double largestY = 0.0;
-    double secondLargestY = 0.0;
-    double largestZ = 0.0;
-    double secondLargestZ = 0.0;
-
-    for (TripLocation *tripLocation in self.tripLocations) {
-        if (tripLocation == self.tripLocations.firstObject ||
-            tripLocation == self.tripLocations.lastObject) {
-            continue;
-        }
-        CMAcceleration minMax = tripLocation.minMaxOfMotions;
-        if (minMax.x > largestX) {
-            secondLargestXMotion = largestXMotion;
-            secondLargestX = largestX;
-            largestXMotion = tripLocation;
-            largestX = minMax.x;
-        } else if (minMax.x > secondLargestX) {
-            secondLargestXMotion = tripLocation;
-            secondLargestX = minMax.x;
-        }
-        if (minMax.y > largestY) {
-            secondLargestYMotion = largestYMotion;
-            secondLargestY = largestY;
-            largestYMotion = tripLocation;
-            largestY = minMax.y;
-        } else if (minMax.y > secondLargestY) {
-            secondLargestYMotion = tripLocation;
-            secondLargestY = minMax.y;
-        }
-        if (minMax.z > largestZ) {
-            secondLargestZMotion = largestZMotion;
-            secondLargestZ = largestZ;
-            largestZMotion = tripLocation;
-            largestZ = minMax.z;
-        } else if (minMax.z > secondLargestZ) {
-            secondLargestZMotion = tripLocation;
-            secondLargestZ = minMax.z;
-        }
+    if (self.largestXMotion) {
+        self.largestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
     }
-    largestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    secondLargestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    largestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    secondLargestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    largestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
-    secondLargestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    if (self.secondLargestXMotion) {
+        self.secondLargestXMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    }
+    if (self.largestYMotion) {
+        self.largestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    }
+    if (self.secondLargestYMotion) {
+        self.secondLargestYMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    }
+    if (self.largestZMotion) {
+        self.largestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    }
+    if (self.secondLargestZMotion) {
+        self.secondLargestZMotion.tripAnnotation = [[TripAnnotation alloc] init];
+    }
 }
 
 - (void)AIIncidentDetection {
