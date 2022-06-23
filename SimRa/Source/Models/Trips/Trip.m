@@ -699,7 +699,7 @@
                  0.0,
                  0.0,
                  0.0,
-                 tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0];
+                 round(tripLocation.location.timestamp.timeIntervalSince1970) * 1000.0];
     
     if (horizontalAccuracy == -1.0) {
         csvString = [csvString stringByAppendingString:@","];
@@ -874,7 +874,8 @@
             csvString = [self locationStringFromTripLocation:tripLocation
                                                         gyro:tripLocation.gyro
                                                closePassInfo:tripLocation.closePassInfo];
-            NSNumber *locationTime = [NSNumber numberWithDouble:tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0];
+            NSNumber *locationTime = [NSNumber numberWithDouble:
+                                      round(tripLocation.location.timestamp.timeIntervalSince1970) * 1000.0];
             locationLines[locationTime] = csvString;
         }
         
