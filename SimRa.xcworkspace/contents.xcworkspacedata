@@ -5,6 +5,9 @@
       location = "group:berlin.gpx">
    </FileRef>
    <FileRef
+      location = "group:neuss.gpx">
+   </FileRef>
+   <FileRef
       location = "group:SimRa.xcodeproj">
    </FileRef>
    <FileRef
