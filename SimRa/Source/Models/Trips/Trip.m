@@ -733,7 +733,7 @@
         rightSensorVal2 = closePassInfo.rightSensor2Value.stringValue;
     }
 
-    csvString = [csvString stringByAppendingFormat:@"%@,%@,%@,%@,%@",leftSensorVal1,leftSensorVal2,rightSensorVal1,rightSensorVal2,isClosePassEvent]; // OBS Values
+    csvString = [csvString stringByAppendingFormat:@"%@,%@,%@,%@,%@,",leftSensorVal1,leftSensorVal2,rightSensorVal1,rightSensorVal2,isClosePassEvent]; // OBS Values
     csvString = [csvString stringByAppendingString:@",,,,,,"]; // Linear Giro Values
     csvString = [csvString stringByAppendingString:@"\n"];
 
