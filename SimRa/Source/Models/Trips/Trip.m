@@ -699,7 +699,7 @@
                  0.0,
                  0.0,
                  0.0,
-                 tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0];
+                 round(tripLocation.location.timestamp.timeIntervalSince1970) * 1000.0];
     
     if (horizontalAccuracy == -1.0) {
         csvString = [csvString stringByAppendingString:@","];
@@ -823,7 +823,7 @@
                              key,
                              tripLocation.location.coordinate.latitude,
                              tripLocation.location.coordinate.longitude,
-                             tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0,
+                             round(tripLocation.location.timestamp.timeIntervalSince1970) * 1000.0,
                              self.bikeTypeId,
                              self.childseat,
                              self.trailer,
@@ -875,7 +875,7 @@
                                                         gyro:tripLocation.gyro
                                                closePassInfo:tripLocation.closePassInfo];
             NSNumber *locationTime = [NSNumber numberWithDouble:
-                                     tripLocation.location.timestamp.timeIntervalSince1970 * 1000.0];
+                                     round(tripLocation.location.timestamp.timeIntervalSince1970) * 1000.0];
             locationLines[locationTime] = csvString;
         }
         
