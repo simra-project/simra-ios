@@ -1533,7 +1533,7 @@
     [request setURL:[NSURL URLWithString:urlString]];
     
     [request setValue:@"text/plain" forHTTPHeaderField: @"Content-Type"];
-    [request setTimeoutInterval:10.0];
+    [request setTimeoutInterval:20.0];
     NSLog(@"AIIncidentDetection request:\n%@", request);
     NSURL *csvFile = [self csvFileWithHeader:FALSE];
     
