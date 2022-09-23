@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *other;
 @property (weak, nonatomic) IBOutlet UISwitch *escooter;
 @property (weak, nonatomic) IBOutlet UITextView *comment;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 
 @end
 
@@ -66,9 +67,14 @@
     self.comment.text = self.tripAnnotation.comment;
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    self.doneButton.enabled = TRUE;
+}
+
 - (void)textViewDidEndEditing:(UITextView *)textView {
     self.tripAnnotation.comment = textView.text;
     self.changed = TRUE;
+    self.doneButton.enabled = FALSE;
 }
 
 - (IBAction)incidentChanged:(IdPicker *)sender {
