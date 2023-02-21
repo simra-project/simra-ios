@@ -57,12 +57,18 @@
 
 @property (nonatomic) BOOL initialMessagePassed;
 
+@property (strong, nonatomic) CLLocationManager *locationManager;
+
 @end
 
 @implementation ViewController
 @synthesize bleManager;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    
     self.mapView.delegate = self;
     self.mapView.showsScale = TRUE;
     self.mapView.showsCompass = TRUE;
@@ -87,8 +93,10 @@
 
     [NSLayoutConstraint activateConstraints:@[a, b]];
     [self setupOpenBikeSensor];
+    
     self.playButton.enabled = TRUE;
     self.stopButton.enabled = FALSE;
+
     self.navigationItem.leftBarButtonItem.enabled = TRUE;
     self.navigationItem.rightBarButtonItem.enabled = TRUE;
 
@@ -175,6 +183,39 @@
         [self checkRegions];
     }
     [self checkRegions];
+    [self checkLocationManager];
+}
+
+- (void)checkLocationManager {
+    if (CLLocationManager.locationServicesEnabled &&
+        CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
+        if (!self.trip) {
+            self.playButton.enabled = TRUE;
+            self.stopButton.enabled = FALSE;
+        }
+    } else {
+        if (self.trip) {
+            [self stopButtonPressed:nil];
+        } else {
+            self.playButton.enabled = FALSE;
+            self.stopButton.enabled = FALSE;
+            self.ac = [UIAlertController
+                       alertControllerWithTitle:NSLocalizedString(@"Location", @"Location")
+                       message:NSLocalizedString(@"To record your trips with Simra you need to allow Location",@"To record your trips with Simra you need to allow Location")
+                       preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *aac = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel")
+                                                          style:UIAlertActionStyleCancel
+                                                        handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            [self.ac addAction:aac];
+            [self presentViewController:self.ac animated:TRUE completion:nil];
+        }
+    }
+}
+
+- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
+    [self checkLocationManager];
 }
 
 -(void)setupOpenBikeSensor{
@@ -421,9 +462,6 @@
         if (!self.annotationView) {
             self.annotationView = [[AnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"me"];
         }
-
-        UIImage *image = [UIImage imageNamed:@"pin"];
-        self.annotationView.personImage = image;
 
         self.annotationView.recording = self.trip != nil;
         self.annotationView.speed = 0.0;

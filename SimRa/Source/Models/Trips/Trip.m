@@ -1067,7 +1067,8 @@
     }
     
     ad.lm.delegate = self;
-    if (CLLocationManager.locationServicesEnabled) {
+    if (CLLocationManager.locationServicesEnabled &&
+        CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse) {
         ad.lm.allowsBackgroundLocationUpdates = TRUE;
         ad.lm.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
         ad.lm.activityType = CLActivityTypeFitness;

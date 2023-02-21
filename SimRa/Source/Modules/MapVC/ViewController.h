@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "SimRa-Swift.h"
 
-@interface ViewController : UIViewController <MKMapViewDelegate,BluetoothDelegate>
+@interface ViewController : UIViewController <MKMapViewDelegate,BluetoothDelegate,CLLocationManagerDelegate>
 
 @property (nonatomic, strong) BluetoothManager *bleManager;
 
