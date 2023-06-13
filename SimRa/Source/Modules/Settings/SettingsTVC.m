@@ -282,8 +282,8 @@
 
 - (IBAction)privacyPressed:(UIButton *)sender {
     [[AppDelegate sharedDelegate] openURL:@{
-        @"en" : @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/privacy_policy_statement/parameter/en",
-        @"de" : @"https://www.mcc.tu-berlin.de/menue/forschung/projekte/simra/datenschutzerklaerung/parameter/de/"
+        @"en" : @"https://www.tu.berlin/en/mcc/research/projects/simra-privacy-policy-statement",
+        @"de" : @"https://www.tu.berlin/mcc/forschung/projekte/simra-datenschutzerklaerung"
     }];
 }
 
