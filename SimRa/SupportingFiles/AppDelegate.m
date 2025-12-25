@@ -94,8 +94,8 @@
 
 - (void)showHowTo {
     [self openURL:@{
-        @"en" : @"https://tubcloud.tu-berlin.de/s/N5Zd5BKFFm9X3Am/download/SimRa_Instructions_IOS.pdf",
-        @"de" : @"https://tubcloud.tu-berlin.de/s/D7oiP3FXYqnGPjr/download/SimRa_Anleitung_IOS.pdf"
+        @"en" : @"https://simra-backend.3s-rg.de:4998/SimRa_Instructions_IOS.pdf",
+        @"de" : @"https://simra-backend.3s-rg.de:4998/SimRa_Anleitung_IOS.pdf"
     }];
 }
 

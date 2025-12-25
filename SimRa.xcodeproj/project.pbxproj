@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -152,6 +152,7 @@
 		84E36108224E0721003847E8 /* TripEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripEditVC.m; sourceTree = "<group>"; };
 		84E3610A224E0759003847E8 /* AnnotationTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnnotationTVC.h; sourceTree = "<group>"; };
 		84E3610B224E0759003847E8 /* AnnotationTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnnotationTVC.m; sourceTree = "<group>"; };
+		A0C9087B2ECD0B43009FD4E8 /* Hash-Suffix.h */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Hash-Suffix.h"; sourceTree = "<group>"; };
 		B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimRa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimRa.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimRa/Pods-SimRa.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,6 +208,7 @@
 				84DD1E92224C0028004895F9 /* Assets.xcassets */,
 				845FD035225D71FE0041568E /* Hash-Suffix.h */,
 				845FD034225D71E90041568E /* Hash-Suffix.h.sample */,
+				A0C9087B2ECD0B43009FD4E8 /* Hash-Suffix.h */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -678,9 +680,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SimRa/Pods-SimRa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-SimRa/Pods-SimRa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -919,11 +925,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = C652JFWU23;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"DEBUG=1",
@@ -952,11 +957,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = C652JFWU23;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/SupportingFiles/Info.plist;

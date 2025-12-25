@@ -275,15 +275,15 @@
 
 - (IBAction)aboutPressed:(UIButton *)sender {
     [[AppDelegate sharedDelegate] openURL:@{
-        @"en" : @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/en/",
-        @"de" : @"https://www.mcc.tu-berlin.de/menue/research/projects/simra/parameter/de/"
+        @"en" : @"https://www.digital-future.berlin/en/research/projects/simra/",
+        @"de" : @"https://www.digital-future.berlin/forschung/projekte/simra/"
     }];
 }
 
 - (IBAction)privacyPressed:(UIButton *)sender {
     [[AppDelegate sharedDelegate] openURL:@{
-        @"en" : @"https://www.tu.berlin/en/mcc/research/projects/simra-privacy-policy-statement",
-        @"de" : @"https://www.tu.berlin/mcc/forschung/projekte/simra-datenschutzerklaerung"
+        @"en" : @"https://www.tu.berlin/en/3s/research/projects/simra-privacy-policy-statement",
+        @"de" : @"https://www.tu.berlin/3s/forschung/projekte/simra-datenschutzerklaerung"
     }];
 }
 
@@ -325,8 +325,8 @@
 
 - (IBAction)imprintPressed:(UIButton *)sender {
     [[AppDelegate sharedDelegate] openURL:@{
-        @"en" : @"https://www.tu-berlin.de/servicemenue/impressum/parameter/en/mobil/",
-        @"de" : @"https://www.tu-berlin.de/servicemenue/impressum/parameter/mobil/"
+        @"en" : @"https://www.tu.berlin/en/footer/site-credits",
+        @"de" : @"https://www.tu.berlin/footer/impressum"
     }];
 }
 

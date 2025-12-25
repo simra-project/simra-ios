@@ -23,6 +23,8 @@ xcuserdata/
 *.moved-aside
 *.xccheckout
 *.xcscmblueprint
+SimRa/Resources/Hash-Suffix.h
+
 
 ## Obj-C/Swift specific
 *.hmap

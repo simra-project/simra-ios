@@ -12,7 +12,7 @@
 #ifdef DEBUG
 #define API_HOST @"vm1.mcc.tu-berlin.de:8082"
 #else
-#define API_HOST @"vm2.mcc.tu-berlin.de:8082"
+#define API_HOST @"simra-backend.3s-rg.de:8082"
 #endif
 #define API_VERSION 13
 
