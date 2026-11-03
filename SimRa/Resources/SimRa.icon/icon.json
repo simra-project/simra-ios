@@ -1,0 +1,114 @@
+{
+  "color-space-for-untagged-svg-colors" : "display-p3",
+  "fill-specializations" : [
+    {
+      "value" : "automatic"
+    },
+    {
+      "appearance" : "dark",
+      "value" : "automatic"
+    }
+  ],
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "hidden" : false,
+          "image-name" : "Image 6.heif",
+          "name" : "Image 6",
+          "position" : {
+            "scale" : 0.5,
+            "translation-in-points" : [
+              373,
+              136.5
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
+        {
+          "fill" : {
+            "solid" : "display-p3:0.88086,0.23547,0.30151,1.00000"
+          },
+          "glass-specializations" : [
+            {
+              "value" : true
+            },
+            {
+              "appearance" : "light",
+              "value" : true
+            }
+          ],
+          "hidden" : false,
+          "image-name" : "SimRa_Radfahrer.svg",
+          "name" : "SimRa_Radfahrer",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              0,
+              22
+            ]
+          }
+        },
+        {
+          "image-name" : "Image 7.heif",
+          "name" : "Image 7",
+          "position" : {
+            "scale" : 0.5,
+            "translation-in-points" : [
+              4.5,
+              188.00000000000006
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
+    },
+    {
+      "layers" : [
+        {
+          "blend-mode" : "overlay",
+          "fill" : "none",
+          "hidden" : false,
+          "image-name" : "Image.heif",
+          "name" : "Image",
+          "position" : {
+            "scale" : 0.5,
+            "translation-in-points" : [
+              0.5,
+              188.99999999999994
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "squares" : "shared"
+  }
+}

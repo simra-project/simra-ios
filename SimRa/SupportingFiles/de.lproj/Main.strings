@@ -18,7 +18,7 @@
 "1xw-dA-InH.text" = "∅-Distanz";
 
 /* Class = "UILabel"; text = "Offset Sensor Right"; ObjectID = "1zb-7d-enF"; */
-"1zb-7d-enF.text" = "Offset Sensor Right";
+"1zb-7d-enF.text" = "Offset Sensor rechts";
 
 /* Class = "UILabel"; text = "Bicycle"; ObjectID = "2Zr-zX-WNu"; */
 "2Zr-zX-WNu.text" = "Fahrrad";
@@ -33,7 +33,7 @@
 "39Z-h9-cEF.text" = "Immer";
 
 /* Class = "UIButton"; normalTitle = "Disconnect"; ObjectID = "3GT-IK-GMC"; */
-"3GT-IK-GMC.normalTitle" = "Disconnect";
+"3GT-IK-GMC.normalTitle" = "Trennen";
 
 /* Class = "UILabel"; text = "Incidents"; ObjectID = "4ED-g6-RgE"; */
 "4ED-g6-RgE.text" = "Vorfälle";
@@ -48,7 +48,7 @@
 "5h9-tM-U6A.title" = "Fahrten";
 
 /* Class = "UILabel"; text = "Advance Settings"; ObjectID = "69M-Ic-ZaJ"; */
-"69M-Ic-ZaJ.text" = "Advance Settings";
+"69M-Ic-ZaJ.text" = "Erweiterte Einstellungen";
 
 /* Class = "UITextView"; text = "TTGSnackbar By Zekunyan is provided under the MIT license https://github.com/zekunyan/TTGSnackbar"; ObjectID = "6Ih-ec-D8F"; */
 "6Ih-ec-D8F.text" = "TTGSnackbar By Zekunyan is provided under the MIT license https://github.com/zekunyan/TTGSnackbar";
@@ -57,7 +57,7 @@
 "8Fn-ss-h83.headerTitle" = "Privatsphäre: Anfang der Fahrt";
 
 /* Class = "UILabel"; text = "Available Devices"; ObjectID = "9h1-hD-7lY"; */
-"9h1-hD-7lY.text" = "Available Devices";
+"9h1-hD-7lY.text" = "Verfügbare Geräte";
 
 /* Class = "UILabel"; text = "Thereof Scary"; ObjectID = "AbA-66-1FG"; */
 "AbA-66-1FG.text" = "Davon beängstigend";
@@ -66,7 +66,7 @@
 "Axe-mV-OS5.normalTitle" = "OK";
 
 /* Class = "UITableViewSection"; headerTitle = "Devices"; ObjectID = "B4V-FQ-pgG"; */
-"B4V-FQ-pgG.headerTitle" = "Devices";
+"B4V-FQ-pgG.headerTitle" = "Geräte";
 
 /* Class = "UILabel"; text = "Region"; ObjectID = "Ble-fg-2cq"; */
 "Ble-fg-2cq.text" = "Region";
@@ -87,7 +87,7 @@
 "DY1-7h-Asu.normalTitle" = "Impressum";
 
 /* Class = "UILabel"; text = "Device Info:"; ObjectID = "Dmd-na-jBj"; */
-"Dmd-na-jBj.text" = "Device Info:";
+"Dmd-na-jBj.text" = "Geräteinformationen:";
 
 /* Class = "UILabel"; text = "Passenger Car"; ObjectID = "FDw-TH-ScJ"; */
 "FDw-TH-ScJ.text" = "PKW";
@@ -96,13 +96,13 @@
 "FRX-9C-cpb.text" = "E-Scooter";
 
 /* Class = "UITextView"; text = "Created my free logo at https://LogoMakr.com"; ObjectID = "FlT-0A-Udk"; */
-"FlT-0A-Udk.text" = "Created my free logo at https://LogoMakr.com";
+"FlT-0A-Udk.text" = "Mein kostenloses Logo erstellt mit https://LogoMakr.com";
 
 /* Class = "UILabel"; text = "Cycling Experience"; ObjectID = "Gt8-Qt-Vdn"; */
 "Gt8-Qt-Vdn.text" = "Raderfahrung";
 
 /* Class = "UITextView"; text = "SSZipArchive by ZipArchive under the MIT license https://github.com/ZipArchive/ZipArchive"; ObjectID = "H8j-GY-xsq"; */
-"H8j-GY-xsq.text" = "SSZipArchive by ZipArchive under the MIT license https://github.com/ZipArchive/ZipArchive";
+"H8j-GY-xsq.text" = "SSZipArchive von ZipArchive unter der MIT-Lizenz https://github.com/ZipArchive/ZipArchive";
 
 /* Class = "UIButton"; normalTitle = "About"; ObjectID = "Hy8-yG-bWd"; */
 "Hy8-yG-bWd.normalTitle" = "Über";
@@ -123,7 +123,7 @@
 "LGj-0o-yBH.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
 
 /* Class = "UILabel"; text = "Note: You can change this from OpenBikeSensor settings page"; ObjectID = "LQP-w9-Mde"; */
-"LQP-w9-Mde.text" = "Note: You can change this from OpenBikeSensor settings page";
+"LQP-w9-Mde.text" = "Hinweis: Dies kann auf der OpenBikeSensor-Einstellungsseite geändert werden";
 
 /* Class = "UILabel"; text = "Gender"; ObjectID = "MqN-41-3CZ"; */
 "MqN-41-3CZ.text" = "Geschlecht";
@@ -171,7 +171,7 @@
 "VHZ-9D-W3q.title" = "Schneiden";
 
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "VTO-Vt-8RE"; */
-"VTO-Vt-8RE.text" = "Subtitle";
+"VTO-Vt-8RE.text" = "Untertitel";
 
 /* Class = "UILabel"; text = "Trailer"; ObjectID = "VhB-wN-SnI"; */
 "VhB-wN-SnI.text" = "Anhänger";
@@ -180,13 +180,13 @@
 "XcY-SK-4YC.normalTitle" = "Privatsphäre";
 
 /* Class = "UILabel"; text = "Offset Sensor Left"; ObjectID = "Y96-1a-wLP"; */
-"Y96-1a-wLP.text" = "Offset Sensor Left";
+"Y96-1a-wLP.text" = "Offset Sensor links";
 
 /* Class = "UITableViewSection"; headerTitle = "Other Traffic Participants"; ObjectID = "Z6B-Or-wWS"; */
 "Z6B-Or-wWS.headerTitle" = "Andere Verkehrsteilnehmer";
 
 /* Class = "UIButton"; normalTitle = "OPEN OPENBIKESENSOR SETTINGS"; ObjectID = "afy-x7-PUI"; */
-"afy-x7-PUI.normalTitle" = "OPEN OPENBIKESENSOR SETTINGS";
+"afy-x7-PUI.normalTitle" = "OPENBIKESENSOR-EINSTELLUNGEN ÖFFNEN";
 
 /* Class = "UITextView"; text = "Icons made by\nFreepik www.freepik.com\nfrom www.flaticon.com"; ObjectID = "agv-he-9aQ"; */
 "agv-he-9aQ.text" = "Icons made by\nFreepik www.freepik.com\nfrom www.flaticon.com";
@@ -204,7 +204,7 @@
 "eXq-aF-Bmm.text" = "Kindersitz";
 
 /* Class = "UILabel"; text = "Distance of the outer point of the Handlerbar to the frame"; ObjectID = "ebw-2W-l0C"; */
-"ebw-2W-l0C.text" = "Distance of the outer point of the Handlerbar to the frame";
+"ebw-2W-l0C.text" = "Abstand vom äußeren Lenkerende zum Rahmen";
 
 /* Class = "UILabel"; text = "Initial Meters"; ObjectID = "gLu-uM-5dG"; */
 "gLu-uM-5dG.text" = "Meter anfangs";
@@ -234,7 +234,7 @@
 "j7W-tE-H1P.text" = "Taxi";
 
 /* Class = "UILabel"; text = "OpenBikeSensor connection"; ObjectID = "jzy-8h-Yx7"; */
-"jzy-8h-Yx7.text" = "OpenBikeSensor connection";
+"jzy-8h-Yx7.text" = "OpenBikeSensor-Verbindung";
 
 /* Class = "UIBarButtonItem"; title = "Upload"; ObjectID = "krP-3i-mxQ"; */
 "krP-3i-mxQ.title" = "Hochladen";
@@ -243,13 +243,13 @@
 "nrt-bo-qSo.text" = "Fahrten";
 
 /* Class = "UILabel"; text = "Sensor Distance:"; ObjectID = "o5c-MY-u3d"; */
-"o5c-MY-u3d.text" = "Sensor Distance:";
+"o5c-MY-u3d.text" = "Sensorabstand:";
 
 /* Class = "UILabel"; text = "Average Idle Time"; ObjectID = "oBk-eL-4Fm"; */
 "oBk-eL-4Fm.text" = "∅-Stillstandsdauer";
 
 /* Class = "UITextView"; text = "Loaf By Mat Schmid is provided under the MIT license https://github.com/schmidyy/Loaf"; ObjectID = "pCu-ap-WZC"; */
-"pCu-ap-WZC.text" = "Loaf By Mat Schmid is provided under the MIT license https://github.com/schmidyy/Loaf";
+"pCu-ap-WZC.text" = "Loaf von Mat Schmid unter der MIT-Lizenz https://github.com/schmidyy/Loaf";
 
 /* Class = "UINavigationItem"; title = "My Trips"; ObjectID = "pq7-Kn-x7k"; */
 "pq7-Kn-x7k.title" = "Meine Fahrten";
@@ -264,7 +264,7 @@
 "rVw-dc-Kk6.text" = "Nie";
 
 /* Class = "UILabel"; text = "Credits"; ObjectID = "rpD-ll-SMT"; */
-"rpD-ll-SMT.text" = "Credits";
+"rpD-ll-SMT.text" = "Danksagungen";
 
 /* Class = "UILabel"; text = "OpenBikeSensor"; ObjectID = "tPz-8H-PNu"; */
 "tPz-8H-PNu.text" = "OpenBikeSensor";
@@ -315,7 +315,7 @@
 "zMa-cg-HEi.title" = "Fahrt Details";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "zPk-B6-o6t"; */
-"zPk-B6-o6t.text" = "Title";
+"zPk-B6-o6t.text" = "Titel";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "zd7-nb-obV"; */
 "zd7-nb-obV.normalTitle" = "Fertig";

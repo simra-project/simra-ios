@@ -31,6 +31,9 @@
 /* Edited */
 "Edited" = "Edited";
 
+/* Not edited */
+"Not edited" = "Not edited";
+
 /* Feedback SimRa */
 "Feedback SimRa" = "Feedback SimRa";
 
@@ -97,11 +100,23 @@
 /* SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results */
 "Please choose your correct region, so that we can analyse your ride correctly. Your selected region:" = "Please choose your correct region, so that we can analyse your ride correctly. Your selected region:";
 
+/* Settings */
+"Settings" = "Settings";
+
+/* Trips */
+"Trips" = "Trips";
+
+/* Start Ride */
+"Start Ride" = "Start Ride";
+
+/* Stop Ride */
+"Stop Ride" = "Stop Ride";
+
+/* Stop */
+"Stop" = "Stop";
+
 /* Start */
 "Start" = "Start";
-
-/* Upload */
-"Upload" = "Upload";
 
 /* Uploaded */
 "Uploaded" = "Uploaded";
@@ -132,3 +147,349 @@
 "No, don't send any rides" = "No, don't send any rides";
 "Files uploaded successfully" = "Files uploaded successfully";
 "Something went wrong. Please try again later" = "Something went wrong. Please try again later";
+
+/* About */
+"About" = "About";
+
+/* Privacy */
+"Privacy" = "Privacy";
+
+/* Feedback */
+"Feedback" = "Feedback";
+
+/* Imprint */
+"Imprint" = "Imprint";
+
+/* Appearance */
+"Appearance" = "Appearance";
+
+/* Light */
+"Light" = "Light";
+
+/* Dark */
+"Dark" = "Dark";
+
+/* System */
+"System" = "System";
+
+/* App Settings */
+"App Settings" = "App Settings";
+"Customize appearance and measurement units." = "Customize appearance and measurement units.";
+
+/* App version */
+"App version" = "App version";
+
+/* Tap to send diagnostic data to the SimRa team. */
+"Tap to send diagnostic data to the SimRa team." = "Tap to send diagnostic data to the SimRa team.";
+
+/* Profile */
+"Profile" = "Profile";
+
+/* Trip Settings */
+"Trip Settings" = "Trip Settings";
+
+/* Metric System */
+"Metric System" = "Metric System";
+
+/* Distance in km */
+"Distance in km" = "Distance in km";
+
+/* Recording start delay */
+"Recording start delay" = "Recording start delay";
+
+/* Time */
+"Time" = "Time";
+
+/* Distance */
+"Distance" = "Distance";
+
+/* Bicycle type */
+"Bicycle type" = "Bicycle type";
+
+/* Position */
+"Position" = "Position";
+
+/* Child seat */
+"Child seat" = "Child seat";
+
+/* Trailer */
+"Trailer" = "Trailer";
+
+/* Defaults for new trips */
+"Defaults for new trips" = "Defaults for new trips";
+
+/* These settings will be automatically applied to new trips. */
+"These settings will be automatically applied to new trips." = "These settings will be automatically applied to new trips.";
+
+/* AI Recording */
+"AI Recording" = "AI Recording";
+
+/* Sensors */
+"Sensors" = "Sensors";
+
+/* Configure sensor */
+"Configure sensor" = "Configure sensor";
+
+/* Recording starts when the selected time or distance is reached. */
+"Recording starts when the selected time or distance is reached." = "Recording starts when the selected time or distance is reached.";
+
+/* Age */
+"Age" = "Age";
+
+/* Gender */
+"Gender" = "Gender";
+
+/* Experience */
+"Experience" = "Experience";
+
+/* Region */
+"Region" = "Region";
+
+/* Not selected */
+"Not selected" = "Not selected";
+
+/* These data are used exclusively for statistical evaluations. */
+"These data are used exclusively for statistical evaluations." = "These data are used exclusively for statistical evaluations.";
+
+/* Record riding behavior */
+"Record riding behavior" = "Record riding behavior";
+
+/* Sensitivity */
+"Sensitivity" = "Sensitivity";
+
+/* SimRa can record and evaluate your riding behavior during a ride. */
+"SimRa can record and evaluate your riding behavior during a ride." = "SimRa can record and evaluate your riding behavior during a ride.";
+
+/* Overview */
+"Overview" = "Overview";
+
+/* Statistics */
+"Statistics" = "Statistics";
+
+/* The bars show your previous rides and the distance covered. */
+"The bars show your previous rides and the distance covered." = "The bars show your previous rides and the distance covered.";
+
+/* Position in group */
+"Position in group" = "Position in group";
+
+/* Ready */
+"Ready" = "Ready";
+
+/* Recording in progress */
+"Recording in progress" = "Recording in progress";
+
+/* Ready for next ride */
+"Ready for next ride" = "Ready for next ride";
+
+/* Recording not started yet */
+"Recording not started yet" = "Recording not started yet";
+
+/* Dangers */
+"Dangers" = "Dangers";
+
+/* Accessibility label for app version */
+"Accessibility label for app version" = "Accessibility label for app version";
+
+/* Accessibility hint for app version */
+"Accessibility hint for app version" = "Accessibility hint for app version";
+
+/* Recording time format */
+"%.0f s" = "%.0f s";
+
+/* Language */
+"Language" = "Language";
+"Automatic" = "Automatic";
+
+/* Siri dialog strings */
+"Recording started." = "Recording started.";
+"Start Recording" = "Start Recording";
+"Hazard type" = "Hazard type";
+"Hazard recorded." = "Hazard recorded.";
+"Record an incident with a hazard type." = "Record an incident with a hazard type.";
+"A SimRa recording is already active." = "A SimRa recording is already active.";
+"No SimRa recording is active." = "No SimRa recording is active.";
+"Button recording" = "Recorded with button";
+"Recording stopped." = "Recording stopped.";
+"A recording is already in progress." = "A recording is already in progress.";
+"No recording is currently active." = "No recording is currently active.";
+
+/* Additional UI Strings */
+"News" = "News";
+"No news available" = "No news available";
+"Sensor Details" = "Sensor Details";
+"Left Offset" = "Left Offset";
+"Right Offset" = "Right Offset";
+"Distance Indicator" = "Distance Indicator";
+"Disconnect Sensor" = "Disconnect Sensor";
+"Discovered Devices" = "Discovered Devices";
+"Scanning for OpenBikeSensor..." = "Scanning for OpenBikeSensor...";
+"No devices found" = "No devices found";
+"Unknown Device" = "Unknown Device";
+"OpenBikeSensor" = "OpenBikeSensor";
+"Open OpenBikeSensor settings" = "Open OpenBikeSensor settings";
+"Hazard Map" = "Hazard Map";
+"SimRa Hazard Map" = "SimRa Hazard Map";
+"Open the SimRa street safety map" = "Open the SimRa street safety map";
+"My Trips" = "My Trips";
+"Open recorded trips" = "Open recorded trips";
+"Open SimRa settings" = "Open SimRa settings";
+"Map" = "Map";
+"Would you like to view the User Manual?\n\nIf not, you can access it later via Settings / How To." = "Would you like to view the User Manual?\n\nIf not, you can access it later via Settings / How To.";
+"No trips" = "No trips";
+"Once trips are recorded, they will appear here." = "Once trips are recorded, they will appear here.";
+"Uploading trips..." = "Uploading trips...";
+"Today" = "Today";
+"Yesterday" = "Yesterday";
+"Duration unknown" = "Duration unknown";
+"No unuploaded trips selected." = "No unuploaded trips selected.";
+"Trip uploaded successfully." = "Trip uploaded successfully.";
+"%d trips uploaded successfully." = "%d trips uploaded successfully.";
+"%d succeeded, %d failed." = "%d succeeded, %d failed.";
+"Edit trip" = "Edit trip";
+"Details" = "Details";
+"Trim" = "Trim";
+"Danger" = "Danger";
+"Edit incident" = "Edit incident";
+"Incident type" = "Incident type";
+"Scary / Danger" = "Scary / Danger";
+"Incident" = "Incident";
+"Specify what happened and if there was concrete danger." = "Specify what happened and if there was concrete danger.";
+"Involved parties" = "Involved parties";
+"Select all road users involved in the incident." = "Select all road users involved in the incident.";
+"Car" = "Car";
+"Taxi" = "Taxi";
+"Delivery vehicle / Van" = "Delivery vehicle / Van";
+"Bus" = "Bus";
+"Truck" = "Truck";
+"Pedestrian" = "Pedestrian";
+"Bicycle" = "Bicycle";
+"Motorcycle" = "Motorcycle";
+"E-Scooter" = "E-Scooter";
+
+/* Widget Strings */
+"Recording Widget" = "Recording Widget";
+"Start or continue a SimRa recording." = "Start or continue a SimRa recording.";
+"Duration" = "Duration";
+"Distance" = "Distance";
+"Incidents" = "Incidents";
+"Total Rides" = "Total Rides";
+"Total Distance" = "Total Distance";
+"Mark Incident" = "Mark Incident";
+"Stop Recording" = "Stop Recording";
+"Elapsed Time" = "Elapsed Time";
+"Incidents Recorded" = "Incidents Recorded";
+"Ride Statistics" = "Ride Statistics";
+"Rides" = "Rides";
+"km" = "km";
+"Total Distance" = "Total Distance";
+"Other" = "Other";
+"Comment" = "Comment";
+"Note" = "Note";
+"Optional. Additional information about the incident." = "Optional. Additional information about the incident.";
+"Equipment" = "Equipment";
+"Use as default" = "Use as default";
+"These bicycle and equipment settings will be applied to future trips." = "These bicycle and equipment settings will be applied to future trips.";
+"Unsaved Changes" = "Unsaved Changes";
+"Tap 'Done' to save changes." = "Tap 'Done' to save changes.";
+"Trip Details" = "Trip Details";
+"Total distance" = "Total distance";
+"Riding behavior" = "Riding behavior";
+"Please select" = "Please select";
+"Not available" = "Not available";
+"male" = "male";
+"female" = "female";
+"diverse" = "diverse";
+"more than 10 years" = "more than 10 years";
+"5 to 10 years" = "5 to 10 years";
+"2 to 4 years" = "2 to 4 years";
+"less than 2 years" = "less than 2 years";
+"(not selected)" = "(not selected)";
+"City or Trecking Bike" = "City or Trecking Bike";
+"Racing Bike" = "Racing Bike";
+"E-Bike" = "E-Bike";
+"Recumbent Bike" = "Recumbent Bike";
+"Cargo Bike" = "Cargo Bike";
+"Tandem" = "Tandem";
+"Mountain Bike" = "Mountain Bike";
+"Trouser Pocket" = "Trouser Pocket";
+"Handlebar" = "Handlebar";
+"Jacket Pocket" = "Jacket Pocket";\n\"Mark Incident\" = \"Mark Incident\";\n\"Stop Recording\" = \"Stop Recording\";\n\"%d incidents\" = \"%d incidents\";
+"Handheld" = "Handheld";
+"Bike Basket / Pannier" = "Bike Basket / Pannier";
+"Backpack etc." = "Backpack etc.";
+"Other (please comment)" = "Other (please comment)";
+"Nothing" = "Nothing";
+"Close Passing" = "Close Passing";
+"Parking Car" = "Parking Car";
+"Almost Turning Accident" = "Almost Turning Accident";
+"Oncoming Traffic" = "Oncoming Traffic";
+"Tailgating" = "Tailgating";
+"Almost Dooring" = "Almost Dooring";
+"Sidestep (e.g. a dog)" = "Sidestep (e.g. a dog)";
+
+/* Battery Optimization */
+"Battery Optimization" = "Battery Optimization";
+"Maximum Accuracy" = "Maximum Accuracy";
+"Balanced" = "Balanced";
+"Maximum Battery Saving" = "Maximum Battery Saving";
+"Select battery optimization level" = "Select battery optimization level";
+
+/* Start */
+"Start" = "Start";
+
+/* Hazard Types */
+"Pothole" = "Pothole";
+"Tailgating" = "Tailgating";
+"Illegal Parking" = "Illegal Parking";
+
+/* Traffic Participants */
+"Car" = "Car";
+"Pedestrian" = "Pedestrian";
+"Truck" = "Truck";
+"Bus" = "Bus";
+"Motorcycle" = "Motorcycle";
+"Bicycle" = "Bicycle";
+
+/* Hazard Sources */
+"Detected via On-Device AI" = "Detected via On-Device AI";
+"Detected via Online AI" = "Detected via Online AI";
+"Manually recorded" = "Manually recorded";
+
+/* Widget */
+"Recording active" = "Recording active";
+"%d min ago" = "%d min ago";
+"Distance: %@ km" = "Distance: %@ km";
+"Hazards: %d" = "Hazards: %d";
+"%d min" = "%d min";
+"Shortcut" = "Shortcut";
+"Shortcuts" = "Shortcuts";
+"Apple Watch" = "Apple Watch";
+"Involved road user" = "Involved road user";
+"Offline map mode" = "Offline map mode";
+"Show recorded route" = "Show recorded route";
+"Appearance" = "Appearance";
+"System" = "System";
+"Light" = "Light";
+"Dark" = "Dark";
+"Recording and map" = "Recording and map";
+"No route recorded" = "No route recorded";
+"Notifications" = "Notifications";
+"Ride reminder" = "Ride reminder";
+"Weekday" = "Weekday";
+"Time" = "Time";
+"Save reminder" = "Save reminder";
+"Ready to ride?" = "Ready to ride?";
+"Start a SimRa recording for your next ride." = "Start a SimRa recording for your next ride.";
+"Search trips" = "Search trips";
+
+/* Live Activity */
+"Recording in progress" = "Recording in progress";
+"Mark hazard" = "Mark hazard";
+"Quickly recorded. Details can be added later." = "Quickly recorded. Details can be added later.";
+"Record incident" = "Record incident";
+
+/* End of Trip */
+"Trip completed" = "Trip completed";
+"Save changes" = "Save changes";
+"Discard" = "Discard";
+"Review your ride" = "Review your ride";
