@@ -16,6 +16,7 @@ struct SimRaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @StateObject private var bluetoothObserver = BluetoothObserver()
     @AppStorage("appAppearance") private var appAppearance: String = "auto"
+    @Environment(\.scenePhase) private var scenePhase
     
     var body: some Scene {
         WindowGroup {
@@ -29,6 +30,10 @@ struct SimRaApp: App {
                 .onOpenURL { url in
                     handleDeeplink(url: url)
                 }
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            guard newPhase == .active else { return }
+            appDelegate.handleSceneDidBecomeActive()
         }
     }
 

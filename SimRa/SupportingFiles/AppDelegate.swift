@@ -243,10 +243,7 @@ final class AppDelegate:
         return true
     }
 
-    func applicationDidBecomeActive(
-        _ application: UIApplication
-    ) {
-
+    func handleSceneDidBecomeActive() {
         lm.requestWhenInUseAuthorization()
 
         processPendingLiveActivityIncidents()
