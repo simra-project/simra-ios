@@ -6,8 +6,6 @@
 //  Copyright © 2026 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.
 //
 
-private let HASH_SUFFIX = "_simra"
-
 import Foundation
 
 extension String {
@@ -33,7 +31,7 @@ extension String {
         let df = DateFormatter()
         df.dateFormat = "dd.MM.yyyy"
         let dateString = df.string(from: Date())
-        let client = dateString + HASH_SUFFIX // HASH_SUFFIX muss global oder via Header verfügbar sein
+        let client = dateString + SimRaHashSuffix()
         return client.hashString
     }
 }

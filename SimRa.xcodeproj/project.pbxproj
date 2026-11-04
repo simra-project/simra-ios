@@ -25,6 +25,7 @@
 		9F18879E303DEC500014F58C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F18879D303DEC500014F58C /* WidgetKit.framework */; };
 		9F1887A0303DEC500014F58C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F18879F303DEC500014F58C /* SwiftUI.framework */; };
 		9F1887B1303DEC500014F58C /* SimRa WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F18879C303DEC500014F58C /* SimRa WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F2164EF309B53F80088FE94 /* Hash-Suffix.h.sample in Resources */ = {isa = PBXBuildFile; fileRef = 9F2164EE309B53F80088FE94 /* Hash-Suffix.h.sample */; };
 		9F30E80A3090D2D1008EB465 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F30E8093090D2D1008EB465 /* LaunchScreen.storyboard */; };
 		9F30E8133090D2D9008EB465 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F30E8123090D2D9008EB465 /* InfoPlist.xcstrings */; };
 		9F39596930488C760034C61D /* SimRa.icon in Resources */ = {isa = PBXBuildFile; fileRef = 9F39596830488C760034C61D /* SimRa.icon */; };
@@ -143,7 +144,6 @@
 		84564AF922549B1500D46132 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84564AFA22549B1700D46132 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		845FD034225D71E90041568E /* Hash-Suffix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hash-Suffix.h"; sourceTree = "<group>"; };
-		845FD035225D71FE0041568E /* Hash-Suffix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hash-Suffix.h"; sourceTree = "<group>"; };
 		848338002253C6A200342285 /* server.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = server.cer; sourceTree = "<group>"; };
 		8483380A2253E2AF00342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/constants.plist; sourceTree = "<group>"; };
 		8483380B2253E2C700342285 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/constants.plist; sourceTree = "<group>"; };
@@ -160,6 +160,8 @@
 		9F18879C303DEC500014F58C /* SimRa WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SimRa WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F18879D303DEC500014F58C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		9F18879F303DEC500014F58C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		9F2164ED309B53F80088FE94 /* Hash-Suffix-Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hash-Suffix-Bridging.h"; sourceTree = "<group>"; };
+		9F2164EE309B53F80088FE94 /* Hash-Suffix.h.sample */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Hash-Suffix.h.sample"; sourceTree = "<group>"; };
 		9F30E8083090D2D1008EB465 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F30E80B3090D2D9008EB465 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9F30E80C3090D2D9008EB465 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
@@ -277,9 +279,10 @@
 				848338002253C6A200342285 /* server.cer */,
 				9F39596830488C760034C61D /* SimRa.icon */,
 				84DD1E92224C0028004895F9 /* Assets.xcassets */,
-				845FD035225D71FE0041568E /* Hash-Suffix.h */,
 				845FD034225D71E90041568E /* Hash-Suffix.h */,
 				A0C9087B2ECD0B43009FD4E8 /* Hash-Suffix.h */,
+				9F2164ED309B53F80088FE94 /* Hash-Suffix-Bridging.h */,
+				9F2164EE309B53F80088FE94 /* Hash-Suffix.h.sample */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F2164EF309B53F80088FE94 /* Hash-Suffix.h.sample in Resources */,
 				84564AF822549B1200D46132 /* Localizable.strings in Resources */,
 				9F30E8133090D2D9008EB465 /* InfoPlist.xcstrings in Resources */,
 				84DD1E93224C0028004895F9 /* Assets.xcassets in Resources */,
@@ -925,7 +929,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = SN9HR48548;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -987,7 +991,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = SN9HR48548;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1020,6 +1024,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -1028,7 +1033,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SimRa;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1036,9 +1041,10 @@
 				MARKETING_VERSION = 26;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Resources/Hash-Suffix-Bridging.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1056,12 +1062,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = SimRa;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1069,9 +1076,10 @@
 				MARKETING_VERSION = 26;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				NEW_SETTING = "";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Resources/Hash-Suffix-Bridging.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1082,8 +1090,9 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				INFOPLIST_FILE = simraTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1101,8 +1110,9 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				INFOPLIST_FILE = simraTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1119,8 +1129,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				INFOPLIST_FILE = simraUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1137,8 +1148,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				INFOPLIST_FILE = simraUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1162,6 +1174,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1172,7 +1185,7 @@
 				INFOPLIST_FILE = "SimRa Widgets/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "SimRa Widgets";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1180,7 +1193,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 26;
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil.SimRa-Widgets";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.SimRa-Widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -1205,13 +1218,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "SimRa Widgets/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "SimRa Widgets";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1219,7 +1233,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 26;
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil.SimRa-Widgets";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.SimRa-Widgets";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

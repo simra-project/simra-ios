@@ -40,7 +40,7 @@ public class API: NSObject {
         let df = DateFormatter()
         df.dateFormat = "dd.MM.yyyy"
         let dateString = df.string(from: Date())
-        let suffix = "_simra"
+        let suffix = SimRaHashSuffix()
         let client = dateString + suffix
         // Java-like hashCode based on UTF-16 code units
         var hash: UInt32 = 0
