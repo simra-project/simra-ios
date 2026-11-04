@@ -7,16 +7,13 @@
 //
 
 import CoreBluetooth
-import TTGSnackbar
+import UIKit
 @objc public class BluetoothManager : NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     @objc var _manager : CBCentralManager?
     @objc var delegate : BluetoothDelegate?
     @objc private(set) var connected = false
     var state: CBManagerState? {
-        guard _manager != nil else {
-            return nil
-        }
-        return CBManagerState(rawValue: (_manager?.state.rawValue)!)
+        _manager?.state
     }
     private var timeoutMonitor : Timer? /// Timeout monitor of connect to peripheral
     private var interrogateMonitor : Timer? /// Timeout monitor of interrogate the peripheral
@@ -89,7 +86,7 @@ import TTGSnackbar
     /**
      The method provides for connecting the special peripheral
      
-     - parameter peripher: The peripheral you want to connect
+     - parameter peripheral: The peripheral you want to connect
      */
     @objc func connectPeripheral(_ peripheral: CBPeripheral) {
         if !isConnecting {
@@ -104,10 +101,10 @@ import TTGSnackbar
      */
     @objc func disconnectPeripheral() {
         self.showDisconnectedState()
-        if connectedPeripheral != nil {
-            _manager?.cancelPeripheralConnection(connectedPeripheral!)
+        if let connectedPeripheral {
+            _manager?.cancelPeripheralConnection(connectedPeripheral)
             startScanPeripheral()
-            connectedPeripheral = nil
+            self.connectedPeripheral = nil
             characteristicsDic.removeAll()
         }
     }
@@ -117,11 +114,7 @@ import TTGSnackbar
     @objc func showConnectedState(){
         guard connectedPeripheral != nil else { return }
         guard let peripheralName = connectedPeripheral?.name else { return }
-        let snackbar = TTGSnackbar(message: "\(peripheralName) connected", duration: .middle)
-        snackbar.cornerRadius = 2
-        snackbar.backgroundColor = UIColor.green
-        snackbar.animationType = .slideFromTopBackToTop
-        snackbar.show()
+        showStatusMessage("\(peripheralName) connected", backgroundColor: .green)
     }
     /**
      The method displays that the peripheral is disconnected
@@ -129,11 +122,40 @@ import TTGSnackbar
     @objc func showDisconnectedState(){
         guard connectedPeripheral != nil else { return }
         guard let peripheralName = connectedPeripheral?.name else { return }
-        let snackbar = TTGSnackbar(message: "\(peripheralName) disconnected", duration: .middle)
-        snackbar.cornerRadius = 2
-        snackbar.backgroundColor = UIColor.red
-        snackbar.animationType = .slideFromTopBackToTop
-        snackbar.show()
+        showStatusMessage("\(peripheralName) disconnected", backgroundColor: .red)
+    }
+
+    private func showStatusMessage(_ message: String, backgroundColor: UIColor) {
+        DispatchQueue.main.async {
+            guard let presenter = self.topViewController() else {
+                print(message)
+                return
+            }
+
+            let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+            alert.view.tintColor = backgroundColor
+            presenter.present(alert, animated: true)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                alert.dismiss(animated: true)
+            }
+        }
+    }
+
+    private func topViewController() -> UIViewController? {
+        let rootViewController: UIViewController? = {
+            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                return scene.windows.first(where: { $0.isKeyWindow })?.rootViewController
+            }
+            return nil
+        }()
+        var topViewController = rootViewController
+
+        while let presented = topViewController?.presentedViewController {
+            topViewController = presented
+        }
+
+        return topViewController
     }
     /**
      The method provides for the user who want to obtain the descriptor
@@ -149,12 +171,14 @@ import TTGSnackbar
      
      - parameter timer: The timer touch off this selector
      */
-    @objc func connectTimeout(_ timer : Timer) {
-        if isConnecting {
-            isConnecting = false
-            connectPeripheral(timer.userInfo as! CBPeripheral)
-            timeoutMonitor = nil
+    @objc func connectTimeout(_ timer: Timer) {
+        guard isConnecting, let peripheral = timer.userInfo as? CBPeripheral else {
+            return
         }
+
+        isConnecting = false
+        timeoutMonitor = nil
+        connectPeripheral(peripheral)
     }
     /**
      This method is invoked when interrogate peripheral is timeout
@@ -291,7 +315,10 @@ import TTGSnackbar
             timeoutMonitor = nil
         }
         connected = false
-        delegate?.failToConnectPeripheral?(peripheral, error: error!)
+        delegate?.failToConnectPeripheral?(
+            peripheral,
+            error: error ?? NSError(domain: "BluetoothManager", code: -1)
+        )
     }
     /**
      The method is invoked where services were discovered.
@@ -371,9 +398,7 @@ import TTGSnackbar
                 delegate?.didFailToReadValueForCharacteristic?(error!)
             return
         }
-        guard let data = characteristic.value else {
-            delegate?.didFailToReadValueForCharacteristic?(error!)
-
+        guard characteristic.value != nil else {
             return
         }
         delegate?.didReadValueForCharacteristic?(characteristic)
@@ -396,3 +421,4 @@ import TTGSnackbar
         return NSNumber(value: lsb)
     }
 }
+

@@ -1,0 +1,108 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "·" : {
+
+    },
+    "%lld" : {
+
+    },
+    "%lld Fahrten" : {
+
+    },
+    "%lld gemeldete Gefahren" : {
+
+    },
+    "00:00" : {
+
+    },
+    "4 Wochen" : {
+
+    },
+    "Abbiegeunfall" : {
+
+    },
+    "Aktuelle Aufzeichnung und Fahrtenstatistik." : {
+
+    },
+    "Auffahren / Drängeln" : {
+
+    },
+    "Aufnahme" : {
+
+    },
+    "Aufnahme starten" : {
+
+    },
+    "Aufnahme stoppen" : {
+
+    },
+    "Aufnahmezeit" : {
+
+    },
+    "Aufzeichnung stoppen" : {
+
+    },
+    "Ausweichen / Hindernis" : {
+
+    },
+    "Beendet die aktuelle Aufnahme" : {
+
+    },
+    "Dooring" : {
+
+    },
+    "Einparkendes Auto" : {
+
+    },
+    "Gefahr" : {
+
+    },
+    "Gefahr melden" : {
+
+    },
+    "Gefahren" : {
+
+    },
+    "Gefahrentyp" : {
+
+    },
+    "Gegenverkehr" : {
+
+    },
+    "in 4 Wochen" : {
+
+    },
+    "km" : {
+
+    },
+    "Mark hazard" : {
+
+    },
+    "Öffnet SimRa zum Melden einer Gefahr" : {
+
+    },
+    "Record a hazard during the active SimRa recording." : {
+
+    },
+    "SimRa" : {
+
+    },
+    "Stop Recording" : {
+
+    },
+    "Stop the active SimRa recording." : {
+
+    },
+    "Strecke" : {
+
+    },
+    "Zeit" : {
+
+    },
+    "Zu nahes Überholen" : {
+
+    }
+  },
+  "version" : "1.3"
+}

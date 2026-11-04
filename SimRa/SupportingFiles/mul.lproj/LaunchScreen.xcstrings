@@ -1,0 +1,30 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "4GK-pk-u7Y.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"SimRa\"; ObjectID = \"4GK-pk-u7Y\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "SimRa"
+          }
+        }
+      }
+    },
+    "AbU-ah-4vZ.text" : {
+      "comment" : "Class = \"UILabel\"; text = \"Sicherheit im Radverkehr\"; ObjectID = \"AbU-ah-4vZ\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Sicherheit im Radverkehr"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.3"
+}

@@ -3,53 +3,93 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0970067372FFAB52EE7B49B4 /* Pods_SimRa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */; };
 		63143E5726665AD000997995 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63143E5626665AD000997995 /* Enums.swift */; };
-		6346DFD126A0784100F0EE02 /* BLEManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6346DFD026A0784100F0EE02 /* BLEManager.m */; };
 		63534E2126A0677A008B58D6 /* PeripheralInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63534E2026A0677A008B58D6 /* PeripheralInfo.swift */; };
-		6383AC412657E9B00038F3AE /* ProfileTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC402657E9B00038F3AE /* ProfileTVC.m */; };
-		6383AC4A2657EBF60038F3AE /* TripsSettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC492657EBF60038F3AE /* TripsSettingsTVC.m */; };
 		6383AC682657F3F80038F3AE /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC672657F3F80038F3AE /* Utility.swift */; };
 		6383AC6D2657F48D0038F3AE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC6C2657F48D0038F3AE /* Constants.swift */; };
 		6383AC752657FD2C0038F3AE /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6383AC742657FD2C0038F3AE /* UserPreferences.swift */; };
 		63882B7F265C474400E147D9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63882B7E265C474400E147D9 /* Extensions.swift */; };
-		63DB6241269F0EC800E09EC6 /* DeviceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63DB6240269F0EC800E09EC6 /* DeviceTableViewCell.m */; };
 		63DB6251269F41D900E09EC6 /* BluetoothDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DB624F269F41D900E09EC6 /* BluetoothDelegate.swift */; };
 		63DB6252269F41D900E09EC6 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DB6250269F41D900E09EC6 /* BluetoothManager.swift */; };
-		63FB41A52683563000BF5386 /* OpenBikeSensorConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63FB41A42683563000BF5386 /* OpenBikeSensorConfigurationViewController.m */; };
-		840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AC224D125800488B31 /* MyTripsTVC.m */; };
-		840E20B0224D190400488B31 /* SettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840E20AF224D190400488B31 /* SettingsTVC.m */; };
-		840EF31F2817EB78001B6603 /* API.m in Sources */ = {isa = PBXBuildFile; fileRef = 840EF31E2817EB78001B6603 /* API.m */; };
-		8418D52E22562148000A1D10 /* UploaderObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8418D52D22562148000A1D10 /* UploaderObject.m */; };
-		8421D68D2254AE710056B62C /* NSString+hashCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D68C2254AE710056B62C /* NSString+hashCode.m */; };
-		8421D6902254B4E50056B62C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8421D68F2254B4E50056B62C /* LaunchScreen.storyboard */; };
-		8421D6932254B6F40056B62C /* NSTimeInterval+hms.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */; };
-		8421D6962254BAA30056B62C /* DSBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8421D6952254BAA30056B62C /* DSBarChart.m */; };
-		845467EB227B0ABD0060E06D /* TripDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 845467EA227B0ABD0060E06D /* TripDetailTVC.m */; };
 		84564AF822549B1200D46132 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84564AF622549B1100D46132 /* Localizable.strings */; };
-		8470352C23D6D0810041AAFB /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470352B23D6D0810041AAFB /* Region.m */; };
-		8470352F23D6D0DA0041AAFB /* Regions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470352E23D6D0DA0041AAFB /* Regions.m */; };
-		8471D0E425E25EE4003F154E /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471D0E325E25EE4003F154E /* News.m */; };
-		8471D0EA25E2DC5B003F154E /* NewsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471D0E925E2DC5B003F154E /* NewsVC.m */; };
 		848338022253CA0D00342285 /* constants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 848338042253CA0D00342285 /* constants.plist */; };
-		849CA147224D3C6600CE45EB /* IdPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CA146224D3C6600CE45EB /* IdPicker.m */; };
-		84DD1E88224C0027004895F9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD1E87224C0027004895F9 /* AppDelegate.m */; };
-		84DD1E8B224C0027004895F9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD1E8A224C0027004895F9 /* ViewController.m */; };
 		84DD1E8E224C0027004895F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84DD1E8C224C0027004895F9 /* Main.storyboard */; };
 		84DD1E93224C0028004895F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84DD1E92224C0028004895F9 /* Assets.xcassets */; };
-		84DD1E99224C0028004895F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD1E98224C0028004895F9 /* main.m */; };
 		84DD1EA3224C0028004895F9 /* simraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD1EA2224C0028004895F9 /* simraTests.m */; };
 		84DD1EAE224C0028004895F9 /* simraUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD1EAD224C0028004895F9 /* simraUITests.m */; };
-		84DD1EBF224CD9A6004895F9 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD1EBE224CD9A6004895F9 /* Trip.m */; };
-		84DD1EC2224CD9BF004895F9 /* Trips.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD1EC1224CD9BF004895F9 /* Trips.m */; };
-		84DD1EC5224CEAB6004895F9 /* AnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DD1EC4224CEAB6004895F9 /* AnnotationView.m */; };
-		84E36109224E0721003847E8 /* TripEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E36108224E0721003847E8 /* TripEditVC.m */; };
-		84E3610C224E0759003847E8 /* AnnotationTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E3610B224E0759003847E8 /* AnnotationTVC.m */; };
+		9F18878D303DBCC50014F58C /* TripEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F18878C303DBCBB0014F58C /* TripEditView.swift */; };
+		9F18879E303DEC500014F58C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F18879D303DEC500014F58C /* WidgetKit.framework */; };
+		9F1887A0303DEC500014F58C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F18879F303DEC500014F58C /* SwiftUI.framework */; };
+		9F1887B1303DEC500014F58C /* SimRa WidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F18879C303DEC500014F58C /* SimRa WidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F2164EF309B53F80088FE94 /* Hash-Suffix.h.sample in Resources */ = {isa = PBXBuildFile; fileRef = 9F2164EE309B53F80088FE94 /* Hash-Suffix.h.sample */; };
+		9F30E80A3090D2D1008EB465 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F30E8093090D2D1008EB465 /* LaunchScreen.storyboard */; };
+		9F30E8133090D2D9008EB465 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F30E8123090D2D9008EB465 /* InfoPlist.xcstrings */; };
+		9F39596930488C760034C61D /* SimRa.icon in Resources */ = {isa = PBXBuildFile; fileRef = 9F39596830488C760034C61D /* SimRa.icon */; };
+		9F67C8D83045FA510080CDED /* SimRaRecordingActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67C8D73045FA510080CDED /* SimRaRecordingActivityManager.swift */; };
+		9F67C8DA304642E60080CDED /* SimpleZipArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67C8D9304642E60080CDED /* SimpleZipArchiver.swift */; };
+		9FA202D3304B08A7003D5164 /* RecordingAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A100040000000000000004 /* RecordingAppIntents.swift */; };
+		9FA202D9304B1F6D003D5164 /* Regions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFEC30407F4A00C11560 /* Regions.swift */; };
+		9FA202DA304B1F7E003D5164 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFEA30407F4200C11560 /* Region.swift */; };
+		9FC315E5304219CB00EFB67D /* TripModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC315E4304219CB00EFB67D /* TripModels.swift */; };
+		9FC315E730421ADC00EFB67D /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC315E630421ADC00EFB67D /* Trip.swift */; };
+		9FC315EB304259A000EFB67D /* DSBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC315EA304259A000EFB67D /* DSBarChart.swift */; };
+		9FC315EF30430A1C00EFB67D /* SimRaHazardMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC315EE30430A1C00EFB67D /* SimRaHazardMapView.swift */; };
+		9FE3CF60303FAD3700C11560 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF5F303FAD3700C11560 /* SettingsView.swift */; };
+		9FE3CF70303FADE100C11560 /* TripSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF6F303FADE100C11560 /* TripSettingsView.swift */; };
+		9FE3CF72303FADEB00C11560 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF71303FADEB00C11560 /* ProfileView.swift */; };
+		9FE3CF74303FADF400C11560 /* MyTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF73303FADF400C11560 /* MyTrip.swift */; };
+		9FE3CF76303FB1CF00C11560 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF75303FB1CF00C11560 /* MainView.swift */; };
+		9FE3CF78303FB1D600C11560 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF77303FB1D600C11560 /* MainViewModel.swift */; };
+		9FE3CF7A303FB2BA00C11560 /* SimRaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF79303FB2BA00C11560 /* SimRaApp.swift */; };
+		9FE3CF7C303FB2C000C11560 /* BluetoothObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF7B303FB2C000C11560 /* BluetoothObserver.swift */; };
+		9FE3CF80303FB37200C11560 /* RecordingShortcutBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF7F303FB37200C11560 /* RecordingShortcutBridge.swift */; };
+		9FE3CF82303FB3A200C11560 /* OBSConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF81303FB3A200C11560 /* OBSConfigView.swift */; };
+		9FE3CF84303FB51F00C11560 /* TripDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF83303FB51F00C11560 /* TripDetailView.swift */; };
+		9FE3CF86303FB82600C11560 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF85303FB82600C11560 /* AnnotationView.swift */; };
+		9FE3CF88303FB8FD00C11560 /* NewsItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF87303FB8FD00C11560 /* NewsItem.swift */; };
+		9FE3CF8E303FC1A500C11560 /* SimRaAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CF8D303FC1A500C11560 /* SimRaAnnotationView.swift */; };
+		9FE3CFBA30403AB200C11560 /* ClosePassInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFB930403AB200C11560 /* ClosePassInfo.swift */; };
+		9FE3CFC83040467900C11560 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFC73040467900C11560 /* AppDelegate.swift */; };
+		9FE3CFE730407CF400C11560 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFE630407CF400C11560 /* News.swift */; };
+		9FE3CFE930407EF300C11560 /* UploaderObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFE830407EF300C11560 /* UploaderObject.swift */; };
+		9FE3CFEB30407F4200C11560 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFEA30407F4200C11560 /* Region.swift */; };
+		9FE3CFED30407F4A00C11560 /* Regions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFEC30407F4A00C11560 /* Regions.swift */; };
+		9FE3CFEF30407FCD00C11560 /* IdPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFEE30407FCD00C11560 /* IdPicker.swift */; };
+		9FE3CFF13040E5D700C11560 /* SimRaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFF03040E5D700C11560 /* SimRaView.swift */; };
+		9FE3CFF33040E63E00C11560 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFF23040E63E00C11560 /* API.swift */; };
+		9FE3CFF53040E69B00C11560 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFF43040E69B00C11560 /* BLEManager.swift */; };
+		A4FAE8452E5E1EC1009B1FA9 /* ModernRecordActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FAE8442E5E1EC1009B1FA9 /* ModernRecordActionButton.swift */; };
+		B7A100030000000000000003 /* RecordingAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A100040000000000000004 /* RecordingAppIntents.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		9F188796303DEAEF0014F58C /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = folder.rkassets;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# <com.apple.build-tasks.compile-rk-assets.xcplugin>\n";
+		};
+		9F188797303DEAFE0014F58C /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = folder.rkassets;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# <com.apple.build-tasks.compile-rk-assets.xcplugin>\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		84DD1E9F224C0028004895F9 /* PBXContainerItemProxy */ = {
@@ -66,103 +106,133 @@
 			remoteGlobalIDString = 84DD1E82224C0027004895F9;
 			remoteInfo = simra;
 		};
+		9F1887AF303DEC500014F58C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84DD1E7B224C0027004895F9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F18879B303DEC500014F58C;
+			remoteInfo = "SimRa WidgetsExtension";
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9F1887B6303DEC500014F58C /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9F1887B1303DEC500014F58C /* SimRa WidgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimRa.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimRa/Pods-SimRa.release.xcconfig"; sourceTree = "<group>"; };
 		63143E5626665AD000997995 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
-		6346DFCF26A0784100F0EE02 /* BLEManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLEManager.h; sourceTree = "<group>"; };
-		6346DFD026A0784100F0EE02 /* BLEManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLEManager.m; sourceTree = "<group>"; };
 		63534E2026A0677A008B58D6 /* PeripheralInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralInfo.swift; sourceTree = "<group>"; };
-		6383AC3F2657E9B00038F3AE /* ProfileTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileTVC.h; sourceTree = "<group>"; };
-		6383AC402657E9B00038F3AE /* ProfileTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileTVC.m; sourceTree = "<group>"; };
-		6383AC482657EBF60038F3AE /* TripsSettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripsSettingsTVC.h; sourceTree = "<group>"; };
-		6383AC492657EBF60038F3AE /* TripsSettingsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripsSettingsTVC.m; sourceTree = "<group>"; };
-		6383AC662657F3F70038F3AE /* SimRa-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimRa-Bridging-Header.h"; sourceTree = "<group>"; };
 		6383AC672657F3F80038F3AE /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		6383AC6C2657F48D0038F3AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6383AC742657FD2C0038F3AE /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		63882B7E265C474400E147D9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		63DB623F269F0EC800E09EC6 /* DeviceTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceTableViewCell.h; sourceTree = "<group>"; };
-		63DB6240269F0EC800E09EC6 /* DeviceTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceTableViewCell.m; sourceTree = "<group>"; };
 		63DB624F269F41D900E09EC6 /* BluetoothDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothDelegate.swift; sourceTree = "<group>"; };
 		63DB6250269F41D900E09EC6 /* BluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
-		63FB41A32683563000BF5386 /* OpenBikeSensorConfigurationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenBikeSensorConfigurationViewController.h; sourceTree = "<group>"; };
-		63FB41A42683563000BF5386 /* OpenBikeSensorConfigurationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenBikeSensorConfigurationViewController.m; sourceTree = "<group>"; };
-		840E20AB224D125800488B31 /* MyTripsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTripsTVC.h; sourceTree = "<group>"; };
-		840E20AC224D125800488B31 /* MyTripsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTripsTVC.m; sourceTree = "<group>"; };
-		840E20AE224D190400488B31 /* SettingsTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsTVC.h; sourceTree = "<group>"; };
-		840E20AF224D190400488B31 /* SettingsTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsTVC.m; sourceTree = "<group>"; };
-		840EF31D2817EB78001B6603 /* API.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API.h; sourceTree = "<group>"; };
-		840EF31E2817EB78001B6603 /* API.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = API.m; sourceTree = "<group>"; };
 		84121643225757A4006F9E2C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
-		8418D52C22562148000A1D10 /* UploaderObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UploaderObject.h; sourceTree = "<group>"; };
-		8418D52D22562148000A1D10 /* UploaderObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploaderObject.m; sourceTree = "<group>"; };
-		8421D68B2254AE710056B62C /* NSString+hashCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+hashCode.h"; sourceTree = "<group>"; };
-		8421D68C2254AE710056B62C /* NSString+hashCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+hashCode.m"; sourceTree = "<group>"; };
-		8421D68F2254B4E50056B62C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8421D6912254B6F40056B62C /* NSTimeInterval+hms.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSTimeInterval+hms.h"; sourceTree = "<group>"; };
-		8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSTimeInterval+hms.m"; sourceTree = "<group>"; };
-		8421D6942254BAA30056B62C /* DSBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSBarChart.h; sourceTree = "<group>"; };
-		8421D6952254BAA30056B62C /* DSBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSBarChart.m; sourceTree = "<group>"; };
 		84376F6B27342FFA0006DBEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		845467E9227B0ABD0060E06D /* TripDetailTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripDetailTVC.h; sourceTree = "<group>"; };
-		845467EA227B0ABD0060E06D /* TripDetailTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripDetailTVC.m; sourceTree = "<group>"; };
 		84564AF722549B1100D46132 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84564AF922549B1500D46132 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84564AFA22549B1700D46132 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		845FD034225D71E90041568E /* Hash-Suffix.h.sample */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Hash-Suffix.h.sample"; sourceTree = "<group>"; };
-		845FD035225D71FE0041568E /* Hash-Suffix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hash-Suffix.h"; sourceTree = "<group>"; };
-		8470352A23D6D0810041AAFB /* Region.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
-		8470352B23D6D0810041AAFB /* Region.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
-		8470352D23D6D0DA0041AAFB /* Regions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Regions.h; sourceTree = "<group>"; };
-		8470352E23D6D0DA0041AAFB /* Regions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Regions.m; sourceTree = "<group>"; };
-		8471D0E225E25EE4003F154E /* News.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
-		8471D0E325E25EE4003F154E /* News.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
-		8471D0E825E2DC5B003F154E /* NewsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsVC.h; sourceTree = "<group>"; };
-		8471D0E925E2DC5B003F154E /* NewsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsVC.m; sourceTree = "<group>"; };
+		845FD034225D71E90041568E /* Hash-Suffix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hash-Suffix.h"; sourceTree = "<group>"; };
 		848338002253C6A200342285 /* server.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = server.cer; sourceTree = "<group>"; };
 		8483380A2253E2AF00342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/constants.plist; sourceTree = "<group>"; };
 		8483380B2253E2C700342285 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/constants.plist; sourceTree = "<group>"; };
 		8483380C2253E2CB00342285 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/constants.plist; sourceTree = "<group>"; };
-		849CA145224D3C6600CE45EB /* IdPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IdPicker.h; sourceTree = "<group>"; };
-		849CA146224D3C6600CE45EB /* IdPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IdPicker.m; sourceTree = "<group>"; };
 		84DD1E83224C0027004895F9 /* SimRa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimRa.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		84DD1E86224C0027004895F9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		84DD1E87224C0027004895F9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		84DD1E89224C0027004895F9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		84DD1E8A224C0027004895F9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		84DD1E8D224C0027004895F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84DD1E92224C0028004895F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		84DD1E97224C0028004895F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84DD1E98224C0028004895F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		84DD1E9E224C0028004895F9 /* SimRaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimRaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84DD1EA2224C0028004895F9 /* simraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simraTests.m; sourceTree = "<group>"; };
 		84DD1EA4224C0028004895F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84DD1EA9224C0028004895F9 /* SimRaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimRaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84DD1EAD224C0028004895F9 /* simraUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simraUITests.m; sourceTree = "<group>"; };
 		84DD1EAF224C0028004895F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84DD1EBD224CD9A6004895F9 /* Trip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
-		84DD1EBE224CD9A6004895F9 /* Trip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
-		84DD1EC0224CD9BF004895F9 /* Trips.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Trips.h; sourceTree = "<group>"; };
-		84DD1EC1224CD9BF004895F9 /* Trips.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Trips.m; sourceTree = "<group>"; };
-		84DD1EC3224CEAB6004895F9 /* AnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnnotationView.h; sourceTree = "<group>"; };
-		84DD1EC4224CEAB6004895F9 /* AnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnnotationView.m; sourceTree = "<group>"; };
-		84E36107224E0721003847E8 /* TripEditVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripEditVC.h; sourceTree = "<group>"; };
-		84E36108224E0721003847E8 /* TripEditVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripEditVC.m; sourceTree = "<group>"; };
-		84E3610A224E0759003847E8 /* AnnotationTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnnotationTVC.h; sourceTree = "<group>"; };
-		84E3610B224E0759003847E8 /* AnnotationTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnnotationTVC.m; sourceTree = "<group>"; };
+		9F18878C303DBCBB0014F58C /* TripEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEditView.swift; sourceTree = "<group>"; };
+		9F18879C303DEC500014F58C /* SimRa WidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SimRa WidgetsExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F18879D303DEC500014F58C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		9F18879F303DEC500014F58C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		9F2164ED309B53F80088FE94 /* Hash-Suffix-Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hash-Suffix-Bridging.h"; sourceTree = "<group>"; };
+		9F2164EE309B53F80088FE94 /* Hash-Suffix.h.sample */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Hash-Suffix.h.sample"; sourceTree = "<group>"; };
+		9F30E8083090D2D1008EB465 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9F30E80B3090D2D9008EB465 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9F30E80C3090D2D9008EB465 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		9F30E80D3090D2D9008EB465 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/LaunchScreen.xcstrings; sourceTree = "<group>"; };
+		9F30E8123090D2D9008EB465 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		9F39596830488C760034C61D /* SimRa.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = SimRa.icon; sourceTree = "<group>"; };
+		9F67C8D73045FA510080CDED /* SimRaRecordingActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimRaRecordingActivityManager.swift; sourceTree = "<group>"; };
+		9F67C8D9304642E60080CDED /* SimpleZipArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleZipArchiver.swift; sourceTree = "<group>"; };
+		9FA202D1304AFA94003D5164 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9FC315E4304219CB00EFB67D /* TripModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModels.swift; sourceTree = "<group>"; };
+		9FC315E630421ADC00EFB67D /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		9FC315EA304259A000EFB67D /* DSBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSBarChart.swift; sourceTree = "<group>"; };
+		9FC315EE30430A1C00EFB67D /* SimRaHazardMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimRaHazardMapView.swift; sourceTree = "<group>"; };
+		9FE3CF5F303FAD3700C11560 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		9FE3CF6F303FADE100C11560 /* TripSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripSettingsView.swift; sourceTree = "<group>"; };
+		9FE3CF71303FADEB00C11560 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		9FE3CF73303FADF400C11560 /* MyTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTrip.swift; sourceTree = "<group>"; };
+		9FE3CF75303FB1CF00C11560 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		9FE3CF77303FB1D600C11560 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		9FE3CF79303FB2BA00C11560 /* SimRaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimRaApp.swift; sourceTree = "<group>"; };
+		9FE3CF7B303FB2C000C11560 /* BluetoothObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothObserver.swift; sourceTree = "<group>"; };
+		9FE3CF7F303FB37200C11560 /* RecordingShortcutBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingShortcutBridge.swift; sourceTree = "<group>"; };
+		9FE3CF81303FB3A200C11560 /* OBSConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OBSConfigView.swift; sourceTree = "<group>"; };
+		9FE3CF83303FB51F00C11560 /* TripDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailView.swift; sourceTree = "<group>"; };
+		9FE3CF85303FB82600C11560 /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		9FE3CF87303FB8FD00C11560 /* NewsItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItem.swift; sourceTree = "<group>"; };
+		9FE3CF8D303FC1A500C11560 /* SimRaAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimRaAnnotationView.swift; sourceTree = "<group>"; };
+		9FE3CF91303FC23100C11560 /* NSTimeInterval+hms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTimeInterval+hms.swift"; sourceTree = "<group>"; };
+		9FE3CF93303FC25300C11560 /* NSString+hashCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSString+hashCode.swift"; sourceTree = "<group>"; };
+		9FE3CFB930403AB200C11560 /* ClosePassInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosePassInfo.swift; sourceTree = "<group>"; };
+		9FE3CFC73040467900C11560 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9FE3CFE630407CF400C11560 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		9FE3CFE830407EF300C11560 /* UploaderObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploaderObject.swift; sourceTree = "<group>"; };
+		9FE3CFEA30407F4200C11560 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
+		9FE3CFEC30407F4A00C11560 /* Regions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regions.swift; sourceTree = "<group>"; };
+		9FE3CFEE30407FCD00C11560 /* IdPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdPicker.swift; sourceTree = "<group>"; };
+		9FE3CFF03040E5D700C11560 /* SimRaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimRaView.swift; sourceTree = "<group>"; };
+		9FE3CFF23040E63E00C11560 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		9FE3CFF43040E69B00C11560 /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		A0C9087B2ECD0B43009FD4E8 /* Hash-Suffix.h */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Hash-Suffix.h"; sourceTree = "<group>"; };
-		B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimRa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimRa.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimRa/Pods-SimRa.debug.xcconfig"; sourceTree = "<group>"; };
+		A4FAE8442E5E1EC1009B1FA9 /* ModernRecordActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernRecordActionButton.swift; sourceTree = "<group>"; };
+		B7A100040000000000000004 /* RecordingAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingAppIntents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		9FAB383A303F942D00FFE238 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				SimRaRecordingAttributes.swift,
+				SimRaWidgetState.swift,
+			);
+			target = 84DD1E82224C0027004895F9 /* SimRa */;
+		};
+		9FAD67AB304AF5B1007D1EA9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 9F18879B303DEC500014F58C /* SimRa WidgetsExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		9F1887A1303DEC500014F58C /* SimRa Widgets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (9FAB383A303F942D00FFE238 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 9FAD67AB304AF5B1007D1EA9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "SimRa Widgets"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		84DD1E80224C0027004895F9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0970067372FFAB52EE7B49B4 /* Pods_SimRa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,22 +250,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F188799303DEC500014F58C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F1887A0303DEC500014F58C /* SwiftUI.framework in Frameworks */,
+				9F18879E303DEC500014F58C /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		288809C55A11C3C4AE475945 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */,
-				471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		4B157F66407423D825C34D65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B4A6EED3F7222BB930BCA946 /* Pods_SimRa.framework */,
+				9F18879D303DEC500014F58C /* WidgetKit.framework */,
+				9F18879F303DEC500014F58C /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -203,12 +274,15 @@
 		6383AC1C2657E6EE0038F3AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F30E8123090D2D9008EB465 /* InfoPlist.xcstrings */,
 				848338042253CA0D00342285 /* constants.plist */,
 				848338002253C6A200342285 /* server.cer */,
+				9F39596830488C760034C61D /* SimRa.icon */,
 				84DD1E92224C0028004895F9 /* Assets.xcassets */,
-				845FD035225D71FE0041568E /* Hash-Suffix.h */,
-				845FD034225D71E90041568E /* Hash-Suffix.h.sample */,
+				845FD034225D71E90041568E /* Hash-Suffix.h */,
 				A0C9087B2ECD0B43009FD4E8 /* Hash-Suffix.h */,
+				9F2164ED309B53F80088FE94 /* Hash-Suffix-Bridging.h */,
+				9F2164EE309B53F80088FE94 /* Hash-Suffix.h.sample */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -226,13 +300,16 @@
 		6383AC1E2657E6FC0038F3AE /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				84DD1E98224C0028004895F9 /* main.m */,
-				84DD1E86224C0027004895F9 /* AppDelegate.h */,
-				84DD1E87224C0027004895F9 /* AppDelegate.m */,
-				8421D68F2254B4E50056B62C /* LaunchScreen.storyboard */,
+				9FA202D1304AFA94003D5164 /* Info.plist */,
+				9F67C8D9304642E60080CDED /* SimpleZipArchiver.swift */,
+				9FE3CF79303FB2BA00C11560 /* SimRaApp.swift */,
+				9FE3CF7B303FB2C000C11560 /* BluetoothObserver.swift */,
+				9F30E8093090D2D1008EB465 /* LaunchScreen.storyboard */,
 				84DD1E8C224C0027004895F9 /* Main.storyboard */,
-				84DD1E97224C0028004895F9 /* Info.plist */,
 				84564AF622549B1100D46132 /* Localizable.strings */,
+				9FE3CFB930403AB200C11560 /* ClosePassInfo.swift */,
+				9FE3CFF03040E5D700C11560 /* SimRaView.swift */,
+				9FE3CFC73040467900C11560 /* AppDelegate.swift */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -261,9 +338,10 @@
 				6383AC342657E9400038F3AE /* Helper */,
 				6383AC352657E9680038F3AE /* DSBarChart */,
 				6383AC672657F3F80038F3AE /* Utility.swift */,
-				6383AC662657F3F70038F3AE /* SimRa-Bridging-Header.h */,
 				6383AC6C2657F48D0038F3AE /* Constants.swift */,
 				63882B7E265C474400E147D9 /* Extensions.swift */,
+				9FE3CF7F303FB37200C11560 /* RecordingShortcutBridge.swift */,
+				B7A100040000000000000004 /* RecordingAppIntents.swift */,
 				63143E5626665AD000997995 /* Enums.swift */,
 			);
 			path = Utils;
@@ -272,8 +350,7 @@
 		6383AC252657E73E0038F3AE /* News */ = {
 			isa = PBXGroup;
 			children = (
-				8471D0E825E2DC5B003F154E /* NewsVC.h */,
-				8471D0E925E2DC5B003F154E /* NewsVC.m */,
+				9FE3CF87303FB8FD00C11560 /* NewsItem.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -281,8 +358,7 @@
 		6383AC262657E7440038F3AE /* AnnotationView */ = {
 			isa = PBXGroup;
 			children = (
-				84DD1EC3224CEAB6004895F9 /* AnnotationView.h */,
-				84DD1EC4224CEAB6004895F9 /* AnnotationView.m */,
+				9FE3CF8D303FC1A500C11560 /* SimRaAnnotationView.swift */,
 			);
 			path = AnnotationView;
 			sourceTree = "<group>";
@@ -290,8 +366,7 @@
 		6383AC272657E74B0038F3AE /* MyTripsTVC */ = {
 			isa = PBXGroup;
 			children = (
-				840E20AB224D125800488B31 /* MyTripsTVC.h */,
-				840E20AC224D125800488B31 /* MyTripsTVC.m */,
+				9FE3CF73303FADF400C11560 /* MyTrip.swift */,
 			);
 			path = MyTripsTVC;
 			sourceTree = "<group>";
@@ -299,8 +374,7 @@
 		6383AC282657E7540038F3AE /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				840E20AE224D190400488B31 /* SettingsTVC.h */,
-				840E20AF224D190400488B31 /* SettingsTVC.m */,
+				9FE3CF5F303FAD3700C11560 /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -308,8 +382,7 @@
 		6383AC292657E7580038F3AE /* IdPicker */ = {
 			isa = PBXGroup;
 			children = (
-				849CA145224D3C6600CE45EB /* IdPicker.h */,
-				849CA146224D3C6600CE45EB /* IdPicker.m */,
+				9FE3CFEE30407FCD00C11560 /* IdPicker.swift */,
 			);
 			path = IdPicker;
 			sourceTree = "<group>";
@@ -317,8 +390,7 @@
 		6383AC2A2657E7600038F3AE /* TripEdit */ = {
 			isa = PBXGroup;
 			children = (
-				84E36107224E0721003847E8 /* TripEditVC.h */,
-				84E36108224E0721003847E8 /* TripEditVC.m */,
+				9F18878C303DBCBB0014F58C /* TripEditView.swift */,
 			);
 			path = TripEdit;
 			sourceTree = "<group>";
@@ -326,8 +398,7 @@
 		6383AC2B2657E7680038F3AE /* TripDetails */ = {
 			isa = PBXGroup;
 			children = (
-				845467E9227B0ABD0060E06D /* TripDetailTVC.h */,
-				845467EA227B0ABD0060E06D /* TripDetailTVC.m */,
+				9FE3CF83303FB51F00C11560 /* TripDetailView.swift */,
 			);
 			path = TripDetails;
 			sourceTree = "<group>";
@@ -335,8 +406,7 @@
 		6383AC2C2657E76E0038F3AE /* AnnotationTVC */ = {
 			isa = PBXGroup;
 			children = (
-				84E3610A224E0759003847E8 /* AnnotationTVC.h */,
-				84E3610B224E0759003847E8 /* AnnotationTVC.m */,
+				9FE3CF85303FB82600C11560 /* AnnotationView.swift */,
 			);
 			path = AnnotationTVC;
 			sourceTree = "<group>";
@@ -344,8 +414,10 @@
 		6383AC2E2657E7B90038F3AE /* MapVC */ = {
 			isa = PBXGroup;
 			children = (
-				84DD1E89224C0027004895F9 /* ViewController.h */,
-				84DD1E8A224C0027004895F9 /* ViewController.m */,
+				A4FAE8442E5E1EC1009B1FA9 /* ModernRecordActionButton.swift */,
+				9FC315EE30430A1C00EFB67D /* SimRaHazardMapView.swift */,
+				9FE3CF75303FB1CF00C11560 /* MainView.swift */,
+				9FE3CF77303FB1D600C11560 /* MainViewModel.swift */,
 			);
 			path = MapVC;
 			sourceTree = "<group>";
@@ -360,8 +432,8 @@
 				6383AC292657E7580038F3AE /* IdPicker */,
 				6383AC302657E89A0038F3AE /* Trips */,
 				6383AC742657FD2C0038F3AE /* UserPreferences.swift */,
-				840EF31D2817EB78001B6603 /* API.h */,
-				840EF31E2817EB78001B6603 /* API.m */,
+				9F67C8D73045FA510080CDED /* SimRaRecordingActivityManager.swift */,
+				9FE3CFF23040E63E00C11560 /* API.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -369,10 +441,8 @@
 		6383AC302657E89A0038F3AE /* Trips */ = {
 			isa = PBXGroup;
 			children = (
-				84DD1EC0224CD9BF004895F9 /* Trips.h */,
-				84DD1EC1224CD9BF004895F9 /* Trips.m */,
-				84DD1EBD224CD9A6004895F9 /* Trip.h */,
-				84DD1EBE224CD9A6004895F9 /* Trip.m */,
+				9FC315E4304219CB00EFB67D /* TripModels.swift */,
+				9FC315E630421ADC00EFB67D /* Trip.swift */,
 			);
 			path = Trips;
 			sourceTree = "<group>";
@@ -380,10 +450,8 @@
 		6383AC312657E8D00038F3AE /* Regions */ = {
 			isa = PBXGroup;
 			children = (
-				8470352A23D6D0810041AAFB /* Region.h */,
-				8470352B23D6D0810041AAFB /* Region.m */,
-				8470352D23D6D0DA0041AAFB /* Regions.h */,
-				8470352E23D6D0DA0041AAFB /* Regions.m */,
+				9FE3CFEC30407F4A00C11560 /* Regions.swift */,
+				9FE3CFEA30407F4200C11560 /* Region.swift */,
 			);
 			path = Regions;
 			sourceTree = "<group>";
@@ -391,8 +459,7 @@
 		6383AC322657E8DD0038F3AE /* News */ = {
 			isa = PBXGroup;
 			children = (
-				8471D0E225E25EE4003F154E /* News.h */,
-				8471D0E325E25EE4003F154E /* News.m */,
+				9FE3CFE630407CF400C11560 /* News.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -400,8 +467,7 @@
 		6383AC332657E8E50038F3AE /* UploaderObject */ = {
 			isa = PBXGroup;
 			children = (
-				8418D52C22562148000A1D10 /* UploaderObject.h */,
-				8418D52D22562148000A1D10 /* UploaderObject.m */,
+				9FE3CFE830407EF300C11560 /* UploaderObject.swift */,
 			);
 			path = UploaderObject;
 			sourceTree = "<group>";
@@ -409,10 +475,8 @@
 		6383AC342657E9400038F3AE /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				8421D6912254B6F40056B62C /* NSTimeInterval+hms.h */,
-				8421D6922254B6F40056B62C /* NSTimeInterval+hms.m */,
-				8421D68B2254AE710056B62C /* NSString+hashCode.h */,
-				8421D68C2254AE710056B62C /* NSString+hashCode.m */,
+				9FE3CF91303FC23100C11560 /* NSTimeInterval+hms.swift */,
+				9FE3CF93303FC25300C11560 /* NSString+hashCode.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -420,8 +484,7 @@
 		6383AC352657E9680038F3AE /* DSBarChart */ = {
 			isa = PBXGroup;
 			children = (
-				8421D6942254BAA30056B62C /* DSBarChart.h */,
-				8421D6952254BAA30056B62C /* DSBarChart.m */,
+				9FC315EA304259A000EFB67D /* DSBarChart.swift */,
 			);
 			path = DSBarChart;
 			sourceTree = "<group>";
@@ -429,8 +492,7 @@
 		6383AC522657EC5A0038F3AE /* ProfileTVC */ = {
 			isa = PBXGroup;
 			children = (
-				6383AC3F2657E9B00038F3AE /* ProfileTVC.h */,
-				6383AC402657E9B00038F3AE /* ProfileTVC.m */,
+				9FE3CF71303FADEB00C11560 /* ProfileView.swift */,
 			);
 			path = ProfileTVC;
 			sourceTree = "<group>";
@@ -438,8 +500,7 @@
 		6383AC562657EC660038F3AE /* TripsSettingsTVC */ = {
 			isa = PBXGroup;
 			children = (
-				6383AC482657EBF60038F3AE /* TripsSettingsTVC.h */,
-				6383AC492657EBF60038F3AE /* TripsSettingsTVC.m */,
+				9FE3CF6F303FADE100C11560 /* TripSettingsView.swift */,
 			);
 			path = TripsSettingsTVC;
 			sourceTree = "<group>";
@@ -450,8 +511,7 @@
 				63DB624F269F41D900E09EC6 /* BluetoothDelegate.swift */,
 				63DB6250269F41D900E09EC6 /* BluetoothManager.swift */,
 				63534E2026A0677A008B58D6 /* PeripheralInfo.swift */,
-				6346DFCF26A0784100F0EE02 /* BLEManager.h */,
-				6346DFD026A0784100F0EE02 /* BLEManager.m */,
+				9FE3CFF43040E69B00C11560 /* BLEManager.swift */,
 			);
 			path = BluetoothManager;
 			sourceTree = "<group>";
@@ -459,10 +519,7 @@
 		63FB419C268339EF00BF5386 /* OpenBikeSensorConfig */ = {
 			isa = PBXGroup;
 			children = (
-				63FB41A32683563000BF5386 /* OpenBikeSensorConfigurationViewController.h */,
-				63FB41A42683563000BF5386 /* OpenBikeSensorConfigurationViewController.m */,
-				63DB623F269F0EC800E09EC6 /* DeviceTableViewCell.h */,
-				63DB6240269F0EC800E09EC6 /* DeviceTableViewCell.m */,
+				9FE3CF81303FB3A200C11560 /* OBSConfigView.swift */,
 			);
 			path = OpenBikeSensorConfig;
 			sourceTree = "<group>";
@@ -473,8 +530,8 @@
 				84DD1E85224C0027004895F9 /* SimRa */,
 				84DD1EA1224C0028004895F9 /* SimRaTests */,
 				84DD1EAC224C0028004895F9 /* SimRaUITests */,
+				9F1887A1303DEC500014F58C /* SimRa Widgets */,
 				84DD1E84224C0027004895F9 /* Products */,
-				288809C55A11C3C4AE475945 /* Pods */,
 				4B157F66407423D825C34D65 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -485,6 +542,7 @@
 				84DD1E83224C0027004895F9 /* SimRa.app */,
 				84DD1E9E224C0028004895F9 /* SimRaTests.xctest */,
 				84DD1EA9224C0028004895F9 /* SimRaUITests.xctest */,
+				9F18879C303DEC500014F58C /* SimRa WidgetsExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -524,15 +582,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84DD1EB2224C0028004895F9 /* Build configuration list for PBXNativeTarget "SimRa" */;
 			buildPhases = (
-				0FC07A2E8D20B78FB997B3F4 /* [CP] Check Pods Manifest.lock */,
 				84DD1E7F224C0027004895F9 /* Sources */,
 				84DD1E80224C0027004895F9 /* Frameworks */,
 				84DD1E81224C0027004895F9 /* Resources */,
-				5CEC94382466568DEB810719 /* [CP] Embed Pods Frameworks */,
+				9F1887B6303DEC500014F58C /* Embed Foundation Extensions */,
 			);
 			buildRules = (
+				9F188797303DEAFE0014F58C /* PBXBuildRule */,
+				9F188796303DEAEF0014F58C /* PBXBuildRule */,
 			);
 			dependencies = (
+				9F1887B0303DEC500014F58C /* PBXTargetDependency */,
 			);
 			name = SimRa;
 			productName = simra;
@@ -575,13 +635,37 @@
 			productReference = 84DD1EA9224C0028004895F9 /* SimRaUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		9F18879B303DEC500014F58C /* SimRa WidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F1887B3303DEC500014F58C /* Build configuration list for PBXNativeTarget "SimRa WidgetsExtension" */;
+			buildPhases = (
+				9F188798303DEC500014F58C /* Sources */,
+				9F188799303DEC500014F58C /* Frameworks */,
+				9F18879A303DEC500014F58C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9F1887A1303DEC500014F58C /* SimRa Widgets */,
+			);
+			name = "SimRa WidgetsExtension";
+			packageProductDependencies = (
+			);
+			productName = "SimRa WidgetsExtension";
+			productReference = 9F18879C303DEC500014F58C /* SimRa WidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		84DD1E7B224C0027004895F9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1330;
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2700;
 				ORGANIZATIONNAME = "Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin";
 				TargetAttributes = {
 					84DD1E82224C0027004895F9 = {
@@ -601,6 +685,9 @@
 						CreatedOnToolsVersion = 10.2;
 						TestTargetID = 84DD1E82224C0027004895F9;
 					};
+					9F18879B303DEC500014F58C = {
+						CreatedOnToolsVersion = 26.6;
+					};
 				};
 			};
 			buildConfigurationList = 84DD1E7E224C0027004895F9 /* Build configuration list for PBXProject "SimRa" */;
@@ -611,6 +698,7 @@
 				en,
 				Base,
 				de,
+				fr,
 			);
 			mainGroup = 84DD1E7A224C0027004895F9;
 			productRefGroup = 84DD1E84224C0027004895F9 /* Products */;
@@ -620,6 +708,7 @@
 				84DD1E82224C0027004895F9 /* SimRa */,
 				84DD1E9D224C0028004895F9 /* SimRaTests */,
 				84DD1EA8224C0028004895F9 /* SimRaUITests */,
+				9F18879B303DEC500014F58C /* SimRa WidgetsExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -629,10 +718,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F2164EF309B53F80088FE94 /* Hash-Suffix.h.sample in Resources */,
 				84564AF822549B1200D46132 /* Localizable.strings in Resources */,
+				9F30E8133090D2D9008EB465 /* InfoPlist.xcstrings in Resources */,
 				84DD1E93224C0028004895F9 /* Assets.xcassets in Resources */,
+				9F39596930488C760034C61D /* SimRa.icon in Resources */,
 				848338022253CA0D00342285 /* constants.plist in Resources */,
-				8421D6902254B4E50056B62C /* LaunchScreen.storyboard in Resources */,
+				9F30E80A3090D2D1008EB465 /* LaunchScreen.storyboard in Resources */,
 				84DD1E8E224C0027004895F9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -651,89 +743,61 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F18879A303DEC500014F58C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0FC07A2E8D20B78FB997B3F4 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SimRa-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5CEC94382466568DEB810719 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SimRa/Pods-SimRa-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SimRa/Pods-SimRa-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SimRa/Pods-SimRa-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84DD1E7F224C0027004895F9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FE3CF78303FB1D600C11560 /* MainViewModel.swift in Sources */,
 				6383AC752657FD2C0038F3AE /* UserPreferences.swift in Sources */,
-				8470352C23D6D0810041AAFB /* Region.m in Sources */,
-				84DD1E8B224C0027004895F9 /* ViewController.m in Sources */,
-				63DB6241269F0EC800E09EC6 /* DeviceTableViewCell.m in Sources */,
-				84DD1EBF224CD9A6004895F9 /* Trip.m in Sources */,
-				840E20B0224D190400488B31 /* SettingsTVC.m in Sources */,
-				840EF31F2817EB78001B6603 /* API.m in Sources */,
-				84E36109224E0721003847E8 /* TripEditVC.m in Sources */,
+				9F18878D303DBCC50014F58C /* TripEditView.swift in Sources */,
 				63534E2126A0677A008B58D6 /* PeripheralInfo.swift in Sources */,
 				63DB6251269F41D900E09EC6 /* BluetoothDelegate.swift in Sources */,
-				84DD1EC2224CD9BF004895F9 /* Trips.m in Sources */,
-				84E3610C224E0759003847E8 /* AnnotationTVC.m in Sources */,
-				84DD1EC5224CEAB6004895F9 /* AnnotationView.m in Sources */,
-				840E20AD224D125800488B31 /* MyTripsTVC.m in Sources */,
-				845467EB227B0ABD0060E06D /* TripDetailTVC.m in Sources */,
-				8421D68D2254AE710056B62C /* NSString+hashCode.m in Sources */,
-				6383AC412657E9B00038F3AE /* ProfileTVC.m in Sources */,
-				84DD1E99224C0028004895F9 /* main.m in Sources */,
-				6346DFD126A0784100F0EE02 /* BLEManager.m in Sources */,
-				6383AC4A2657EBF60038F3AE /* TripsSettingsTVC.m in Sources */,
-				8471D0E425E25EE4003F154E /* News.m in Sources */,
-				63FB41A52683563000BF5386 /* OpenBikeSensorConfigurationViewController.m in Sources */,
+				9FE3CFEF30407FCD00C11560 /* IdPicker.swift in Sources */,
+				9FE3CF70303FADE100C11560 /* TripSettingsView.swift in Sources */,
+				9FE3CFE930407EF300C11560 /* UploaderObject.swift in Sources */,
+				9FE3CF74303FADF400C11560 /* MyTrip.swift in Sources */,
+				9FE3CF60303FAD3700C11560 /* SettingsView.swift in Sources */,
+				9FE3CFF33040E63E00C11560 /* API.swift in Sources */,
+				9FE3CF7C303FB2C000C11560 /* BluetoothObserver.swift in Sources */,
+				9FE3CF76303FB1CF00C11560 /* MainView.swift in Sources */,
+				9FC315EF30430A1C00EFB67D /* SimRaHazardMapView.swift in Sources */,
+				9FE3CFF13040E5D700C11560 /* SimRaView.swift in Sources */,
+				9FC315E5304219CB00EFB67D /* TripModels.swift in Sources */,
 				63143E5726665AD000997995 /* Enums.swift in Sources */,
-				8471D0EA25E2DC5B003F154E /* NewsVC.m in Sources */,
+				9FE3CFC83040467900C11560 /* AppDelegate.swift in Sources */,
+				9FE3CFE730407CF400C11560 /* News.swift in Sources */,
+				9FC315EB304259A000EFB67D /* DSBarChart.swift in Sources */,
 				6383AC682657F3F80038F3AE /* Utility.swift in Sources */,
-				849CA147224D3C6600CE45EB /* IdPicker.m in Sources */,
-				84DD1E88224C0027004895F9 /* AppDelegate.m in Sources */,
-				8418D52E22562148000A1D10 /* UploaderObject.m in Sources */,
 				63DB6252269F41D900E09EC6 /* BluetoothManager.swift in Sources */,
+				9F67C8D83045FA510080CDED /* SimRaRecordingActivityManager.swift in Sources */,
+				9FE3CF82303FB3A200C11560 /* OBSConfigView.swift in Sources */,
+				9FE3CFEB30407F4200C11560 /* Region.swift in Sources */,
 				63882B7F265C474400E147D9 /* Extensions.swift in Sources */,
-				8421D6932254B6F40056B62C /* NSTimeInterval+hms.m in Sources */,
-				8421D6962254BAA30056B62C /* DSBarChart.m in Sources */,
-				8470352F23D6D0DA0041AAFB /* Regions.m in Sources */,
+				9FE3CF72303FADEB00C11560 /* ProfileView.swift in Sources */,
+				9FE3CF86303FB82600C11560 /* AnnotationView.swift in Sources */,
+				9FE3CF88303FB8FD00C11560 /* NewsItem.swift in Sources */,
+				9FE3CF7A303FB2BA00C11560 /* SimRaApp.swift in Sources */,
+				9FE3CFBA30403AB200C11560 /* ClosePassInfo.swift in Sources */,
+				9F67C8DA304642E60080CDED /* SimpleZipArchiver.swift in Sources */,
 				6383AC6D2657F48D0038F3AE /* Constants.swift in Sources */,
+				9FE3CF84303FB51F00C11560 /* TripDetailView.swift in Sources */,
+				9FE3CFF53040E69B00C11560 /* BLEManager.swift in Sources */,
+				A4FAE8452E5E1EC1009B1FA9 /* ModernRecordActionButton.swift in Sources */,
+				9FE3CFED30407F4A00C11560 /* Regions.swift in Sources */,
+				B7A100030000000000000003 /* RecordingAppIntents.swift in Sources */,
+				9FE3CF8E303FC1A500C11560 /* SimRaAnnotationView.swift in Sources */,
+				9FC315E730421ADC00EFB67D /* Trip.swift in Sources */,
+				9FE3CF80303FB37200C11560 /* RecordingShortcutBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,6 +817,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F188798303DEC500014F58C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FA202D3304B08A7003D5164 /* RecordingAppIntents.swift in Sources */,
+				9FA202DA304B1F7E003D5164 /* Region.swift in Sources */,
+				9FA202D9304B1F6D003D5164 /* Regions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -766,6 +840,11 @@
 			target = 84DD1E82224C0027004895F9 /* SimRa */;
 			targetProxy = 84DD1EAA224C0028004895F9 /* PBXContainerItemProxy */;
 		};
+		9F1887B0303DEC500014F58C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F18879B303DEC500014F58C /* SimRa WidgetsExtension */;
+			targetProxy = 9F1887AF303DEC500014F58C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -775,6 +854,7 @@
 				84564AF722549B1100D46132 /* Base */,
 				84564AF922549B1500D46132 /* en */,
 				84564AFA22549B1700D46132 /* de */,
+				9F30E80B3090D2D9008EB465 /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -792,11 +872,20 @@
 		84DD1E8C224C0027004895F9 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				84DD1E8D224C0027004895F9 /* Base */,
 				84121643225757A4006F9E2C /* de */,
 				84376F6B27342FFA0006DBEC /* en */,
+				9F30E80C3090D2D9008EB465 /* fr */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9F30E8093090D2D1008EB465 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F30E8083090D2D1008EB465 /* Base */,
+				9F30E80D3090D2D9008EB465 /* mul */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -806,6 +895,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -839,6 +929,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -858,6 +949,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
 			name = Debug;
 		};
@@ -865,6 +957,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -898,6 +991,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -913,6 +1007,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -920,30 +1015,36 @@
 		};
 		84DD1EB3224C0028004895F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB902EA20381AAA6CCB33C6D /* Pods-SimRa.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = SimRa;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SimRa/SimRa.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = CGLX6ASXCV;
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"DEBUG=1",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SimRa;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 26;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Source/Utils/SimRa-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Resources/Hash-Suffix-Bridging.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -952,27 +1053,33 @@
 		};
 		84DD1EB4224C0028004895F9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 471BDB63EC85DA7802557828 /* Pods-SimRa.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = SimRa;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SimRa/SimRa.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 26;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = CGLX6ASXCV;
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = simra/SupportingFiles/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SimRa;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 26;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Source/Utils/SimRa-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "SimRa/Resources/Hash-Suffix-Bridging.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -981,56 +1088,56 @@
 		84DD1EB6224C0028004895F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C652JFWU23;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				INFOPLIST_FILE = simraTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimRa.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app/SimRa.temp_caseinsensitive_rename.temp_caseinsensitive_rename";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimRa.app/SimRa";
 			};
 			name = Debug;
 		};
 		84DD1EB7224C0028004895F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C652JFWU23;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				INFOPLIST_FILE = simraTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimRa.temp_caseinsensitive_rename.temp_caseinsensitive_rename.app/SimRa.temp_caseinsensitive_rename.temp_caseinsensitive_rename";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimRa.app/SimRa";
 			};
 			name = Release;
 		};
 		84DD1EB9224C0028004895F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C652JFWU23;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				INFOPLIST_FILE = simraUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = simra;
@@ -1040,19 +1147,102 @@
 		84DD1EBA224C0028004895F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = C652JFWU23;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
 				INFOPLIST_FILE = simraUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = simra;
+			};
+			name = Release;
+		};
+		9F1887B4303DEC500014F58C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "SimRa Widgets/SimRa Widgets.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 26;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SimRa Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SimRa Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 26;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.SimRa-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG WIDGET_EXTENSION $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9F1887B5303DEC500014F58C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "SimRa Widgets/SimRa Widgets.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 26;
+				DEVELOPMENT_TEAM = CGLX6ASXCV;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SimRa Widgets/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "SimRa Widgets";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 26;
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.SimRa-Widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "WIDGET_EXTENSION $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1091,6 +1281,15 @@
 			buildConfigurations = (
 				84DD1EB9224C0028004895F9 /* Debug */,
 				84DD1EBA224C0028004895F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F1887B3303DEC500014F58C /* Build configuration list for PBXNativeTarget "SimRa WidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F1887B4303DEC500014F58C /* Debug */,
+				9F1887B5303DEC500014F58C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
