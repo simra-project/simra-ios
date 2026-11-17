@@ -5,9 +5,15 @@
       "comment" : "Bundle name",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimRa"
+          }
+        },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "SimRa"
           }
         }
@@ -17,10 +23,16 @@
       "comment" : "Privacy - Bluetooth Always Usage Description",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimRa benötigt Bluetooth, um sich mit einem OpenBikeSensor zu verbinden."
+          }
+        },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Diese App benötigt Bluetooth, um sich mit einem OpenBikeSensor zu verbinden."
+            "state" : "translated",
+            "value" : "SimRa uses Bluetooth to connect to an OpenBikeSensor."
           }
         }
       }
@@ -29,10 +41,16 @@
       "comment" : "Privacy - Bluetooth Peripheral Usage Description",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimRa benötigt Bluetooth, um sich mit einem OpenBikeSensor zu verbinden."
+          }
+        },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Diese App benötigt Bluetooth, um sich mit einem OpenBikeSensor zu verbinden."
+            "state" : "translated",
+            "value" : "SimRa uses Bluetooth to connect to an OpenBikeSensor."
           }
         }
       }
@@ -41,10 +59,16 @@
       "comment" : "Privacy - Location Usage Description",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimRa benötigt deinen Standort, um dich auf der Karte anzuzeigen und Fahrten zu speichern."
+          }
+        },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Diese App benötigt deinen Standort, um dich auf der Karte anzuzeigen und Fahrten zu speichern."
+            "state" : "translated",
+            "value" : "SimRa uses your location to show you on the map and save your rides."
           }
         }
       }
@@ -53,10 +77,16 @@
       "comment" : "Privacy - Location When In Use Usage Description",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SimRa benötigt deinen Standort, um dich auf der Karte anzuzeigen und Fahrten zu speichern."
+          }
+        },
         "en" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Diese App benötigt deinen Standort, um dich auf der Karte anzuzeigen und Fahrten zu speichern."
+            "state" : "translated",
+            "value" : "SimRa uses your location to show you on the map and save your rides."
           }
         }
       }
