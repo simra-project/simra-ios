@@ -48,16 +48,9 @@ public class News: NSObject {
         request.setValue("text/plain", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 10.0
         
-        print("request:\n\(request)")
-
         let dataTask = URLSession.shared.dataTask(with: request) { [weak self] data, response, connectionError in
-            if let connectionError = connectionError {
-                print("connectionError \(connectionError)")
+            if connectionError != nil {
                 return
-            }
-            
-            if let data = data, let respString = String(data: data, encoding: .utf8) {
-                print("response \(String(describing: response)) \(respString)")
             }
             
             if let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) {
@@ -73,10 +66,7 @@ public class News: NSObject {
 
     public func process(_ data: Data) {
         guard let dataString = String(data: data, encoding: .utf8) else { return }
-        print("dataString \(dataString)")
-        
         let lines = dataString.components(separatedBy: "\n")
-        print("lines \(lines)")
         
         var version = 0
         if lines.count > 0, lines[0].hasPrefix("#") {
@@ -90,7 +80,6 @@ public class News: NSObject {
         if version > 0 {
             for n in 1..<lines.count {
                 let line = lines[n]
-                print("line \(line)")
                 newsLines.append(line)
             }
             newsVersion = version

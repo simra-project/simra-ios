@@ -170,6 +170,7 @@
 		9F39596830488C760034C61D /* SimRa.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = SimRa.icon; sourceTree = "<group>"; };
 		9F67C8D73045FA510080CDED /* SimRaRecordingActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimRaRecordingActivityManager.swift; sourceTree = "<group>"; };
 		9F67C8D9304642E60080CDED /* SimpleZipArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleZipArchiver.swift; sourceTree = "<group>"; };
+		9F91F0D030AC6FCC00903383 /* SimRa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimRa.entitlements; sourceTree = "<group>"; };
 		9FA202D1304AFA94003D5164 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FC315E4304219CB00EFB67D /* TripModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModels.swift; sourceTree = "<group>"; };
 		9FC315E630421ADC00EFB67D /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
@@ -533,6 +534,7 @@
 				9F1887A1303DEC500014F58C /* SimRa Widgets */,
 				84DD1E84224C0027004895F9 /* Products */,
 				4B157F66407423D825C34D65 /* Frameworks */,
+				9F91F0D030AC6FCC00903383 /* SimRa.entitlements */,
 			);
 			sourceTree = "<group>";
 		};
@@ -944,7 +946,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1003,7 +1005,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1098,7 +1100,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimRa.app/SimRa";
@@ -1118,7 +1120,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimRa.app/SimRa";
@@ -1137,7 +1139,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = simra;
@@ -1156,7 +1158,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simra.emil";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.tu-berlin.mcc.simraUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = simra;

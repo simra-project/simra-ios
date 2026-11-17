@@ -17,13 +17,11 @@ public class API: NSObject {
     
     public static var APIPrefix: String {
         let prefix = "\(scheme)//\(host)/\(version)"
-        print("APIprefix: \(prefix)")
         return prefix
     }
     
     public static var APIShortPrefix: String {
         let prefix = "\(scheme)//\(host)"
-        print("APIprefix: \(prefix)")
         return prefix
     }
     

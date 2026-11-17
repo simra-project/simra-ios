@@ -18,7 +18,7 @@ struct SimRaHazardMapView: View {
             SimRaHazardWebView(
                 url: URL(
                     string:
-                        "https://simra.3s-rg.de/streets/map"
+                        "https://simra-project.github.io/dashboard/"
                 )!
             )
             .ignoresSafeArea(

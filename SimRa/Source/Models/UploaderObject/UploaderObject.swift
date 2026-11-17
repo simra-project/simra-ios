@@ -69,13 +69,14 @@ open class UploaderObject: NSObject, URLSessionDelegate {
     open func uploadFile(_ name: String, withController controller: NSObject, error errorSelector: Selector, completion completionSelector: Selector) {
         guard let csvFileUrl = self.csvFile() else { return }
 
-        do {
-            let data = try Data(contentsOf: csvFileUrl)
-            if let string = String(data: data, encoding: .utf8) {
-                print("data:\n\(string)")
-            }
-        } catch {
-            print("Error reading csvFile: \(error)")
+        guard FileManager.default.fileExists(atPath: csvFileUrl.path) else {
+            let fileError = NSError(
+                domain: "SimRa.Upload",
+                code: -2,
+                userInfo: [NSLocalizedDescriptionKey: "Upload file is unavailable."]
+            )
+            controller.performSelector(onMainThread: errorSelector, with: fileError, waitUntilDone: false)
+            return
         }
 
         var components: URLComponents?
@@ -104,7 +105,6 @@ open class UploaderObject: NSObject, URLSessionDelegate {
         request.httpMethod = hasCredentials ? "PUT" : "POST"
         request.setValue("text/plain", forHTTPHeaderField: "Content-Type")
         request.timeoutInterval = 30.0
-        print("request:\n\(request)")
 
         let dataTask = uploadSession.uploadTask(with: request, fromFile: csvFileUrl) { [weak self] data, response, connectionError in
             guard let self = self else { return }
