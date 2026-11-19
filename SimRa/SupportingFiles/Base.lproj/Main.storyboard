@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Qp-s0-MOK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Qp-s0-MOK">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </mapView>
                     <toolbarItems>
-                        <barButtonItem title="Start" id="NeF-Te-cJc">
+                        <barButtonItem systemItem="play" id="NeF-Te-cJc">
                             <connections>
                                 <action selector="playButtonPressed:" destination="BYZ-38-t0r" id="oTr-vq-4Ql"/>
                             </connections>
@@ -26,18 +25,13 @@
                         <barButtonItem systemItem="flexibleSpace" id="zon-bJ-fHC"/>
                         <barButtonItem enabled="NO" title="Item" style="plain" id="Py2-VK-zVn"/>
                         <barButtonItem systemItem="flexibleSpace" id="U3d-bw-Zah"/>
-                        <barButtonItem title="Stop" id="dZi-32-hxA">
+                        <barButtonItem systemItem="stop" id="dZi-32-hxA">
                             <connections>
                                 <action selector="stopButtonPressed:" destination="BYZ-38-t0r" id="XXl-nJ-5Ws"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="SimRa" id="yDl-6c-Zif">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="hzM-QB-nuc">
-                            <connections>
-                                <segue destination="Zrj-ys-gys" kind="show" id="C7l-ZL-GdY"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Trips" id="5h9-tM-U6A">
                             <connections>
                                 <segue destination="PYd-3I-T6G" kind="show" identifier="trips:" id="Nv0-xU-ZYr"/>
@@ -46,7 +40,6 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="dummyButton" destination="Py2-VK-zVn" id="7QS-qV-0cb"/>
                         <outlet property="mapView" destination="qjl-XI-Yhp" id="10V-ux-a3R"/>
                         <outlet property="playButton" destination="NeF-Te-cJc" id="uJi-VC-P8s"/>
                         <outlet property="stopButton" destination="dZi-32-hxA" id="lyk-fV-7iC"/>
@@ -71,14 +64,14 @@
                             <tableViewSection headerTitle="Setup" id="1uD-bL-KPo">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="vCg-lZ-qrN" style="IBUITableViewCellStyleDefault" id="8bY-Dy-320">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8bY-Dy-320" id="Qtp-5g-v9i">
-                                            <rect key="frame" x="0.0" y="0.0" width="293.5" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="293.5" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vCg-lZ-qrN">
-                                                    <rect key="frame" x="16" y="0.0" width="269.5" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="269.5" height="51"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -91,14 +84,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="TX3-yP-atN" style="IBUITableViewCellStyleDefault" id="sDA-LC-U9t">
-                                        <rect key="frame" x="0.0" y="93.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="101" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sDA-LC-U9t" id="73d-ic-Igy">
-                                            <rect key="frame" x="0.0" y="0.0" width="293.5" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="293.5" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TX3-yP-atN">
-                                                    <rect key="frame" x="16" y="0.0" width="269.5" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="269.5" height="51"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -115,14 +108,14 @@
                             <tableViewSection headerTitle="SimRa" id="Cks-n4-XGj">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="QgM-eA-NtT">
-                                        <rect key="frame" x="0.0" y="215" width="320" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="230" width="320" height="15.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QgM-eA-NtT" id="jxU-bE-qns">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="14.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="15.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Hy8-yG-bWd">
-                                                    <rect key="frame" x="20" y="7" width="280" height="0.0"/>
+                                                    <rect key="frame" x="20" y="7" width="280" height="1"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <state key="normal" title="About"/>
                                                     <connections>
@@ -133,7 +126,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Tug-GQ-2NO">
-                                        <rect key="frame" x="0.0" y="229.5" width="320" height="15.5"/>
+                                        <rect key="frame" x="0.0" y="245.5" width="320" height="15.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tug-GQ-2NO" id="ZMj-4K-QfI">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="15.5"/>
@@ -151,14 +144,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Ajx-DX-0M1">
-                                        <rect key="frame" x="0.0" y="245" width="320" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="261" width="320" height="15.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ajx-DX-0M1" id="EYs-HS-qlx">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="14.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="15.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="QeF-cV-htR">
-                                                    <rect key="frame" x="20" y="7" width="280" height="0.0"/>
+                                                    <rect key="frame" x="20" y="7" width="280" height="1"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <state key="normal" title="How To"/>
                                                     <connections>
@@ -169,7 +162,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Khc-gb-LB0">
-                                        <rect key="frame" x="0.0" y="259.5" width="320" height="15.5"/>
+                                        <rect key="frame" x="0.0" y="276.5" width="320" height="15.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Khc-gb-LB0" id="bjt-9o-maV">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="15.5"/>
@@ -187,14 +180,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rxz-bU-byc">
-                                        <rect key="frame" x="0.0" y="275" width="320" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="292" width="320" height="15.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rxz-bU-byc" id="8as-5V-Wva">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="14.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="15.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="DY1-7h-Asu">
-                                                    <rect key="frame" x="20" y="7" width="280" height="0.0"/>
+                                                    <rect key="frame" x="20" y="7" width="280" height="1"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <state key="normal" title="Imprint"/>
                                                     <connections>
@@ -205,14 +198,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="rpD-ll-SMT" style="IBUITableViewCellStyleDefault" id="cWX-0Q-Z5a">
-                                        <rect key="frame" x="0.0" y="289.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="307.5" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cWX-0Q-Z5a" id="Uz7-ks-bXw">
-                                            <rect key="frame" x="0.0" y="0.0" width="293.5" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="293.5" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Credits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rpD-ll-SMT">
-                                                    <rect key="frame" x="16" y="0.0" width="269.5" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="269.5" height="51"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -225,21 +218,21 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="ysy-Na-eJd" detailTextLabel="QbR-cf-yoT" style="IBUITableViewCellStyleValue1" id="zS8-SF-nTN">
-                                        <rect key="frame" x="0.0" y="333" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="358.5" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zS8-SF-nTN" id="pya-Ma-Q37">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ysy-Na-eJd">
-                                                    <rect key="frame" x="16" y="12" width="57" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="57" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="QbR-cf-yoT">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -256,8 +249,15 @@
                             <outlet property="delegate" destination="Zrj-ys-gys" id="usd-Wi-RW7"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Settings" id="hzM-QB-nuc">
+                            <connections>
+                                <segue destination="Zrj-ys-gys" kind="show" identifier="showSettings" id="C7l-ZL-GdY"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Settings" id="03L-ez-qcN"/>
-                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="version" destination="QbR-cf-yoT" id="tnR-He-B4J"/>
                         <outlet property="versionCell" destination="zS8-SF-nTN" id="bZ5-2P-9lr"/>
@@ -272,24 +272,24 @@
             <objects>
                 <viewController id="hEV-g2-xsS" customClass="NewsVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Avx-Ry-Npx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="558"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M2z-iI-uAU">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
                                 <items>
                                     <navigationItem title="News" id="ST0-cS-qrH"/>
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Axe-mV-OS5">
-                                <rect key="frame" x="145" y="498" width="30" height="30"/>
+                                <rect key="frame" x="145" y="508" width="30" height="30"/>
                                 <state key="normal" title="OK"/>
                                 <connections>
                                     <segue destination="H9k-lR-p8w" kind="unwind" unwindAction="newsSeen:" id="SCG-je-ryO"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="up5-sQ-cWf">
-                                <rect key="frame" x="16" y="56" width="288" height="434"/>
+                                <rect key="frame" x="16" y="54" width="288" height="446"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
@@ -528,14 +528,14 @@ from www.flaticon.com</string>
                             <tableViewSection headerTitle="Privacy: Hide part of your trips" id="8Fn-ss-h83">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="jjL-z8-BYL">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jjL-z8-BYL" id="4YT-0K-IMe">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Initial Seconds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3v-22-57Y">
-                                                    <rect key="frame" x="20" y="11.5" width="125" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="125" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="uU0-X7-AoD"/>
                                                     </constraints>
@@ -544,7 +544,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="e6z-1a-Zi8">
-                                                    <rect key="frame" x="184" y="7" width="118" height="31"/>
+                                                    <rect key="frame" x="186" y="10.5" width="114" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="OYW-UP-XWn"/>
                                                         <constraint firstAttribute="width" constant="114" id="dYs-gp-pSq"/>
@@ -554,7 +554,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ts0-v6-Oh2">
-                                                    <rect key="frame" x="153" y="11.5" width="25" height="21"/>
+                                                    <rect key="frame" x="153" y="15" width="25" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="NoD-4w-kgT"/>
                                                         <constraint firstAttribute="width" constant="25" id="Rmb-kf-IbQ"/>
@@ -576,14 +576,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="5cL-Pe-edL">
-                                        <rect key="frame" x="0.0" y="93.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="101" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5cL-Pe-edL" id="kaZ-Mz-gIk">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Initial Meters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLu-uM-5dG">
-                                                    <rect key="frame" x="20" y="11.5" width="125" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="125" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="bK6-KE-oTK"/>
                                                     </constraints>
@@ -592,7 +592,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="25K-ai-s59">
-                                                    <rect key="frame" x="184" y="7" width="118" height="31"/>
+                                                    <rect key="frame" x="186" y="10.5" width="114" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="114" id="2al-fQ-Voo"/>
                                                         <constraint firstAttribute="height" constant="30" id="sv3-ox-JeX"/>
@@ -602,7 +602,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="55" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ch5-yO-f7f">
-                                                    <rect key="frame" x="153" y="11.5" width="25" height="21"/>
+                                                    <rect key="frame" x="153" y="15" width="25" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="0Bc-lv-seW"/>
                                                         <constraint firstAttribute="height" constant="21" id="2KC-tf-s76"/>
@@ -628,14 +628,14 @@ from www.flaticon.com</string>
                             <tableViewSection headerTitle="Bike" id="I0W-mX-MMT">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="doF-P0-WqW">
-                                        <rect key="frame" x="0.0" y="215" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="230" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="doF-P0-WqW" id="Fux-KQ-lja">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jxq-AX-FsN">
-                                                    <rect key="frame" x="20" y="11.5" width="38" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="38" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="fLG-T9-NdL"/>
                                                     </constraints>
@@ -644,7 +644,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7N9-JX-3gY" customClass="IdPicker">
-                                                    <rect key="frame" x="66" y="7" width="234" height="30"/>
+                                                    <rect key="frame" x="66" y="10.5" width="234" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="hPS-fO-Z3W"/>
                                                     </constraints>
@@ -665,14 +665,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8JM-VF-39X">
-                                        <rect key="frame" x="0.0" y="258.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="281" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8JM-VF-39X" id="j7M-Pb-3bV">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position of your iPhone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWU-L2-tzF">
-                                                    <rect key="frame" x="20" y="11.5" width="175" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="175" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="vZW-ag-3Hc"/>
                                                     </constraints>
@@ -681,7 +681,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gxn-9i-OrV" customClass="IdPicker">
-                                                    <rect key="frame" x="203" y="7" width="97" height="30"/>
+                                                    <rect key="frame" x="203" y="10.5" width="97" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="5X9-g9-Xky"/>
                                                     </constraints>
@@ -702,14 +702,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="kiC-7v-440">
-                                        <rect key="frame" x="0.0" y="302" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="332" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kiC-7v-440" id="P2w-8S-h1f">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Child Seat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXq-aF-Bmm">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="211" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Enz-tD-dmL"/>
                                                     </constraints>
@@ -718,7 +718,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N55-ke-qlw">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="239" y="10" width="63" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="xZP-tu-if9"/>
                                                     </constraints>
@@ -737,14 +737,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0yT-ry-qO5">
-                                        <rect key="frame" x="0.0" y="345.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="383" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0yT-ry-qO5" id="8eQ-hY-Ter">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trailer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhB-wN-SnI">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="211" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="GWb-Ec-Hxd"/>
                                                     </constraints>
@@ -753,7 +753,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mmg-9W-taD">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="239" y="10" width="63" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="BmA-1h-RyQ"/>
                                                     </constraints>
@@ -776,14 +776,14 @@ from www.flaticon.com</string>
                             <tableViewSection headerTitle="General Settings" id="32b-Vh-PWn">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="bNC-hJ-pvw">
-                                        <rect key="frame" x="0.0" y="467" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="512" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bNC-hJ-pvw" id="PVu-cY-i5O">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online AI Ride Analysis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tf0-as-NvS">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="211" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="alG-Sb-Lm2"/>
                                                     </constraints>
@@ -792,7 +792,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lNh-LP-qHw">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="239" y="10" width="63" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="Hs0-ac-l42"/>
                                                     </constraints>
@@ -815,13 +815,13 @@ from www.flaticon.com</string>
                             <tableViewSection headerTitle="Devices" id="B4V-FQ-pgG">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="93" id="dm6-lM-GBS">
-                                        <rect key="frame" x="0.0" y="588.5" width="320" height="93"/>
+                                        <rect key="frame" x="0.0" y="641" width="320" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dm6-lM-GBS" id="0QS-mo-pnL">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OpenBikeSensor connection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jzy-8h-Yx7">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="OpenBikeSensor connection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jzy-8h-Yx7">
                                                     <rect key="frame" x="20" y="15" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="AJZ-3z-jEa"/>
@@ -830,8 +830,8 @@ from www.flaticon.com</string>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gNp-qs-yQV">
-                                                    <rect key="frame" x="251" y="10" width="51" height="31"/>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gNp-qs-yQV">
+                                                    <rect key="frame" x="251" y="10" width="63" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="TBd-o8-REU"/>
                                                     </constraints>
@@ -839,7 +839,7 @@ from www.flaticon.com</string>
                                                         <action selector="openBikeSensorChanged:" destination="NGZ-Ib-TCI" eventType="valueChanged" id="1JF-hP-Ojl"/>
                                                     </connections>
                                                 </switch>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afy-x7-PUI">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afy-x7-PUI">
                                                     <rect key="frame" x="20" y="52" width="280" height="35"/>
                                                     <color key="backgroundColor" systemColor="systemBlueColor"/>
                                                     <constraints>
@@ -908,14 +908,14 @@ from www.flaticon.com</string>
                             <tableViewSection headerTitle="Attributes" id="U5K-Jr-VAV">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="9NQ-h5-Drk">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9NQ-h5-Drk" id="eiD-BC-zhf">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year of Birth" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLn-j1-mrG">
-                                                    <rect key="frame" x="20" y="11.5" width="94" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="94" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="eDa-TO-f1S"/>
                                                     </constraints>
@@ -924,7 +924,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yNU-dK-Ne3" customClass="IdPicker">
-                                                    <rect key="frame" x="122" y="5" width="178" height="34"/>
+                                                    <rect key="frame" x="122" y="8.5" width="178" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
@@ -942,14 +942,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="5zW-tW-WXg">
-                                        <rect key="frame" x="0.0" y="93.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="101" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5zW-tW-WXg" id="GAe-ZL-Loh">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xo7-fY-8wU" customClass="IdPicker">
-                                                    <rect key="frame" x="85" y="7" width="215" height="30"/>
+                                                    <rect key="frame" x="85" y="10.5" width="215" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="new-6J-7o7"/>
                                                         <constraint firstAttribute="height" constant="30" id="oel-fv-dB0"/>
@@ -961,7 +961,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqN-41-3CZ">
-                                                    <rect key="frame" x="20" y="11.5" width="57" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="57" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="E3y-O0-Ko7"/>
                                                     </constraints>
@@ -982,14 +982,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="4n1-1u-Jc6">
-                                        <rect key="frame" x="0.0" y="137" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="152" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4n1-1u-Jc6" id="3wQ-OF-AGx">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Region" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ble-fg-2cq">
-                                                    <rect key="frame" x="20" y="11.5" width="53" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="53" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="wac-n1-8C2"/>
                                                     </constraints>
@@ -998,7 +998,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BEu-9Y-79g" customClass="IdPicker">
-                                                    <rect key="frame" x="81" y="7" width="159" height="30"/>
+                                                    <rect key="frame" x="81" y="10.5" width="159" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="uQC-xO-GJO"/>
                                                     </constraints>
@@ -1009,7 +1009,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ac-hH-O0E">
-                                                    <rect key="frame" x="248" y="7" width="52" height="30"/>
+                                                    <rect key="frame" x="248" y="10.5" width="52" height="30"/>
                                                     <state key="normal" title="Closest"/>
                                                     <connections>
                                                         <action selector="closestPressed:" destination="c8U-8m-Y77" eventType="touchUpInside" id="R19-cL-v5X"/>
@@ -1028,14 +1028,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="X1g-Ki-Tzf">
-                                        <rect key="frame" x="0.0" y="180.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="203" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="X1g-Ki-Tzf" id="X97-dR-YNl">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cycling Experience" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gt8-Qt-Vdn">
-                                                    <rect key="frame" x="20" y="11.5" width="146" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="146" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="0gQ-f6-GN7"/>
                                                     </constraints>
@@ -1044,7 +1044,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2eb-l0-HoE" customClass="IdPicker">
-                                                    <rect key="frame" x="174" y="7" width="126" height="30"/>
+                                                    <rect key="frame" x="174" y="10.5" width="126" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="LwR-yx-jfX"/>
                                                     </constraints>
@@ -1065,14 +1065,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="132" id="Cg1-pQ-XV9">
-                                        <rect key="frame" x="0.0" y="224" width="320" height="132"/>
+                                        <rect key="frame" x="0.0" y="254" width="320" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cg1-pQ-XV9" id="CnW-1S-LOx">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="132"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adherence to Rules" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbI-gv-mnl">
-                                                    <rect key="frame" x="20" y="20" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="20" width="211" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="xoT-Oh-UYy"/>
                                                     </constraints>
@@ -1081,13 +1081,13 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wvb-7H-gmb">
-                                                    <rect key="frame" x="251" y="20" width="51" height="31"/>
+                                                    <rect key="frame" x="239" y="20" width="63" height="28"/>
                                                     <connections>
                                                         <action selector="behaviourSwitchChanged:" destination="c8U-8m-Y77" eventType="valueChanged" id="ycZ-ad-u4T"/>
                                                     </connections>
                                                 </switch>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="l5Z-9d-AwY">
-                                                    <rect key="frame" x="18" y="82" width="284" height="31"/>
+                                                    <rect key="frame" x="20" y="78" width="280" height="34"/>
                                                     <color key="minimumTrackTintColor" systemColor="systemBlueColor"/>
                                                     <color key="maximumTrackTintColor" systemColor="systemBlueColor"/>
                                                     <connections>
@@ -1095,7 +1095,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Never" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVw-dc-Kk6">
-                                                    <rect key="frame" x="20" y="61" width="136" height="21"/>
+                                                    <rect key="frame" x="20" y="57" width="136" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="q7E-Oj-xxb"/>
                                                     </constraints>
@@ -1104,7 +1104,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="39Z-h9-cEF">
-                                                    <rect key="frame" x="164" y="61" width="136" height="21"/>
+                                                    <rect key="frame" x="164" y="57" width="136" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="hDp-Qn-Yio"/>
                                                     </constraints>
@@ -1136,21 +1136,21 @@ from www.flaticon.com</string>
                             <tableViewSection headerTitle="Statistics" id="b5d-GW-6xP">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="nrt-bo-qSo" detailTextLabel="Jxj-C0-6rm" style="IBUITableViewCellStyleValue1" id="elH-Ax-tWo">
-                                        <rect key="frame" x="0.0" y="434" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="464" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="elH-Ax-tWo" id="5Pp-6h-fgq">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Rides" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nrt-bo-qSo">
-                                                    <rect key="frame" x="16" y="12" width="42.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="42.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="Jxj-C0-6rm">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1160,21 +1160,21 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="tir-BI-xQG" detailTextLabel="SDj-Es-JE9" style="IBUITableViewCellStyleValue1" id="1UY-nw-MdV">
-                                        <rect key="frame" x="0.0" y="477.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="515" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1UY-nw-MdV" id="nEZ-X8-X4U">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tir-BI-xQG">
-                                                    <rect key="frame" x="16" y="12" width="67" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="67" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="SDj-Es-JE9">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1184,21 +1184,21 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="1xw-dA-InH" detailTextLabel="stN-Rk-snM" style="IBUITableViewCellStyleValue1" id="2Rx-jJ-HPB">
-                                        <rect key="frame" x="0.0" y="521" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="566" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Rx-jJ-HPB" id="j3p-7G-sH4">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Average Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1xw-dA-InH">
-                                                    <rect key="frame" x="16" y="12" width="133" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="133" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="stN-Rk-snM">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1208,21 +1208,21 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="TUw-ey-TsK" detailTextLabel="DFb-p1-2pe" style="IBUITableViewCellStyleValue1" id="mQM-8D-Xb4">
-                                        <rect key="frame" x="0.0" y="564.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="617" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mQM-8D-Xb4" id="ago-iI-ahr">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="CO2 Saved" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TUw-ey-TsK">
-                                                    <rect key="frame" x="16" y="12" width="85.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="85.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="DFb-p1-2pe">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1232,21 +1232,21 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="NAd-7W-hyb" detailTextLabel="SLo-CQ-Tl6" style="IBUITableViewCellStyleValue1" id="kJs-BQ-Qny">
-                                        <rect key="frame" x="0.0" y="608" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="668" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kJs-BQ-Qny" id="7Fs-Mf-p3Y">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NAd-7W-hyb">
-                                                    <rect key="frame" x="16" y="12" width="65.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="65.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="SLo-CQ-Tl6">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1256,21 +1256,21 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="psv-hA-tkp" detailTextLabel="AyX-cD-Ab9" style="IBUITableViewCellStyleValue1" id="MiB-52-Qwj">
-                                        <rect key="frame" x="0.0" y="651.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="719" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MiB-52-Qwj" id="T9G-zu-aIz">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Idle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="psv-hA-tkp">
-                                                    <rect key="frame" x="16" y="12" width="27.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="27.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="AyX-cD-Ab9">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1280,21 +1280,21 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="oBk-eL-4Fm" detailTextLabel="xie-f4-CSq" style="IBUITableViewCellStyleValue1" id="QYW-Qg-Bkt">
-                                        <rect key="frame" x="0.0" y="695" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="770" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QYW-Qg-Bkt" id="Sj3-C2-0Y9">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Average Idle Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oBk-eL-4Fm">
-                                                    <rect key="frame" x="16" y="12" width="135.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="135.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="xie-f4-CSq">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1304,21 +1304,21 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="D3n-2Y-FbO" detailTextLabel="Krm-nu-a7c" style="IBUITableViewCellStyleValue1" id="8Vx-by-2Vg">
-                                        <rect key="frame" x="0.0" y="738.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="821" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Vx-by-2Vg" id="e1O-eX-hAU">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Average Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D3n-2Y-FbO">
-                                                    <rect key="frame" x="16" y="12" width="115.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="115.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="Krm-nu-a7c">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1328,21 +1328,21 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="4ED-g6-RgE" detailTextLabel="s5z-t3-hbg" style="IBUITableViewCellStyleValue1" id="JC3-qA-lQ7">
-                                        <rect key="frame" x="0.0" y="782" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="872" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JC3-qA-lQ7" id="5OC-Lz-xvH">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Incidents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4ED-g6-RgE">
-                                                    <rect key="frame" x="16" y="12" width="69.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="69.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="s5z-t3-hbg">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1352,21 +1352,21 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="AbA-66-1FG" detailTextLabel="WS8-z4-IWX" style="IBUITableViewCellStyleValue1" id="YAS-8H-KlE">
-                                        <rect key="frame" x="0.0" y="825.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="923" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YAS-8H-KlE" id="YCc-Qd-Lf0">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Thereof Scary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AbA-66-1FG">
-                                                    <rect key="frame" x="16" y="12" width="107.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="16" width="107.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="WS8-z4-IWX">
-                                                    <rect key="frame" x="260" y="12" width="44" height="20.5"/>
+                                                    <rect key="frame" x="260" y="16" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1376,7 +1376,7 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="162" id="b7O-Rj-Hc4">
-                                        <rect key="frame" x="0.0" y="869" width="320" height="162"/>
+                                        <rect key="frame" x="0.0" y="974" width="320" height="162"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b7O-Rj-Hc4" id="cz8-tj-hus">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
@@ -1444,14 +1444,14 @@ from www.flaticon.com</string>
                             <tableViewSection id="hrv-aI-5rp">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="maz-gh-BtZ">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="maz-gh-BtZ" id="8vu-hZ-UaC">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIW-lA-oYU">
-                                                    <rect key="frame" x="20" y="11.5" width="38" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="38" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="gMK-xo-02m"/>
                                                     </constraints>
@@ -1460,7 +1460,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-Lc-xY3" customClass="IdPicker">
-                                                    <rect key="frame" x="66" y="7" width="234" height="30"/>
+                                                    <rect key="frame" x="66" y="10.5" width="234" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="sMF-7X-ILT"/>
                                                     </constraints>
@@ -1481,14 +1481,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BQw-Mt-WQQ">
-                                        <rect key="frame" x="0.0" y="93.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="101" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BQw-Mt-WQQ" id="fbN-J9-iiB">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Position of your iPhone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iuW-2T-zPq">
-                                                    <rect key="frame" x="20" y="11.5" width="175" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="175" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Vqy-DS-BF9"/>
                                                     </constraints>
@@ -1497,7 +1497,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mYN-Xr-lMp" customClass="IdPicker">
-                                                    <rect key="frame" x="203" y="7" width="97" height="30"/>
+                                                    <rect key="frame" x="203" y="10.5" width="97" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="NR8-dP-FUh"/>
                                                     </constraints>
@@ -1518,14 +1518,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Eqx-aW-3Hc">
-                                        <rect key="frame" x="0.0" y="137" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="152" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Eqx-aW-3Hc" id="20X-FB-77K">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Child Seat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="50k-vz-Uwh">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="211" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="S9S-Cr-8xd"/>
                                                     </constraints>
@@ -1534,7 +1534,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZh-ch-MMc">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="239" y="10" width="63" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="bnr-sS-kit"/>
                                                     </constraints>
@@ -1553,14 +1553,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="iNK-AQ-ODA">
-                                        <rect key="frame" x="0.0" y="180.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="203" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iNK-AQ-ODA" id="ZMz-8v-Vb7">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trailer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOP-ce-kGd">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="211" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="X6n-f5-xtp"/>
                                                     </constraints>
@@ -1569,7 +1569,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yxb-J0-Tnp">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="239" y="10" width="63" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="2Zw-cZ-C7X"/>
                                                     </constraints>
@@ -1625,14 +1625,14 @@ from www.flaticon.com</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="trip" textLabel="zPk-B6-o6t" detailTextLabel="VTO-Vt-8RE" style="IBUITableViewCellStyleSubtitle" id="slg-JG-I5k">
-                                <rect key="frame" x="0.0" y="50" width="320" height="55.5"/>
+                                <rect key="frame" x="0.0" y="50" width="320" height="56"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="slg-JG-I5k" id="PX8-Pe-e2k">
-                                    <rect key="frame" x="0.0" y="0.0" width="293.5" height="55.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="293.5" height="56"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zPk-B6-o6t">
-                                            <rect key="frame" x="16" y="10" width="33" height="20.5"/>
+                                            <rect key="frame" x="16" y="9" width="33" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -1686,39 +1686,20 @@ from www.flaticon.com</string>
         <scene sceneID="IME-Gp-EQi">
             <objects>
                 <viewController id="j7e-Gg-2dc" customClass="TripEditVC" sceneMemberID="viewController">
-                    <stackView key="view" opaque="NO" contentMode="scaleToFill" axis="vertical" id="hU6-OF-AH2">
+                    <view key="view" contentMode="scaleToFill" id="hU6-OF-AH2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eWY-ed-XQD">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="mpp-Fs-roo" appends="YES" id="76k-UV-agm"/>
-                                </connections>
-                            </mapView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="a1x-xk-P31"/>
-                    </stackView>
+                    </view>
                     <navigationItem key="navigationItem" title="Edit Trip" id="1cV-GU-tdF">
-                        <barButtonItem key="rightBarButtonItem" title="Clip" id="VHZ-9D-W3q">
-                            <connections>
-                                <action selector="donePressed:" destination="j7e-Gg-2dc" id="iGp-V2-2T8"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Clip" id="VHZ-9D-W3q"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapView" destination="eWY-ed-XQD" id="9z9-3q-trU"/>
                         <segue destination="Mbe-On-WHO" kind="show" identifier="editAnnotation:" id="nkt-0L-Xb6"/>
                         <segue destination="U6v-wH-DyA" kind="show" identifier="tripDetail:" id="0bz-zV-iEw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pXh-OI-oDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="mpp-Fs-roo">
-                    <connections>
-                        <action selector="longPressed:" destination="j7e-Gg-2dc" id="Ece-gt-ACR"/>
-                    </connections>
-                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2989" y="-1194"/>
         </scene>
@@ -1734,14 +1715,14 @@ from www.flaticon.com</string>
                             <tableViewSection id="lVY-UX-IDB">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="w4D-VV-v6Y">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="50" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w4D-VV-v6Y" id="SDr-yX-qE4">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incident" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SvM-GS-sso">
-                                                    <rect key="frame" x="20" y="11.5" width="61" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="61" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="F3c-S0-Bkr"/>
                                                     </constraints>
@@ -1750,7 +1731,7 @@ from www.flaticon.com</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RUN-lE-OIW" customClass="IdPicker">
-                                                    <rect key="frame" x="89" y="7" width="211" height="30"/>
+                                                    <rect key="frame" x="89" y="10.5" width="211" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="20S-Q0-zOn"/>
                                                     </constraints>
@@ -1771,14 +1752,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ZoM-gy-y7h">
-                                        <rect key="frame" x="0.0" y="93.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="101" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZoM-gy-y7h" id="wU6-Nl-0ri">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IKb-oF-Gff">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="251" y="10" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="FRr-8y-PIA"/>
                                                         <constraint firstAttribute="width" constant="49" id="XnH-Iu-cZD"/>
@@ -1788,7 +1769,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This was frightening" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w1x-m4-eN0">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="O8o-RI-Jh6"/>
                                                     </constraints>
@@ -1811,14 +1792,14 @@ from www.flaticon.com</string>
                             <tableViewSection headerTitle="Other Traffic Participants" id="Z6B-Or-wWS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Tve-Ab-ivG">
-                                        <rect key="frame" x="0.0" y="215" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="230" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tve-Ab-ivG" id="Obi-SI-1ON">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m9z-dl-3zF">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="251" y="10" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="e65-UT-7om"/>
                                                         <constraint firstAttribute="width" constant="49" id="sqz-7I-xnA"/>
@@ -1828,7 +1809,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passenger Car" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDw-TH-ScJ">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="JBl-SA-gFA"/>
                                                     </constraints>
@@ -1847,14 +1828,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="e0I-cF-6CJ">
-                                        <rect key="frame" x="0.0" y="258.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="281" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e0I-cF-6CJ" id="pbh-51-jsq">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0HL-sN-TJV">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="251" y="10" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="tcs-nx-lic"/>
                                                         <constraint firstAttribute="width" constant="49" id="vwC-Et-Rwo"/>
@@ -1864,7 +1845,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Taxi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7W-tE-H1P">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="JAT-KO-FEM"/>
                                                     </constraints>
@@ -1883,14 +1864,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="7z4-Cz-fWu">
-                                        <rect key="frame" x="0.0" y="302" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="332" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7z4-Cz-fWu" id="hIh-Mp-DfV">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qhu-dS-SdC">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="251" y="10" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="fRf-RB-w4r"/>
                                                         <constraint firstAttribute="width" constant="49" id="ntt-rV-teJ"/>
@@ -1900,7 +1881,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery Van" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmb-dx-KDO">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="1y4-4l-rHx"/>
                                                     </constraints>
@@ -1919,14 +1900,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Gai-6Y-xC3">
-                                        <rect key="frame" x="0.0" y="345.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="383" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gai-6Y-xC3" id="Gvq-4l-6UU">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Edu-us-abC">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="251" y="10" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="gmQ-Ya-GHJ"/>
                                                         <constraint firstAttribute="width" constant="49" id="mWW-YN-Quj"/>
@@ -1936,7 +1917,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IH6-e7-C6E">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Jdm-2X-I3H"/>
                                                     </constraints>
@@ -1955,14 +1936,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="IfQ-Xn-dOw">
-                                        <rect key="frame" x="0.0" y="389" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="434" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IfQ-Xn-dOw" id="adl-Jy-xAm">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vw5-uq-TES">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="251" y="10" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="GHw-CY-Doh"/>
                                                         <constraint firstAttribute="width" constant="49" id="rJD-OF-bSZ"/>
@@ -1972,7 +1953,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Commercial Vehicle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gM8-wW-yu6">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="WD3-J5-Vlt"/>
                                                     </constraints>
@@ -1991,14 +1972,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="dez-Mr-PQz">
-                                        <rect key="frame" x="0.0" y="432.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="485" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dez-Mr-PQz" id="xhh-nf-veg">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eMr-M8-yXM">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="251" y="10" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="8L4-3x-70N"/>
                                                         <constraint firstAttribute="width" constant="49" id="spV-tL-uVt"/>
@@ -2008,7 +1989,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pedestrian" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khh-Xv-Ynq">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="wpR-Sr-nQm"/>
                                                     </constraints>
@@ -2027,14 +2008,14 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qDq-N1-ypV">
-                                        <rect key="frame" x="0.0" y="476" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="536" width="320" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qDq-N1-ypV" id="A3p-ul-qxZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mzJ-OG-14N">
-                                                    <rect key="frame" x="251" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="251" y="10" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="49" id="Az7-PR-6zg"/>
                                                         <constraint firstAttribute="height" constant="31" id="SMz-Rq-KTh"/>
@@ -2044,7 +2025,7 @@ from www.flaticon.com</string>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bicycle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Zr-zX-WNu">
-                                                    <rect key="frame" x="20" y="11.5" width="223" height="21"/>
+                                                    <rect key="frame" x="20" y="15" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="4PM-Dq-xJN"/>
                                                     </constraints>
@@ -2063,13 +2044,13 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Rqi-fn-CEy">
-                                        <rect key="frame" x="0.0" y="519.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="587" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rqi-fn-CEy" id="uhT-sg-mK7">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Xc-Pz-0go">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Xc-Pz-0go">
                                                     <rect key="frame" x="251" y="6.5" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="hM6-kE-pHY"/>
@@ -2079,7 +2060,7 @@ from www.flaticon.com</string>
                                                         <action selector="motorbikeChanged:" destination="Mbe-On-WHO" eventType="valueChanged" id="diz-LI-2qv"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Motorcycle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNs-N4-TFw">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Motorcycle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNs-N4-TFw">
                                                     <rect key="frame" x="20" y="11.5" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="1Ll-Xh-ACt"/>
@@ -2099,13 +2080,13 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="zNJ-WW-SHZ">
-                                        <rect key="frame" x="0.0" y="563" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="630.5" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zNJ-WW-SHZ" id="FAR-mf-b8W">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="emB-n0-Jtj">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="emB-n0-Jtj">
                                                     <rect key="frame" x="251" y="6.5" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="31" id="5ld-Y6-uHc"/>
@@ -2115,7 +2096,7 @@ from www.flaticon.com</string>
                                                         <action selector="escooterChanged:" destination="Mbe-On-WHO" eventType="valueChanged" id="SQO-JW-2vN"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-Scooter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRX-9C-cpb">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="E-Scooter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRX-9C-cpb">
                                                     <rect key="frame" x="20" y="11.5" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="OUV-8n-skh"/>
@@ -2135,13 +2116,13 @@ from www.flaticon.com</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="uLn-rd-duz">
-                                        <rect key="frame" x="0.0" y="606.5" width="320" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="674" width="320" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uLn-rd-duz" id="AX9-rf-6yn">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gkD-Jc-5Xe">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gkD-Jc-5Xe">
                                                     <rect key="frame" x="251" y="6.5" width="51" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="49" id="1no-hb-drl"/>
@@ -2151,7 +2132,7 @@ from www.flaticon.com</string>
                                                         <action selector="otherChanged:" destination="Mbe-On-WHO" eventType="valueChanged" id="Yj1-ob-B0Y"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Other (please comment)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOF-fs-X67">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Other (please comment)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOF-fs-X67">
                                                     <rect key="frame" x="20" y="11.5" width="223" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Q9j-bv-XEQ"/>
@@ -2175,7 +2156,7 @@ from www.flaticon.com</string>
                             <tableViewSection headerTitle="Comment" id="bow-5B-qsa">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="129" id="lhp-If-Vnk">
-                                        <rect key="frame" x="0.0" y="728" width="320" height="129"/>
+                                        <rect key="frame" x="0.0" y="795.5" width="320" height="129"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lhp-If-Vnk" id="mol-YN-wah">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
@@ -2248,12 +2229,11 @@ from www.flaticon.com</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="3Qp-s0-MOK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="06u-S2-oVJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1RR-lD-mkk">
-                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -2273,7 +2253,7 @@ from www.flaticon.com</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLh-9R-o1N">
-                                <rect key="frame" x="4" y="52" width="320" height="160"/>
+                                <rect key="frame" x="4" y="82" width="320" height="160"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Available Devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9h1-hD-7lY">
                                         <rect key="frame" x="20" y="20" width="240" height="18"/>
@@ -2289,14 +2269,14 @@ from www.flaticon.com</string>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="deviceCell" id="C64-Ib-Jw5" customClass="DeviceTableViewCell">
-                                                <rect key="frame" x="0.0" y="50" width="280" height="44"/>
+                                                <rect key="frame" x="0.0" y="50" width="280" height="52"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C64-Ib-Jw5" id="ROY-9Y-5tD">
-                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="52"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdT-F5-hlU">
-                                                            <rect key="frame" x="0.0" y="13.5" width="280" height="17"/>
+                                                            <rect key="frame" x="0.0" y="17.5" width="280" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -2334,7 +2314,7 @@ from www.flaticon.com</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zZi-cb-Vk9">
-                                <rect key="frame" x="0.0" y="212" width="324" height="358.5"/>
+                                <rect key="frame" x="0.0" y="242" width="324" height="358.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advance Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69M-Ic-ZaJ">
                                         <rect key="frame" x="20" y="171.5" width="284" height="18"/>
@@ -2510,7 +2490,7 @@ from www.flaticon.com</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3Yx-jP-sPA"/>
+        <segue reference="7TT-ES-lGU"/>
         <segue reference="2hm-aX-QV5"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -2518,13 +2498,13 @@ from www.flaticon.com</string>
         <image name="racing-flag" width="48" height="48"/>
         <image name="start" width="48" height="48"/>
         <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.53333333333333333" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

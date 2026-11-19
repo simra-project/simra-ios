@@ -38,7 +38,7 @@ import CoreBluetooth
     /**
      The callback function when central manager failed to connect the peripheral.
      
-     - parameter connectedPeripheral: The peripheral which connected failure.
+     - parameter peripheral: The peripheral which connected failure.
      - parameter error:               The connected failed error message.
      */
     @objc optional func failToConnectPeripheral(_ peripheral: CBPeripheral, error: Error)
