@@ -62,10 +62,10 @@ struct DSBarChart: View {
             } else {
 
                 ContentUnavailableView(
-                    "Keine Daten",
+                    "No data",
                     systemImage: "chart.bar",
                     description: Text(
-                        "Für diese Statistik sind noch keine Werte vorhanden."
+                        "No values are available for this statistic yet."
                     )
                 )
             }

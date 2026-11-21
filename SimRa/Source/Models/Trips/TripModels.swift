@@ -2,7 +2,8 @@
 //  TripModels.swift
 //  SimRa
 //
-//  Swift equivalents of the legacy Trip model support types.
+//  Created by Emil Pauls on 27.08.26.
+//  Copyright © 2026 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.
 //
 
 import Foundation
@@ -159,7 +160,10 @@ public final class TripInfo: NSObject {
     public var validAnnotationsCount: Int = 0
     public var fileHash: String?
     public var filePasswd: String?
-    public var duration: NSDateInterval = NSDateInterval(start: Date(), end: Date())
+    public var duration: NSDateInterval = NSDateInterval(
+        start: Date(timeIntervalSince1970: 0),
+        end: Date(timeIntervalSince1970: 0)
+    )
     public var length: Int = 0
 
     public override init() {
@@ -186,7 +190,7 @@ public final class TripInfo: NSObject {
         self.fileHash = dictionary["fileHash"] as? String
         self.filePasswd = dictionary["filePasswd"] as? String
 
-        let start = (dictionary["start"] as? NSNumber)?.doubleValue ?? Date().timeIntervalSince1970
+        let start = (dictionary["start"] as? NSNumber)?.doubleValue ?? 0
         let end = (dictionary["end"] as? NSNumber)?.doubleValue ?? start
         self.duration = NSDateInterval(
             start: Date(timeIntervalSince1970: start),

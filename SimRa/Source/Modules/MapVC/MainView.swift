@@ -13,6 +13,7 @@ import MapKit
 struct MainView: View {
 
     @StateObject private var vm = MainViewModel()
+    @State private var newsBannerMessage: String?
     @Namespace private var mapScope
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
@@ -20,6 +21,9 @@ struct MainView: View {
         NavigationStack {
             content
                 .navigationBarTitleDisplayMode(.inline)
+                .onReceive(NotificationCenter.default.publisher(for: .serverNewsDidUpdate)) { _ in
+                    presentUnreadNewsIfNeeded()
+                }
                 .toolbar {
                     toolbarContent
                 }
@@ -90,6 +94,20 @@ struct MainView: View {
             mapView
             recordingAction
         }
+        .task {
+            vm.presentInitialGuideIfNeeded()
+            presentUnreadNewsIfNeeded()
+        }
+        .overlay(alignment: .top) {
+            if let newsBannerMessage {
+                newsBanner(message: newsBannerMessage)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 12)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .zIndex(1)
+            }
+        }
+        .animation(.snappy, value: newsBannerMessage != nil)
         .ignoresSafeArea(
             edges: [
                 .horizontal,
@@ -172,10 +190,10 @@ struct MainView: View {
 
     @MapContentBuilder
     private var recordingRoute: some MapContent {
-        if let route = vm.recordingRouteOverlay {
-            MapPolyline(route)
+        ForEach(vm.recordingRouteSegments) { segment in
+            MapPolyline(segment.polyline)
                 .stroke(
-                    .tint,
+                    segment.color,
                     style: StrokeStyle(
                         lineWidth: 5,
                         lineCap: .round,
@@ -271,6 +289,58 @@ struct MainView: View {
         default:
             return .orange
         }
+    }
+
+    private func presentUnreadNewsIfNeeded() {
+        let news = AppDelegate.shared().news
+        guard news.hasUnreadNews else { return }
+
+        let messages = news.newsLines.compactMap { line -> String? in
+            guard let marker = line.first, ["-", "i", "*"].contains(String(marker)) else {
+                return nil
+            }
+            let text = String(line.dropFirst()).trimmingCharacters(in: .whitespacesAndNewlines)
+            return text.isEmpty ? nil : text
+        }
+        guard !messages.isEmpty else {
+            news.seen()
+            return
+        }
+
+        newsBannerMessage = messages.joined(separator: "\n")
+        news.seen()
+    }
+
+    private func newsBanner(message: String) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: "newspaper.fill")
+                .foregroundStyle(.tint)
+                .padding(.top, 2)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(NSLocalizedString("Neue SimRa-Information", comment: "New server news banner title"))
+                    .font(.subheadline.weight(.semibold))
+                Text(message)
+                    .font(.subheadline)
+                    .lineLimit(5)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer(minLength: 0)
+            Button {
+                newsBannerMessage = nil
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundStyle(.secondary)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(NSLocalizedString("Close", comment: "Close news message"))
+        }
+        .padding(14)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 18))
+        .overlay {
+            RoundedRectangle(cornerRadius: 18)
+                .strokeBorder(.primary.opacity(0.08), lineWidth: 1)
+        }
+        .shadow(color: .black.opacity(0.12), radius: 18, y: 6)
     }
 
     // MARK: - Toolbar
@@ -597,6 +667,7 @@ private struct LiquidGlassRecordingControl: View {
                 }
             }
         }
+        .geometryGroup()
         .animation(
             .spring(
                 response: 0.46,

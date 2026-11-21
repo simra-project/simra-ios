@@ -1,7 +1,7 @@
 import Foundation
 import ObjectiveC.runtime
 
-private final class LanguageAwareBundle: Bundle {
+private final class LanguageAwareBundle: Bundle, @unchecked Sendable {
     override func localizedString(
         forKey key: String,
         value: String?,

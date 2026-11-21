@@ -239,6 +239,20 @@
 
 /* Age */
 "Age" = "Age";
+"after 2004" = "after 2004";
+"2000-2004" = "2000-2004";
+"1995-1999" = "1995-1999";
+"1990-1994" = "1990-1994";
+"1985-1989" = "1985-1989";
+"1980-1984" = "1980-1984";
+"1975-1979" = "1975-1979";
+"1970-1974" = "1970-1974";
+"1965-1969" = "1965-1969";
+"1960-1964" = "1960-1964";
+"1955-1959" = "1955-1959";
+"1950-1954" = "1950-1954";
+"before 1950" = "before 1950";
+"London (inactive)" = "London (inactive)";
 
 /* Gender */
 "Gender" = "Gender";
@@ -541,3 +555,67 @@
 "Save changes" = "Save changes";
 "Discard" = "Discard";
 "Review your ride" = "Review your ride";
+
+"What happened?" = "What happened?";
+"Who was involved?" = "Who was involved?";
+"Automatic detection" = "Automatic detection";
+"Shortcut source" = "Shortcuts";
+"Manually added" = "Manually added";
+"Unknown source" = "Unknown source";
+"Widget or Live Activity" = "Widget or Live Activity";
+"Shortcut source description" = "Recorded via Shortcuts";
+"Apple Watch source description" = "Recorded via Apple Watch";
+"Siri source description" = "Recorded via Siri";
+"Added manually on map" = "Added manually on the map.";
+"Unknown source description" = "The source of this incident is unknown.";
+"Incident source" = "Incident source";
+"Automatically detected" = "Automatically detected";
+"Dooring" = "Dooring";
+"Turning Accident" = "Turning Accident";
+"Sidestep" = "Sidestep";
+
+/* Scary or dangerous */
+"Scary or dangerous" = "Scary or dangerous";
+
+/* Van / delivery vehicle */
+"Van / delivery vehicle" = "Van / delivery vehicle";
+
+/* E-scooter */
+"E-scooter" = "E-scooter";
+
+/* Involved road users */
+"Involved road users" = "Involved road users";
+
+/* Destination */
+"Destination" = "Destination";
+
+/* Completed localized UI strings */
+"Attention! Only tap the Continue button if you were asked to do so by the SimRa team. By pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides." = "Attention! Only tap Continue if the SimRa team asked you to. Tapping Upload on the next step sends your SimRa configuration to the team. You can also choose to upload your last 10 rides or all rides.";
+"Aufnahme starten" = "Start recording";
+"Automatische Erkennung" = "Automatic detection";
+"Continue" = "Continue";
+"Die Aufzeichnung beginnt erst, wenn die gewählte Zeit oder Strecke erreicht wurde." = "Recording starts once the selected time or distance is reached.";
+"Discards any changes and closes the view." = "Discards all changes and closes the view.";
+"Kurzbefehle" = "Shortcuts";
+"Loading trip" = "Loading trip";
+"Report a dangerous situation during the ride" = "Report a dangerous situation during the ride";
+"Report danger" = "Report danger";
+"Reported danger" = "Reported danger";
+"Saves the changed trip details." = "Saves the updated trip details.";
+"Schneiden" = "Trim";
+"Siri" = "Siri";
+"Startet eine neue SimRa-Aufnahme." = "Starts a new SimRa recording.";
+"Stop the current ride" = "Stop the current ride";
+"Tap the checkmark to save or X to discard the changes." = "Tap the checkmark to save, or X to discard the changes.";
+"Trip" = "Trip";
+"Trip unavailable" = "Trip unavailable";
+"Trips by year" = "Trips by year";
+"Uploaded" = "Uploaded";
+"Vorfall-Art nicht verfügbar" = "Incident type unavailable";
+"Widget" = "Widget";
+"Sensitivity" = "Sensitivity";
+
+/* Additional localized app messages */
+"Incident type unavailable" = "Incident type unavailable";
+"No data" = "No data";
+"No values are available for this statistic yet." = "No values are available for this statistic yet.";

@@ -74,6 +74,7 @@ struct SettingsView: View {
     private var appAppearance = "system"
 
     @State private var reminderRules: [RideReminderRule] = []
+    @AppStorage("serverNewsNotificationsEnabled") private var serverNewsNotificationsEnabled = false
     @State private var reminderWeekday = 2
     @State private var reminderHour = 8
     @State private var reminderMinute = 0
@@ -109,6 +110,16 @@ struct SettingsView: View {
             }
 
             Section {
+                Toggle(
+                    NSLocalizedString("Mitteilungen zu Server-News", comment: "Optional notifications for new server news"),
+                    isOn: $serverNewsNotificationsEnabled
+                )
+                .onChange(of: serverNewsNotificationsEnabled) { _, enabled in
+                    if enabled {
+                        News.requestNotificationAuthorization()
+                    }
+                }
+
                 Toggle(
                     NSLocalizedString("Ride reminder", comment: "Weekly ride reminder"),
                     isOn: Binding(
@@ -173,6 +184,8 @@ struct SettingsView: View {
                 }
             } header: {
                 Text(NSLocalizedString("Notifications", comment: "Notification settings"))
+            } footer: {
+                Text(NSLocalizedString("Neue Servermeldungen erscheinen einmal in der App. Mitteilungen kannst du hier zusätzlich einschalten.", comment: "Server news notification explanation"))
             }
 
             Section {
@@ -1031,6 +1044,9 @@ private struct StatisticsDashboardView: View {
         let date: Date
         let distance: Int
         let incidents: Int
+        let duration: Int
+        let idle: Int
+        let scaryIncidents: Int
         let uploaded: Bool
     }
 
@@ -1050,32 +1066,15 @@ private struct StatisticsDashboardView: View {
     }
 
     private var timeOfDay: [Int] {
-        let suffix = AppDelegate.shared().regions.regionId == 0
-            ? ""
-            : "-\(AppDelegate.shared().regions.regionId)"
-        let stored =
-            UserDefaults.standard.array(
-                forKey:
-                    "totalSlots\(suffix)"
-            ) as? [Int] ?? []
-
-        if stored.count >= 24 {
-            return stride(from: 0, to: 24, by: 6).map { start in
-                stored[start..<start + 6].reduce(0, +)
-            }
-        }
-
-        return summaries.reduce(into: Array(repeating: 0, count: 4)) { result, summary in
+        summaries.reduce(into: Array(repeating: 0, count: 4)) { result, summary in
             let hour = Calendar.current.component(.hour, from: summary.date)
             result[min(hour / 6, 3)] += 1
         }
     }
 
-    private func persistedStatistic(_ key: String) -> Int {
-        let regionID = AppDelegate.shared().regions.regionId
-        let suffix = regionID == 0 ? "" : "-\(regionID)"
-        return UserDefaults.standard.integer(forKey: "\(key)\(suffix)")
-    }
+    private var totalDuration: Int { summaries.reduce(0) { $0 + $1.duration } }
+    private var totalIdle: Int { summaries.reduce(0) { $0 + $1.idle } }
+    private var totalScaryIncidents: Int { summaries.reduce(0) { $0 + $1.scaryIncidents } }
 
     private func formatDuration(_ seconds: Int) -> String {
         let hours = seconds / 3_600
@@ -1099,9 +1098,9 @@ private struct StatisticsDashboardView: View {
                 metric("Trips", value: "\(summaries.count)", symbol: "bicycle")
                 metric("Total distance", value: formatDistance(totalDistance), symbol: "point.topleft.down.curvedto.point.bottomright.up")
                 metric("Incidents", value: "\(totalIncidents)", symbol: "exclamationmark.triangle")
-                metric("Total duration", value: formatDuration(persistedStatistic("totalDuration")), symbol: "clock")
-                metric("Idle time", value: formatDuration(persistedStatistic("totalIdle")), symbol: "pause.circle")
-                metric("Scary incidents", value: "\(persistedStatistic("numberOfScary"))", symbol: "exclamationmark.octagon")
+                metric("Total duration", value: formatDuration(totalDuration), symbol: "clock")
+                metric("Idle time", value: formatDuration(totalIdle), symbol: "pause.circle")
+                metric("Scary incidents", value: "\(totalScaryIncidents)", symbol: "exclamationmark.octagon")
                 metric("Uploaded", value: "\(Int(uploadedShare * 100))%", symbol: "arrow.up.circle")
             } header: {
                 Text(NSLocalizedString("Overview", comment: "Statistics overview"))
@@ -1156,11 +1155,22 @@ private struct StatisticsDashboardView: View {
     private func loadSummaries() {
         summaries = TripInfo.allStoredIdentifiers().compactMap { number in
             guard let info = TripInfo(fromStorage: number.intValue) else { return nil }
+            let trip = Trip(fromStorage: info.identifier)
+            let timestamps = (trip?.tripLocations as? [TripLocation] ?? [])
+                .map { $0.location.timestamp }
+            let startDate = timestamps.min()
+                ?? (info.duration.startDate.timeIntervalSince1970 > 0 ? info.duration.startDate : nil)
+            guard let startDate else { return nil }
+            let endDate = timestamps.max() ?? info.duration.endDate
+            let duration = max(Int(endDate.timeIntervalSince(startDate)), 0)
             return Summary(
                 id: info.identifier,
-                date: info.duration.startDate,
-                distance: info.length,
-                incidents: info.validAnnotationsCount,
+                date: startDate,
+                distance: max(info.length, 0),
+                incidents: max(info.validAnnotationsCount, 0),
+                duration: duration,
+                idle: max(trip?.idle() ?? 0, 0),
+                scaryIncidents: max(trip?.numberOfScary() ?? 0, 0),
                 uploaded: info.uploaded
             )
         }

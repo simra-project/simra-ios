@@ -77,6 +77,14 @@ private struct RecordingMetrics: Sendable {
     }
 }
 
+// MARK: - Speed Colored Route Segment
+
+struct SpeedRouteSegment: Identifiable {
+    let id: Int
+    let polyline: MKPolyline
+    let color: Color
+}
+
 // MARK: - Main View Model
 
 @MainActor
@@ -134,7 +142,7 @@ final class MainViewModel: ObservableObject {
     var recordingStatusText: String?
 
     @Published
-    var recordingRouteOverlay: MKPolyline?
+    private(set) var recordingRouteSegments: [SpeedRouteSegment] = []
 
     @Published
     private(set) var recordingRouteCoordinates:
@@ -254,7 +262,6 @@ final class MainViewModel: ObservableObject {
 
     init() {
 
-        checkInitialMessages()
         setupBluetooth()
         setupObservers()
 
@@ -516,7 +523,7 @@ final class MainViewModel: ObservableObject {
 
             recordingStatusText = nil
             recordingStartedAt = nil
-            recordingRouteOverlay = nil
+            recordingRouteSegments = []
             recordingRouteCoordinates = []
             recordingIncidents = []
             currentSpeedKmh = 0
@@ -805,7 +812,7 @@ final class MainViewModel: ObservableObject {
         guard isRecording,
               let trip = appDelegate.activeTrip
         else {
-            recordingRouteOverlay = nil
+            recordingRouteSegments = []
             recordingRouteCoordinates = []
             recordingIncidents = []
 
@@ -830,35 +837,40 @@ final class MainViewModel: ObservableObject {
             return
         }
 
-        let allCoordinates: [CLLocationCoordinate2D] =
-            locations.compactMap { location in
-                let coordinate =
-                    location.location.coordinate
-
-                guard CLLocationCoordinate2DIsValid(coordinate) else {
-                    return nil
-                }
-
-                return coordinate
-            }
-
-        let coordinates =
-            downsampleRouteCoordinates(
-                allCoordinates,
-                maximumCount: 600
-            )
-
-        recordingRouteCoordinates = coordinates
-
-        if coordinates.count >= 2 {
-            recordingRouteOverlay =
-                MKPolyline(
-                    coordinates: coordinates,
-                    count: coordinates.count
-                )
-        } else {
-            recordingRouteOverlay = nil
+        let validLocations = locations.filter {
+            CLLocationCoordinate2DIsValid($0.location.coordinate)
         }
+        let sampledLocations: [TripLocation]
+        if validLocations.count > 600 {
+            let step = Double(validLocations.count - 1) / 599
+            sampledLocations = (0..<600).map { index in
+                validLocations[min(validLocations.count - 1, Int((Double(index) * step).rounded()))]
+            }
+        } else {
+            sampledLocations = validLocations
+        }
+
+        let coordinates = sampledLocations.map { $0.location.coordinate }
+        recordingRouteCoordinates = coordinates
+        recordingRouteSegments = zip(sampledLocations, sampledLocations.dropFirst())
+            .enumerated()
+            .map { index, pair in
+                let points = [pair.0.location.coordinate, pair.1.location.coordinate]
+                let polyline = MKPolyline(coordinates: points, count: points.count)
+                let speedKmh = max(pair.1.location.speed, 0) * 3.6
+                let color: Color
+                switch speedKmh {
+                case ..<10:
+                    color = .blue
+                case ..<20:
+                    color = .green
+                case ..<30:
+                    color = .orange
+                default:
+                    color = .red
+                }
+                return SpeedRouteSegment(id: index, polyline: polyline, color: color)
+            }
 
         // MARK: Incidents
 
@@ -1257,14 +1269,13 @@ final class MainViewModel: ObservableObject {
 
     // MARK: - Initial Messages
 
-    private func checkInitialMessages() {
+    func presentInitialGuideIfNeeded() {
+        guard !UserDefaults.standard.bool(forKey: "initialMessage") else {
+            return
+        }
 
-        if !UserDefaults.standard.bool(
-            forKey:
-                "initialMessage"
-        ) {
-
-            showHowToAlert = true
+        DispatchQueue.main.async { [weak self] in
+            self?.showHowToAlert = true
         }
     }
 
@@ -1275,6 +1286,7 @@ final class MainViewModel: ObservableObject {
             forKey:
                 "initialMessage"
         )
+        appDelegate.showHowTo()
     }
 
     func skipHowTo() {

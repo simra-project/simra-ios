@@ -72,7 +72,7 @@ struct AnnotationView: View {
         switch normalizedSource {
         case .automatic:
             return NSLocalizedString(
-                "Automatische Erkennung",
+                "Automatically detected",
                 comment: "Automatic detection"
             )
         case .widget:
@@ -82,7 +82,7 @@ struct AnnotationView: View {
             )
         case .shortcut:
             return NSLocalizedString(
-                "Kurzbefehle",
+                "Shortcut source",
                 comment: "Shortcut source"
             )
         case .watch:
@@ -97,12 +97,12 @@ struct AnnotationView: View {
             )
         case .manual:
             return NSLocalizedString(
-                "Manuell eingetragen",
+                "Manually added",
                 comment: "Manually added"
             )
         case .unknown:
             return NSLocalizedString(
-                "Quelle nicht bekannt",
+                "Unknown source",
                 comment: "Unknown source"
             )
         }
@@ -112,37 +112,37 @@ struct AnnotationView: View {
         switch normalizedSource {
         case .automatic:
             return NSLocalizedString(
-                "Automatisch erkannt",
+                "Automatic detection",
                 comment: "Automatic detection"
             )
         case .widget:
             return NSLocalizedString(
-                "Über Widget oder Live Activity erfasst",
+                "Widget or Live Activity",
                 comment: "Widget or Live Activity"
             )
         case .shortcut:
             return NSLocalizedString(
-                "Über Kurzbefehle erfasst",
+                "Shortcut source description",
                 comment: "Shortcut source"
             )
         case .watch:
             return NSLocalizedString(
-                "Über die Apple Watch erfasst",
+                "Apple Watch source description",
                 comment: "Apple Watch source"
             )
         case .siri:
             return NSLocalizedString(
-                "Über Siri erfasst",
+                "Siri source description",
                 comment: "Siri"
             )
         case .manual:
             return NSLocalizedString(
-                "Manuell auf der Karte eingetragen.",
+                "Added manually on map",
                 comment: "Added manually on map"
             )
         case .unknown:
             return NSLocalizedString(
-                "Die Quelle dieses Ereignisses ist nicht bekannt.",
+                "Unknown source description",
                 comment: "Unknown source"
             )
         }
@@ -208,7 +208,7 @@ struct AnnotationView: View {
         }
         .navigationTitle(
             NSLocalizedString(
-                "Vorfall bearbeiten",
+                "Edit incident",
                 comment: "Edit incident"
             )
         )
@@ -234,11 +234,11 @@ struct AnnotationView: View {
                 .accessibilityLabel(
                     hasChanges
                     ? NSLocalizedString(
-                        "Speichern",
+                        "Save changes",
                         comment: "Save"
                     )
                     : NSLocalizedString(
-                        "Schließen",
+                        "Cancel",
                         comment: "Close"
                     )
                 )
@@ -322,7 +322,7 @@ struct AnnotationView: View {
         } header: {
             Text(
                 NSLocalizedString(
-                    "Quelle",
+                    "Incident source",
                     comment: "Incident source"
                 )
             )
@@ -336,7 +336,7 @@ struct AnnotationView: View {
             if incidentTypes.isEmpty {
                 Text(
                     NSLocalizedString(
-                        "Vorfall-Art nicht verfügbar",
+                        "Incident type unavailable",
                         comment: "Missing incident types"
                     )
                 )
@@ -346,7 +346,7 @@ struct AnnotationView: View {
             } else {
                 Picker(
                     NSLocalizedString(
-                        "Vorfall",
+                        "Incident",
                         comment: "Incident type"
                     ),
                     selection: $incidentId
@@ -369,7 +369,7 @@ struct AnnotationView: View {
 
             Toggle(
                 NSLocalizedString(
-                    "Erschrecken / Gefährdung",
+                    "Scary or dangerous",
                     comment: "Scary or dangerous"
                 ),
                 isOn: $frightening
@@ -378,7 +378,7 @@ struct AnnotationView: View {
         } header: {
             Text(
                 NSLocalizedString(
-                    "Vorfall-Art",
+                    "Incident type",
                     comment: "Incident type"
                 )
             )
@@ -390,7 +390,7 @@ struct AnnotationView: View {
     private var participantsSection: some View {
         Section {
             vehicleToggle(
-                "Auto",
+                "Car",
                 "car.fill",
                 $car
             )
@@ -402,7 +402,7 @@ struct AnnotationView: View {
             )
 
             vehicleToggle(
-                "Lieferwagen / Transporter",
+                "Van / delivery vehicle",
                 "truck.box.fill",
                 $delivery
             )
@@ -414,37 +414,37 @@ struct AnnotationView: View {
             )
 
             vehicleToggle(
-                "LKW",
+                "Truck",
                 "truck.box.fill",
                 $commercial
             )
 
             vehicleToggle(
-                "Fußgänger",
+                "Pedestrian",
                 "figure.walk",
                 $pedestrian
             )
 
             vehicleToggle(
-                "Fahrrad",
+                "Bicycle",
                 "bicycle",
                 $bicycle
             )
 
             vehicleToggle(
-                "Motorrad",
+                "Motorcycle",
                 "motorcycle.fill",
                 $motorcycle
             )
 
             vehicleToggle(
-                "E-Scooter",
+                "E-scooter",
                 "scooter",
                 $escooter
             )
 
             vehicleToggle(
-                "Andere",
+                "Other",
                 "ellipsis.circle",
                 $other
             )
@@ -452,7 +452,7 @@ struct AnnotationView: View {
         } header: {
             Text(
                 NSLocalizedString(
-                    "Beteiligte Verkehrsteilnehmer",
+                    "Involved road users",
                     comment: "Involved road users"
                 )
             )
@@ -473,7 +473,7 @@ struct AnnotationView: View {
         } header: {
             Text(
                 NSLocalizedString(
-                    "Kommentar",
+                    "Comment",
                     comment: "Comment"
                 )
             )

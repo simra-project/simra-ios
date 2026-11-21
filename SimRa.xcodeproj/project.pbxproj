@@ -31,6 +31,7 @@
 		9F39596930488C760034C61D /* SimRa.icon in Resources */ = {isa = PBXBuildFile; fileRef = 9F39596830488C760034C61D /* SimRa.icon */; };
 		9F67C8D83045FA510080CDED /* SimRaRecordingActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67C8D73045FA510080CDED /* SimRaRecordingActivityManager.swift */; };
 		9F67C8DA304642E60080CDED /* SimpleZipArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67C8D9304642E60080CDED /* SimpleZipArchiver.swift */; };
+		9F7AB96630AF83B20064E99C /* LanguageLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7AB96530AF83B20064E99C /* LanguageLocalization.swift */; };
 		9FA202D3304B08A7003D5164 /* RecordingAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A100040000000000000004 /* RecordingAppIntents.swift */; };
 		9FA202D9304B1F6D003D5164 /* Regions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFEC30407F4A00C11560 /* Regions.swift */; };
 		9FA202DA304B1F7E003D5164 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFEA30407F4200C11560 /* Region.swift */; };
@@ -170,6 +171,7 @@
 		9F39596830488C760034C61D /* SimRa.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = SimRa.icon; sourceTree = "<group>"; };
 		9F67C8D73045FA510080CDED /* SimRaRecordingActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimRaRecordingActivityManager.swift; sourceTree = "<group>"; };
 		9F67C8D9304642E60080CDED /* SimpleZipArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleZipArchiver.swift; sourceTree = "<group>"; };
+		9F7AB96530AF83B20064E99C /* LanguageLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageLocalization.swift; sourceTree = "<group>"; };
 		9F91F0D030AC6FCC00903383 /* SimRa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SimRa.entitlements; sourceTree = "<group>"; };
 		9FA202D1304AFA94003D5164 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FC315E4304219CB00EFB67D /* TripModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModels.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		A0C9087B2ECD0B43009FD4E8 /* Hash-Suffix.h */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Hash-Suffix.h"; sourceTree = "<group>"; };
 		A4FAE8442E5E1EC1009B1FA9 /* ModernRecordActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernRecordActionButton.swift; sourceTree = "<group>"; };
 		B7A100040000000000000004 /* RecordingAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingAppIntents.swift; sourceTree = "<group>"; };
+		D114A1B2C3D4E5F607182930 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/constants.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -344,6 +347,7 @@
 				9FE3CF7F303FB37200C11560 /* RecordingShortcutBridge.swift */,
 				B7A100040000000000000004 /* RecordingAppIntents.swift */,
 				63143E5626665AD000997995 /* Enums.swift */,
+				9F7AB96530AF83B20064E99C /* LanguageLocalization.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -701,6 +705,8 @@
 				Base,
 				de,
 				fr,
+				"fr 2",
+				"fr 3",
 			);
 			mainGroup = 84DD1E7A224C0027004895F9;
 			productRefGroup = 84DD1E84224C0027004895F9 /* Products */;
@@ -775,6 +781,7 @@
 				9FC315EF30430A1C00EFB67D /* SimRaHazardMapView.swift in Sources */,
 				9FE3CFF13040E5D700C11560 /* SimRaView.swift in Sources */,
 				9FC315E5304219CB00EFB67D /* TripModels.swift in Sources */,
+				9F7AB96630AF83B20064E99C /* LanguageLocalization.swift in Sources */,
 				63143E5726665AD000997995 /* Enums.swift in Sources */,
 				9FE3CFC83040467900C11560 /* AppDelegate.swift in Sources */,
 				9FE3CFE730407CF400C11560 /* News.swift in Sources */,
@@ -867,6 +874,7 @@
 				8483380A2253E2AF00342285 /* en */,
 				8483380B2253E2C700342285 /* Base */,
 				8483380C2253E2CB00342285 /* de */,
+				D114A1B2C3D4E5F607182930 /* fr */,
 			);
 			name = constants.plist;
 			sourceTree = "<group>";

@@ -549,7 +549,7 @@ private struct RecordingWidgetView:
                     entry
             )
 
-        @unknown default:
+        default:
 
             MediumRecordingView(
                 entry:
@@ -2115,7 +2115,7 @@ private struct StatisticsWidgetView:
                     entry
             )
 
-        @unknown default:
+        default:
 
             MediumStatisticsView(
                 entry:
@@ -2140,6 +2140,10 @@ private struct SmallStatisticsView:
             0,
             +
         )
+    }
+
+    private var totalRides: Int {
+        entry.weeklyRideCounts.reduce(0, +)
     }
 
     var body: some View {
@@ -2191,13 +2195,14 @@ private struct SmallStatisticsView:
                     )
             }
 
-            Text("in 4 Wochen")
-                .font(
-                    .caption
-                )
-                .foregroundStyle(
-                    .secondary
-                )
+            Label(
+                String(format: NSLocalizedString("%d Fahrten · letzte 4 Wochen", comment: "Small widget four week summary"), totalRides),
+                systemImage: "bicycle"
+            )
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
+            .minimumScaleFactor(0.75)
 
             Spacer(
                 minLength: 7

@@ -10,6 +10,8 @@
 import Foundation
 import SwiftUI
 import CoreLocation
+import ActivityKit
+import UIKit
 
 // MARK: - My Trips View
 
@@ -103,8 +105,13 @@ struct MyTripsView: View {
                 $selectedTripIDs
         ) {
 
-            pendingSection
-            uploadedSection
+            if !items.filter(matchesSearch).isEmpty {
+                Section {
+                    ForEach(items.filter(matchesSearch)) { item in
+                        tripRow(item)
+                    }
+                }
+            }
 
             if hasLoaded &&
                 items.isEmpty {
@@ -552,10 +559,9 @@ struct MyTripsView: View {
         )
 
         /*
-         Load identifiers first.
-
-         The identifier is only used as a fallback for ordering.
-         The actual date always comes from the trip's own locations.
+         Load compact trip metadata and the persisted recording-date index.
+         GPS locations are decoded only for trips without a valid index entry,
+         then their earliest and latest timestamps are cached for later loads.
          */
 
         let identifiers =
@@ -567,6 +573,11 @@ struct MyTripsView: View {
             .sorted {
                 $0.intValue > $1.intValue
             }
+        let validIdentifiers = Set(identifiers.map(\.intValue))
+        var dateIndex = TripRecordingDateIndex.load()
+        dateIndex = dateIndex.filter {
+            validIdentifiers.contains($0.key) && $0.value.dates != nil
+        }
 
         var batchCount = 0
 
@@ -579,17 +590,9 @@ struct MyTripsView: View {
             let tripIdentifier =
                 identifier.intValue
 
-            /*
-             Prefer TripInfo for metadata, but independently load
-             the Trip so that the actual recording timestamps come
-             from this specific trip.
-             */
-
-            /*
-             Read only the compact TripInfo record for the first paint.
-             Loading the full location stream is deferred until the row
-             is already visible.
-             */
+            // TripInfo supplies compact display metadata. Recording dates
+            // come from the cached index, with GPS timestamps used once
+            // to populate missing or invalid entries.
 
             guard let info =
                 TripInfo(
@@ -600,15 +603,51 @@ struct MyTripsView: View {
                 continue
             }
 
-            let item =
-                TripListItem(
-                    info:
-                        info,
-                    startDate:
-                        info.duration.startDate,
-                    endDate:
-                        info.duration.endDate
-                )
+            let indexedDates: (start: Date, end: Date)?
+            if let cachedRange = dateIndex[tripIdentifier] {
+                indexedDates = cachedRange.dates
+            } else {
+                indexedDates = nil
+            }
+
+            let metadataDates = TripRecordingDateRange(
+                startDate: info.duration.startDate,
+                endDate: info.duration.endDate
+            )?.dates
+
+            let recordingDates: (start: Date, end: Date)?
+            if let indexedDates {
+                recordingDates = indexedDates
+            } else {
+                let gpsDates: (start: Date, end: Date)? = await Task.detached(priority: .utility) {
+                    guard let trip = Trip(fromStorage: tripIdentifier) else {
+                        return nil
+                    }
+                    let dates = (trip.tripLocations as NSArray)
+                        .compactMap { ($0 as? TripLocation)?.location.timestamp }
+                    guard let startDate = dates.min(), let endDate = dates.max() else {
+                        return nil
+                    }
+                    return TripRecordingDateRange(
+                        startDate: startDate,
+                        endDate: endDate
+                    )?.dates
+                }.value
+
+                recordingDates = gpsDates ?? metadataDates
+                if let recordingDates {
+                    dateIndex[tripIdentifier] = TripRecordingDateRange(
+                        startDate: recordingDates.start,
+                        endDate: recordingDates.end
+                    )
+                }
+            }
+
+            let item = TripListItem(
+                info: info,
+                startDate: recordingDates?.start,
+                endDate: recordingDates?.end
+            )
 
             items.append(
                 item
@@ -628,6 +667,8 @@ struct MyTripsView: View {
                 await Task.yield()
             }
         }
+
+        TripRecordingDateIndex.save(dateIndex)
 
         /*
          Final ordering:
@@ -679,27 +720,11 @@ struct MyTripsView: View {
             }
         }
 
-        let summaryIdentifiers =
-            items.map(\.id)
-
         isLoading = false
         hasLoaded = true
 
-        Task {
-            for identifier in summaryIdentifiers {
-                guard !Task.isCancelled else {
-                    return
-                }
-
-                await calculateSummary(
-                    forIdentifier:
-                        identifier
-                )
-
-                // Keep the first-render path responsive when many rides exist.
-                await Task.yield()
-            }
-        }
+        // Summary statistics are calculated only when a ride is opened.
+        // Avoid decoding every recorded location just to finish the list load.
     }
 
     // MARK: Summary Calculation
@@ -833,6 +858,7 @@ struct MyTripsView: View {
                 withIdentifier:
                     identifier
             )
+        TripRecordingDateIndex.remove([identifier])
 
         selectedTripIDs.remove(
             identifier
@@ -871,6 +897,7 @@ struct MyTripsView: View {
                         identifier
                 )
         }
+        TripRecordingDateIndex.remove(ids)
 
         items.removeAll {
             ids.contains(
@@ -974,16 +1001,89 @@ private struct LazyTripEditDestination:
             }
         }
         .task {
+            let loadedTrip = await Task.detached(priority: .userInitiated) {
+                Trip(fromStorage: identifier)
+            }.value
 
-            trip =
-                Trip(
-                    fromStorage:
-                        identifier
-                )
+            guard !Task.isCancelled else {
+                return
+            }
 
-            failed =
-                trip == nil
+            trip = loadedTrip
+            failed = loadedTrip == nil
         }
+    }
+}
+
+// MARK: - Stored Trip Recording Dates
+
+private struct TripRecordingDateRange: Codable, Sendable {
+    let startTimestamp: TimeInterval
+    let endTimestamp: TimeInterval
+
+    init?(startDate: Date, endDate: Date) {
+        let startTimestamp = startDate.timeIntervalSince1970
+        let endTimestamp = endDate.timeIntervalSince1970
+        guard
+            startTimestamp.isFinite,
+            endTimestamp.isFinite,
+            startTimestamp > 0,
+            endTimestamp > startTimestamp
+        else {
+            return nil
+        }
+
+        self.startTimestamp = startTimestamp
+        self.endTimestamp = endTimestamp
+    }
+
+    var dates: (start: Date, end: Date)? {
+        guard
+            startTimestamp.isFinite,
+            endTimestamp.isFinite,
+            startTimestamp > 0,
+            endTimestamp > startTimestamp
+        else {
+            return nil
+        }
+
+        return (
+            Date(timeIntervalSince1970: startTimestamp),
+            Date(timeIntervalSince1970: endTimestamp)
+        )
+    }
+}
+
+private enum TripRecordingDateIndex {
+    private static let storageKey = "tripRecordingDateIndex"
+
+    static func load() -> [Int: TripRecordingDateRange] {
+        guard
+            let data = UserDefaults.standard.data(forKey: storageKey),
+            let stored = try? JSONDecoder().decode([String: TripRecordingDateRange].self, from: data)
+        else {
+            return [:]
+        }
+
+        return stored.reduce(into: [:]) { result, entry in
+            guard let identifier = Int(entry.key), identifier > 0 else { return }
+            result[identifier] = entry.value
+        }
+    }
+
+    static func save(_ index: [Int: TripRecordingDateRange]) {
+        let stored = Dictionary(
+            uniqueKeysWithValues: index.map { (String($0.key), $0.value) }
+        )
+        guard let data = try? JSONEncoder().encode(stored) else { return }
+        UserDefaults.standard.set(data, forKey: storageKey)
+    }
+
+    static func remove(_ identifiers: [Int]) {
+        guard !identifiers.isEmpty else { return }
+        var index = load()
+        identifiers.forEach { index.removeValue(forKey: $0) }
+        save(index)
     }
 }
 
@@ -1853,6 +1953,11 @@ final class TripBatchUploadCoordinator:
     private var didFinish =
         false
 
+    @available(iOS 16.2, *)
+    private var uploadActivity: Activity<SimRaUploadAttributes>?
+
+    private var backgroundTaskIdentifier: UIBackgroundTaskIdentifier = .invalid
+
     // MARK: Upload
 
     func upload(
@@ -1915,6 +2020,11 @@ final class TripBatchUploadCoordinator:
 
         isUploading =
             true
+
+        beginBackgroundUploadWindow()
+        if #available(iOS 16.2, *) {
+            startUploadActivity()
+        }
 
         uploadNext()
     }
@@ -1998,6 +2108,103 @@ final class TripBatchUploadCoordinator:
                 totalCount
             )
             : 0
+
+        if #available(iOS 16.2, *) {
+            updateUploadActivity()
+        }
+    }
+
+    @available(iOS 16.2, *)
+    private func startUploadActivity() {
+        guard ActivityAuthorizationInfo().areActivitiesEnabled else {
+            return
+        }
+
+        let attributes = SimRaUploadAttributes(totalCount: totalCount)
+        let state = SimRaUploadAttributes.ContentState()
+        let content = ActivityContent(
+            state: state,
+            staleDate: .now.addingTimeInterval(60)
+        )
+
+        do {
+            uploadActivity = try Activity.request(
+                attributes: attributes,
+                content: content,
+                pushType: nil
+            )
+        } catch {
+            uploadActivity = nil
+        }
+    }
+
+    @available(iOS 16.2, *)
+    private func updateUploadActivity() {
+        guard let uploadActivity else {
+            return
+        }
+
+        let state = SimRaUploadAttributes.ContentState(
+            completedCount: completedCount,
+            succeededCount: successCount,
+            failedCount: failureCount
+        )
+        let content = ActivityContent(
+            state: state,
+            staleDate: .now.addingTimeInterval(60)
+        )
+
+        Task {
+            await uploadActivity.update(content)
+        }
+    }
+
+    @available(iOS 16.2, *)
+    private func finishUploadActivity() {
+        guard let uploadActivity else {
+            return
+        }
+
+        let state = SimRaUploadAttributes.ContentState(
+            completedCount: totalCount,
+            succeededCount: successCount,
+            failedCount: failureCount
+        )
+        let content = ActivityContent(
+            state: state,
+            staleDate: .now
+        )
+
+        Task {
+            await uploadActivity.end(
+                content,
+                dismissalPolicy: .after(.now.addingTimeInterval(5))
+            )
+        }
+        self.uploadActivity = nil
+    }
+
+    private func beginBackgroundUploadWindow() {
+        guard backgroundTaskIdentifier == .invalid else {
+            return
+        }
+
+        backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(
+            withName: "SimRaTripUpload"
+        ) { [weak self] in
+            Task { @MainActor in
+                self?.endBackgroundUploadWindow()
+            }
+        }
+    }
+
+    private func endBackgroundUploadWindow() {
+        guard backgroundTaskIdentifier != .invalid else {
+            return
+        }
+
+        UIApplication.shared.endBackgroundTask(backgroundTaskIdentifier)
+        backgroundTaskIdentifier = .invalid
     }
 
     // MARK: Next
@@ -2053,6 +2260,11 @@ final class TripBatchUploadCoordinator:
 
         didFinish =
             true
+
+        if #available(iOS 16.2, *) {
+            finishUploadActivity()
+        }
+        endBackgroundUploadWindow()
 
         isProcessing =
             false

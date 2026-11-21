@@ -157,6 +157,71 @@ struct SimRaLiveActivity: Widget {
     }
 }
 
+@available(iOS 16.2, *)
+struct SimRaUploadLiveActivity: Widget {
+
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: SimRaUploadAttributes.self) { context in
+            HStack(spacing: 14) {
+                Image(systemName: "icloud.and.arrow.up")
+                    .font(.title2)
+                    .foregroundStyle(.blue)
+
+                VStack(alignment: .leading, spacing: 7) {
+                    HStack {
+                        Text("SimRa")
+                            .font(.headline)
+                        Spacer()
+                        Text("\(context.state.completedCount)/\(context.attributes.totalCount)")
+                            .font(.subheadline.monospacedDigit())
+                            .foregroundStyle(.secondary)
+                    }
+
+                    ProgressView(
+                        value: Double(context.state.completedCount),
+                        total: Double(max(context.attributes.totalCount, 1))
+                    )
+                }
+            }
+            .padding(.horizontal, 18)
+            .padding(.vertical, 14)
+            .activityBackgroundTint(.clear)
+            .activitySystemActionForegroundColor(.primary)
+        } dynamicIsland: { context in
+            DynamicIsland(
+                expanded: {
+                    DynamicIslandExpandedRegion(.leading) {
+                        Image(systemName: "icloud.and.arrow.up")
+                            .foregroundStyle(.blue)
+                    }
+                    DynamicIslandExpandedRegion(.trailing) {
+                        Text("\(context.state.completedCount)/\(context.attributes.totalCount)")
+                            .font(.subheadline.monospacedDigit())
+                    }
+                    DynamicIslandExpandedRegion(.bottom) {
+                        ProgressView(
+                            value: Double(context.state.completedCount),
+                            total: Double(max(context.attributes.totalCount, 1))
+                        )
+                    }
+                },
+                compactLeading: {
+                    Image(systemName: "icloud.and.arrow.up")
+                        .foregroundStyle(.blue)
+                },
+                compactTrailing: {
+                    Text("\(context.state.completedCount)/\(context.attributes.totalCount)")
+                        .font(.caption2.monospacedDigit())
+                },
+                minimal: {
+                    Image(systemName: "icloud.and.arrow.up")
+                        .foregroundStyle(.blue)
+                }
+            )
+        }
+    }
+}
+
 // MARK: - Lock Screen
 
 private struct SimRaLiveActivityLockScreenView: View {
@@ -389,26 +454,36 @@ private struct ActivityRouteBackground: View {
                         )
                 )
 
-                // MARK: Main route
+                // MARK: Speed-colored route
 
-                context.stroke(
-                    path,
-                    with:
-                        .color(
-                            Color.blue.opacity(
-                                0.72
-                            )
-                        ),
-                    style:
-                        StrokeStyle(
-                            lineWidth:
-                                layout.lineWidth,
-                            lineCap:
-                                .round,
-                            lineJoin:
-                                .round
+                for index in 1..<layout.points.count {
+                    var segment = Path()
+                    segment.move(to: layout.points[index - 1])
+                    segment.addLine(to: layout.points[index])
+
+                    let speedKmh = points[index].speedKmh ?? 0
+                    let color: Color
+                    switch speedKmh {
+                    case ..<10:
+                        color = .blue
+                    case ..<20:
+                        color = .green
+                    case ..<30:
+                        color = .orange
+                    default:
+                        color = .red
+                    }
+
+                    context.stroke(
+                        segment,
+                        with: .color(color.opacity(0.9)),
+                        style: StrokeStyle(
+                            lineWidth: layout.lineWidth,
+                            lineCap: .round,
+                            lineJoin: .round
                         )
-                )
+                    )
+                }
 
                 // MARK: Start point
 
@@ -844,7 +919,7 @@ private struct SimRaHazardButton: View {
             )
             .font(
                 .system(
-                    size: 14,
+                    size: 18,
                     weight: .bold
                 )
             )
@@ -852,8 +927,8 @@ private struct SimRaHazardButton: View {
                 .white
             )
             .frame(
-                width: 40,
-                height: 40
+                width: 52,
+                height: 52
             )
             .background {
 
@@ -889,7 +964,7 @@ private struct SimRaStopButton: View {
             )
             .font(
                 .system(
-                    size: 14,
+                    size: 18,
                     weight: .bold
                 )
             )
@@ -897,8 +972,8 @@ private struct SimRaStopButton: View {
                 .white
             )
             .frame(
-                width: 40,
-                height: 40
+                width: 52,
+                height: 52
             )
             .background {
 

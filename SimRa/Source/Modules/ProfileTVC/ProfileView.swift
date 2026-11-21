@@ -44,87 +44,85 @@ struct ProfileView: View {
     @AppStorage("behaviourValue")
     private var behaviourValue: Double = 0.5
 
-    // MARK: - Statistics
+    // MARK: - Localization Keys
 
-    @State private var totalRides: Int = 0
-    @State private var totalLength: Double = 0
-    @State private var totalDuration: Int = 0
-    @State private var totalIncidents: Int = 0
-
-    // MARK: - Constants
-
-    private var constants: [String: Any] {
-        AppDelegate.shared().constants
-    }
-
+    // Keep picker values in a stable order so changing the app language
+    // re-localizes the labels without changing the stored selection IDs.
     private var ages: [String] {
-        if let arr = constants["ages"] as? [String], !arr.isEmpty { return arr }
-        return [
-            NSLocalizedString("Please select", comment: "Age fallback"),
-            "<18",
-            "18-25",
-            "26-35",
-            "36-45",
-            "46-55",
-            "56-65",
-            ">65"
+        [
+            "Please select",
+            "after 2004",
+            "2000-2004",
+            "1995-1999",
+            "1990-1994",
+            "1985-1989",
+            "1980-1984",
+            "1975-1979",
+            "1970-1974",
+            "1965-1969",
+            "1960-1964",
+            "1955-1959",
+            "1950-1954",
+            "before 1950"
         ]
     }
 
     private var sexes: [String] {
-        if let arr = constants["sexes"] as? [String], !arr.isEmpty { return arr }
-        return [
-            NSLocalizedString("Please select", comment: "Gender fallback"),
-            NSLocalizedString("male", comment: "Gender"),
-            NSLocalizedString("female", comment: "Gender"),
-            NSLocalizedString("diverse", comment: "Gender")
-        ]
+        ["Please select", "male", "female", "diverse"]
     }
 
     private var experiences: [String] {
-        if let arr = constants["experiences"] as? [String], !arr.isEmpty { return arr }
-        return [
-            NSLocalizedString("Please select", comment: "Experience fallback"),
-            NSLocalizedString("more than 10 years", comment: "Experience"),
-            NSLocalizedString("5 to 10 years", comment: "Experience"),
-            NSLocalizedString("2 to 4 years", comment: "Experience"),
-            NSLocalizedString("less than 2 years", comment: "Experience")
+        [
+            "Please select",
+            "more than 10 years",
+            "5 to 10 years",
+            "2 to 4 years",
+            "less than 2 years"
         ]
     }
 
     private var bikeTypes: [String] {
-        if let arr = constants["bikeTypes"] as? [String], !arr.isEmpty { return arr }
-        return [
-            NSLocalizedString("(not selected)", comment: "Bike type fallback"),
-            NSLocalizedString("City or Trecking Bike", comment: "Bike type"),
-            NSLocalizedString("Racing Bike", comment: "Bike type"),
-            NSLocalizedString("E-Bike", comment: "Bike type"),
-            NSLocalizedString("Recumbent Bike", comment: "Bike type"),
-            NSLocalizedString("Cargo Bike", comment: "Bike type"),
-            NSLocalizedString("Tandem", comment: "Bike type"),
-            NSLocalizedString("Mountain Bike", comment: "Bike type"),
-            NSLocalizedString("Other", comment: "Bike type")
+        [
+            "(not selected)",
+            "City or Trecking Bike",
+            "Racing Bike",
+            "E-Bike",
+            "Recumbent Bike",
+            "Cargo Bike",
+            "Tandem",
+            "Mountain Bike",
+            "Other"
         ]
     }
 
     private var positions: [String] {
-        if let arr = constants["positions"] as? [String], !arr.isEmpty { return arr }
-        return [
-            NSLocalizedString("Trouser Pocket", comment: "Position"),
-            NSLocalizedString("Handlebar", comment: "Position"),
-            NSLocalizedString("Jacket Pocket", comment: "Position"),
-            NSLocalizedString("Handheld", comment: "Position"),
-            NSLocalizedString("Bike Basket / Pannier", comment: "Position"),
-            NSLocalizedString("Backpack etc.", comment: "Position"),
-            NSLocalizedString("Other (please comment)", comment: "Position")
+        [
+            "Trouser Pocket",
+            "Handlebar",
+            "Jacket Pocket",
+            "Handheld",
+            "Bike Basket / Pannier",
+            "Backpack etc.",
+            "Other (please comment)"
         ]
     }
 
     private var regionNames: [String] {
-        if let regionsArray = constants["regions"] as? [String], !regionsArray.isEmpty {
-            return regionsArray
-        }
-        return AppDelegate.shared().regions.regionTextsSorted()
+        [
+            "Please select",
+            "Berlin/Potsdam",
+            "London (inactive)",
+            "Other",
+            "Bern",
+            "Pforzheim/Enzkreis",
+            "Augsburg",
+            "Bochum",
+            "Stuttgart"
+        ]
+    }
+
+    private func localizedProfileValue(_ value: String) -> String {
+        NSLocalizedString(value, comment: "Profile picker value")
     }
 
     private var languages: [(code: String, name: String)] {
@@ -151,7 +149,7 @@ struct ProfileView: View {
                             .tag(0)
                     } else {
                         ForEach(ages.indices, id: \.self) { index in
-                            Text(ages[index])
+                            Text(localizedProfileValue(ages[index]))
                                 .tag(index)
                         }
                     }
@@ -163,7 +161,7 @@ struct ProfileView: View {
                             .tag(0)
                     } else {
                         ForEach(sexes.indices, id: \.self) { index in
-                            Text(sexes[index])
+                            Text(localizedProfileValue(sexes[index]))
                                 .tag(index)
                         }
                     }
@@ -175,7 +173,7 @@ struct ProfileView: View {
                             .tag(0)
                     } else {
                         ForEach(experiences.indices, id: \.self) { index in
-                            Text(experiences[index])
+                            Text(localizedProfileValue(experiences[index]))
                                 .tag(index)
                         }
                     }
@@ -187,7 +185,7 @@ struct ProfileView: View {
                             .tag(0)
                     } else {
                         ForEach(bikeTypes.indices, id: \.self) { index in
-                            Text(bikeTypes[index])
+                            Text(localizedProfileValue(bikeTypes[index]))
                                 .tag(index)
                         }
                     }
@@ -199,7 +197,7 @@ struct ProfileView: View {
                             .tag(0)
                     } else {
                         ForEach(positions.indices, id: \.self) { index in
-                            Text(positions[index])
+                            Text(localizedProfileValue(positions[index]))
                                 .tag(index)
                         }
                     }
@@ -210,7 +208,7 @@ struct ProfileView: View {
                         Text(NSLocalizedString("Not selected", comment: "Not selected")).tag(0)
                     } else {
                         ForEach(regionNames.indices, id: \.self) { index in
-                            Text(regionNames[index]).tag(index)
+                            Text(localizedProfileValue(regionNames[index])).tag(index)
                         }
                     }
                 }
@@ -278,135 +276,7 @@ struct ProfileView: View {
                 Text(NSLocalizedString("SimRa can record and evaluate your riding behavior during a ride.", comment: "SimRa can record and evaluate your riding behavior during a ride."))
             }
 
-            // MARK: Statistics
 
-            Section {
-
-                HStack {
-
-                    Label(
-                        NSLocalizedString("Trips", comment: "Trips"),
-                        systemImage: "bicycle"
-                    )
-
-                    Spacer()
-
-                    Text(
-                        "\(totalRides)"
-                    )
-                    .fontWeight(.semibold)
-                    .monospacedDigit()
-                }
-
-                HStack {
-
-                    Label(
-                        NSLocalizedString("Total distance", comment: "Total distance"),
-                        systemImage: "point.topleft.down.curvedto.point.bottomright.up"
-                    )
-
-                    Spacer()
-
-                    Text(
-                        formattedDistance
-                    )
-                    .fontWeight(.semibold)
-                    .monospacedDigit()
-                }
-
-                HStack {
-
-                    Label(
-                        NSLocalizedString("Total duration", comment: "Total duration"),
-                        systemImage: "clock"
-                    )
-
-                    Spacer()
-
-                    Text(
-                        formattedDuration
-                    )
-                    .fontWeight(.semibold)
-                    .monospacedDigit()
-                }
-
-                HStack {
-
-                    Label(
-                        NSLocalizedString("Total incidents", comment: "Total incidents"),
-                        systemImage: "exclamationmark.triangle"
-                    )
-
-                    Spacer()
-
-                    Text(
-                        "\(totalIncidents)"
-                    )
-                    .fontWeight(.semibold)
-                    .monospacedDigit()
-                }
-
-                if totalRides > 0 {
-                    HStack {
-                        Label(
-                            NSLocalizedString("Average distance", comment: "Average distance"),
-                            systemImage: "arrow.triangle.swap"
-                        )
-
-                        Spacer()
-
-                        Text(
-                            formattedAverageDistance
-                        )
-                        .fontWeight(.semibold)
-                        .monospacedDigit()
-                    }
-
-                    HStack {
-                        Label(
-                            NSLocalizedString("CO₂ saved", comment: "CO₂ saved"),
-                            systemImage: "leaf"
-                        )
-
-                        Spacer()
-
-                        Text(
-                            formattedCO2
-                        )
-                        .fontWeight(.semibold)
-                        .monospacedDigit()
-                    }
-                }
-
-            } header: {
-
-                Text(NSLocalizedString("Overview", comment: "Overview"))
-            }
-
-            // MARK: Chart
-
-            Section {
-
-                DSBarChart(
-                    references: [
-                        NSLocalizedString("Trips", comment: "Trips"),
-                        NSLocalizedString("Distance (km)", comment: "Distance in km")
-                    ],
-                    values: [
-                        Double(totalRides),
-                        totalLength / 1000.0
-                    ]
-                )
-                .frame(height: 190)
-
-            } header: {
-
-                Text(NSLocalizedString("Statistics", comment: "Statistics"))
-
-            } footer: {
-
-                Text(NSLocalizedString("The bars show your previous rides and the distance covered.", comment: "The bars show your previous rides and the distance covered."))
-            }
         }
         .navigationTitle(NSLocalizedString("Profile", comment: "Profile"))
         .navigationBarTitleDisplayMode(.inline)
@@ -416,7 +286,6 @@ struct ProfileView: View {
         )
         .onAppear {
             loadRegion()
-            loadStatistics()
         }
     }
 
@@ -433,91 +302,15 @@ struct ProfileView: View {
     private func saveRegion() {
         let appDelegate = AppDelegate.shared()
         appDelegate.regions.selectPosition(regionId)
-        loadStatistics()
     }
 
     // MARK: - Set Language
 
     private func setAppLanguage(_ languageCode: String) {
-        if languageCode == "auto" {
-            UserDefaults.standard.removeObject(forKey: "AppleLanguages")
-        } else {
-            UserDefaults.standard.set([languageCode], forKey: "AppleLanguages")
-        }
-        UserDefaults.standard.synchronize()
+        LanguageLocalization.apply(languageCode)
     }
 
-    // MARK: - Load Statistics
 
-    private func loadStatistics() {
-        let appDelegate = AppDelegate.shared()
-        let regionId = appDelegate.regions.regionId
-
-        totalRides = appDelegate.defaults.integer(forKey: withRegionId("totalRides", regionId: regionId))
-        totalLength = Double(appDelegate.defaults.integer(forKey: withRegionId("totalLength", regionId: regionId)))
-        totalDuration = appDelegate.defaults.integer(forKey: withRegionId("totalDuration", regionId: regionId))
-        totalIncidents = appDelegate.defaults.integer(forKey: withRegionId("totalIncidents", regionId: regionId))
-    }
-
-    private func withRegionId(_ key: String, regionId: Int) -> String {
-        if regionId == 0 {
-            return key
-        }
-        return "\(key)-\(regionId)"
-    }
-
-    // MARK: - Formatting
-
-    private var durationInSeconds: Int {
-        // If stored in milliseconds (legacy SimRa stored ms, e.g. 3,600,000 for 1h)
-        if totalDuration > 100_000 {
-            return totalDuration / 1000
-        }
-        return totalDuration
-    }
-
-    private var formattedDistance: String {
-
-        let kilometers = totalLength / 1000.0
-
-        if kilometers < 100 {
-            return String(
-                format: "%.1f km",
-                kilometers
-            )
-        }
-
-        return String(
-            format: "%.0f km",
-            kilometers
-        )
-    }
-
-    private var formattedAverageDistance: String {
-        guard totalRides > 0 else { return "0.0 km" }
-        let avgKm = (totalLength / 1000.0) / Double(totalRides)
-        return String(format: "%.1f km", avgKm)
-    }
-
-    private var formattedCO2: String {
-        let kilometers = totalLength / 1000.0
-        let co2Kg = kilometers * 0.138
-        if co2Kg < 10 {
-            return String(format: "%.2f kg", co2Kg)
-        }
-        return String(format: "%.1f kg", co2Kg)
-    }
-
-    private var formattedDuration: String {
-        let seconds = durationInSeconds
-        let hours = seconds / 3600
-        let minutes = (seconds % 3600) / 60
-        if hours > 0 {
-            return String(format: "%d h %d min", hours, minutes)
-        } else {
-            return String(format: "%d min", minutes)
-        }
-    }
 }
 
 // MARK: - Preview

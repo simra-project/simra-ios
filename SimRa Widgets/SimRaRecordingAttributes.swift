@@ -11,6 +11,34 @@ import ActivityKit
 import Foundation
 
 @available(iOS 16.2, *)
+public struct SimRaUploadAttributes: ActivityAttributes {
+
+    public struct ContentState: Codable, Hashable {
+        public var completedCount: Int
+        public var succeededCount: Int
+        public var failedCount: Int
+
+        public init(
+            completedCount: Int = 0,
+            succeededCount: Int = 0,
+            failedCount: Int = 0
+        ) {
+            self.completedCount = max(0, completedCount)
+            self.succeededCount = max(0, succeededCount)
+            self.failedCount = max(0, failedCount)
+        }
+    }
+
+    public let totalCount: Int
+    public let startDate: Date
+
+    public init(totalCount: Int, startDate: Date = .now) {
+        self.totalCount = max(0, totalCount)
+        self.startDate = startDate
+    }
+}
+
+@available(iOS 16.2, *)
 public struct SimRaRecordingAttributes: ActivityAttributes {
 
     // MARK: - Dynamic Content
@@ -20,10 +48,16 @@ public struct SimRaRecordingAttributes: ActivityAttributes {
         public struct RoutePoint: Codable, Hashable {
             public let latitude: Double
             public let longitude: Double
+            public let speedKmh: Double?
 
-            public init(latitude: Double, longitude: Double) {
+            public init(
+                latitude: Double,
+                longitude: Double,
+                speedKmh: Double? = nil
+            ) {
                 self.latitude = latitude
                 self.longitude = longitude
+                self.speedKmh = speedKmh
             }
         }
 

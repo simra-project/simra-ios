@@ -1,3 +1,11 @@
+//
+//  News.swift
+//  SimRa
+//
+//  Created by Emil Pauls on 27.08.26.
+//  Copyright © 2026 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.
+//
+
 import Foundation
 import UserNotifications
 
@@ -5,16 +13,24 @@ import UserNotifications
 public final class News: NSObject {
     public var newsItems: NSMutableArray = []
     public var lastSeenNewsId: Int = 0
-    public private(set) var newsLines: [String] = []
+    public private(set) var newsLines: [String]
     public private(set) var newsVersion: Int
     public var hasUnreadNews: Bool {
         newsVersion > UserDefaults.standard.integer(forKey: "newsVersion")
     }
 
+    private static let latestVersionKey = "newsLatestVersion"
+    private static let newsLinesKey = "newsLines"
+
     private var requestInProgress = false
 
     public override init() {
-        newsVersion = UserDefaults.standard.integer(forKey: "newsVersion")
+        let defaults = UserDefaults.standard
+        newsVersion = defaults.integer(forKey: Self.latestVersionKey)
+        if newsVersion == 0 {
+            newsVersion = defaults.integer(forKey: "newsVersion")
+        }
+        newsLines = defaults.stringArray(forKey: Self.newsLinesKey) ?? []
         super.init()
     }
 
@@ -56,12 +72,14 @@ public final class News: NSObject {
     public func process(_ data: Data) {
         guard let text = String(data: data, encoding: .utf8) else { return }
         let lines = text.components(separatedBy: .newlines)
-        guard let firstLine = lines.first, firstLine.hasPrefix("#"),
-              let version = Int(firstLine.dropFirst()),
-              version > newsVersion else { return }
+        guard let firstLine = lines.first, firstLine.hasPrefix("#") else { return }
+        let versionText = String(firstLine.dropFirst()).trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let version = Int(versionText), version > newsVersion else { return }
 
         newsLines = Array(lines.dropFirst()).filter { !$0.isEmpty }
         newsVersion = version
+        UserDefaults.standard.set(version, forKey: Self.latestVersionKey)
+        UserDefaults.standard.set(newsLines, forKey: Self.newsLinesKey)
         NotificationCenter.default.post(name: .serverNewsDidUpdate, object: nil)
         postLocalNotificationIfAllowed()
     }
@@ -71,13 +89,24 @@ public final class News: NSObject {
         NotificationCenter.default.post(name: .serverNewsDidUpdate, object: nil)
     }
 
+    public static func requestNotificationAuthorization() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { _, _ in }
+    }
+
     private func postLocalNotificationIfAllowed() {
+        guard UserDefaults.standard.bool(forKey: "serverNewsNotificationsEnabled") else { return }
         let center = UNUserNotificationCenter.current()
         center.getNotificationSettings { settings in
             let schedule: () -> Void = {
                 let content = UNMutableNotificationContent()
                 content.title = NSLocalizedString("New SimRa information", comment: "News notification title")
-                content.body = NSLocalizedString("New information from SimRa is available.", comment: "News notification body")
+                let announcement = self.newsLines.first.map {
+                    String($0.dropFirst()).trimmingCharacters(in: .whitespacesAndNewlines)
+                } ?? ""
+                let message = announcement.isEmpty
+                    ? NSLocalizedString("New information from SimRa is available.", comment: "News notification body")
+                    : announcement
+                content.body = String(message.prefix(140))
                 content.sound = .default
                 let request = UNNotificationRequest(
                     identifier: "simra-server-news-\(self.newsVersion)",
@@ -90,11 +119,7 @@ public final class News: NSObject {
             switch settings.authorizationStatus {
             case .authorized, .provisional, .ephemeral:
                 schedule()
-            case .notDetermined:
-                center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
-                    if granted { schedule() }
-                }
-            case .denied:
+            case .notDetermined, .denied:
                 break
             @unknown default:
                 break

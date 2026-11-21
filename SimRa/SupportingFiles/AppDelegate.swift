@@ -2,8 +2,11 @@
 //  AppDelegate.swift
 //  SimRa
 //
-//  Main application delegate.
+//  Created by Emil Pauls on 19.11.2026
+//  Copyright © 2026 Mobile Cloud Computing an der Fakultät IV
+//  (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.
 //
+
 
 import SwiftUI
 import UIKit
@@ -11,12 +14,14 @@ import CoreLocation
 import CoreMotion
 import ActivityKit
 import WidgetKit
+import UserNotifications
 
 @objcMembers
 final class AppDelegate:
     NSObject,
     UIApplicationDelegate,
-    CLLocationManagerDelegate
+    CLLocationManagerDelegate,
+    UNUserNotificationCenterDelegate
 {
 
     // MARK: - Shared
@@ -90,37 +95,38 @@ final class AppDelegate:
     var trips:
         Trips!
 
-    private lazy var loadedConstants: [String: Any] = {
-        let localization =
-            defaults.string(forKey: "appLanguage")
-            ?? "Base"
+    private var cachedConstantsLanguage: String?
+    private var cachedConstants: [String: Any] = [:]
 
-        let url =
+    var constants: [String: Any] {
+        let selectedLanguage = defaults.string(forKey: "appLanguage") ?? "auto"
+        let systemLanguage = Locale.current.language.languageCode?.identifier
+        let requestedLanguage = selectedLanguage == "auto"
+            ? (systemLanguage ?? "auto")
+            : selectedLanguage
+        let resourceLocalization = ["de", "en", "fr"].contains(requestedLanguage)
+            ? requestedLanguage
+            : nil
+        let cacheLanguage = resourceLocalization ?? "default"
+
+        guard cachedConstantsLanguage != cacheLanguage else {
+            return cachedConstants
+        }
+
+        let url = resourceLocalization.flatMap {
             Bundle.main.url(
                 forResource: "constants",
                 withExtension: "plist",
                 subdirectory: nil,
-                localization: localization
+                localization: $0
             )
-            ?? Bundle.main.url(
-                forResource: "constants",
-                withExtension: "plist"
-            )
+        } ?? Bundle.main.url(forResource: "constants", withExtension: "plist")
 
-        guard
-            let url,
-            let dictionary = NSDictionary(
-                contentsOf: url
-            ) as? [String: Any]
-        else {
-            return [:]
-        }
-
-        return dictionary
-    }()
-
-    var constants: [String: Any] {
-        loadedConstants
+        cachedConstantsLanguage = cacheLanguage
+        cachedConstants =
+            url.flatMap { NSDictionary(contentsOf: $0) as? [String: Any] }
+            ?? [:]
+        return cachedConstants
     }
 
     // MARK: - Recording
@@ -201,6 +207,7 @@ final class AppDelegate:
 
         Self.sharedInstance =
             self
+        UNUserNotificationCenter.current().delegate = self
 
         trips =
             Trips(
@@ -210,6 +217,14 @@ final class AppDelegate:
         registerRecordingObservers()
 
         restoreActiveRecording()
+    }
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.banner, .sound])
     }
 
     // MARK: - Application Launch
@@ -245,6 +260,8 @@ final class AppDelegate:
 
     func handleSceneDidBecomeActive() {
         lm.requestWhenInUseAuthorization()
+        news.refresh()
+        scheduleWidgetStatisticsRefresh()
 
         processPendingLiveActivityIncidents()
         processPendingWidgetCommand()
@@ -559,7 +576,7 @@ final class AppDelegate:
             lastActivityUpdate == nil
             || now.timeIntervalSince(
                 lastActivityUpdate!
-            ) >= 15
+            ) >= 5
 
         if shouldUpdateActivity {
             updateRecordingActivity(
@@ -765,9 +782,10 @@ final class AppDelegate:
             return []
         }
 
-        let step = max(1, locations.count / 80)
-        return locations.enumerated().compactMap { index, location in
-            guard index % step == 0 else {
+        let maximumCount = 80
+        let step = max(1, Int(ceil(Double(locations.count - 1) / Double(maximumCount - 1))))
+        let sampled = locations.enumerated().compactMap { index, location -> SimRaRecordingAttributes.ContentState.RoutePoint? in
+            guard index % step == 0 || index == locations.count - 1 else {
                 return nil
             }
 
@@ -776,11 +794,18 @@ final class AppDelegate:
                 return nil
             }
 
+            let rawSpeedKmh = location.location.speed * 3.6
+            let speedKmh = rawSpeedKmh.isFinite && rawSpeedKmh >= 0
+                ? rawSpeedKmh
+                : nil
+
             return SimRaRecordingAttributes.ContentState.RoutePoint(
                 latitude: coordinate.latitude,
-                longitude: coordinate.longitude
+                longitude: coordinate.longitude,
+                speedKmh: speedKmh
             )
         }
+        return sampled
     }
 
     private func stopRecordingActivity(
@@ -927,7 +952,27 @@ final class AppDelegate:
         )
     }
 
+    private struct WidgetTripStatistic: Codable {
+        let date: Date
+        let distanceMeters: Double
+    }
+
     private func scheduleWidgetStatisticsRefresh() {
+        let statistics = TripInfo.allStoredIdentifiers().compactMap { identifier -> WidgetTripStatistic? in
+            guard let info = TripInfo(fromStorage: identifier.intValue) else { return nil }
+            let date = info.duration.startDate
+            guard date.timeIntervalSince1970 > 0 else { return nil }
+            return WidgetTripStatistic(
+                date: date,
+                distanceMeters: Double(max(info.length, 0))
+            )
+        }
+
+        if let data = try? JSONEncoder().encode(statistics),
+           let sharedDefaults = UserDefaults(suiteName: WidgetStateKey.suiteName) {
+            sharedDefaults.set(data, forKey: WidgetStateKey.tripStatistics)
+        }
+
         WidgetCenter.shared.reloadTimelines(ofKind: "SimRaRecordingWidget")
     }
 

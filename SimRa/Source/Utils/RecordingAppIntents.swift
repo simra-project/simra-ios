@@ -153,6 +153,28 @@ struct StartRecordingIntent: AppIntent {
     }
 }
 
+@available(iOS 16.0, *)
+struct StopRecordingAppIntent: AppIntent {
+
+    static let title: LocalizedStringResource = "Stop Recording"
+    static let description = IntentDescription(
+        "Stop the active SimRa recording."
+    )
+    static var openAppWhenRun: Bool = true
+
+    func perform() async throws -> some IntentResult & ProvidesDialog {
+        let stopped = await MainActor.run {
+            RecordingShortcutBridge.stopRecording()
+        }
+
+        guard stopped else {
+            throw RecordingShortcutError.notRecording
+        }
+
+        return .result(dialog: IntentDialog("Recording stopped."))
+    }
+}
+
 // MARK: - Typed Incident
 
 @available(iOS 16.0, *)
@@ -179,8 +201,15 @@ struct MarkIncidentIntent: AppIntent {
     @Parameter(title: "Comment")
     var comment: String?
 
+    static var parameterSummary: some ParameterSummary {
+        Summary("Report \(\.$hazardType) involving \(\.$participant)") {
+            \.$frightening
+            \.$comment
+        }
+    }
+
     init() {
-        self.hazardType = .generalHazard
+        self.hazardType = nil
         self.participant = nil
         self.frightening = false
         self.comment = nil
@@ -194,18 +223,25 @@ struct MarkIncidentIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        let selectedType = hazardType ?? .generalHazard
+        let selectedType = try await $hazardType.requestValue("What happened?")
+        let selectedParticipant = try await $participant.requestValue("Who was involved?")
+        let selectedFrightening = try await $frightening.requestValue(
+            "Was it frightening?"
+        )
+        let selectedComment = try await $comment.requestValue(
+            "Add a comment."
+        )
 
         let marked = await MainActor.run {
             RecordingShortcutBridge.markIncident(
                 selectedType.incidentID,
                 source: "Siri",
                 participantMask:
-                    participant?.maskValue ?? 0,
+                    selectedParticipant.maskValue,
                 frightening:
-                    frightening,
+                    selectedFrightening,
                 comment:
-                    comment
+                    selectedComment
             )
         }
 
@@ -232,6 +268,7 @@ enum IncidentParticipant: String, AppEnum {
     case motorcycle
     case escooter
     case other
+    case unknown
 
     static var typeDisplayRepresentation: TypeDisplayRepresentation {
         TypeDisplayRepresentation(name: "Involved road user")
@@ -248,12 +285,16 @@ enum IncidentParticipant: String, AppEnum {
             .bicycle: "Bicycle",
             .motorcycle: "Motorcycle",
             .escooter: "E-scooter",
-            .other: "Other"
+            .other: "Other",
+            .unknown: "Not sure"
         ]
     }
 
     var maskValue: Int {
-        1 << rawIndex
+        guard self != .unknown else {
+            return 0
+        }
+        return 1 << rawIndex
     }
 
     private var rawIndex: Int {
@@ -267,6 +308,7 @@ enum IncidentParticipant: String, AppEnum {
         case .motorcycle: return 6
         case .escooter: return 7
         case .other: return 8
+        case .unknown: return 9
         }
     }
 }
@@ -327,7 +369,7 @@ enum IncidentType: String, AppEnum {
 
     static var typeDisplayRepresentation: TypeDisplayRepresentation {
         TypeDisplayRepresentation(
-            name: "Gefahrentyp"
+            name: "Hazard type"
         )
     }
 
@@ -335,28 +377,28 @@ enum IncidentType: String, AppEnum {
         [IncidentType: DisplayRepresentation] {
         [
             .generalHazard:
-                "Gefahr",
+                "Danger",
 
             .closePassing:
-                "Zu nahes Überholen",
+                "Close Passing",
 
             .dooring:
                 "Dooring",
 
             .turningAccident:
-                "Abbiegeunfall",
+                "Turning Accident",
 
             .oncomingTraffic:
-                "Gegenverkehr",
+                "Oncoming Traffic",
 
             .parkingCar:
-                "Einparkendes Auto",
+                "Parking Car",
 
             .tailgating:
-                "Auffahren / Drängeln",
+                "Tailgating",
 
             .sidestep:
-                "Ausweichen / Hindernis"
+                "Sidestep"
         ]
     }
 
@@ -391,16 +433,16 @@ enum IncidentType: String, AppEnum {
     var localizedName: String {
         switch self {
         case .generalHazard:
-            return "Gefahr"
+            return NSLocalizedString("Danger", comment: "Hazard type")
 
         case .closePassing:
-            return "Zu nahes Überholen"
+            return NSLocalizedString("Close Passing", comment: "Hazard type")
 
         case .dooring:
-            return "Dooring"
+            return NSLocalizedString("Dooring", comment: "Hazard type")
 
         case .turningAccident:
-            return "Abbiegeunfall"
+            return NSLocalizedString("Turning Accident", comment: "Hazard type")
 
         case .oncomingTraffic:
             return "Gegenverkehr"
@@ -432,10 +474,24 @@ struct SimRaShortcuts: AppShortcutsProvider {
                 "Aufzeichnung in \(.applicationName) starten",
                 "Fahrt in \(.applicationName) starten",
                 "Start a recording in \(.applicationName)",
-                "Start a ride in \(.applicationName)"
+                "Start a ride in \(.applicationName)",
+                "Démarrer un trajet avec \(.applicationName)"
             ],
             shortTitle: "Start Recording",
             systemImageName: "play.fill"
+        )
+
+        AppShortcut(
+            intent: StopRecordingAppIntent(),
+            phrases: [
+                "Aufzeichnung in \(.applicationName) stoppen",
+                "Fahrt in \(.applicationName) beenden",
+                "Stop a recording in \(.applicationName)",
+                "Stop a ride in \(.applicationName)",
+                "Arrêter un trajet avec \(.applicationName)"
+            ],
+            shortTitle: "Stop Recording",
+            systemImageName: "stop.fill"
         )
 
         AppShortcut(
@@ -444,11 +500,22 @@ struct SimRaShortcuts: AppShortcutsProvider {
                 "Gefahr in \(.applicationName) melden",
                 "Gefahr in \(.applicationName) erfassen",
                 "Gefahrenstelle in \(.applicationName) melden",
-                "Vorfall in \(.applicationName) erfassen"
+                "Vorfall in \(.applicationName) erfassen",
+                "Signaler un danger avec \(.applicationName)"
             ],
             shortTitle: "Mark Incident",
-            systemImageName:
-                "exclamationmark.triangle.fill"
+            systemImageName: "exclamationmark.triangle.fill"
+        )
+
+        AppShortcut(
+            intent: MarkIncidentIntent(),
+            phrases: [
+                "Gefahr mit \(.applicationName) erfassen",
+                "Report a hazard with \(.applicationName)",
+                "Décrire un danger avec \(.applicationName)"
+            ],
+            shortTitle: "Report hazard",
+            systemImageName: "questionmark.bubble"
         )
     }
 }

@@ -61,7 +61,7 @@
 	<key>bikeTypes</key>
 	<array>
 		<string>(not selected)</string>
-		<string>City or Trecking Bike</string>
+		<string>City or Trekking Bike</string>
 		<string>Racing Bike</string>
 		<string>E-Bike</string>
 		<string>Recumbent Bike</string>

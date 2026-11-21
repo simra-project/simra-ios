@@ -53,7 +53,7 @@ public final class TripPoint:
 
         return trimmed.isEmpty
             ? NSLocalizedString(
-                "Gefahr",
+                "Danger",
                 comment:
                     "Fallback incident title"
             )
@@ -832,7 +832,7 @@ final class TripEditViewModel:
                             incidentID
                         ]
                         : NSLocalizedString(
-                            "Gefahr",
+                            "Danger",
                             comment:
                                 "Fallback incident title"
                         )
@@ -912,7 +912,7 @@ final class TripEditViewModel:
                 incidentID
             ]
             : NSLocalizedString(
-                "Gefahr",
+                "Danger",
                 comment:
                     "Fallback incident title"
             )
@@ -1029,7 +1029,7 @@ final class TripEditViewModel:
         // No incident type selected yet.
         point.title =
             NSLocalizedString(
-                "Gefahr",
+                "Danger",
                 comment:
                     "New incident"
             )
@@ -1792,7 +1792,7 @@ private struct TripMap:
                 TripEndpointMarker(
                     title:
                         NSLocalizedString(
-                            "Ziel",
+                            "Destination",
                             comment:
                                 ""
                         ),

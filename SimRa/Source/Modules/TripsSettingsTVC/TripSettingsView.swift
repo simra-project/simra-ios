@@ -115,8 +115,7 @@ struct TripSettingsView: View {
             } footer: {
                 Text(
                     NSLocalizedString(
-                        "Die Aufzeichnung beginnt erst, wenn die gewählte Zeit oder Strecke erreicht wurde.",
-                        value: "Die Aufzeichnung beginnt erst, wenn die gewählte Zeit oder Strecke erreicht wurde.",
+                        "Recording starts when the selected time or distance is reached.",
                         comment: "Recording starts when the selected time or distance is reached."
                     )
                 )

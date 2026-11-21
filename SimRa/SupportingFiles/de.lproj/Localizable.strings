@@ -1,20 +1,164 @@
+/* No comment provided by engineer. */
+"·" = "·";
+
+/* (No Comment) */
+"(not selected)" = "(nicht ausgewählt)";
+
+/* Recording time format */
+"%.0f s" = "%.0f s";
+
+/* No comment provided by engineer. */
+"%@ %%" = "%@ %%";
+
+/* No comment provided by engineer. */
+"%@ m" = "%@ m";
+
+/* No comment provided by engineer. */
+"%@ s" = "%@ s";
+
+/* Partial upload failure */
+"%d succeeded, %d failed." = "%d erfolgreich, %d fehlgeschlagen.";
+
+/* Trips upload success */
+"%d trips uploaded successfully." = "%d Fahrten erfolgreich hochgeladen.";
+
+/* (No Comment) */
+"2 to 4 years" = "2 bis 4 Jahre";
+
+/* (No Comment) */
+"5 to 10 years" = "5 bis 10 Jahre";
+
+/* (No Comment) */
+"A recording is already in progress." = "Es läuft bereits eine Aufzeichnung.";
+
+/* (No Comment) */
+"A SimRa recording is already active." = "Eine SimRa-Aufnahme läuft bereits.";
+
+/* About */
+"About" = "Über";
+
+/* Accessibility hint for app version */
+"Accessibility hint for app version" = "Barrierefreiheits-Hinweis für App-Version";
+
+/* Accessibility label for app version */
+"Accessibility label for app version" = "Barrierefreiheits-Label für App-Version";
+
 /* MyTrips View Context menu title */
 "Actions" = "Aktionen";
+
+/* Added manually on map */
+"Added manually on map" = "Manuell auf der Karte eingetragen";
+
+/* Age */
+"Age" = "Alter";
+
+/* AI Recording */
+"AI Recording" = "KI-Aufzeichnung";
+
+/* Table Select All */
+"All" = "Alle";
+
+/* App Settings */
+"App Settings" = "App-Einstellungen";
+
+/* App version */
+"App version" = "App-Version";
+
+/* Appearance */
+"Appearance" = "Darstellung";
+
+/* Apple Watch source\nSource badge for Apple Watch incidents */
+"Apple Watch" = "Apple Watch";
+
+/* Apple Watch source */
+"Apple Watch source description" = "Über die Apple Watch erfasst";
+
+/* Diagnostic upload explanation */
+"Attention! Only tap the Continue button if you were asked to do so by the SimRa team. By pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides." = "Achtung! Tippe nur auf „Weiter“, wenn das SimRa-Team dich dazu aufgefordert hat. Wenn du im nächsten Schritt auf „Hochladen“ tippst, sendest du deine SimRa-Konfiguration an das Team. Du kannst auch auswählen, ob deine letzten 10 oder alle Fahrten hochgeladen werden sollen.";
+
+/* Acknowledgement to send configuration */
+"Attention! Only tap the Continue button, if you were asked to do so by the SimRa team. By Pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides." = "Achtung! Tippen Sie nur dann auf die Schaltfläche Weiter, wenn Sie vom SimRa-Team dazu aufgefordert wurden. Wenn Sie im nächsten Schritt auf die Schaltfläche Hochladen tippen, senden Sie Ihre SimRa-Konfiguration an das SimRa-Team. Sie können auch angeben, ob Sie die letzten 10 Fahrten oder alle Fahrten hochladen möchten.";
+
+/* Start recording */
+"Aufnahme starten" = "Aufnahme starten";
+
+/* Language */
+"Automatic" = "Automatisch";
+
+/* Automatic detection */
+"Automatic detection" = "Automatische Erkennung";
+
+/* Automatic detection */
+"Automatically detected" = "Automatisch erkannt";
+
+/* Source badge for automatically detected incidents */
+"Automatische Erkennung" = "Automatische Erkennung";
+
+/* Involved road users */
+"Beteiligte Verkehrsteilnehmer" = "Beteiligte Verkehrsteilnehmer";
+
+/* Bicycle */
+"Bicycle" = "Fahrrad";
+
+/* Bicycle type */
+"Bicycle type" = "Fahrradtyp";
+
+/* (No Comment) */
+"Bus" = "Bus";
+
+/* (No Comment) */
+"Button recording" = "Über den Button erfasst";
 
 /* Cancel */
 "Cancel" = "Abbrechen";
 
+/* (No Comment) */
+"Car" = "Auto";
+
+/* (No Comment) */
+"Cargo Bike" = "Lastenfahrrad";
+
+/* Child seat */
+"Child seat" = "Kindersitz";
+
+/* (No Comment) */
+"City or Trecking Bike" = "City- oder Trecking-Rad";
+
 /* Closest Regions to your Location */
 "Closest Regions to your Location" = "Die nächstgelegenen Regionen";
+
+/* (No Comment) */
+"Comment" = "Kommentar";
 
 /* Completed */
 "Completed" = "Komplett";
 
+/* Configure sensor */
+"Configure sensor" = "Sensor konfigurieren";
+
 /* Configure your Email, please! */
 "Configure your Email, please!" = "Bitte konfigurieren Sie ihre Mail App";
 
+/* Continue */
+"Continue" = "Weiter";
+
+/* (No Comment) */
+"Customize appearance and measurement units." = "Passen Sie das Erscheinungsbild und die Maßeinheiten an.";
+
+/* (No Comment) */
+"Danger" = "Gefahr";
+
+/* Dangers */
+"Dangers" = "Gefahren";
+
+/* Dark */
+"Dark" = "Dunkel";
+
 /* Dear SimRa Team */
 "Dear SimRa Team" = "Liebes SimRa Team";
+
+/* Defaults for new trips */
+"Defaults for new trips" = "Standard für neue Fahrten";
 
 /* Delete */
 "Delete" = "Löschen";
@@ -22,59 +166,329 @@
 /* Confirmation button for delete My Trips table row */
 "Delete locally" = "Lokal Löschen";
 
+/* (No Comment) */
+"Delivery vehicle / Van" = "Lieferwagen / Transporter";
+
+/* (No Comment) */
+"Details" = "Details";
+
+/* No comment provided by engineer. */
+"Device disconnected" = "Device disconnected";
+
+/* Recording starts when the selected time or distance is reached. */
+"Die Aufzeichnung beginnt erst, wenn die gewählte Zeit oder Strecke erreicht wurde." = "Die Aufzeichnung beginnt erst, wenn die gewählte Zeit oder Strecke erreicht wurde.";
+
+/* Cancel changes hint */
+"Discards any changes and closes the view." = "Verwirft alle Änderungen und schließt die Ansicht.";
+
+/* (No Comment) */
+"Disconnect Sensor" = "Sensor trennen";
+
+/* (No Comment) */
+"Discovered Devices" = "Gefundene Geräte";
+
+/* Distance */
+"Distance" = "Entfernung";
+
+/* Distance in km */
+"Distance in km" = "Distanz in km";
+
+/* (No Comment) */
+"Distance Indicator" = "Abstandsanzeige";
+
+/* (No Comment) */
+"diverse" = "divers";
+
+/* Do not show the map while recording */
+"Do not show map" = "Keine Karte anzeigen";
+
+/* Ride upload question */
+"Do you also want to send rides?" = "Möchten Sie auch Fahrten senden?";
+
 /* Don't show this again */
 "Don't show this again" = "Dieses nicht wieder anzeigen";
 
 /* Done */
 "Done" = "Fertig";
 
+/* (No Comment) */
+"Duration" = "Dauer";
+
+/* (No Comment) */
+"Duration unknown" = "Dauer unbekannt";
+
+/* (No Comment) */
+"E-Bike" = "E-Bike";
+
+/* (No Comment) */
+"E-Scooter" = "E-Scooter";
+
+/* Edit incident */
+"Edit incident" = "Vorfall bearbeiten";
+
+/* (No Comment) */
+"Edit trip" = "Fahrt bearbeiten";
+
 /* Edited */
 "Edited" = "Geändert";
 
-/* Not edited */
-"Not edited" = "Nicht bearbeitet";
+/* (No Comment) */
+"Elapsed Time" = "Verstrichene Zeit";
+
+/* Equipment */
+"Equipment" = "Ausstattung";
+
+/* Scary or dangerous */
+"Erschrecken / Gefährdung" = "Erschrecken / Gefährdung";
+
+/* Experience */
+"Experience" = "Erfahrung";
+
+/* Feedback */
+"Feedback" = "Rückmeldung";
 
 /* Feedback SimRa */
 "Feedback SimRa" = "Rückmeldung SimRa";
 
+/* (No Comment) */
+"female" = "weiblich";
+
+/* Upload succeeded */
+"Files uploaded successfully" = "Dateien erfolgreich hochgeladen";
+
 /* Finish */
 "Finish" = "Ziel";
 
-/* How To */
-"How To" = "Anleitung";
+/* No comment provided by engineer. */
+"Für diese Statistik sind noch keine Werte vorhanden." = "Für diese Statistik sind noch keine Werte vorhanden.";
 
-/* If not, you may access it via Settings/How To */
-"If not, you may access it via Settings/How To later" = "Wenn nicht, können Sie dies später unter Einstellungen/How To abrufen";
+/* Fallback incident title\nNew incident */
+"Gefahr" = "Gefahr";
 
-/* Later */
-"Later" = "Später";
-
-/* MyTrips View Context menu export title */
-"Manual Export" = "Manueller Export";
-
-/* MyTrips View Context menu export GPX title */
-"GPX Export" = "GPX Export";
+/* Gender */
+"Gender" = "Geschlecht";
 
 /* MyTrips View Context menu export GeoJSON title */
 "GeoJSON Export" = "GeoJSON Export";
 
+/* MyTrips View Context menu export GPX title */
+"GPX Export" = "GPX Export";
+
+/* (No Comment) */
+"Handlebar" = "Lenker";
+
+/* Hazard Map */
+"Hazard Map" = "Gefahrenkarte";
+
+/* (No Comment) */
+"Hazard recorded." = "Gefahr erfasst.";
+
+/* (No Comment) */
+"Hazard type" = "Gefahrentyp";
+
+/* How To */
+"How To" = "Anleitung";
+
+/* (No Comment) */
+"Idle time" = "Standzeit";
+
+/* If not, you may access it via Settings/How To */
+"If not, you may access it via Settings/How To later" = "Wenn nicht, können Sie dies später unter Einstellungen/How To abrufen";
+
+/* Imprint */
+"Imprint" = "Impressum";
+
+/* (No Comment) */
+"Incident" = "Vorfall";
+
+/* Incident source */
+"Incident source" = "Vorfallquelle";
+
+/* (No Comment) */
+"Incident type" = "Vorfall-Art";
+
+/* (No Comment) */
+"Incidents" = "Vorfälle";
+
+/* (No Comment) */
+"Incidents Recorded" = "Vorfälle erfasst";
+
+/* (No Comment) */
+"Involved parties" = "Beteiligte";
+
+/* (No Comment) */
+"Jacket Pocket" = "Jackentasche";
+
+/* (No Comment) */
+"km" = "km";
+
 /* MyTrips View Context menu export KML title */
 "KML Export" = "KML Export";
+
+/* Comment */
+"Kommentar" = "Kommentar";
+
+/* Source badge for Shortcuts incidents */
+"Kurzbefehle" = "Kurzbefehle";
+
+/* Language */
+"Language" = "Sprache";
+
+/* Later */
+"Later" = "Später";
+
+/* (No Comment) */
+"Left Offset" = "Linker Abstand";
+
+/* (No Comment) */
+"less than 2 years" = "weniger als 2 Jahre";
+
+/* Light */
+"Light" = "Hell";
+
+/* Loading trip */
+"Loading trip" = "Fahrt wird geladen";
+
+/* (No Comment) */
+"male" = "männlich";
+
+/* MyTrips View Context menu export title */
+"Manual Export" = "Manueller Export";
+
+/* Manually added */
+"Manually added" = "Manuell eingetragen";
+
+/* Map accessibility label */
+"Map" = "Karte";
+
+/* Map display settings */
+"Map display" = "Kartendarstellung";
+
+/* (No Comment) */
+"Mark Incident" = "Gefahr erfassen";
+
+/* Metric System */
+"Metric System" = "Metrisches System";
+
+/* (No Comment) */
+"more than 10 years" = "mehr als 10 Jahre";
+
+/* (No Comment) */
+"Motorcycle" = "Motorrad";
+
+/* (No Comment) */
+"Mountain Bike" = "Mountainbike";
+
+/* My Trips */
+"My Trips" = "Meine Fahrten";
 
 /* New */
 "New" = "Neu";
 
+/* Additional UI Strings */
+"News" = "Neuigkeiten";
+
+/* (No Comment) */
+"No devices found" = "Keine Geräte gefunden";
+
+/* No news available */
+"No news available" = "Keine Neuigkeiten vorhanden";
+
+/* (No Comment) */
+"No recording is currently active." = "Es ist keine Aufzeichnung aktiv.";
+
+/* Offline route empty state */
+"No route recorded" = "Keine Strecke aufgezeichnet";
+
+/* (No Comment) */
+"No SimRa recording is active." = "Aktuell läuft keine SimRa-Aufnahme.";
+
+/* No trips */
+"No trips" = "Keine Fahrten";
+
+/* No unuploaded trips selected */
+"No unuploaded trips selected." = "Keine nicht hochgeladenen Fahrten ausgewählt.";
+
+/* Don't upload rides */
+"No, don't send any rides" = "Nein, schicken Sie keine Fahrten";
+
+/* Table Select None */
+"None" = "Keine";
+
+/* Not available */
+"Not available" = "Nicht verfügbar";
+
+/* Not edited */
+"Not edited" = "Nicht bearbeitet";
+
 /* Not Recording */
 "Not Recording" = "Keine Aufzeichnung";
+
+/* Not selected */
+"Not selected" = "Nicht ausgewählt";
 
 /* Not Uploaded */
 "Not Uploaded" = "Nicht hochgeladen";
 
+/* (No Comment) */
+"Note" = "Hinweis";
+
+/* Notification settings */
+"Notifications" = "Benachrichtigungen";
+
 /* OK */
 "OK" = "OK";
 
+/* Empty trips description */
+"Once trips are recorded, they will appear here." = "Sobald Fahrten aufgezeichnet wurden, erscheinen sie hier.";
+
+/* OBS hint */
+"Open OpenBikeSensor settings" = "OpenBikeSensor-Einstellungen öffnen";
+
+/* My Trips hint */
+"Open recorded trips" = "Aufgezeichnete Fahrten öffnen";
+
+/* Settings hint */
+"Open SimRa settings" = "SimRa-Einstellungen öffnen";
+
+/* Hazard map hint */
+"Open the SimRa street safety map" = "SimRa Straßensicherheitskarte öffnen";
+
+/* OpenBikeSensor */
+"OpenBikeSensor" = "OpenBikeSensor";
+
+/* (No Comment) */
+"Optional. Additional information about the incident." = "Optional. Zusätzliche Informationen zum Vorfall.";
+
+/* (No Comment) */
+"Other" = "Andere";
+
+/* Overview */
+"Overview" = "Übersicht";
+
+/* (No Comment) */
+"Pedestrian" = "Fußgänger";
+
 /* Please choose a Region */
 "Please choose a Region" = "Bitte wählen Sie eine Region aus";
+
+/* SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results */
+"Please choose your correct region, so that we can analyse your ride correctly. Your selected region:" = "Bitte stellen Sie Ihre Region ein, damit Ihre Daten richtig ausgewertet werden können. Ihre derzeit ausgewählte Region ist:";
+
+/* (No Comment) */
+"Please select" = "Bitte auswählen";
+
+/* Position */
+"Position" = "Position";
+
+/* Position in group */
+"Position in group" = "Position in der Gruppe";
+
+/* Privacy */
+"Privacy" = "Datenschutz";
+
+/* Profile */
+"Profile" = "Profil";
 
 /* Profile Running */
 "Profile Running" = "Profil wird ausgeführt";
@@ -82,41 +496,299 @@
 /* Profile UploadError */
 "Profile UploadError" = "Profile UploadError";
 
-/* Upload Context */
-"Upload" = "Hochladen";
+/* Live Activity incident\nQuick incident comment */
+"Quickly recorded. Details can be added later." = "Schnell erfasst. Details können später ergänzt werden.";
+
+/* (No Comment) */
+"Racing Bike" = "Rennrad";
 
 /* Re-Upload */
 "Re-Upload" = "Nochmals hochladen";
 
+/* Ready */
+"Ready" = "Bereit";
+
+/* Ready for next ride */
+"Ready for next ride" = "Bereit für die nächste Fahrt";
+
+/* Ride reminder title */
+"Ready to ride?" = "Bereit für die nächste Fahrt?";
+
+/* (No Comment) */
+"Record an incident with a hazard type." = "Gefahr mit Gefahrentyp erfassen.";
+
+/* Record riding behavior */
+"Record riding behavior" = "Fahrverhalten aufzeichnen";
+
 /* Recording */
 "Recording" = "Aufzeichnung";
+
+/* Recording in progress */
+"Recording in progress" = "Aufnahme läuft";
+
+/* Recording not started yet */
+"Recording not started yet" = "Aufzeichnung nicht gestartet";
+
+/* Recording start delay */
+"Recording start delay" = "Aufzeichnungsbeginn";
+
+/* Siri dialog strings */
+"Recording started." = "Aufzeichnung gestartet.";
+
+/* Recording starts when the selected time or distance is reached. */
+"Recording starts when the selected time or distance is reached." = "Die Aufzeichnung beginnt erst, wenn die gewählte Zeit oder Strecke erreicht wurde.";
+
+/* (No Comment) */
+"Recording stopped." = "Aufzeichnung gestoppt.";
+
+/* Widget Strings */
+"Recording Widget" = "Aufzeichnungs-Widget";
+
+/* (No Comment) */
+"Recumbent Bike" = "Liegerad";
+
+/* Region */
+"Region" = "Region";
+
+/* Report danger hint */
+"Report a dangerous situation during the ride" = "Melde während der Fahrt eine gefährliche Situation.";
+
+/* Report danger button */
+"Report danger" = "Gefahr melden";
+
+/* Recorded danger marker */
+"Reported danger" = "Gemeldete Gefahr";
+
+/* Weekly ride reminder */
+"Ride reminder" = "Fahrt-Erinnerung";
+
+/* (No Comment) */
+"Ride Statistics" = "Fahrtstatistiken";
+
+/* (No Comment) */
+"Rides" = "Fahrten";
+
+/* Time of day distribution */
+"Rides by time of day" = "Fahrten nach Tageszeit";
+
+/* Riding behavior */
+"Riding behavior" = "Fahrverhalten";
+
+/* (No Comment) */
+"Right Offset" = "Rechter Abstand";
 
 /* Running */
 "Running" = "Läuft";
 
-/* SimRa */
-"SimRa" = "SimRa";
+/* Save\nSave changes */
+"Save changes" = "Änderungen speichern";
 
-/* SimRa now supports many regions. Do you want to set a region to improve your contributions to the project? This way, we can increase the significance of our results */
-"Please choose your correct region, so that we can analyse your ride correctly. Your selected region:" = "Bitte stellen Sie Ihre Region ein, damit Ihre Daten richtig ausgewertet werden können. Ihre derzeit ausgewählte Region ist:";
+/* Save reminder settings */
+"Save reminder" = "Erinnerung speichern";
+
+/* Save changes hint */
+"Saves the changed trip details." = "Speichert die geänderten Fahrtdetails.";
+
+/* (No Comment) */
+"Scanning for OpenBikeSensor..." = "Suche nach OpenBikeSensor...";
+
+/* (No Comment) */
+"Scary / Danger" = "Beängstigend / Gefahr";
+
+/* (No Comment) */
+"Scary incidents" = "Beängstigende Vorfälle";
+
+/* No comment provided by engineer. */
+"Schneiden" = "Schneiden";
+
+/* Search trips */
+"Search trips" = "Fahrten suchen";
+
+/* (No Comment) */
+"Select all road users involved in the incident." = "Wählen Sie alle am Vorfall beteiligten Verkehrsteilnehmer aus.";
+
+/* Diagnostic upload title */
+"Send local app data to SimRa team" = "Lokale App-Daten an das SimRa-Team senden";
+
+/* Sensitivity */
+"Sensitivity" = "Empfindlichkeit";
+
+/* (No Comment) */
+"Sensor Details" = "Sensor-Details";
+
+/* Sensors */
+"Sensors" = "Sensoren";
 
 /* Settings */
 "Settings" = "Einstellungen";
 
-/* Trips */
-"Trips" = "Fahrten";
+/* Shortcut source */
+"Shortcut source" = "Kurzbefehle";
+
+/* Shortcut source */
+"Shortcut source description" = "Über Kurzbefehle erfasst";
+
+/* Show route on map */
+"Show recorded route" = "Gefahrene Linie anzeigen";
+
+/* No comment provided by engineer. */
+"Sicherheit im Radverkehr — TU Berlin" = "Sicherheit im Radverkehr — TU Berlin";
+
+/* SimRa */
+"SimRa" = "SimRa";
+
+/* SimRa can record and evaluate your riding behavior during a ride. */
+"SimRa can record and evaluate your riding behavior during a ride." = "SimRa kann dein Fahrverhalten während einer Fahrt aufzeichnen und auswerten.";
+
+/* SimRa Hazard Map */
+"SimRa Hazard Map" = "SimRa Gefahrenkarte";
+
+/* Siri\nSource badge for Siri incidents */
+"Siri" = "Siri";
+
+/* Siri */
+"Siri source description" = "Über Siri erfasst";
+
+/* Upload failed */
+"Something went wrong. Please try again later" = "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal";
+
+/* (No Comment) */
+"Specify what happened and if there was concrete danger." = "Geben Sie an, was passiert ist und ob konkrete Gefahr bestand.";
+
+/* Start */
+"Start" = "Start";
+
+/* Start ride hint */
+"Start a new ride" = "Neue Fahrt starten";
+
+/* Ride reminder body */
+"Start a SimRa recording for your next ride." = "Starte eine SimRa-Aufzeichnung für deine nächste Fahrt.";
+
+/* (No Comment) */
+"Start or continue a SimRa recording." = "Starten oder fortsetzen Sie eine SimRa-Aufzeichnung.";
+
+/* (No Comment) */
+"Start Recording" = "Aufzeichnung starten";
 
 /* Start Ride */
 "Start Ride" = "Fahrt starten";
 
-/* Stop Ride */
-"Stop Ride" = "Fahrt stoppen";
+/* Start recording hint */
+"Startet eine neue SimRa-Aufnahme." = "Startet eine neue SimRa-Aufnahme.";
+
+/* Statistics */
+"Statistics" = "Statistik";
+
+/* Stick to rules */
+"Stick to rules" = "An Regeln halten";
 
 /* Stop */
 "Stop" = "Stopp";
 
-/* Start */
-"Start" = "Start";
+/* (No Comment) */
+"Stop Recording" = "Aufnahme stoppen";
+
+/* Stop Ride */
+"Stop Ride" = "Fahrt stoppen";
+
+/* Stop ride hint */
+"Stop the current ride" = "Aktuelle Fahrt beenden";
+
+/* System */
+"System" = "System";
+
+/* (No Comment) */
+"Tandem" = "Tandem";
+
+/* (No Comment) */
+"Tap 'Done' to save changes." = "Tippen Sie auf 'Fertig', um die Änderungen zu speichern.";
+
+/* Unsaved changes instructions */
+"Tap the checkmark to save or X to discard the changes." = "Tippe auf das Häkchen, um zu speichern, oder auf X, um die Änderungen zu verwerfen.";
+
+/* Tap to send diagnostic data to the SimRa team. */
+"Tap to send diagnostic data to the SimRa team." = "Tippen Sie, um Diagnosedaten an das SimRa-Team zu senden.";
+
+/* (No Comment) */
+"Taxi" = "Taxi";
+
+/* The bars show your previous rides and the distance covered. */
+"The bars show your previous rides and the distance covered." = "Die Balken zeigen deine bisherigen Fahrten und die zurückgelegte Distanz.";
+
+/* These bicycle and equipment settings will be applied to future trips. */
+"These bicycle and equipment settings will be applied to future trips." = "Diese Einstellungen für Fahrrad und Ausstattung werden für zukünftige Fahrten übernommen.";
+
+/* These data are used exclusively for statistical evaluations. */
+"These data are used exclusively for statistical evaluations." = "Diese Angaben werden ausschließlich für statistische Auswertungen verwendet.";
+
+/* These settings will be automatically applied to new trips. */
+"These settings will be automatically applied to new trips." = "Diese Einstellungen werden automatisch für neue Fahrten übernommen.";
+
+/* Time */
+"Time" = "Uhrzeit";
+
+/* Today */
+"Today" = "Heute";
+
+/* (No Comment) */
+"Total distance" = "Gesamtstrecke";
+
+/* (No Comment) */
+"Total Distance" = "Gesamtstrecke";
+
+/* (No Comment) */
+"Total duration" = "Gesamtdauer";
+
+/* (No Comment) */
+"Total Rides" = "Gesamtfahrten";
+
+/* Trailer */
+"Trailer" = "Anhänger";
+
+/* (No Comment) */
+"Trim" = "Schneiden";
+
+/* Trip */
+"Trip" = "Fahrt";
+
+/* Trip Details */
+"Trip Details" = "Fahrt-Details";
+
+/* Trip Settings */
+"Trip Settings" = "Fahrt-Einstellungen";
+
+/* Trip unavailable */
+"Trip unavailable" = "Fahrt nicht verfügbar";
+
+/* Trip upload success */
+"Trip uploaded successfully." = "Fahrt erfolgreich hochgeladen.";
+
+/* Trips */
+"Trips" = "Fahrten";
+
+/* Yearly distribution */
+"Trips by year" = "Fahrten nach Jahr";
+
+/* (No Comment) */
+"Trouser Pocket" = "Hosentasche";
+
+/* (No Comment) */
+"Truck" = "LKW";
+
+/* (No Comment) */
+"Unknown Device" = "Unbekanntes Gerät";
+
+/* Unknown source */
+"Unknown source" = "Quelle nicht bekannt";
+
+/* Unknown source */
+"Unknown source description" = "Die Quelle dieses Ereignisses ist nicht bekannt.";
+
+/* Unsaved Changes */
+"Unsaved Changes" = "Ungespeicherte Änderungen";
+
+/* Upload Context */
+"Upload" = "Hochladen";
 
 /* Uploaded */
 "Uploaded" = "Hochgeladen";
@@ -124,229 +796,56 @@
 /* UploadError */
 "UploadError" = "Fehler beim Hochladen";
 
+/* (No Comment) */
+"Uploading trips..." = "Fahrten werden hochgeladen...";
+
+/* Use as default */
+"Use as default" = "Als Standard verwenden";
+
+/* Incident type */
+"Vorfall" = "Vorfall";
+
+/* Incident type */
+"Vorfall-Art" = "Vorfall-Art";
+
+/* Missing incident types */
+"Vorfall-Art nicht verfügbar" = "Vorfall-Art nicht verfügbar";
+
+/* Reminder weekday */
+"Weekday" = "Wochentag";
+
+/* Source badge for widget or Live Activity incidents\nWidget or Live Activity */
+"Widget" = "Widget";
+
+/* Widget or Live Activity */
+"Widget or Live Activity" = "Über Widget oder Live Activity erfasst";
+
 /* Would you like to view the User Manual now? */
 "Would you like to view the User Manual now?" = "Möchten Sie jetzt die Anleitung ansehen?";
+
+/* User manual prompt */
+"Would you like to view the User Manual?\n\nIf not, you can access it later via Settings / How To." = "Möchten Sie die Anleitung ansehen?\n\nWenn nicht, können Sie diese später über Einstellungen / Anleitung aufrufen.";
 
 /* Yes */
 "Yes" = "Ja";
 
-/* Table Select All */
-"All" = "Alle";
-
-/* Table Select None */
-"None" = "Keine";
-
-/* Acknowledgement to send configuration*/
-"Attention! Only tap the Continue button, if you were asked to do so by the SimRa team. By Pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides." = "Achtung! Tippen Sie nur dann auf die Schaltfläche Weiter, wenn Sie vom SimRa-Team dazu aufgefordert wurden. Wenn Sie im nächsten Schritt auf die Schaltfläche Hochladen tippen, senden Sie Ihre SimRa-Konfiguration an das SimRa-Team. Sie können auch angeben, ob Sie die letzten 10 Fahrten oder alle Fahrten hochladen möchten.";
-
-"Send local app data to SimRa team" = "Lokale App-Daten an das SimRa-Team senden";
-
-"Do you also want to send rides?" = "Möchten Sie auch Fahrten senden?";
+/* Upload all rides */
 "Yes, all" = "Ja, alles";
+
+/* Upload recent rides */
 "Yes, the last" = "Ja, die letzten";
-"No, don't send any rides" = "Nein, schicken Sie keine Fahrten";
-"Files uploaded successfully" = "Dateien erfolgreich hochgeladen";
-"Something went wrong. Please try again later" = "Etwas ist schief gelaufen. Bitte versuchen Sie es später noch einmal";
 
-/* About */
-"About" = "Über";
+/* Yesterday */
+"Yesterday" = "Gestern";
 
-/* Privacy */
-"Privacy" = "Datenschutz";
+/* No comment provided by engineer. */
+"Ziel" = "Ziel";
 
-/* Feedback */
-"Feedback" = "Rückmeldung";
 
-/* Imprint */
-"Imprint" = "Impressum";
-
-/* Appearance */
-"Appearance" = "Erscheinungsbild";
-
-/* Light */
-"Light" = "Hell";
-
-/* Dark */
-"Dark" = "Dunkel";
-
-/* System */
-"System" = "System";
-
-/* App-Einstellungen */
-"App Settings" = "App-Einstellungen";
-"Customize appearance and measurement units." = "Passen Sie das Erscheinungsbild und die Maßeinheiten an.";
-"Appearance" = "Erscheinungsbild";
-"Light" = "Hell";
-"Dark" = "Dunkel";
-"System" = "System";
-
-/* App version */
-"App version" = "App-Version";
-
-/* Tap to send diagnostic data to the SimRa team. */
-"Tap to send diagnostic data to the SimRa team." = "Tippen Sie, um Diagnosedaten an das SimRa-Team zu senden.";
-
-/* Profile */
-"Profile" = "Profil";
-
-/* Trip Settings */
-"Trip Settings" = "Fahrt-Einstellungen";
-
-/* Metric System */
-"Metric System" = "Metrisches System";
-
-/* Distance in km */
-"Distance in km" = "Distanz in km";
-
-/* Recording start delay */
-"Recording start delay" = "Aufzeichnungsbeginn";
-
-/* Time */
-"Time" = "Zeit";
-
-/* Distance */
-"Distance" = "Strecke";
-
-/* Bicycle type */
-"Bicycle type" = "Fahrradtyp";
-
-/* Position */
-"Position" = "Position";
-
-/* Child seat */
-"Child seat" = "Kindersitz";
-
-/* Trailer */
-"Trailer" = "Anhänger";
-
-/* Defaults for new trips */
-"Defaults for new trips" = "Standard für neue Fahrten";
-
-/* These settings will be automatically applied to new trips. */
-"These settings will be automatically applied to new trips." = "Diese Einstellungen werden automatisch für neue Fahrten übernommen.";
-
-/* AI Recording */
-"AI Recording" = "KI-Aufzeichnung";
-
-/* Sensors */
-"Sensors" = "Sensoren";
-
-/* Configure sensor */
-"Configure sensor" = "Sensor konfigurieren";
-
-/* Recording starts when the selected time or distance is reached. */
-"Recording starts when the selected time or distance is reached." = "Die Aufzeichnung beginnt erst, wenn die gewählte Zeit oder Strecke erreicht wurde.";
-
-/* Age */
-"Age" = "Alter";
-
-/* Gender */
-"Gender" = "Geschlecht";
-
-/* Experience */
-"Experience" = "Erfahrung";
-
-/* Region */
-"Region" = "Region";
-
-/* Not selected */
-"Not selected" = "Nicht ausgewählt";
-
-/* These data are used exclusively for statistical evaluations. */
-"These data are used exclusively for statistical evaluations." = "Diese Angaben werden ausschließlich für statistische Auswertungen verwendet.";
-
-/* Record riding behavior */
-"Record riding behavior" = "Fahrverhalten aufzeichnen";
-
-/* Stick to rules */
-"Stick to rules" = "An Regeln halten";
-
-/* SimRa can record and evaluate your riding behavior during a ride. */
-"SimRa can record and evaluate your riding behavior during a ride." = "SimRa kann dein Fahrverhalten während einer Fahrt aufzeichnen und auswerten.";
-
-/* Overview */
-"Overview" = "Übersicht";
-
-/* Statistics */
-"Statistics" = "Statistik";
-"Total duration" = "Gesamtdauer";
-"Idle time" = "Standzeit";
-"Scary incidents" = "Beängstigende Vorfälle";
-"Rides by time of day" = "Fahrten nach Tageszeit";
-
-/* The bars show your previous rides and the distance covered. */
-"The bars show your previous rides and the distance covered." = "Die Balken zeigen deine bisherigen Fahrten und die zurückgelegte Distanz.";
-
-/* Position in group */
-"Position in group" = "Position in der Gruppe";
-
-/* Ready */
-"Ready" = "Bereit";
-
-/* Recording in progress */
-"Recording in progress" = "Aufzeichnung läuft";
-
-/* Ready for next ride */
-"Ready for next ride" = "Bereit für die nächste Fahrt";
-
-/* Recording not started yet */
-"Recording not started yet" = "Aufzeichnung nicht gestartet";
-
-/* Dangers */
-"Dangers" = "Gefahren";
-
-/* Accessibility label for app version */
-"Accessibility label for app version" = "Barrierefreiheits-Label für App-Version";
-
-/* Accessibility hint for app version */
-"Accessibility hint for app version" = "Barrierefreiheits-Hinweis für App-Version";
-
-/* Recording time format */
-
-/* Widget - Start new ride button */
-"Start a new ride" = "Neue Fahrt starten";
-
-/* Widget - Ready to record state */
-"Ready" = "Bereit";
-
-/* Widget - Danger reporting button */
+/* Restored existing localized entries */
 "Mark danger" = "Gefahr melden";
-
-/* Widget - Stop recording button */
 "Stop recording" = "Aufzeichnung beenden";
-
-/* Widget - Total distance label */
-"Gesamt" = "Gesamt";
-
-/* Widget - Total rides */
-"Rides" = "Fahrten";
-
-/* Widget - Total time label */
-"Time" = "Zeit";
-
-/* Widget - Incidents count plural */
 "incidents" = "Vorfälle";
-
-/* Widget - Ready subtitle */
-"Start a new ride" = "Neue Fahrt starten";
-"%.0f s" = "%.0f s";
-
-/* Language */
-"Language" = "Sprache";
-"Automatic" = "Automatisch";
-
-/* Siri dialog strings */
-"Recording started." = "Aufzeichnung gestartet.";
-"Start Recording" = "Aufzeichnung starten";
-"Hazard type" = "Gefahrentyp";
-"Hazard recorded." = "Gefahr erfasst.";
-"Record an incident with a hazard type." = "Gefahr mit Gefahrentyp erfassen.";
-"A SimRa recording is already active." = "Eine SimRa-Aufnahme läuft bereits.";
-"No SimRa recording is active." = "Aktuell läuft keine SimRa-Aufnahme.";
-"Button recording" = "Über den Button erfasst";
-"Recording stopped." = "Aufzeichnung gestoppt.";
-"A recording is already in progress." = "Es läuft bereits eine Aufzeichnung.";
-"No recording is currently active." = "Es ist keine Aufzeichnung aktiv.";
 "Close Passing marked." = "Zu nahes Überholen markiert.";
 "Parking Car marked." = "Einparkendes Auto markiert.";
 "Turning Accident marked." = "Abbiegeunfall markiert.";
@@ -355,112 +854,7 @@
 "Dooring marked." = "Türöffnen markiert.";
 "Sidestep marked." = "Ausweichen markiert.";
 "Incident marked." = "Vorfall markiert.";
-
-/* Additional UI Strings */
-"News" = "Neuigkeiten";
-"No news available" = "Keine Neuigkeiten vorhanden";
-"Sensor Details" = "Sensor-Details";
-"Left Offset" = "Linker Abstand";
-"Right Offset" = "Rechter Abstand";
-"Distance Indicator" = "Abstandsanzeige";
-"Disconnect Sensor" = "Sensor trennen";
-"Discovered Devices" = "Gefundene Geräte";
-"Scanning for OpenBikeSensor..." = "Suche nach OpenBikeSensor...";
-"No devices found" = "Keine Geräte gefunden";
-"Unknown Device" = "Unbekanntes Gerät";
-"OpenBikeSensor" = "OpenBikeSensor";
-"Open OpenBikeSensor settings" = "OpenBikeSensor-Einstellungen öffnen";
-"Hazard Map" = "Gefahrenkarte";
-"SimRa Hazard Map" = "SimRa Gefahrenkarte";
-"Open the SimRa street safety map" = "SimRa Straßensicherheitskarte öffnen";
-"My Trips" = "Meine Fahrten";
-"Open recorded trips" = "Aufgezeichnete Fahrten öffnen";
-"Open SimRa settings" = "SimRa-Einstellungen öffnen";
-"Map" = "Karte";
-"Would you like to view the User Manual?\n\nIf not, you can access it later via Settings / How To." = "Möchten Sie die Anleitung ansehen?\n\nWenn nicht, können Sie diese später über Einstellungen / Anleitung aufrufen.";
-"No trips" = "Keine Fahrten";
-"Once trips are recorded, they will appear here." = "Sobald Fahrten aufgezeichnet wurden, erscheinen sie hier.";
-"Uploading trips..." = "Fahrten werden hochgeladen...";
-"Today" = "Heute";
-"Yesterday" = "Gestern";
-"Duration unknown" = "Dauer unbekannt";
-"No unuploaded trips selected." = "Keine nicht hochgeladenen Fahrten ausgewählt.";
-"Trip uploaded successfully." = "Fahrt erfolgreich hochgeladen.";
-"%d trips uploaded successfully." = "%d Fahrten erfolgreich hochgeladen.";
-"%d succeeded, %d failed." = "%d erfolgreich, %d fehlgeschlagen.";
-"Edit trip" = "Fahrt bearbeiten";
-"Details" = "Details";
-"Trim" = "Schneiden";
-"Danger" = "Gefahr";
-"Edit incident" = "Vorfall bearbeiten";
-"Incident type" = "Art des Vorfalls";
-"Scary / Danger" = "Beängstigend / Gefahr";
-"Incident" = "Vorfall";
-"Specify what happened and if there was concrete danger." = "Geben Sie an, was passiert ist und ob konkrete Gefahr bestand.";
-"Involved parties" = "Beteiligte";
-"Select all road users involved in the incident." = "Wählen Sie alle am Vorfall beteiligten Verkehrsteilnehmer aus.";
-"Car" = "Auto";
-"Taxi" = "Taxi";
-"Delivery vehicle / Van" = "Lieferwagen / Transporter";
-"Bus" = "Bus";
-"Truck" = "LKW";
-"Pedestrian" = "Fußgänger";
-"Bicycle" = "Fahrrad";
-"Motorcycle" = "Motorrad";
-"E-Scooter" = "E-Scooter";
-
-/* Widget Strings */
-"Recording Widget" = "Aufzeichnungs-Widget";
-"Start or continue a SimRa recording." = "Starten oder fortsetzen Sie eine SimRa-Aufzeichnung.";
-"Duration" = "Dauer";
-"Distance" = "Entfernung";
-"Incidents" = "Vorfälle";
-"Total Rides" = "Gesamtfahrten";
-"Total Distance" = "Gesamtstrecke";
-"Mark Incident" = "Gefahr erfassen";
-"Stop Recording" = "Aufnahme stoppen";
-"Elapsed Time" = "Verstrichene Zeit";
-"Incidents Recorded" = "Vorfälle erfasst";
-"Ride Statistics" = "Fahrtstatistiken";
-"Rides" = "Fahrten";
-"km" = "km";
-"Total Distance" = "Gesamtstrecke";
-"Other" = "Andere";
-"Comment" = "Kommentar";
-"Note" = "Hinweis";
-"Optional. Additional information about the incident." = "Optional. Zusätzliche Informationen zum Vorfall.";
-"Equipment" = "Ausstattung";
-"Use as default" = "Als Standard verwenden";
-"These bicycle and equipment settings will be applied to future trips." = "Diese Einstellungen für Fahrrad und Ausstattung werden für zukünftige Fahrten übernommen.";
-"Unsaved Changes" = "Ungespeicherte Änderungen";
-"Tap 'Done' to save changes." = "Tippen Sie auf 'Fertig', um die Änderungen zu speichern.";
-"Trip Details" = "Fahrt-Details";
-"Total distance" = "Gesamtstrecke";
-"Riding behavior" = "Fahrverhalten";
-"Total duration" = "Gesamtdauer";
 "Total incidents" = "Gesamtvorfälle";
-"Please select" = "Bitte auswählen";
-"Not available" = "Nicht verfügbar";
-"male" = "männlich";
-"female" = "weiblich";
-"diverse" = "divers";
-"more than 10 years" = "mehr als 10 Jahre";
-"5 to 10 years" = "5 bis 10 Jahre";
-"2 to 4 years" = "2 bis 4 Jahre";
-"less than 2 years" = "weniger als 2 Jahre";
-"(not selected)" = "(nicht ausgewählt)";
-"City or Trecking Bike" = "City- oder Trecking-Rad";
-"Racing Bike" = "Rennrad";
-"E-Bike" = "E-Bike";
-"Recumbent Bike" = "Liegerad";
-"Cargo Bike" = "Lastenfahrrad";
-"Tandem" = "Tandem";
-"Mountain Bike" = "Mountainbike";
-"Trouser Pocket" = "Hosentasche";
-"Handlebar" = "Lenker";
-"Jacket Pocket" = "Jackentasche";
-"Mark Incident" = "Gefahr erfassen";
-"Stop Recording" = "Aufnahme stoppen";
 "%d incidents" = "%d Vorfälle";
 "Handheld" = "In der Hand";
 "Bike Basket / Pannier" = "Fahrradkorb oder -tasche";
@@ -471,39 +865,19 @@
 "Parking Car" = "Ein- oder ausparkendes Fahrzeug";
 "Almost Turning Accident" = "Beinahe-Abbiegeunfall";
 "Oncoming Traffic" = "Entgegenkommender Verkehrsteilnehmer";
-"Tailgating" = "Zu dichtes Auffahren";
+"Tailgating" = "Drängeln";
 "Almost Dooring" = "Beinahe-Dooring";
 "Sidestep (e.g. a dog)" = "Hindernis ausweichen (z.B. Hund)";
-
-/* Battery Optimization */
 "Battery Optimization" = "Akkuoptimierung";
 "Maximum Accuracy" = "Maximale Genauigkeit";
 "Balanced" = "Ausgeglichen";
 "Maximum Battery Saving" = "Maximale Akkueinsparung";
 "Select battery optimization level" = "Wählen Sie die Akkuoptimierungsstufe";
-
-/* Start */
-"Start" = "Start";
-
-/* Hazard Types */
 "Pothole" = "Schlagloch";
-"Tailgating" = "Drängeln";
 "Illegal Parking" = "Falschparker";
-
-/* Traffic Participants */
-"Car" = "PKW";
-"Pedestrian" = "Fußgänger";
-"Truck" = "LKW";
-"Bus" = "Bus";
-"Motorcycle" = "Motorrad";
-"Bicycle" = "Fahrrad";
-
-/* Hazard Sources */
 "Detected via On-Device AI" = "Erkannt via On-Device AI";
 "Detected via Online AI" = "Erkannt via Online AI";
 "Manually recorded" = "Manuell erfasst";
-
-/* Widget */
 "Recording active" = "Aufnahme läuft";
 "%d min ago" = "vor %d Min.";
 "Distance: %@ km" = "Distanz: %@ km";
@@ -511,33 +885,39 @@
 "%d min" = "%d Min.";
 "Shortcut" = "Kurzbefehle";
 "Shortcuts" = "Kurzbefehle";
-"Apple Watch" = "Apple Watch";
 "Involved road user" = "Beteiligte Verkehrsteilnehmer";
-"Do not show map" = "Keine Karte anzeigen";
-"Show recorded route" = "Gefahrene Linie anzeigen";
-"Appearance" = "Darstellung";
-"System" = "System";
-"Light" = "Hell";
-"Dark" = "Dunkel";
-"Map display" = "Kartendarstellung";
-"No route recorded" = "Keine Strecke aufgezeichnet";
-"Notifications" = "Benachrichtigungen";
-"Ride reminder" = "Fahrt-Erinnerung";
-"Weekday" = "Wochentag";
-"Time" = "Uhrzeit";
-"Save reminder" = "Erinnerung speichern";
-"Ready to ride?" = "Bereit für die nächste Fahrt?";
-"Start a SimRa recording for your next ride." = "Starte eine SimRa-Aufzeichnung für deine nächste Fahrt.";
-"Search trips" = "Fahrten suchen";
-
-/* Live Activity */
-"Recording in progress" = "Aufnahme läuft";
 "Mark hazard" = "Gefahr erfassen";
 "Record incident" = "Incident erfassen";
-"Quickly recorded. Details can be added later." = "Schnell erfasst. Details können später ergänzt werden.";
-
-/* End of Trip */
 "Trip completed" = "Fahrt beendet";
-"Save changes" = "Änderungen speichern";
 "Discard" = "Verwerfen";
 "Review your ride" = "Fahrt überprüfen";
+
+/* Scary or dangerous */
+"Scary or dangerous" = "Erschrecken / Gefährdung";
+
+/* Van / delivery vehicle */
+"Van / delivery vehicle" = "Lieferwagen / Transporter";
+
+/* E-scooter */
+"E-scooter" = "E-Scooter";
+
+/* Involved road users */
+"Involved road users" = "Beteiligte Verkehrsteilnehmer";
+
+/* Destination */
+"Destination" = "Ziel";
+
+"What happened?" = "Was ist passiert?";
+
+"Who was involved?" = "Wer war beteiligt?";
+
+"Sensitivity" = "Empfindlichkeit";
+
+"Uploaded" = "Hochgeladen";
+
+/* Additional localized app messages */
+"Incident type unavailable" = "Vorfall-Art nicht verfügbar";
+"No data" = "Keine Daten";
+"No values are available for this statistic yet." = "Für diese Statistik sind noch keine Werte vorhanden.";
+"Dooring" = "Dooring";
+"Turning Accident" = "Abbiegeunfall";

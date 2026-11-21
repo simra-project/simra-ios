@@ -497,3 +497,13 @@
 "Save changes" = "Save changes";
 "Discard" = "Discard";
 "Review your ride" = "Review your ride";
+
+"What happened?" = "What happened?";
+"Who was involved?" = "Who was involved?";
+
+/* Additional localized app messages */
+"Incident type unavailable" = "Incident type unavailable";
+"No data" = "No data";
+"No values are available for this statistic yet." = "No values are available for this statistic yet.";
+"Dooring" = "Dooring";
+"Turning Accident" = "Turning Accident";

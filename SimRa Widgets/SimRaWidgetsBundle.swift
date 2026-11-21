@@ -16,5 +16,6 @@ struct SimRaWidgetsBundle: WidgetBundle {
     var body: some Widget {
         SimRaRecordingWidget()
         SimRaLiveActivity()
+        SimRaUploadLiveActivity()
     }
 }

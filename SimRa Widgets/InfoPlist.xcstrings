@@ -5,10 +5,22 @@
       "comment" : "Bundle display name",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "SimRa-Widgets"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "SimRa Widgets"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Widgets SimRa"
           }
         }
       }
@@ -17,10 +29,22 @@
       "comment" : "Bundle name",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "SimRa-Widget-Erweiterung"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "SimRa WidgetsExtension"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Extension de widgets SimRa"
           }
         }
       }
@@ -29,10 +53,22 @@
       "comment" : "Copyright (human-readable)",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Copyright © 2026 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. Alle Rechte vorbehalten."
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Copyright © 2026 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Copyright © 2026 Mobile Cloud Computing de la faculté IV (génie électrique et informatique) de l’Université technique de Berlin. Tous droits réservés."
           }
         }
       }
