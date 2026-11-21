@@ -44,13 +44,6 @@ struct ProfileView: View {
     @AppStorage("behaviourValue")
     private var behaviourValue: Double = 0.5
 
-    // MARK: - Statistics
-
-    @State private var totalRides: Int = 0
-    @State private var totalLength: Double = 0
-    @State private var totalDuration: Int = 0
-    @State private var totalIncidents: Int = 0
-
     // MARK: - Constants
 
     private var constants: [String: Any] {
@@ -96,7 +89,7 @@ struct ProfileView: View {
         if let arr = constants["bikeTypes"] as? [String], !arr.isEmpty { return arr }
         return [
             NSLocalizedString("(not selected)", comment: "Bike type fallback"),
-            NSLocalizedString("City or Trecking Bike", comment: "Bike type"),
+            NSLocalizedString("City or Trekking Bike", comment: "Bike type"),
             NSLocalizedString("Racing Bike", comment: "Bike type"),
             NSLocalizedString("E-Bike", comment: "Bike type"),
             NSLocalizedString("Recumbent Bike", comment: "Bike type"),
@@ -277,136 +270,6 @@ struct ProfileView: View {
 
                 Text(NSLocalizedString("SimRa can record and evaluate your riding behavior during a ride.", comment: "SimRa can record and evaluate your riding behavior during a ride."))
             }
-
-            // MARK: Statistics
-
-            Section {
-
-                HStack {
-
-                    Label(
-                        NSLocalizedString("Trips", comment: "Trips"),
-                        systemImage: "bicycle"
-                    )
-
-                    Spacer()
-
-                    Text(
-                        "\(totalRides)"
-                    )
-                    .fontWeight(.semibold)
-                    .monospacedDigit()
-                }
-
-                HStack {
-
-                    Label(
-                        NSLocalizedString("Total distance", comment: "Total distance"),
-                        systemImage: "point.topleft.down.curvedto.point.bottomright.up"
-                    )
-
-                    Spacer()
-
-                    Text(
-                        formattedDistance
-                    )
-                    .fontWeight(.semibold)
-                    .monospacedDigit()
-                }
-
-                HStack {
-
-                    Label(
-                        NSLocalizedString("Total duration", comment: "Total duration"),
-                        systemImage: "clock"
-                    )
-
-                    Spacer()
-
-                    Text(
-                        formattedDuration
-                    )
-                    .fontWeight(.semibold)
-                    .monospacedDigit()
-                }
-
-                HStack {
-
-                    Label(
-                        NSLocalizedString("Total incidents", comment: "Total incidents"),
-                        systemImage: "exclamationmark.triangle"
-                    )
-
-                    Spacer()
-
-                    Text(
-                        "\(totalIncidents)"
-                    )
-                    .fontWeight(.semibold)
-                    .monospacedDigit()
-                }
-
-                if totalRides > 0 {
-                    HStack {
-                        Label(
-                            NSLocalizedString("Average distance", comment: "Average distance"),
-                            systemImage: "arrow.triangle.swap"
-                        )
-
-                        Spacer()
-
-                        Text(
-                            formattedAverageDistance
-                        )
-                        .fontWeight(.semibold)
-                        .monospacedDigit()
-                    }
-
-                    HStack {
-                        Label(
-                            NSLocalizedString("CO₂ saved", comment: "CO₂ saved"),
-                            systemImage: "leaf"
-                        )
-
-                        Spacer()
-
-                        Text(
-                            formattedCO2
-                        )
-                        .fontWeight(.semibold)
-                        .monospacedDigit()
-                    }
-                }
-
-            } header: {
-
-                Text(NSLocalizedString("Overview", comment: "Overview"))
-            }
-
-            // MARK: Chart
-
-            Section {
-
-                DSBarChart(
-                    references: [
-                        NSLocalizedString("Trips", comment: "Trips"),
-                        NSLocalizedString("Distance (km)", comment: "Distance in km")
-                    ],
-                    values: [
-                        Double(totalRides),
-                        totalLength / 1000.0
-                    ]
-                )
-                .frame(height: 190)
-
-            } header: {
-
-                Text(NSLocalizedString("Statistics", comment: "Statistics"))
-
-            } footer: {
-
-                Text(NSLocalizedString("The bars show your previous rides and the distance covered.", comment: "The bars show your previous rides and the distance covered."))
-            }
         }
         .navigationTitle(NSLocalizedString("Profile", comment: "Profile"))
         .navigationBarTitleDisplayMode(.inline)
@@ -414,9 +277,8 @@ struct ProfileView: View {
             .smooth,
             value: behaviour
         )
-        .onAppear {
+        .task {
             loadRegion()
-            loadStatistics()
         }
     }
 
@@ -433,91 +295,14 @@ struct ProfileView: View {
     private func saveRegion() {
         let appDelegate = AppDelegate.shared()
         appDelegate.regions.selectPosition(regionId)
-        loadStatistics()
     }
 
     // MARK: - Set Language
 
     private func setAppLanguage(_ languageCode: String) {
-        if languageCode == "auto" {
-            UserDefaults.standard.removeObject(forKey: "AppleLanguages")
-        } else {
-            UserDefaults.standard.set([languageCode], forKey: "AppleLanguages")
-        }
-        UserDefaults.standard.synchronize()
+        LanguageLocalization.apply(languageCode)
     }
 
-    // MARK: - Load Statistics
-
-    private func loadStatistics() {
-        let appDelegate = AppDelegate.shared()
-        let regionId = appDelegate.regions.regionId
-
-        totalRides = appDelegate.defaults.integer(forKey: withRegionId("totalRides", regionId: regionId))
-        totalLength = Double(appDelegate.defaults.integer(forKey: withRegionId("totalLength", regionId: regionId)))
-        totalDuration = appDelegate.defaults.integer(forKey: withRegionId("totalDuration", regionId: regionId))
-        totalIncidents = appDelegate.defaults.integer(forKey: withRegionId("totalIncidents", regionId: regionId))
-    }
-
-    private func withRegionId(_ key: String, regionId: Int) -> String {
-        if regionId == 0 {
-            return key
-        }
-        return "\(key)-\(regionId)"
-    }
-
-    // MARK: - Formatting
-
-    private var durationInSeconds: Int {
-        // If stored in milliseconds (legacy SimRa stored ms, e.g. 3,600,000 for 1h)
-        if totalDuration > 100_000 {
-            return totalDuration / 1000
-        }
-        return totalDuration
-    }
-
-    private var formattedDistance: String {
-
-        let kilometers = totalLength / 1000.0
-
-        if kilometers < 100 {
-            return String(
-                format: "%.1f km",
-                kilometers
-            )
-        }
-
-        return String(
-            format: "%.0f km",
-            kilometers
-        )
-    }
-
-    private var formattedAverageDistance: String {
-        guard totalRides > 0 else { return "0.0 km" }
-        let avgKm = (totalLength / 1000.0) / Double(totalRides)
-        return String(format: "%.1f km", avgKm)
-    }
-
-    private var formattedCO2: String {
-        let kilometers = totalLength / 1000.0
-        let co2Kg = kilometers * 0.138
-        if co2Kg < 10 {
-            return String(format: "%.2f kg", co2Kg)
-        }
-        return String(format: "%.1f kg", co2Kg)
-    }
-
-    private var formattedDuration: String {
-        let seconds = durationInSeconds
-        let hours = seconds / 3600
-        let minutes = (seconds % 3600) / 60
-        if hours > 0 {
-            return String(format: "%d h %d min", hours, minutes)
-        } else {
-            return String(format: "%d min", minutes)
-        }
-    }
 }
 
 // MARK: - Preview

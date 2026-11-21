@@ -449,7 +449,7 @@
 "2 to 4 years" = "2 to 4 years";
 "less than 2 years" = "less than 2 years";
 "(not selected)" = "(not selected)";
-"City or Trecking Bike" = "City or Trecking Bike";
+"City or Trekking Bike" = "City or Trekking Bike";
 "Racing Bike" = "Racing Bike";
 "E-Bike" = "E-Bike";
 "Recumbent Bike" = "Recumbent Bike";
@@ -541,3 +541,107 @@
 "Save changes" = "Save changes";
 "Discard" = "Discard";
 "Review your ride" = "Review your ride";
+
+"Automatic detection" = "Automatic detection";
+
+"Unknown source" = "Unknown source";
+
+"Automatically detected" = "Automatically detected";
+
+"Recorded via Widget or Live Activity" = "Recorded via Widget or Live Activity";
+
+"Recorded via Shortcuts" = "Recorded via Shortcuts";
+
+"Recorded via Apple Watch" = "Recorded via Apple Watch";
+
+"Recorded via Siri" = "Recorded via Siri";
+
+"Added manually on map." = "Added manually on map.";
+
+"The source of this event is unknown." = "The source of this event is unknown.";
+
+"Source" = "Source";
+
+"Incident type unavailable" = "Incident type unavailable";
+
+"Scary or dangerous" = "Scary or dangerous";
+
+"Involved road users" = "Involved road users";
+
+"Destination" = "Destination";
+
+"No data" = "No data";
+
+"No values are available for this statistic yet." = "No values are available for this statistic yet.";
+
+"Dooring" = "Dooring";
+
+"Turning Accident" = "Turning Accident";
+
+"Sidestep" = "Sidestep";
+
+"Attention! Only tap the Continue button if you were asked to do so by the SimRa team. By pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides." = "Attention! Only tap the Continue button if you were asked to do so by the SimRa team. By pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides.";
+
+"Average distance" = "Average distance";
+
+"CO₂ saved" = "CO₂ saved";
+
+"Continue" = "Continue";
+
+"Discards any changes and closes the view." = "Discards any changes and closes the view.";
+
+"Distance (km)" = "Distance (km)";
+
+"Loading trip" = "Loading trip";
+
+"Report a dangerous situation during the ride" = "Report a dangerous situation during the ride";
+
+"Report danger" = "Report danger";
+
+"Reported danger" = "Reported danger";
+
+"Saves the changed trip details." = "Saves the changed trip details.";
+
+"Save" = "Save";
+
+"Close" = "Close";
+
+"Siri" = "Siri";
+
+"Stop the current ride" = "Stop the current ride";
+
+"Tap the checkmark to save or X to discard the changes." = "Tap the checkmark to save or X to discard the changes.";
+
+"Trip" = "Trip";
+
+"Trip unavailable" = "Trip unavailable";
+
+"Trips by year" = "Trips by year";
+
+"App guide" = "App guide";
+"New server news notifications" = "New server news notifications";
+"New SimRa information" = "New SimRa information";
+"Dismiss" = "Dismiss";
+"Profile and statistics" = "Profile and statistics";
+"Recording" = "Recording";
+"My Trips" = "My Trips";
+"Map and settings" = "Map and settings";
+"Start a recording before your ride. SimRa records the route and can capture incidents you report during the trip." = "Start a recording before your ride. SimRa records the route and can capture incidents you report during the trip.";
+"Open My Trips from the list icon on the map screen. Trips are sorted newest first. Select a trip to review its route and edit incident details." = "Open My Trips from the list icon on the map screen. Trips are sorted newest first. Select a trip to review its route and edit incident details.";
+"The profile shows your local trip totals. Statistics include all saved trips, whether or not they have been uploaded." = "The profile shows your local trip totals. Statistics include all saved trips, whether or not they have been uploaded.";
+"The hazard map displays reported danger points. Settings contains appearance, map, reminder, profile, and notification options." = "The hazard map displays reported danger points. Settings contains appearance, map, reminder, profile, and notification options.";
+
+"Widget" = "Widget";
+
+"Map and recording" = "Map and recording";
+"App guide map and recording section" = "Map and recording";
+"Report a danger" = "Report a danger";
+"App guide incident section" = "Report a danger";
+"My Trips and trip details" = "My Trips and trip details";
+"App guide trips section" = "My Trips and trip details";
+"Statistics and profile" = "Statistics and profile";
+"App guide statistics and profile section" = "Statistics and profile";
+"Hazard map and settings" = "Hazard map and settings";
+"App guide settings section" = "Hazard map and settings";
+
+"Uploaded" = "Uploaded";

@@ -16,14 +16,21 @@ struct SimRaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @StateObject private var bluetoothObserver = BluetoothObserver()
     @AppStorage("appAppearance") private var appAppearance: String = "auto"
+    @AppStorage("appLanguage") private var appLanguage: String = "auto"
     @Environment(\.scenePhase) private var scenePhase
+
+    init() {
+        LanguageLocalization.apply(UserDefaults.standard.string(forKey: "appLanguage") ?? "auto")
+    }
     
     var body: some Scene {
         WindowGroup {
             MainView()
+                .id(appLanguage)
+                .environment(\.locale, Locale(identifier: appLanguage == "auto" ? Locale.current.identifier : appLanguage))
                 .preferredColorScheme(colorScheme)
                 .alert("SimRa", isPresented: $bluetoothObserver.showDisconnectAlert) {
-                    Button("Return", role: .cancel) { }
+                    Button("Cancel", role: .cancel) { }
                 } message: {
                     Text("Device disconnected")
                 }

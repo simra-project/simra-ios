@@ -13,6 +13,7 @@ import MapKit
 struct MainView: View {
 
     @StateObject private var vm = MainViewModel()
+    @State private var incomingNews: [String] = []
     @Namespace private var mapScope
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
@@ -80,6 +81,9 @@ struct MainView: View {
                         )
                     }
                 }
+                .onReceive(NotificationCenter.default.publisher(for: .simRaNewsReceived)) { notification in
+                    incomingNews = notification.userInfo?["lines"] as? [String] ?? []
+                }
         }
     }
 
@@ -96,6 +100,52 @@ struct MainView: View {
                 .bottom
             ]
         )
+        .overlay(alignment: .top) {
+            if !incomingNews.isEmpty {
+                serverNewsBanner
+                    .padding(.horizontal, 12)
+                    .padding(.top, 8)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+            }
+        }
+        .animation(.easeInOut, value: incomingNews.isEmpty)
+    }
+
+    private var serverNewsBanner: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Label(
+                    NSLocalizedString("New SimRa information", comment: "New server news banner"),
+                    systemImage: "newspaper"
+                )
+                .font(.headline)
+                Spacer()
+                Button {
+                    incomingNews = []
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title3)
+                        .foregroundStyle(.secondary)
+                }
+                .accessibilityLabel(
+                    NSLocalizedString("Dismiss", comment: "Dismiss news banner")
+                )
+            }
+
+            ForEach(Array(incomingNews.prefix(4).enumerated()), id: \.offset) { _, line in
+                Text(String(line.dropFirst()))
+                    .font(.subheadline)
+                    .lineLimit(2)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .padding(14)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 18))
+        .overlay {
+            RoundedRectangle(cornerRadius: 18)
+                .strokeBorder(.white.opacity(0.2), lineWidth: 1)
+        }
+        .shadow(color: .black.opacity(0.18), radius: 12, y: 5)
     }
 
     // MARK: - Map
@@ -104,8 +154,8 @@ struct MainView: View {
         Group {
             if vm.offlineMapMode {
                 OfflineRecordingRouteView(
-                    coordinates:
-                        vm.recordingRouteCoordinates,
+                    routePoints:
+                        vm.recordingRoutePoints,
                     incidents:
                         vm.recordingIncidents,
                     showRoute:
@@ -172,16 +222,29 @@ struct MainView: View {
 
     @MapContentBuilder
     private var recordingRoute: some MapContent {
-        if let route = vm.recordingRouteOverlay {
-            MapPolyline(route)
+        ForEach(0..<max(vm.recordingRoutePoints.count - 1, 0), id: \.self) { index in
+            let start = vm.recordingRoutePoints[index]
+            let end = vm.recordingRoutePoints[index + 1]
+            let speed = (start.speedKmh + end.speedKmh) / 2
+
+            MapPolyline(coordinates: [start.coordinate, end.coordinate])
                 .stroke(
-                    .tint,
+                    routeColor(for: speed),
                     style: StrokeStyle(
                         lineWidth: 5,
                         lineCap: .round,
                         lineJoin: .round
                     )
                 )
+        }
+    }
+
+    private func routeColor(for speedKmh: Double) -> Color {
+        switch speedKmh {
+        case ..<15: .blue
+        case ..<25: .green
+        case ..<35: .orange
+        default: .red
         }
     }
 
@@ -425,6 +488,7 @@ struct MainView: View {
             )
         ) {
             vm.confirmHowTo()
+            AppDelegate.shared().showHowTo()
         }
 
         Button(
@@ -472,9 +536,22 @@ struct MainView: View {
 }
 
 private struct OfflineRecordingRouteView: View {
-    let coordinates: [CLLocationCoordinate2D]
+    let routePoints: [RecordingRoutePoint]
     let incidents: [RecordingIncident]
+
+    private var coordinates: [CLLocationCoordinate2D] {
+        routePoints.map(\.coordinate)
+    }
     let showRoute: Bool
+
+    private func routeColor(for speedKmh: Double) -> Color {
+        switch speedKmh {
+        case ..<15: .blue
+        case ..<25: .green
+        case ..<35: .orange
+        default: .red
+        }
+    }
 
     var body: some View {
         GeometryReader { proxy in
@@ -507,17 +584,19 @@ private struct OfflineRecordingRouteView: View {
                     )
                 }
 
-                var path = Path()
-                path.move(to: point(coordinates[0]))
-                for coordinate in coordinates.dropFirst() {
-                    path.addLine(to: point(coordinate))
-                }
+                for index in 0..<(routePoints.count - 1) {
+                    let start = routePoints[index]
+                    let end = routePoints[index + 1]
+                    var path = Path()
+                    path.move(to: point(start.coordinate))
+                    path.addLine(to: point(end.coordinate))
 
-                context.stroke(
-                    path,
-                    with: .color(.blue),
-                    style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round)
-                )
+                    context.stroke(
+                        path,
+                        with: .color(routeColor(for: (start.speedKmh + end.speedKmh) / 2)),
+                        style: StrokeStyle(lineWidth: 5, lineCap: .round, lineJoin: .round)
+                    )
+                }
             }
             .background(Color(.secondarySystemBackground))
             .overlay {

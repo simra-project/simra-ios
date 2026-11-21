@@ -64,6 +64,7 @@
 		9FE3CFF53040E69B00C11560 /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE3CFF43040E69B00C11560 /* BLEManager.swift */; };
 		A4FAE8452E5E1EC1009B1FA9 /* ModernRecordActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FAE8442E5E1EC1009B1FA9 /* ModernRecordActionButton.swift */; };
 		B7A100030000000000000003 /* RecordingAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A100040000000000000004 /* RecordingAppIntents.swift */; };
+		D314A1B2C3D4E5F607182930 /* LanguageLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D214A1B2C3D4E5F607182930 /* LanguageLocalization.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -148,6 +149,7 @@
 		8483380A2253E2AF00342285 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/constants.plist; sourceTree = "<group>"; };
 		8483380B2253E2C700342285 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/constants.plist; sourceTree = "<group>"; };
 		8483380C2253E2CB00342285 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/constants.plist; sourceTree = "<group>"; };
+		D114A1B2C3D4E5F607182930 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/constants.plist; sourceTree = "<group>"; };
 		84DD1E83224C0027004895F9 /* SimRa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimRa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84DD1E92224C0028004895F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84DD1E9E224C0028004895F9 /* SimRaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimRaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +207,7 @@
 		A0C9087B2ECD0B43009FD4E8 /* Hash-Suffix.h */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Hash-Suffix.h"; sourceTree = "<group>"; };
 		A4FAE8442E5E1EC1009B1FA9 /* ModernRecordActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModernRecordActionButton.swift; sourceTree = "<group>"; };
 		B7A100040000000000000004 /* RecordingAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingAppIntents.swift; sourceTree = "<group>"; };
+		D214A1B2C3D4E5F607182930 /* LanguageLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageLocalization.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -343,6 +346,7 @@
 				63882B7E265C474400E147D9 /* Extensions.swift */,
 				9FE3CF7F303FB37200C11560 /* RecordingShortcutBridge.swift */,
 				B7A100040000000000000004 /* RecordingAppIntents.swift */,
+				D214A1B2C3D4E5F607182930 /* LanguageLocalization.swift */,
 				63143E5626665AD000997995 /* Enums.swift */,
 			);
 			path = Utils;
@@ -797,6 +801,7 @@
 				A4FAE8452E5E1EC1009B1FA9 /* ModernRecordActionButton.swift in Sources */,
 				9FE3CFED30407F4A00C11560 /* Regions.swift in Sources */,
 				B7A100030000000000000003 /* RecordingAppIntents.swift in Sources */,
+				D314A1B2C3D4E5F607182930 /* LanguageLocalization.swift in Sources */,
 				9FE3CF8E303FC1A500C11560 /* SimRaAnnotationView.swift in Sources */,
 				9FC315E730421ADC00EFB67D /* Trip.swift in Sources */,
 				9FE3CF80303FB37200C11560 /* RecordingShortcutBridge.swift in Sources */,
@@ -867,6 +872,7 @@
 				8483380A2253E2AF00342285 /* en */,
 				8483380B2253E2C700342285 /* Base */,
 				8483380C2253E2CB00342285 /* de */,
+				D114A1B2C3D4E5F607182930 /* fr */,
 			);
 			name = constants.plist;
 			sourceTree = "<group>";

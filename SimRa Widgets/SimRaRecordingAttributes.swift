@@ -31,12 +31,22 @@ public struct SimRaRecordingAttributes: ActivityAttributes {
         public var distanceMeters: Int
         public var incidents: Int
         public var route: [RoutePoint]
+        public var uploadProgress: Double?
+        public var uploadCompletedCount: Int?
+        public var uploadTotalCount: Int?
+        public var uploadFailureCount: Int?
+        public var uploadFinished: Bool?
 
         public init(
             elapsedSeconds: Int = 0,
             distanceMeters: Int = 0,
             incidents: Int = 0,
-            route: [RoutePoint] = []
+            route: [RoutePoint] = [],
+            uploadProgress: Double? = nil,
+            uploadCompletedCount: Int? = nil,
+            uploadTotalCount: Int? = nil,
+            uploadFailureCount: Int? = nil,
+            uploadFinished: Bool? = nil
         ) {
             self.elapsedSeconds = max(
                 0,
@@ -53,6 +63,11 @@ public struct SimRaRecordingAttributes: ActivityAttributes {
                 incidents
             )
             self.route = route
+            self.uploadProgress = uploadProgress.map { min(max($0, 0), 1) }
+            self.uploadCompletedCount = uploadCompletedCount.map { max($0, 0) }
+            self.uploadTotalCount = uploadTotalCount.map { max($0, 0) }
+            self.uploadFailureCount = uploadFailureCount.map { max($0, 0) }
+            self.uploadFinished = uploadFinished
         }
     }
 

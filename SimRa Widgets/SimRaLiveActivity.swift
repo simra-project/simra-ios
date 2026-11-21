@@ -12,978 +12,448 @@ import AppIntents
 import SwiftUI
 import WidgetKit
 
+private typealias RoutePoint = SimRaRecordingAttributes.ContentState.RoutePoint
+
 // MARK: - Live Activity
 
 struct SimRaLiveActivity: Widget {
 
     var body: some WidgetConfiguration {
-
-        ActivityConfiguration(
-            for: SimRaRecordingAttributes.self
-        ) { context in
-
-            SimRaLiveActivityLockScreenView(
-                context: context
-            )
-            .activityBackgroundTint(.clear)
-            .activitySystemActionForegroundColor(.primary)
+        ActivityConfiguration(for: SimRaRecordingAttributes.self) { context in
+            SimRaLockScreenView(context: context)
+                .activityBackgroundTint(.clear)
+                .activitySystemActionForegroundColor(.primary)
 
         } dynamicIsland: { context in
-
-            DynamicIsland(
-                expanded: {
-
-                    DynamicIslandExpandedRegion(
-                        .leading
-                    ) {
-
-                        SimRaLiveActivityBrand()
-                    }
-
-                    DynamicIslandExpandedRegion(
-                        .trailing
-                    ) {
-
-                        HStack(spacing: 10) {
-
-                            SimRaHazardButton()
-
-                            SimRaStopButton()
-                        }
-                    }
-
-                    DynamicIslandExpandedRegion(
-                        .bottom
-                    ) {
-
-                        ZStack {
-
-                            ActivityRouteBackground(
-                                points:
-                                    context.state.route
-                            )
-                            .opacity(0.55)
-                            .allowsHitTesting(false)
-
-                            VStack(spacing: 14) {
-
-                                Divider()
-                                    .opacity(0.3)
-
-                                HStack(spacing: 0) {
-
-                                    SimRaRunningDuration(
-                                        elapsedSeconds:
-                                            context.state
-                                            .elapsedSeconds
-                                    )
-
-                                    Spacer(
-                                        minLength: 24
-                                    )
-
-                                    SimRaLargeMetric(
-                                        title:
-                                            "Strecke",
-                                        value:
-                                            context.state
-                                            .formattedDistance,
-                                        systemImage:
-                                            "point.topleft.down.curvedto.point.bottomright.up"
-                                    )
-                                }
-                                .padding(
-                                    .horizontal,
-                                    4
-                                )
-                            }
-                        }
-                    }
-
-                },
-                compactLeading: {
-
-                    Image(
-                        systemName:
-                            "bicycle"
-                    )
-                    .font(
-                        .system(
-                            size: 14,
-                            weight: .semibold
-                        )
-                    )
-                    .foregroundStyle(
-                        .blue
-                    )
-
-                },
-                compactTrailing: {
-
-                    Text(
-                        context.state
-                            .formattedDistance
-                    )
-                    .font(
-                        .system(
-                            size: 12,
-                            weight: .semibold
-                        )
-                    )
-                    .monospacedDigit()
-                    .foregroundStyle(
-                        .primary
-                    )
-
-                },
-                minimal: {
-
-                    Image(
-                        systemName:
-                            "bicycle"
-                    )
-                    .font(
-                        .system(
-                            size: 13,
-                            weight: .semibold
-                        )
-                    )
-                    .foregroundStyle(
-                        .blue
-                    )
+            DynamicIsland {
+                DynamicIslandExpandedRegion(.leading) {
+                    SimRaBrand()
+                        .padding(.leading, 4)
+                        .frame(maxHeight: .infinity, alignment: .center)
                 }
-            )
+
+                DynamicIslandExpandedRegion(.trailing) {
+                    if context.attributes.tripId != 0 {
+                        SimRaActionButtons(size: 40)
+                    }
+                }
+
+                DynamicIslandExpandedRegion(.bottom) {
+                    if context.attributes.tripId == 0 {
+                        SimRaUploadStatus(context: context)
+                    } else {
+                        VStack(spacing: 12) {
+                            Divider()
+                                .opacity(0.3)
+
+                            SimRaMetricsRow(
+                                startDate: context.attributes.startDate,
+                                distanceMeters: context.state.distanceMeters,
+                                isStale: context.isStale,
+                                minSpacing: 24
+                            )
+                            .padding(.horizontal, 4)
+                        }
+                        .background {
+                            SimRaRouteBackground(points: context.state.route)
+                                .opacity(0.55)
+                        }
+                    }
+                }
+
+            } compactLeading: {
+                Image(systemName: "bicycle")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(.blue)
+
+            } compactTrailing: {
+                if context.attributes.tripId == 0 {
+                    Image(systemName: "icloud.and.arrow.up")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.blue)
+                } else {
+                    Text(SimRaFormat.distance(context.state.distanceMeters))
+                        .font(.caption.weight(.semibold))
+                        .monospacedDigit()
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .frame(maxWidth: 64, alignment: .trailing)
+                        .opacity(context.isStale ? 0.5 : 1)
+                }
+
+            } minimal: {
+                Image(systemName: "bicycle")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.blue)
+            }
+            .keylineTint(.blue)
         }
     }
 }
 
 // MARK: - Lock Screen
 
-private struct SimRaLiveActivityLockScreenView: View {
+private struct SimRaLockScreenView: View {
 
-    let context:
-        ActivityViewContext<
-            SimRaRecordingAttributes
-        >
+    let context: ActivityViewContext<SimRaRecordingAttributes>
 
     var body: some View {
-
-        ZStack {
-
-            ActivityRouteBackground(
-                points:
-                    context.state.route
-            )
-            .opacity(0.48)
-            .allowsHitTesting(false)
-
-            VStack(spacing: 18) {
-
-                HStack(
-                    alignment:
-                        .center
-                ) {
-
-                    SimRaLiveActivityBrand()
-
-                    Spacer(
-                        minLength: 12
-                    )
-
-                    HStack(spacing: 10) {
-
-                        SimRaHazardButton()
-
-                        SimRaStopButton()
-                    }
-                }
-
-                HStack(spacing: 0) {
-
-                    SimRaRunningDuration(
-                        elapsedSeconds:
-                            context.state
-                            .elapsedSeconds
-                    )
-
-                    Spacer(
-                        minLength: 30
-                    )
-
-                    SimRaLargeMetric(
-                        title:
-                            "Strecke",
-                        value:
-                            context.state
-                            .formattedDistance,
-                        systemImage:
-                            "point.topleft.down.curvedto.point.bottomright.up"
-                    )
+        VStack(spacing: 18) {
+            HStack(alignment: .center) {
+                SimRaBrand()
+                Spacer(minLength: 12)
+                if context.attributes.tripId != 0 {
+                    SimRaActionButtons(size: 44)
                 }
             }
-            .padding(
-                .horizontal,
-                18
-            )
-            .padding(
-                .vertical,
-                16
-            )
+
+            if context.attributes.tripId == 0 {
+                SimRaUploadStatus(context: context)
+            } else {
+                SimRaMetricsRow(
+                    startDate: context.attributes.startDate,
+                    distanceMeters: context.state.distanceMeters,
+                    isStale: context.isStale,
+                    minSpacing: 30
+                )
+            }
         }
-        .activitySystemActionForegroundColor(
-            .primary
-        )
+        .padding(.horizontal, 18)
+        .padding(.vertical, 16)
+        .background {
+            if context.attributes.tripId != 0 {
+                SimRaRouteBackground(points: context.state.route)
+                    .opacity(0.48)
+            }
+        }
     }
 }
 
-// MARK: - Running Duration
+// MARK: - Upload Status
 
-private struct SimRaRunningDuration: View {
+private struct SimRaUploadStatus: View {
 
-    let elapsedSeconds:
-        Int
+    let context: ActivityViewContext<SimRaRecordingAttributes>
 
     var body: some View {
+        let total = max(context.state.uploadTotalCount ?? 0, 1)
+        let completed = context.state.uploadCompletedCount ?? 0
+        let failed = context.state.uploadFailureCount ?? 0
+        let finished = context.state.uploadFinished ?? false
 
-        HStack(spacing: 9) {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(finished ? "Upload abgeschlossen" : "Fahrten werden hochgeladen")
+                .font(.headline)
 
-            Image(
-                systemName:
-                    "clock"
+            ProgressView(
+                value: context.state.uploadProgress ?? 0,
+                total: 1
             )
-            .font(
-                .system(
-                    size: 16,
-                    weight: .medium
-                )
-            )
-            .foregroundStyle(
-                .secondary
-            )
+            .tint(.blue)
 
-            VStack(
-                alignment:
-                    .leading,
-                spacing:
-                    2
-            ) {
-
-                Text(
-                    timerInterval:
-                        timerStart...Date.distantFuture,
-                    countsDown:
-                        false
-                )
-                .font(
-                    .system(
-                        size: 21,
-                        weight: .semibold
-                    )
-                )
+            Text("\(completed) von \(total) Fahrten · \(failed) fehlgeschlagen")
+                .font(.caption)
+                .foregroundStyle(.secondary)
                 .monospacedDigit()
-                .foregroundStyle(
-                    .primary
-                )
-                .lineLimit(
-                    1
-                )
-                .minimumScaleFactor(
-                    0.75
-                )
-
-                Text("Zeit")
-                    .font(
-                        .system(
-                            size: 11,
-                            weight: .medium
-                        )
-                    )
-                    .foregroundStyle(
-                        .secondary
-                    )
-                    .lineLimit(
-                        1
-                    )
-            }
         }
-    }
-
-    private var timerStart:
-        Date {
-
-        Date.now.addingTimeInterval(
-            -TimeInterval(
-                max(
-                    elapsedSeconds,
-                    0
-                )
-            )
-        )
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
     }
 }
 
-// MARK: - Activity Route Background
+// MARK: - Metrics Row
 
-private struct ActivityRouteBackground: View {
+private struct SimRaMetricsRow: View {
 
-    let points:
-        [SimRaRecordingAttributes.ContentState.RoutePoint]
+    let startDate: Date
+    let distanceMeters: Int
+    let isStale: Bool
+    let minSpacing: CGFloat
 
     var body: some View {
-
-        GeometryReader { _ in
-
-            Canvas { context, size in
-
-                guard points.count > 1 else {
-                    return
-                }
-
-                let layout =
-                    ActivityRouteLayout(
-                        points:
-                            points,
-                        size:
-                            size
-                    )
-
-                guard layout.points.count > 1 else {
-                    return
-                }
-
-                var path =
-                    Path()
-
-                path.move(
-                    to:
-                        layout.points[0]
+        HStack(spacing: 0) {
+            SimRaMetric(title: "Zeit", systemImage: "clock") {
+                // Fixed reference date from the static attributes:
+                // the system counts on its own, no jumps between updates.
+                Text(
+                    timerInterval: startDate...Date.distantFuture,
+                    countsDown: false
                 )
+                // Timer text is horizontally flexible in widgets.
+                .frame(maxWidth: 110, alignment: .leading)
+            }
 
-                for point
-                    in layout.points.dropFirst() {
+            Spacer(minLength: minSpacing)
 
-                    path.addLine(
-                        to:
-                            point
-                    )
-                }
-
-                // MARK: Soft route underlay
-
-                context.stroke(
-                    path,
-                    with:
-                        .color(
-                            Color.blue.opacity(
-                                0.10
-                            )
-                        ),
-                    style:
-                        StrokeStyle(
-                            lineWidth:
-                                layout.lineWidth + 6,
-                            lineCap:
-                                .round,
-                            lineJoin:
-                                .round
-                        )
-                )
-
-                // MARK: Main route
-
-                context.stroke(
-                    path,
-                    with:
-                        .color(
-                            Color.blue.opacity(
-                                0.72
-                            )
-                        ),
-                    style:
-                        StrokeStyle(
-                            lineWidth:
-                                layout.lineWidth,
-                            lineCap:
-                                .round,
-                            lineJoin:
-                                .round
-                        )
-                )
-
-                // MARK: Start point
-
-                if let first =
-                    layout.points.first {
-
-                    context.fill(
-                        Path(
-                            ellipseIn:
-                                CGRect(
-                                    x:
-                                        first.x - 3.5,
-                                    y:
-                                        first.y - 3.5,
-                                    width:
-                                        7,
-                                    height:
-                                        7
-                                )
-                        ),
-                        with:
-                            .color(
-                                Color.white.opacity(
-                                    0.95
-                                )
-                            )
-                    )
-
-                    context.fill(
-                        Path(
-                            ellipseIn:
-                                CGRect(
-                                    x:
-                                        first.x - 2,
-                                    y:
-                                        first.y - 2,
-                                    width:
-                                        4,
-                                    height:
-                                        4
-                                )
-                        ),
-                        with:
-                            .color(
-                                Color.secondary
-                            )
-                    )
-                }
-
-                // MARK: Current position
-
-                if let last =
-                    layout.points.last {
-
-                    context.fill(
-                        Path(
-                            ellipseIn:
-                                CGRect(
-                                    x:
-                                        last.x - 7,
-                                    y:
-                                        last.y - 7,
-                                    width:
-                                        14,
-                                    height:
-                                        14
-                                )
-                        ),
-                        with:
-                            .color(
-                                Color.blue.opacity(
-                                    0.12
-                                )
-                            )
-                    )
-
-                    context.fill(
-                        Path(
-                            ellipseIn:
-                                CGRect(
-                                    x:
-                                        last.x - 4,
-                                    y:
-                                        last.y - 4,
-                                    width:
-                                        8,
-                                    height:
-                                        8
-                                )
-                        ),
-                        with:
-                            .color(
-                                Color.blue
-                            )
-                    )
-                }
+            SimRaMetric(
+                title: "Strecke",
+                systemImage: "point.topleft.down.curvedto.point.bottomright.up"
+            ) {
+                Text(SimRaFormat.distance(distanceMeters))
             }
         }
-        .frame(
-            maxWidth:
-                .infinity,
-            maxHeight:
-                .infinity
-        )
-        .clipped()
-        .accessibilityHidden(true)
+        .opacity(isStale ? 0.5 : 1)
     }
 }
 
-// MARK: - Route Layout
+// MARK: - Metric
 
-private struct ActivityRouteLayout {
+private struct SimRaMetric<Value: View>: View {
 
-    let points:
-        [CGPoint]
-
-    let lineWidth:
-        CGFloat
+    let title: LocalizedStringKey
+    let systemImage: String
+    let value: Value
 
     init(
-        points:
-            [SimRaRecordingAttributes.ContentState.RoutePoint],
-        size:
-            CGSize
+        title: LocalizedStringKey,
+        systemImage: String,
+        @ViewBuilder value: () -> Value
     ) {
+        self.title = title
+        self.systemImage = systemImage
+        self.value = value()
+    }
 
-        guard
-            points.count > 1,
-            size.width > 0,
-            size.height > 0
-        else {
+    var body: some View {
+        HStack(spacing: 9) {
+            Image(systemName: systemImage)
+                .font(.callout.weight(.medium))
+                .foregroundStyle(.secondary)
+                .accessibilityHidden(true)
 
-            self.points = []
-            self.lineWidth = 3
+            VStack(alignment: .leading, spacing: 2) {
+                value
+                    .font(.title3.weight(.semibold))
+                    .monospacedDigit()
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
 
-            return
-        }
-
-        let latitudes =
-            points.map(
-                \.latitude
-            )
-
-        let longitudes =
-            points.map(
-                \.longitude
-            )
-
-        guard
-            let minLatitude =
-                latitudes.min(),
-            let maxLatitude =
-                latitudes.max(),
-            let minLongitude =
-                longitudes.min(),
-            let maxLongitude =
-                longitudes.max()
-        else {
-
-            self.points = []
-            self.lineWidth = 3
-
-            return
-        }
-
-        let latitudeSpan =
-            max(
-                maxLatitude -
-                    minLatitude,
-                0.00001
-            )
-
-        let centerLatitude =
-            (
-                minLatitude +
-                maxLatitude
-            ) / 2
-
-        let longitudeScale =
-            max(
-                cos(
-                    centerLatitude *
-                    Double.pi /
-                    180
-                ),
-                0.1
-            )
-
-        let longitudeSpan =
-            max(
-                (
-                    maxLongitude -
-                    minLongitude
-                ) *
-                longitudeScale,
-                0.00001
-            )
-
-        let padding =
-            min(
-                max(
-                    min(
-                        size.width,
-                        size.height
-                    ) * 0.06,
-                    4
-                ),
-                12
-            )
-
-        let availableWidth =
-            max(
-                size.width -
-                    padding * 2,
-                1
-            )
-
-        let availableHeight =
-            max(
-                size.height -
-                    padding * 2,
-                1
-            )
-
-        let scale =
-            min(
-                availableWidth /
-                    longitudeSpan,
-                availableHeight /
-                    latitudeSpan
-            )
-
-        let usedWidth =
-            longitudeSpan *
-            scale
-
-        let usedHeight =
-            latitudeSpan *
-            scale
-
-        let originX =
-            (
-                size.width -
-                usedWidth
-            ) / 2
-
-        let originY =
-            (
-                size.height -
-                usedHeight
-            ) / 2
-
-        self.points =
-            points.map { point in
-
-                let normalizedX =
-                    (
-                        (
-                            point.longitude -
-                            minLongitude
-                        ) *
-                        longitudeScale
-                    ) /
-                    longitudeSpan
-
-                let normalizedY =
-                    (
-                        maxLatitude -
-                        point.latitude
-                    ) /
-                    latitudeSpan
-
-                return CGPoint(
-                    x:
-                        originX +
-                        CGFloat(
-                            normalizedX
-                        ) *
-                        usedWidth,
-
-                    y:
-                        originY +
-                        CGFloat(
-                            normalizedY
-                        ) *
-                        usedHeight
-                )
+                Text(title)
+                    .font(.caption2.weight(.medium))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
             }
-
-        let minimumDimension =
-            min(
-                size.width,
-                size.height
-            )
-
-        self.lineWidth =
-            min(
-                max(
-                    minimumDimension *
-                        0.018,
-                    2
-                ),
-                3.5
-            )
+        }
+        .accessibilityElement(children: .combine)
     }
 }
 
 // MARK: - Brand
 
-private struct SimRaLiveActivityBrand: View {
+private struct SimRaBrand: View {
 
     var body: some View {
-
         HStack(spacing: 8) {
+            Image(systemName: "bicycle")
+                .foregroundStyle(.blue)
+                .accessibilityHidden(true)
 
-            Image(
-                systemName:
-                    "bicycle"
-            )
-            .font(
-                .system(
-                    size: 18,
-                    weight: .semibold
-                )
-            )
-            .foregroundStyle(
-                .blue
-            )
-
-            Text("SimRa")
-                .font(
-                    .system(
-                        size: 18,
-                        weight: .bold
-                    )
-                )
-                .foregroundStyle(
-                    .primary
-                )
+            Text(verbatim: "SimRa")
+                .fontWeight(.bold)
+                .foregroundStyle(.primary)
         }
+        .font(.headline.weight(.semibold))
         .fixedSize()
     }
 }
 
-// MARK: - Large Metric
+// MARK: - Action Buttons
 
-private struct SimRaLargeMetric: View {
+private struct SimRaActionButtons: View {
 
-    let title:
-        String
-
-    let value:
-        String
-
-    let systemImage:
-        String
+    let size: CGFloat
 
     var body: some View {
-
-        HStack(spacing: 9) {
-
-            Image(
-                systemName:
-                    systemImage
-            )
-            .font(
-                .system(
-                    size: 16,
-                    weight: .medium
-                )
-            )
-            .foregroundStyle(
-                .secondary
+        // Generous spacing reduces accidental taps on "Stop".
+        HStack(spacing: 14) {
+            SimRaCircleIntentButton(
+                intent: MarkGeneralIncidentIntent(),
+                systemImage: "exclamationmark.triangle.fill",
+                tint: .orange,
+                label: "Gefahr melden",
+                size: size
             )
 
-            VStack(
-                alignment:
-                    .leading,
-                spacing:
-                    2
-            ) {
-
-                Text(value)
-                    .font(
-                        .system(
-                            size: 21,
-                            weight: .semibold
-                        )
-                    )
-                    .monospacedDigit()
-                    .foregroundStyle(
-                        .primary
-                    )
-                    .lineLimit(
-                        1
-                    )
-                    .minimumScaleFactor(
-                        0.75
-                    )
-
-                Text(title)
-                    .font(
-                        .system(
-                            size: 11,
-                            weight: .medium
-                        )
-                    )
-                    .foregroundStyle(
-                        .secondary
-                    )
-                    .lineLimit(
-                        1
-                    )
-            }
+            SimRaCircleIntentButton(
+                intent: StopRecordingIntent(),
+                systemImage: "stop.fill",
+                tint: .red,
+                label: "Aufzeichnung stoppen",
+                size: size
+            )
         }
     }
 }
 
-// MARK: - Hazard Button
+private struct SimRaCircleIntentButton<Intent: AppIntent>: View {
 
-private struct SimRaHazardButton: View {
+    let intent: Intent
+    let systemImage: String
+    let tint: Color
+    let label: LocalizedStringKey
+    let size: CGFloat
 
     var body: some View {
+        Button(intent: intent) {
+            Image(systemName: systemImage)
+                .font(.system(size: size * 0.4, weight: .bold))
+                .foregroundStyle(.white)
+                .frame(width: size, height: size)
+                .background(tint, in: Circle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(label))
+    }
+}
 
-        Button(
-            intent:
-                MarkGeneralIncidentIntent()
-        ) {
+// MARK: - Route Background
 
-            Image(
-                systemName:
-                    "exclamationmark.triangle.fill"
-            )
-            .font(
-                .system(
-                    size: 14,
-                    weight: .bold
+private struct SimRaRouteBackground: View {
+
+    let points: [RoutePoint]
+
+    var body: some View {
+        Canvas { context, size in
+            let layout = SimRaRouteLayout(points: points, size: size)
+
+            guard layout.points.count > 1,
+                  let first = layout.points.first,
+                  let last = layout.points.last
+            else { return }
+
+            var path = Path()
+            path.addLines(layout.points)
+
+            // Soft underlay
+            context.stroke(
+                path,
+                with: .color(Color.blue.opacity(0.10)),
+                style: StrokeStyle(
+                    lineWidth: layout.lineWidth + 6,
+                    lineCap: .round,
+                    lineJoin: .round
                 )
             )
-            .foregroundStyle(
-                .white
-            )
-            .frame(
-                width: 40,
-                height: 40
-            )
-            .background {
 
-                Circle()
-                    .fill(
-                        Color.orange
-                    )
-            }
+            // Main route
+            context.stroke(
+                path,
+                with: .color(Color.blue.opacity(0.72)),
+                style: StrokeStyle(
+                    lineWidth: layout.lineWidth,
+                    lineCap: .round,
+                    lineJoin: .round
+                )
+            )
+
+            // Start point
+            context.fill(Self.dot(at: first, radius: 3.5), with: .color(Color.white.opacity(0.95)))
+            context.fill(Self.dot(at: first, radius: 2), with: .color(Color.secondary))
+
+            // Current position
+            context.fill(Self.dot(at: last, radius: 7), with: .color(Color.blue.opacity(0.12)))
+            context.fill(Self.dot(at: last, radius: 4), with: .color(Color.blue))
         }
-        .buttonStyle(
-            .plain
-        )
-        .accessibilityLabel(
-            "Gefahr melden"
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .clipped()
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+    }
+
+    private static func dot(at center: CGPoint, radius: CGFloat) -> Path {
+        Path(
+            ellipseIn: CGRect(
+                x: center.x - radius,
+                y: center.y - radius,
+                width: radius * 2,
+                height: radius * 2
+            )
         )
     }
 }
 
-// MARK: - Stop Button
+// MARK: - Route Layout
 
-private struct SimRaStopButton: View {
+private struct SimRaRouteLayout {
 
-    var body: some View {
+    let points: [CGPoint]
+    let lineWidth: CGFloat
 
-        Button(
-            intent:
-                StopRecordingIntent()
-        ) {
+    init(points: [RoutePoint], size: CGSize) {
+        let minDimension = min(size.width, size.height)
+        lineWidth = min(max(minDimension * 0.018, 2), 3.5)
 
-            Image(
-                systemName:
-                    "stop.fill"
-            )
-            .font(
-                .system(
-                    size: 14,
-                    weight: .bold
-                )
-            )
-            .foregroundStyle(
-                .white
-            )
-            .frame(
-                width: 40,
-                height: 40
-            )
-            .background {
-
-                Circle()
-                    .fill(
-                        Color.red
-                    )
-            }
+        guard points.count > 1,
+              size.width > 0,
+              size.height > 0,
+              let minLat = points.map(\.latitude).min(),
+              let maxLat = points.map(\.latitude).max(),
+              let minLon = points.map(\.longitude).min(),
+              let maxLon = points.map(\.longitude).max()
+        else {
+            self.points = []
+            return
         }
-        .buttonStyle(
-            .plain
+
+        // Equirectangular approximation, sufficient for a single ride.
+        let centerLat = (minLat + maxLat) / 2
+        let lonScale = max(cos(centerLat * .pi / 180), 0.1)
+
+        let latSpan = max(maxLat - minLat, 0.00001)
+        let lonSpan = max((maxLon - minLon) * lonScale, 0.00001)
+
+        let padding = min(max(minDimension * 0.06, 4), 12)
+        let availableWidth = max(size.width - padding * 2, 1)
+        let availableHeight = max(size.height - padding * 2, 1)
+
+        let scale = min(
+            availableWidth / CGFloat(lonSpan),
+            availableHeight / CGFloat(latSpan)
         )
-        .accessibilityLabel(
-            "Aufzeichnung stoppen"
-        )
+        let usedWidth = CGFloat(lonSpan) * scale
+        let usedHeight = CGFloat(latSpan) * scale
+        let originX = (size.width - usedWidth) / 2
+        let originY = (size.height - usedHeight) / 2
+
+        self.points = points.map { point in
+            let normalizedX = CGFloat((point.longitude - minLon) * lonScale / lonSpan)
+            let normalizedY = CGFloat((maxLat - point.latitude) / latSpan)
+
+            return CGPoint(
+                x: originX + normalizedX * usedWidth,
+                y: originY + normalizedY * usedHeight
+            )
+        }
     }
 }
 
-// MARK: - Content State Helpers
+// MARK: - Formatting
 
-private extension
-    SimRaRecordingAttributes.ContentState {
+private enum SimRaFormat {
 
-    var formattedDuration:
-        String {
+    /// Locale-aware distance, e.g. "850 m" or "12,3 km" on German devices.
+    static func distance(_ meters: Int) -> String {
+        let meters = Double(max(meters, 0))
 
-        let totalSeconds =
-            max(
-                elapsedSeconds,
-                0
-            )
-
-        let hours =
-            totalSeconds / 3_600
-
-        let minutes =
-            (
-                totalSeconds %
-                3_600
-            ) / 60
-
-        let seconds =
-            totalSeconds % 60
-
-        if hours > 0 {
-
-            return String(
-                format:
-                    "%d:%02d:%02d",
-                hours,
-                minutes,
-                seconds
-            )
+        if meters >= 1_000 {
+            return Measurement(value: meters / 1_000, unit: UnitLength.kilometers)
+                .formatted(
+                    .measurement(
+                        width: .abbreviated,
+                        usage: .asProvided,
+                        numberFormatStyle: .number.precision(.fractionLength(1))
+                    )
+                )
         }
 
-        return String(
-            format:
-                "%02d:%02d",
-                minutes,
-                seconds
-            )
-    }
-
-    var formattedDistance:
-        String {
-
-        let distance =
-            max(
-                distanceMeters,
-                0
-            )
-
-        if distance >= 1_000 {
-
-            return String(
-                format:
-                    "%.1f km",
-                distance / 1_000
-            )
-        }
-
-        return String(
-            format:
-                "%.0f m",
-                distance
+        return Measurement(value: meters, unit: UnitLength.meters)
+            .formatted(
+                .measurement(
+                    width: .abbreviated,
+                    usage: .asProvided,
+                    numberFormatStyle: .number.precision(.fractionLength(0))
+                )
             )
     }
 }

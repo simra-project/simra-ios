@@ -14,6 +14,12 @@ import Foundation
 
 // MARK: - Recording Incident
 
+struct RecordingRoutePoint: Identifiable {
+    let id: Int
+    let coordinate: CLLocationCoordinate2D
+    let speedKmh: Double
+}
+
 struct RecordingIncident: Identifiable {
 
     let id: String
@@ -139,6 +145,9 @@ final class MainViewModel: ObservableObject {
     @Published
     private(set) var recordingRouteCoordinates:
         [CLLocationCoordinate2D] = []
+
+    @Published
+    private(set) var recordingRoutePoints: [RecordingRoutePoint] = []
 
     @Published
     private(set) var isLowPowerMode =
@@ -518,6 +527,7 @@ final class MainViewModel: ObservableObject {
             recordingStartedAt = nil
             recordingRouteOverlay = nil
             recordingRouteCoordinates = []
+            recordingRoutePoints = []
             recordingIncidents = []
             currentSpeedKmh = 0
 
@@ -807,6 +817,7 @@ final class MainViewModel: ObservableObject {
         else {
             recordingRouteOverlay = nil
             recordingRouteCoordinates = []
+            recordingRoutePoints = []
             recordingIncidents = []
 
             lastOverlayPointCount = 0
@@ -830,24 +841,34 @@ final class MainViewModel: ObservableObject {
             return
         }
 
-        let allCoordinates: [CLLocationCoordinate2D] =
-            locations.compactMap { location in
-                let coordinate =
-                    location.location.coordinate
+        let allRoutePoints: [RecordingRoutePoint] =
+            locations.enumerated().compactMap { index, location in
+                let coordinate = location.location.coordinate
 
                 guard CLLocationCoordinate2DIsValid(coordinate) else {
                     return nil
                 }
 
-                return coordinate
+                let speed = location.location.speed
+                return RecordingRoutePoint(
+                    id: index,
+                    coordinate: coordinate,
+                    speedKmh: speed.isFinite && speed >= 0 ? speed * 3.6 : 0
+                )
             }
 
-        let coordinates =
-            downsampleRouteCoordinates(
-                allCoordinates,
-                maximumCount: 600
-            )
+        let routePoints: [RecordingRoutePoint]
+        if allRoutePoints.count > 600 {
+            let step = Double(allRoutePoints.count - 1) / 599
+            routePoints = (0..<600).map { index in
+                allRoutePoints[Int((Double(index) * step).rounded())]
+            }
+        } else {
+            routePoints = allRoutePoints
+        }
 
+        let coordinates = routePoints.map(\.coordinate)
+        recordingRoutePoints = routePoints
         recordingRouteCoordinates = coordinates
 
         if coordinates.count >= 2 {

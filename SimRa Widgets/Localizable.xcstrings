@@ -2,106 +2,504 @@
   "sourceLanguage" : "en",
   "strings" : {
     "·" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "·"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "·"
+          }
+        }
+      }
+    },
+    "%@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "%@ km" : {
 
+    },
+    "%@ km · %lld Fahrten" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ km · %2$lld Fahrten"
+          }
+        }
+      }
+    },
+    "%@ km · 4 Wochen" : {
+
+    },
+    "%d rides · 4 weeks" : {
+      "comment" : "Ride count for the last four weeks",
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d Fahrten · 4 Wochen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%d trajets · 4 semaines"
+          }
+        }
+      }
     },
     "%lld" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
     "%lld Fahrten" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld Fahrten"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Trajets : %lld"
+          }
+        }
+      }
+    },
+    "%lld Fahrten · 4 Wochen" : {
 
     },
     "%lld gemeldete Gefahren" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "%lld gemeldete Gefahren"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Dangers signalés : %lld"
+          }
+        }
+      }
+    },
+    "%lld von %lld Fahrten · %lld fehlgeschlagen" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld von %2$lld Fahrten · %3$lld fehlgeschlagen"
+          }
+        }
+      }
     },
     "00:00" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "00:00"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "00:00"
+          }
+        }
+      }
     },
     "4 Wochen" : {
-
-    },
-    "Abbiegeunfall" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "4 Wochen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "4 semaines"
+          }
+        }
+      }
     },
     "Aktuelle Aufzeichnung und Fahrtenstatistik." : {
-
-    },
-    "Auffahren / Drängeln" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Aktuelle Aufzeichnung und Fahrtenstatistik."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Enregistrement en cours et statistiques des trajets."
+          }
+        }
+      }
     },
     "Aufnahme" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Aufnahme"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Enregistrement"
+          }
+        }
+      }
     },
     "Aufnahme starten" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Aufnahme starten"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Démarrer l’enregistrement"
+          }
+        }
+      }
     },
     "Aufnahme stoppen" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Aufnahme stoppen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Arrêter l’enregistrement"
+          }
+        }
+      }
     },
     "Aufnahmezeit" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Aufnahmezeit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Durée de l’enregistrement"
+          }
+        }
+      }
     },
     "Aufzeichnung stoppen" : {
-
-    },
-    "Ausweichen / Hindernis" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Aufzeichnung stoppen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Arrêter l’enregistrement"
+          }
+        }
+      }
     },
     "Beendet die aktuelle Aufnahme" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Beendet die aktuelle Aufnahme"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Met fin à l’enregistrement en cours."
+          }
+        }
+      }
+    },
+    "Close Passing" : {
+      "comment" : "Hazard type"
+    },
+    "Danger" : {
+      "comment" : "Hazard type"
     },
     "Dooring" : {
+      "comment" : "Hazard type",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Türöffnungsunfall"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Accident d’ouverture de portière"
+          }
+        }
+      }
+    },
+    "Fahrten" : {
 
     },
-    "Einparkendes Auto" : {
-
-    },
-    "Gefahr" : {
+    "Fahrten werden hochgeladen" : {
 
     },
     "Gefahr melden" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Gefahr melden"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Signaler un danger"
+          }
+        }
+      }
     },
     "Gefahren" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Gefahren"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Dangers"
+          }
+        }
+      }
+    },
+    "Hazard type" : {
 
     },
-    "Gefahrentyp" : {
-
-    },
-    "Gegenverkehr" : {
-
-    },
-    "in 4 Wochen" : {
+    "Kilometer" : {
 
     },
     "km" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "km"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "km"
+          }
+        }
+      }
     },
     "Mark hazard" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Gefahr markieren"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Signaler un danger"
+          }
+        }
+      }
     },
     "Öffnet SimRa zum Melden einer Gefahr" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Öffnet SimRa zum Melden einer Gefahr"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Ouvre SimRa pour signaler un danger."
+          }
+        }
+      }
+    },
+    "Oncoming Traffic" : {
+      "comment" : "Hazard type"
+    },
+    "Parking Car" : {
+      "comment" : "Hazard type"
     },
     "Record a hazard during the active SimRa recording." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Während der aktiven SimRa-Aufzeichnung eine Gefahr melden."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Signaler un danger pendant l’enregistrement SimRa en cours."
+          }
+        }
+      }
+    },
+    "Sidestep" : {
+      "comment" : "Hazard type"
     },
     "SimRa" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "SimRa"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "SimRa"
+          }
+        }
+      }
     },
     "Stop Recording" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Aufzeichnung stoppen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Arrêter l’enregistrement"
+          }
+        }
+      }
     },
     "Stop the active SimRa recording." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Die aktive SimRa-Aufzeichnung beenden."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Arrêter l’enregistrement SimRa en cours."
+          }
+        }
+      }
     },
     "Strecke" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Strecke"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Distance"
+          }
+        }
+      }
+    },
+    "Tailgating" : {
+      "comment" : "Hazard type"
+    },
+    "Turning Accident" : {
+      "comment" : "Hazard type"
+    },
+    "Upload abgeschlossen" : {
 
     },
     "Zeit" : {
-
-    },
-    "Zu nahes Überholen" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Zeit"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "Durée"
+          }
+        }
+      }
     }
   },
   "version" : "1.3"
