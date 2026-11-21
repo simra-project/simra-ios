@@ -275,17 +275,45 @@ enum IncidentParticipant: String, AppEnum {
 struct MarkShortcutIncidentIntent: AppIntent {
     static let title: LocalizedStringResource = "Mark Incident"
     static let description = IntentDescription(
-        "Record an incident from a Shortcut."
+        "Record a complete incident during the active SimRa recording."
     )
     static var openAppWhenRun: Bool = true
 
-    func perform() async throws -> some IntentResult {
-        WidgetRecordingCommandStore.enqueueIncident(
-            0,
-            source: "Shortcut",
-            comment: nil
-        )
-        return .result()
+    @Parameter(title: "Hazard type")
+    var hazardType: IncidentType?
+
+    @Parameter(title: "Involved road user")
+    var participant: IncidentParticipant?
+
+    @Parameter(title: "Frightening")
+    var frightening: Bool
+
+    @Parameter(title: "Comment")
+    var comment: String?
+
+    init() {
+        hazardType = .generalHazard
+        participant = nil
+        frightening = false
+        comment = nil
+    }
+
+    func perform() async throws -> some IntentResult & ProvidesDialog {
+        let marked = await MainActor.run {
+            RecordingShortcutBridge.markIncident(
+                (hazardType ?? .generalHazard).incidentID,
+                source: "Shortcut",
+                participantMask: participant?.maskValue ?? 0,
+                frightening: frightening,
+                comment: comment
+            )
+        }
+
+        guard marked else {
+            throw RecordingShortcutError.notRecording
+        }
+
+        return .result(dialog: IntentDialog("Hazard recorded."))
     }
 }
 
@@ -327,7 +355,7 @@ enum IncidentType: String, AppEnum {
 
     static var typeDisplayRepresentation: TypeDisplayRepresentation {
         TypeDisplayRepresentation(
-            name: "Gefahrentyp"
+            name: "Hazard type"
         )
     }
 
@@ -335,28 +363,28 @@ enum IncidentType: String, AppEnum {
         [IncidentType: DisplayRepresentation] {
         [
             .generalHazard:
-                "Gefahr",
+                "Danger",
 
             .closePassing:
-                "Zu nahes Überholen",
+                "Close Passing",
 
             .dooring:
                 "Dooring",
 
             .turningAccident:
-                "Abbiegeunfall",
+                "Turning Accident",
 
             .oncomingTraffic:
-                "Gegenverkehr",
+                "Oncoming Traffic",
 
             .parkingCar:
-                "Einparkendes Auto",
+                "Parking Car",
 
             .tailgating:
-                "Auffahren / Drängeln",
+                "Tailgating",
 
             .sidestep:
-                "Ausweichen / Hindernis"
+                "Sidestep"
         ]
     }
 
@@ -390,29 +418,14 @@ enum IncidentType: String, AppEnum {
 
     var localizedName: String {
         switch self {
-        case .generalHazard:
-            return "Gefahr"
-
-        case .closePassing:
-            return "Zu nahes Überholen"
-
-        case .dooring:
-            return "Dooring"
-
-        case .turningAccident:
-            return "Abbiegeunfall"
-
-        case .oncomingTraffic:
-            return "Gegenverkehr"
-
-        case .parkingCar:
-            return "Einparkendes Auto"
-
-        case .tailgating:
-            return "Auffahren"
-
-        case .sidestep:
-            return "Ausweichen"
+        case .generalHazard: return NSLocalizedString("Danger", comment: "Hazard type")
+        case .closePassing: return NSLocalizedString("Close Passing", comment: "Hazard type")
+        case .dooring: return NSLocalizedString("Dooring", comment: "Hazard type")
+        case .turningAccident: return NSLocalizedString("Turning Accident", comment: "Hazard type")
+        case .oncomingTraffic: return NSLocalizedString("Oncoming Traffic", comment: "Hazard type")
+        case .parkingCar: return NSLocalizedString("Parking Car", comment: "Hazard type")
+        case .tailgating: return NSLocalizedString("Tailgating", comment: "Hazard type")
+        case .sidestep: return NSLocalizedString("Sidestep", comment: "Hazard type")
         }
     }
 }

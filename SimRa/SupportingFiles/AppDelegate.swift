@@ -11,12 +11,14 @@ import CoreLocation
 import CoreMotion
 import ActivityKit
 import WidgetKit
+import UserNotifications
 
 @objcMembers
 final class AppDelegate:
     NSObject,
     UIApplicationDelegate,
-    CLLocationManagerDelegate
+    CLLocationManagerDelegate,
+    UNUserNotificationCenterDelegate
 {
 
     // MARK: - Shared
@@ -90,37 +92,44 @@ final class AppDelegate:
     var trips:
         Trips!
 
-    private lazy var loadedConstants: [String: Any] = {
-        let localization =
-            defaults.string(forKey: "appLanguage")
-            ?? "Base"
-
-        let url =
-            Bundle.main.url(
-                forResource: "constants",
-                withExtension: "plist",
-                subdirectory: nil,
-                localization: localization
-            )
-            ?? Bundle.main.url(
-                forResource: "constants",
-                withExtension: "plist"
-            )
-
-        guard
-            let url,
-            let dictionary = NSDictionary(
-                contentsOf: url
-            ) as? [String: Any]
-        else {
-            return [:]
-        }
-
-        return dictionary
-    }()
+    private var cachedConstantsLanguage: String?
+    private var cachedConstants: [String: Any] = [:]
 
     var constants: [String: Any] {
-        loadedConstants
+        let selectedLanguage = defaults.string(forKey: "appLanguage") ?? "auto"
+        let systemLanguage = Locale.current.language.languageCode?.identifier
+        let requestedLanguage = selectedLanguage == "auto"
+            ? systemLanguage
+            : selectedLanguage
+        let localization: String
+        if let requestedLanguage, ["de", "en", "fr"].contains(requestedLanguage) {
+            localization = requestedLanguage
+        } else {
+            localization = "Base"
+        }
+
+        guard cachedConstantsLanguage != localization else {
+            return cachedConstants
+        }
+
+        let url = Bundle.main.url(
+            forResource: "constants",
+            withExtension: "plist",
+            subdirectory: nil,
+            localization: localization
+        ) ?? Bundle.main.url(
+            forResource: "constants",
+            withExtension: "plist"
+        )
+
+        if let url,
+           let dictionary = NSDictionary(contentsOf: url) as? [String: Any] {
+            cachedConstants = dictionary
+        } else {
+            cachedConstants = [:]
+        }
+        cachedConstantsLanguage = localization
+        return cachedConstants
     }
 
     // MARK: - Recording
@@ -142,6 +151,9 @@ final class AppDelegate:
 
     private var lastActivityUpdate:
         Date?
+
+    private var newsObserver: NSObjectProtocol?
+    private var lastWidgetStatisticsRefresh: Date?
 
     private(set) var recoveryInProgress =
         false
@@ -207,6 +219,16 @@ final class AppDelegate:
                 appDelegate: self
             )
 
+        UNUserNotificationCenter.current().delegate = self
+        newsObserver = NotificationCenter.default.addObserver(
+            forName: .simRaNewsReceived,
+            object: nil,
+            queue: .main
+        ) { [weak self] notification in
+            let lines = notification.userInfo?["lines"] as? [String] ?? []
+            self?.deliverNewsNotification(lines)
+        }
+
         registerRecordingObservers()
 
         restoreActiveRecording()
@@ -248,6 +270,8 @@ final class AppDelegate:
 
         processPendingLiveActivityIncidents()
         processPendingWidgetCommand()
+        news.refresh()
+        refreshWidgetTripStatistics()
     }
 
     private func processPendingWidgetCommand() {
@@ -765,13 +789,19 @@ final class AppDelegate:
             return []
         }
 
-        let step = max(1, locations.count / 80)
-        return locations.enumerated().compactMap { index, location in
-            guard index % step == 0 else {
-                return nil
+        let sampleCount = min(locations.count, 80)
+        return (0..<sampleCount).compactMap { sampleIndex in
+            let sourceIndex: Int
+            if sampleCount == 1 {
+                sourceIndex = 0
+            } else {
+                sourceIndex = Int(
+                    (Double(sampleIndex) * Double(locations.count - 1) / Double(sampleCount - 1))
+                        .rounded()
+                )
             }
 
-            let coordinate = location.location.coordinate
+            let coordinate = locations[sourceIndex].location.coordinate
             guard CLLocationCoordinate2DIsValid(coordinate) else {
                 return nil
             }
@@ -928,7 +958,76 @@ final class AppDelegate:
     }
 
     private func scheduleWidgetStatisticsRefresh() {
-        WidgetCenter.shared.reloadTimelines(ofKind: "SimRaRecordingWidget")
+        refreshWidgetTripStatistics(force: true)
+    }
+
+    func refreshWidgetTripStatistics(force: Bool = false) {
+        if !force,
+           let lastWidgetStatisticsRefresh,
+           Date.now.timeIntervalSince(lastWidgetStatisticsRefresh) < 15 * 60 {
+            return
+        }
+
+        lastWidgetStatisticsRefresh = .now
+        Task {
+            let statistics = await TripStatisticsStore.loadWidgetRecords()
+            guard
+                let data = try? JSONEncoder().encode(statistics),
+                let sharedDefaults = UserDefaults(
+                    suiteName: WidgetStateKey.suiteName
+                )
+            else {
+                return
+            }
+
+            sharedDefaults.set(data, forKey: WidgetStateKey.tripStatistics)
+            WidgetCenter.shared.reloadTimelines(ofKind: "SimRaRecordingWidget")
+        }
+    }
+
+    private func deliverNewsNotification(_ lines: [String]) {
+        guard
+            UserDefaults.standard.bool(forKey: "newsNotificationsEnabled"),
+            !lines.isEmpty
+        else {
+            return
+        }
+
+        let content = UNMutableNotificationContent()
+        content.title = NSLocalizedString("New SimRa information", comment: "News notification title")
+        content.body = lines
+            .map { String($0.dropFirst()).trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+            .joined(separator: "\n")
+        content.sound = .default
+
+        let request = UNNotificationRequest(
+            identifier: "simra.news.\(UserDefaults.standard.integer(forKey: "newsVersion"))",
+            content: content,
+            trigger: nil
+        )
+
+        Task {
+            let center = UNUserNotificationCenter.current()
+            let settings = await center.notificationSettings()
+            guard
+                settings.authorizationStatus == .authorized ||
+                settings.authorizationStatus == .provisional
+            else {
+                return
+            }
+
+            try? await center.add(request)
+        }
+    }
+
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        // The in-app news banner already provides the foreground alert.
+        completionHandler([.sound])
     }
 
     private func synchronizeWidgetRecordingState(

@@ -81,7 +81,7 @@ enum TripAnnotationSource: String {
 
         case .automatic:
             return NSLocalizedString(
-                "Automatische Erkennung",
+                "Automatic detection",
                 comment: "Source badge for automatically detected incidents"
             )
 
@@ -93,7 +93,7 @@ enum TripAnnotationSource: String {
 
         case .shortcut:
             return NSLocalizedString(
-                "Kurzbefehle",
+                "Shortcuts",
                 comment: "Source badge for Shortcuts incidents"
             )
 
@@ -1010,6 +1010,19 @@ public final class Trip: UploaderObject, CLLocationManagerDelegate {
 
         removeRecordingCheckpoint()
 
+        if
+            let startTimestamp = infoDictionary["start"] as? TimeInterval,
+            let endTimestamp = infoDictionary["end"] as? TimeInterval
+        {
+            TripRecordingDateIndex.set(
+                TripRecordingDateRange(
+                    startDate: Date(timeIntervalSince1970: startTimestamp),
+                    endDate: Date(timeIntervalSince1970: endTimestamp)
+                ),
+                for: identifier
+            )
+        }
+
         if edited {
             removeLegacyCSVFiles()
         }
@@ -1076,14 +1089,17 @@ public final class Trip: UploaderObject, CLLocationManagerDelegate {
         info.fileHash = fileHash
         info.filePasswd = filePasswd
 
+        let timestamps = (tripLocations as NSArray)
+            .compactMap { ($0 as? TripLocation)?.location.timestamp }
+
         if
-            let first = tripLocations.firstObject as? TripLocation,
-            let last = tripLocations.lastObject as? TripLocation
+            let startDate = timestamps.min(),
+            let endDate = timestamps.max()
         {
             info.duration =
                 NSDateInterval(
-                    start: first.location.timestamp,
-                    end: last.location.timestamp
+                    start: startDate,
+                    end: endDate
                 )
         } else {
             info.duration =

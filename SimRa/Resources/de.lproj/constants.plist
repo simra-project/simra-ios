@@ -61,7 +61,7 @@
 	<key>bikeTypes</key>
 	<array>
 		<string>Bitte auswählen</string>
-		<string>City- oder Trecking-Rad</string>
+		<string>City- oder Trekkingrad</string>
 		<string>Rennrad</string>
 		<string>E-Bike</string>
 		<string>Liegerad</string>

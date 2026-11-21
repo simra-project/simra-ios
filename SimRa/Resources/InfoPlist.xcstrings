@@ -15,6 +15,12 @@
             "state" : "translated",
             "value" : "SimRa"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "SimRa"
+          }
         }
       }
     },
@@ -31,6 +37,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "SimRa uses Bluetooth to connect to an OpenBikeSensor."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "SimRa utilise Bluetooth pour se connecter à un OpenBikeSensor."
           }
         }
       }
@@ -49,6 +61,12 @@
             "state" : "translated",
             "value" : "SimRa uses Bluetooth to connect to an OpenBikeSensor."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "SimRa utilise Bluetooth pour se connecter à un OpenBikeSensor."
+          }
         }
       }
     },
@@ -66,6 +84,12 @@
             "state" : "translated",
             "value" : "SimRa uses your location to show you on the map and save your rides."
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "SimRa utilise votre position pour vous afficher sur la carte et enregistrer vos trajets."
+          }
         }
       }
     },
@@ -82,6 +106,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "SimRa uses your location to show you on the map and save your rides."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "machine_translated",
+            "value" : "SimRa utilise votre position pour vous afficher sur la carte et enregistrer vos trajets."
           }
         }
       }

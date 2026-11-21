@@ -70,6 +70,9 @@ struct SettingsView: View {
     @AppStorage("showRecordedRoute")
     private var showRecordedRoute = true
 
+    @AppStorage("newsNotificationsEnabled")
+    private var newsNotificationsEnabled = false
+
     @AppStorage("appAppearance")
     private var appAppearance = "system"
 
@@ -109,6 +112,25 @@ struct SettingsView: View {
             }
 
             Section {
+                Toggle(
+                    NSLocalizedString("New server news notifications", comment: "Optional notification for new server news"),
+                    isOn: Binding(
+                        get: { newsNotificationsEnabled },
+                        set: { enabled in
+                            guard enabled else {
+                                newsNotificationsEnabled = false
+                                return
+                            }
+
+                            Task { @MainActor in
+                                let granted = (try? await UNUserNotificationCenter.current()
+                                    .requestAuthorization(options: [.alert, .sound])) ?? false
+                                newsNotificationsEnabled = granted
+                            }
+                        }
+                    )
+                )
+
                 Toggle(
                     NSLocalizedString("Ride reminder", comment: "Weekly ride reminder"),
                     isOn: Binding(
@@ -188,6 +210,15 @@ struct SettingsView: View {
                             comment: "About"
                         ),
                         systemImage: "info.circle"
+                    )
+                }
+
+                NavigationLink {
+                    AppExplanationView()
+                } label: {
+                    Label(
+                        NSLocalizedString("App guide", comment: "In-app explanation of the app"),
+                        systemImage: "questionmark.circle"
                     )
                 }
 
@@ -607,9 +638,10 @@ struct SettingsView: View {
         en: String,
         de: String
     ) {
-        let language =
-            Locale.current.language.languageCode?.identifier
-            ?? "de"
+        let selectedLanguage = UserDefaults.standard.string(forKey: "appLanguage") ?? "auto"
+        let language = selectedLanguage == "auto"
+            ? (Locale.current.language.languageCode?.identifier ?? "de")
+            : selectedLanguage
 
         let urlString =
             language == "en"
@@ -1025,12 +1057,53 @@ struct SettingsView: View {
     }
 }
 
+private struct AppExplanationView: View {
+    var body: some View {
+        List {
+            Section {
+                Text(NSLocalizedString("On the Map screen, tap Start recording before you ride. Keep SimRa open or use the Live Activity on the Lock Screen or Dynamic Island to check the recording, report a danger, or stop.", comment: "App guide recording explanation"))
+            } header: {
+                Text(NSLocalizedString("Map and recording", comment: "App guide map and recording section"))
+            }
+
+            Section {
+                Text(NSLocalizedString("Tap Report danger in the recording controls or in the Live Activity as soon as a dangerous situation occurs. SimRa saves the report with your current location.", comment: "App guide incident explanation"))
+            } header: {
+                Text(NSLocalizedString("Report a danger", comment: "App guide incident section"))
+            }
+
+            Section {
+                Text(NSLocalizedString("Open My Trips with the list button on the Map screen. Choose a trip to view its route and edit incident details. Trips are shown with the newest first.", comment: "App guide trips explanation"))
+            } header: {
+                Text(NSLocalizedString("My Trips and trip details", comment: "App guide trips section"))
+            }
+
+            Section {
+                Text(NSLocalizedString("Open Statistics from Settings to see saved trips, distance, incidents, duration, idle time, upload share, time of day, and yearly totals. Profile contains your survey details and riding behavior settings.", comment: "App guide statistics explanation"))
+            } header: {
+                Text(NSLocalizedString("Statistics and profile", comment: "App guide statistics and profile section"))
+            }
+
+            Section {
+                Text(NSLocalizedString("Use Hazard map on the Map screen to explore reported danger points. Settings also contains language, appearance, map, reminders, notifications, and the full PDF manual.", comment: "App guide settings explanation"))
+            } header: {
+                Text(NSLocalizedString("Hazard map and settings", comment: "App guide settings section"))
+            }
+        }
+        .navigationTitle(NSLocalizedString("App guide", comment: "In-app explanation of the app"))
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
 private struct StatisticsDashboardView: View {
     private struct Summary: Identifiable {
         let id: Int
         let date: Date
         let distance: Int
         let incidents: Int
+        let duration: Int
+        let idle: Int
+        let scary: Int
         let uploaded: Bool
     }
 
@@ -1049,32 +1122,23 @@ private struct StatisticsDashboardView: View {
         return Double(summaries.filter(\.uploaded).count) / Double(summaries.count)
     }
 
+    private var totalDuration: Int {
+        summaries.reduce(0) { $0 + $1.duration }
+    }
+
+    private var totalIdle: Int {
+        summaries.reduce(0) { $0 + $1.idle }
+    }
+
+    private var totalScaryIncidents: Int {
+        summaries.reduce(0) { $0 + $1.scary }
+    }
+
     private var timeOfDay: [Int] {
-        let suffix = AppDelegate.shared().regions.regionId == 0
-            ? ""
-            : "-\(AppDelegate.shared().regions.regionId)"
-        let stored =
-            UserDefaults.standard.array(
-                forKey:
-                    "totalSlots\(suffix)"
-            ) as? [Int] ?? []
-
-        if stored.count >= 24 {
-            return stride(from: 0, to: 24, by: 6).map { start in
-                stored[start..<start + 6].reduce(0, +)
-            }
-        }
-
-        return summaries.reduce(into: Array(repeating: 0, count: 4)) { result, summary in
+        summaries.reduce(into: Array(repeating: 0, count: 4)) { result, summary in
             let hour = Calendar.current.component(.hour, from: summary.date)
             result[min(hour / 6, 3)] += 1
         }
-    }
-
-    private func persistedStatistic(_ key: String) -> Int {
-        let regionID = AppDelegate.shared().regions.regionId
-        let suffix = regionID == 0 ? "" : "-\(regionID)"
-        return UserDefaults.standard.integer(forKey: "\(key)\(suffix)")
     }
 
     private func formatDuration(_ seconds: Int) -> String {
@@ -1099,9 +1163,9 @@ private struct StatisticsDashboardView: View {
                 metric("Trips", value: "\(summaries.count)", symbol: "bicycle")
                 metric("Total distance", value: formatDistance(totalDistance), symbol: "point.topleft.down.curvedto.point.bottomright.up")
                 metric("Incidents", value: "\(totalIncidents)", symbol: "exclamationmark.triangle")
-                metric("Total duration", value: formatDuration(persistedStatistic("totalDuration")), symbol: "clock")
-                metric("Idle time", value: formatDuration(persistedStatistic("totalIdle")), symbol: "pause.circle")
-                metric("Scary incidents", value: "\(persistedStatistic("numberOfScary"))", symbol: "exclamationmark.octagon")
+                metric("Total duration", value: formatDuration(totalDuration), symbol: "clock")
+                metric("Idle time", value: formatDuration(totalIdle), symbol: "pause.circle")
+                metric("Scary incidents", value: "\(totalScaryIncidents)", symbol: "exclamationmark.octagon")
                 metric("Uploaded", value: "\(Int(uploadedShare * 100))%", symbol: "arrow.up.circle")
             } header: {
                 Text(NSLocalizedString("Overview", comment: "Statistics overview"))
@@ -1111,9 +1175,12 @@ private struct StatisticsDashboardView: View {
                 HStack(alignment: .bottom, spacing: 12) {
                     ForEach(Array(timeOfDay.enumerated()), id: \.offset) { index, count in
                         VStack(spacing: 4) {
+                            Text("\(count)")
+                                .font(.caption2.monospacedDigit())
+                                .foregroundStyle(.secondary)
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(.tint)
-                                .frame(height: CGFloat(max(count, 1)) * 12)
+                                .frame(height: max(CGFloat(count) / CGFloat(max(timeOfDay.max() ?? 0, 1)) * 72, count > 0 ? 4 : 1))
                             Text(["00–06", "06–12", "12–18", "18–24"][index])
                                 .font(.caption2)
                                 .foregroundStyle(.secondary)
@@ -1121,7 +1188,7 @@ private struct StatisticsDashboardView: View {
                         .frame(maxWidth: .infinity)
                     }
                 }
-                .frame(height: 120, alignment: .bottom)
+                .frame(height: 110, alignment: .bottom)
             } header: {
                 Text(NSLocalizedString("Rides by time of day", comment: "Time of day distribution"))
             }
@@ -1137,7 +1204,7 @@ private struct StatisticsDashboardView: View {
         .navigationTitle(NSLocalizedString("Statistics", comment: "Statistics"))
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            loadSummaries()
+            await loadSummaries()
         }
     }
 
@@ -1153,15 +1220,22 @@ private struct StatisticsDashboardView: View {
         String(format: "%.1f km", Double(meters) / 1000)
     }
 
-    private func loadSummaries() {
-        summaries = TripInfo.allStoredIdentifiers().compactMap { number in
-            guard let info = TripInfo(fromStorage: number.intValue) else { return nil }
-            return Summary(
-                id: info.identifier,
-                date: info.duration.startDate,
-                distance: info.length,
-                incidents: info.validAnnotationsCount,
-                uploaded: info.uploaded
+    private func loadSummaries() async {
+        let statistics = await TripStatisticsStore.loadAll()
+        guard !Task.isCancelled else {
+            return
+        }
+
+        summaries = statistics.map { statistic in
+            Summary(
+                id: statistic.id,
+                date: statistic.date,
+                distance: statistic.distanceMeters,
+                incidents: statistic.incidents,
+                duration: statistic.durationSeconds,
+                idle: statistic.idleSeconds,
+                scary: statistic.scaryIncidents,
+                uploaded: statistic.uploaded
             )
         }
         .sorted { $0.date > $1.date }

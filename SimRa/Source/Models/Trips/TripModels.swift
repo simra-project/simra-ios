@@ -271,6 +271,93 @@ public final class TripInfo: NSObject {
     }
 }
 
+struct TripStatisticRecord: Codable, Identifiable, Sendable {
+    let id: Int
+    let date: Date
+    let distanceMeters: Int
+    let durationSeconds: Int
+    let incidents: Int
+    let idleSeconds: Int
+    let scaryIncidents: Int
+    let uploaded: Bool
+}
+
+struct TripWidgetStatisticRecord: Codable, Sendable {
+    let date: Date
+    let distanceMeters: Double
+}
+
+enum TripStatisticsStore {
+    static func loadWidgetRecords() async -> [TripWidgetStatisticRecord] {
+        let identifiers = Set(
+            TripInfo.allStoredIdentifiers().map(\.intValue)
+                + Trip.allStoredIdentifiers().map(\.intValue)
+        ).sorted()
+        let dateIndex = TripRecordingDateIndex.load()
+
+        return await Task.detached(priority: .utility) {
+            identifiers.compactMap { identifier -> TripWidgetStatisticRecord? in
+                guard let info = TripInfo(fromStorage: identifier) else {
+                    return nil
+                }
+
+                let date =
+                    dateIndex[identifier]?.dates?.start
+                    ?? info.duration.startDate
+
+                return TripWidgetStatisticRecord(
+                    date: date,
+                    distanceMeters: Double(max(info.length, 0))
+                )
+            }
+        }.value
+    }
+
+    static func loadAll() async -> [TripStatisticRecord] {
+        let identifiers = Set(
+            TripInfo.allStoredIdentifiers().map(\.intValue)
+                + Trip.allStoredIdentifiers().map(\.intValue)
+        ).sorted()
+
+        return await Task.detached(priority: .utility) {
+            identifiers.compactMap { identifier -> TripStatisticRecord? in
+                let info = TripInfo(fromStorage: identifier)
+                let trip = Trip(fromStorage: identifier)
+                guard info != nil || trip != nil else {
+                    return nil
+                }
+
+                let points: [Date]
+                if let trip {
+                    points = (trip.tripLocations as NSArray)
+                        .compactMap { ($0 as? TripLocation)?.location.timestamp }
+                } else {
+                    points = []
+                }
+                let firstPoint = points.min()
+                let lastPoint = points.max()
+                let date = firstPoint ?? info?.duration.startDate ?? .distantPast
+                let duration = if let firstPoint, let lastPoint {
+                    max(lastPoint.timeIntervalSince(firstPoint), 0)
+                } else {
+                    trip?.duration()?.duration ?? info?.duration.duration ?? 0
+                }
+
+                return TripStatisticRecord(
+                    id: identifier,
+                    date: date,
+                    distanceMeters: max(trip?.length() ?? info?.length ?? 0, 0),
+                    durationSeconds: max(Int(duration), 0),
+                    incidents: max(trip?.tripValidAnnotations() ?? info?.validAnnotationsCount ?? 0, 0),
+                    idleSeconds: max(trip?.idle() ?? 0, 0),
+                    scaryIncidents: max(trip?.numberOfScary() ?? 0, 0),
+                    uploaded: info?.uploaded ?? false
+                )
+            }
+        }.value
+    }
+}
+
 @objcMembers
 public final class Trips: UploaderObject {
     public var tripInfos: [NSNumber: TripInfo] = [:]

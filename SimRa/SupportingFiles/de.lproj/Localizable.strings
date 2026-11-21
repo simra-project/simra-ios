@@ -259,7 +259,7 @@
 "Record riding behavior" = "Fahrverhalten aufzeichnen";
 
 /* Stick to rules */
-"Stick to rules" = "An Regeln halten";
+"Stick to rules" = "Regeln einhalten";
 
 /* SimRa can record and evaluate your riding behavior during a ride. */
 "SimRa can record and evaluate your riding behavior during a ride." = "SimRa kann dein Fahrverhalten während einer Fahrt aufzeichnen und auswerten.";
@@ -438,7 +438,7 @@
 "Total distance" = "Gesamtstrecke";
 "Riding behavior" = "Fahrverhalten";
 "Total duration" = "Gesamtdauer";
-"Total incidents" = "Gesamtvorfälle";
+"Total incidents" = "Vorfälle insgesamt";
 "Please select" = "Bitte auswählen";
 "Not available" = "Nicht verfügbar";
 "male" = "männlich";
@@ -449,7 +449,7 @@
 "2 to 4 years" = "2 bis 4 Jahre";
 "less than 2 years" = "weniger als 2 Jahre";
 "(not selected)" = "(nicht ausgewählt)";
-"City or Trecking Bike" = "City- oder Trecking-Rad";
+"City or Trekking Bike" = "City- oder Trekkingrad";
 "Racing Bike" = "Rennrad";
 "E-Bike" = "E-Bike";
 "Recumbent Bike" = "Liegerad";
@@ -467,11 +467,11 @@
 "Backpack etc." = "Rucksack o.Ä.";
 "Other (please comment)" = "Anderes (bitte kommentieren)";
 "Nothing" = "Nichts";
-"Close Passing" = "Zu dichtes Überholen";
-"Parking Car" = "Ein- oder ausparkendes Fahrzeug";
+"Close Passing" = "Zu nahes Überholen";
+"Parking Car" = "Einparkendes Auto";
 "Almost Turning Accident" = "Beinahe-Abbiegeunfall";
-"Oncoming Traffic" = "Entgegenkommender Verkehrsteilnehmer";
-"Tailgating" = "Zu dichtes Auffahren";
+"Oncoming Traffic" = "Gegenverkehr";
+"Tailgating" = "Auffahren / Drängeln";
 "Almost Dooring" = "Beinahe-Dooring";
 "Sidestep (e.g. a dog)" = "Hindernis ausweichen (z.B. Hund)";
 
@@ -501,7 +501,7 @@
 /* Hazard Sources */
 "Detected via On-Device AI" = "Erkannt via On-Device AI";
 "Detected via Online AI" = "Erkannt via Online AI";
-"Manually recorded" = "Manuell erfasst";
+"Manually recorded" = "Manuell eingetragen";
 
 /* Widget */
 "Recording active" = "Aufnahme läuft";
@@ -541,3 +541,110 @@
 "Save changes" = "Änderungen speichern";
 "Discard" = "Verwerfen";
 "Review your ride" = "Fahrt überprüfen";
+
+"Automatic detection" = "Automatische Erkennung";
+
+"Unknown source" = "Quelle nicht bekannt";
+
+"Automatically detected" = "Automatisch erkannt";
+
+"Recorded via Widget or Live Activity" = "Über Widget oder Live Activity erfasst";
+
+"Recorded via Shortcuts" = "Über Kurzbefehle erfasst";
+
+"Recorded via Apple Watch" = "Über die Apple Watch erfasst";
+
+"Recorded via Siri" = "Über Siri erfasst";
+
+"Added manually on map." = "Manuell auf der Karte eingetragen.";
+
+"The source of this event is unknown." = "Die Quelle dieses Ereignisses ist nicht bekannt.";
+
+"Source" = "Quelle";
+
+"Incident type unavailable" = "Vorfall-Art nicht verfügbar";
+
+"Scary or dangerous" = "Erschrecken / Gefährdung";
+
+"Involved road users" = "Beteiligte Verkehrsteilnehmer";
+
+"Destination" = "Ziel";
+
+"No data" = "Keine Daten";
+
+"No values are available for this statistic yet." = "Für diese Statistik sind noch keine Werte vorhanden.";
+
+"Dooring" = "Dooring";
+
+"Turning Accident" = "Abbiegeunfall";
+
+"Sidestep" = "Ausweichen / Hindernis";
+
+"Attention! Only tap the Continue button if you were asked to do so by the SimRa team. By pressing the Upload button in the next step, you send your SimRa configuration to the SimRa team. You can also specify to upload the last 10 rides or all rides." = "Achtung: Tippe nur auf „Weiter“, wenn das SimRa-Team dich darum gebeten hat. Wenn du im nächsten Schritt auf „Hochladen“ tippst, sendest du deine SimRa-Konfiguration an das Team. Du kannst außerdem auswählen, ob du die letzten 10 Fahrten oder alle Fahrten hochladen möchtest.";
+
+"Average distance" = "Durchschnittliche Distanz";
+
+"CO₂ saved" = "Eingespartes CO₂";
+
+"Continue" = "Weiter";
+
+"Discards any changes and closes the view." = "Verwirft alle Änderungen und schließt diese Ansicht.";
+
+"Distance (km)" = "Distanz (km)";
+
+"Loading trip" = "Fahrt wird geladen";
+
+"Report a dangerous situation during the ride" = "Eine gefährliche Situation während der Fahrt melden";
+
+"Report danger" = "Gefahr melden";
+
+"Reported danger" = "Gefahr gemeldet";
+
+"Saves the changed trip details." = "Speichert die Änderungen an der Fahrt.";
+
+"Save" = "Speichern";
+
+"Close" = "Schließen";
+
+"Siri" = "Siri";
+
+"Stop the current ride" = "Aktuelle Fahrt beenden";
+
+"Tap the checkmark to save or X to discard the changes." = "Tippe auf das Häkchen, um die Änderungen zu speichern, oder auf X, um sie zu verwerfen.";
+
+"Trip" = "Fahrt";
+
+"Trip unavailable" = "Fahrt nicht verfügbar";
+
+"Trips by year" = "Fahrten nach Jahr";
+
+"App guide" = "App-Erklärung";
+"New server news notifications" = "Neue Servermeldungen als Mitteilung";
+"New SimRa information" = "Neue SimRa-Informationen";
+"Dismiss" = "Schließen";
+"Profile and statistics" = "Profil und Statistik";
+"Recording" = "Aufzeichnung";
+"My Trips" = "Meine Fahrten";
+"Map and settings" = "Karte und Einstellungen";
+"Start a recording before your ride. SimRa records the route and can capture incidents you report during the trip." = "Starte vor deiner Fahrt eine Aufzeichnung. SimRa erfasst die Strecke und die Vorfälle, die du während der Fahrt meldest.";
+"Open My Trips from the list icon on the map screen. Trips are sorted newest first. Select a trip to review its route and edit incident details." = "Öffne „Meine Fahrten“ über das Listensymbol auf der Karte. Die neuesten Fahrten stehen oben. Wähle eine Fahrt aus, um die Strecke anzusehen und Vorfalldetails zu bearbeiten.";
+"The profile shows your local trip totals. Statistics include all saved trips, whether or not they have been uploaded." = "Im Profil siehst du die Summen deiner lokal gespeicherten Fahrten. Die Statistik zählt alle Fahrten, auch wenn sie noch nicht hochgeladen wurden.";
+"The hazard map displays reported danger points. Settings contains appearance, map, reminder, profile, and notification options." = "Die Gefahrenkarte zeigt gemeldete Gefahrenstellen. In den Einstellungen findest du Optionen für Darstellung, Karte, Erinnerungen, Profil und Mitteilungen.";
+
+"Widget" = "Widget";
+
+"Map and recording" = "Karte und Aufzeichnung";
+"App guide map and recording section" = "Karte und Aufzeichnung";
+"On the Map screen, tap Start recording before you ride. Keep SimRa open or use the Live Activity on the Lock Screen or Dynamic Island to check the recording, report a danger, or stop." = "Tippe auf der Kartenansicht vor der Fahrt auf „Aufzeichnung starten“. Lass SimRa geöffnet oder nutze die Live-Aktivität auf dem Sperrbildschirm oder der Dynamic Island, um die Aufzeichnung zu prüfen, eine Gefahr zu melden oder sie zu beenden.";
+"Report a danger" = "Gefahr melden";
+"App guide incident section" = "Gefahr melden";
+"Tap Report danger in the recording controls or in the Live Activity as soon as a dangerous situation occurs. SimRa saves the report with your current location." = "Tippe bei einer gefährlichen Situation in den Aufnahmesteuerungen oder in der Live-Aktivität auf „Gefahr melden“. SimRa speichert die Meldung mit deinem aktuellen Standort.";
+"My Trips and trip details" = "Meine Fahrten und Fahrtdetails";
+"App guide trips section" = "Meine Fahrten und Fahrtdetails";
+"Open My Trips with the list button on the Map screen. Choose a trip to view its route and edit incident details. Trips are shown with the newest first." = "Öffne „Meine Fahrten“ über die Listen-Schaltfläche auf der Kartenansicht. Wähle eine Fahrt, um die Strecke anzusehen und Vorfalldetails zu bearbeiten. Die neuesten Fahrten stehen oben.";
+"Statistics and profile" = "Statistik und Profil";
+"App guide statistics and profile section" = "Statistik und Profil";
+"Open Statistics from Settings to see saved trips, distance, incidents, duration, idle time, upload share, time of day, and yearly totals. Profile contains your survey details and riding behavior settings." = "Öffne „Statistik“ in den Einstellungen, um gespeicherte Fahrten, Strecke, Vorfälle, Dauer, Standzeit, Upload-Anteil, Tageszeiten und Jahressummen zu sehen. Im „Profil“ findest du deine Angaben und Einstellungen zum Fahrverhalten.";
+"Hazard map and settings" = "Gefahrenkarte und Einstellungen";
+"App guide settings section" = "Gefahrenkarte und Einstellungen";
+"Use Hazard map on the Map screen to explore reported danger points. Settings also contains language, appearance, map, reminders, notifications, and the full PDF manual." = "Nutze die „Gefahrenkarte“ auf der Kartenansicht, um gemeldete Gefahrenstellen anzusehen. In den Einstellungen findest du außerdem Sprache, Darstellung, Karte, Erinnerungen, Mitteilungen und die vollständige PDF-Anleitung.";

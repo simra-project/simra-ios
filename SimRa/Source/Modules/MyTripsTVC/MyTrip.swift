@@ -10,6 +10,7 @@
 import Foundation
 import SwiftUI
 import CoreLocation
+import ActivityKit
 
 // MARK: - My Trips View
 
@@ -36,34 +37,40 @@ struct MyTripsView: View {
         editMode?.wrappedValue.isEditing == true
     }
 
-    private var pendingItems: [TripListItem] {
-        items.filter {
-            !$0.isUploaded && matchesSearch($0)
+    private var searchQuery: String {
+        searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var filteredItems: (pending: [TripListItem], uploaded: [TripListItem]) {
+        var pending: [TripListItem] = []
+        var uploaded: [TripListItem] = []
+        let query = searchQuery
+        pending.reserveCapacity(items.count)
+        uploaded.reserveCapacity(items.count)
+
+        for item in items {
+            guard query.isEmpty ||
+                    String(item.id).localizedCaseInsensitiveContains(query)
+            else {
+                continue
+            }
+
+            if item.isUploaded {
+                uploaded.append(item)
+            } else {
+                pending.append(item)
+            }
         }
+
+        return (pending, uploaded)
+    }
+
+    private var pendingItems: [TripListItem] {
+        filteredItems.pending
     }
 
     private var uploadedItems: [TripListItem] {
-        items.filter {
-            $0.isUploaded && matchesSearch($0)
-        }
-    }
-
-    private func matchesSearch(
-        _ item: TripListItem
-    ) -> Bool {
-
-        let query =
-            searchText
-                .trimmingCharacters(
-                    in: .whitespacesAndNewlines
-                )
-
-        guard !query.isEmpty else {
-            return true
-        }
-
-        return String(item.id)
-            .localizedCaseInsensitiveContains(query)
+        filteredItems.uploaded
     }
 
     private var selectedItems: [TripListItem] {
@@ -97,14 +104,15 @@ struct MyTripsView: View {
     // MARK: Body
 
     var body: some View {
+        let visibleTrips = filteredItems
 
         List(
             selection:
                 $selectedTripIDs
         ) {
 
-            pendingSection
-            uploadedSection
+            pendingSection(items: visibleTrips.pending)
+            uploadedSection(items: visibleTrips.uploaded)
 
             if hasLoaded &&
                 items.isEmpty {
@@ -157,7 +165,10 @@ struct MyTripsView: View {
                 for:
                     .tripEdited
             )
-        ) { _ in
+        ) { notification in
+            if let trip = notification.object as? Trip {
+                TripRecordingDateIndex.remove([trip.identifier])
+            }
 
             Task {
                 await reloadTrips()
@@ -217,8 +228,9 @@ struct MyTripsView: View {
     // MARK: Pending Section
 
     @ViewBuilder
-    private var pendingSection:
-        some View {
+    private func pendingSection(
+        items pendingItems: [TripListItem]
+    ) -> some View {
 
         if !pendingItems.isEmpty {
 
@@ -249,8 +261,9 @@ struct MyTripsView: View {
     // MARK: Uploaded Section
 
     @ViewBuilder
-    private var uploadedSection:
-        some View {
+    private func uploadedSection(
+        items uploadedItems: [TripListItem]
+    ) -> some View {
 
         if !uploadedItems.isEmpty {
 
@@ -552,10 +565,9 @@ struct MyTripsView: View {
         )
 
         /*
-         Load identifiers first.
-
-         The identifier is only used as a fallback for ordering.
-         The actual date always comes from the trip's own locations.
+         Load compact trip metadata and the persisted recording-date index.
+         GPS locations are decoded only for trips without a valid index entry,
+         then their earliest and latest timestamps are cached for later loads.
          */
 
         let identifiers =
@@ -567,6 +579,11 @@ struct MyTripsView: View {
             .sorted {
                 $0.intValue > $1.intValue
             }
+        let validIdentifiers = Set(identifiers.map(\.intValue))
+        var dateIndex = TripRecordingDateIndex.load()
+        dateIndex = dateIndex.filter {
+            validIdentifiers.contains($0.key) && $0.value.dates != nil
+        }
 
         var batchCount = 0
 
@@ -600,15 +617,51 @@ struct MyTripsView: View {
                 continue
             }
 
-            let item =
-                TripListItem(
-                    info:
-                        info,
-                    startDate:
-                        info.duration.startDate,
-                    endDate:
-                        info.duration.endDate
-                )
+            let indexedDates: (start: Date, end: Date)?
+            if let cachedRange = dateIndex[tripIdentifier] {
+                indexedDates = cachedRange.dates
+            } else {
+                indexedDates = nil
+            }
+
+            let metadataDates = TripRecordingDateRange(
+                startDate: info.duration.startDate,
+                endDate: info.duration.endDate
+            )?.dates
+
+            let recordingDates: (start: Date, end: Date)?
+            if let indexedDates {
+                recordingDates = indexedDates
+            } else {
+                let gpsDates: (start: Date, end: Date)? = await Task.detached(priority: .utility) {
+                    guard let trip = Trip(fromStorage: tripIdentifier) else {
+                        return nil
+                    }
+                    let dates = (trip.tripLocations as NSArray)
+                        .compactMap { ($0 as? TripLocation)?.location.timestamp }
+                    guard let startDate = dates.min(), let endDate = dates.max() else {
+                        return nil
+                    }
+                    return TripRecordingDateRange(
+                        startDate: startDate,
+                        endDate: endDate
+                    )?.dates
+                }.value
+
+                recordingDates = gpsDates ?? metadataDates
+                if let recordingDates {
+                    dateIndex[tripIdentifier] = TripRecordingDateRange(
+                        startDate: recordingDates.start,
+                        endDate: recordingDates.end
+                    )
+                }
+            }
+
+            let item = TripListItem(
+                info: info,
+                startDate: recordingDates?.start,
+                endDate: recordingDates?.end
+            )
 
             items.append(
                 item
@@ -628,6 +681,9 @@ struct MyTripsView: View {
                 await Task.yield()
             }
         }
+
+        TripRecordingDateIndex.save(dateIndex)
+        AppDelegate.shared().refreshWidgetTripStatistics(force: true)
 
         /*
          Final ordering:
@@ -679,74 +735,8 @@ struct MyTripsView: View {
             }
         }
 
-        let summaryIdentifiers =
-            items.map(\.id)
-
         isLoading = false
         hasLoaded = true
-
-        Task {
-            for identifier in summaryIdentifiers {
-                guard !Task.isCancelled else {
-                    return
-                }
-
-                await calculateSummary(
-                    forIdentifier:
-                        identifier
-                )
-
-                // Keep the first-render path responsive when many rides exist.
-                await Task.yield()
-            }
-        }
-    }
-
-    // MARK: Summary Calculation
-
-    private func calculateSummary(
-        forIdentifier identifier: Int
-    ) async {
-        guard !Task.isCancelled else {
-            return
-        }
-
-        let summary: TripSummary? =
-            await Task.detached(
-                priority:
-                    .utility
-            ) { () -> TripSummary? in
-                guard let trip = Trip(fromStorage: identifier) else {
-                    return nil
-                }
-
-                let input =
-                    TripSummaryBuilder.makeInput(
-                        from:
-                            trip
-                    )
-
-                return TripSummaryBuilder.calculate(
-                    input:
-                        input
-                )
-            }
-            .value
-
-        guard
-            !Task.isCancelled,
-            let summary,
-            let index =
-                items.firstIndex(
-                    where: {
-                        $0.id == identifier
-                    }
-                )
-        else {
-            return
-        }
-
-        items[index].summaryOverride = summary
     }
 
     // MARK: Selection
@@ -833,6 +823,7 @@ struct MyTripsView: View {
                 withIdentifier:
                     identifier
             )
+        TripRecordingDateIndex.remove([identifier])
 
         selectedTripIDs.remove(
             identifier
@@ -871,6 +862,7 @@ struct MyTripsView: View {
                         identifier
                 )
         }
+        TripRecordingDateIndex.remove(ids)
 
         items.removeAll {
             ids.contains(
@@ -984,6 +976,83 @@ private struct LazyTripEditDestination:
             failed =
                 trip == nil
         }
+    }
+}
+
+struct TripRecordingDateRange: Codable, Sendable {
+    let startTimestamp: TimeInterval
+    let endTimestamp: TimeInterval
+
+    init?(startDate: Date, endDate: Date) {
+        let startTimestamp = startDate.timeIntervalSince1970
+        let endTimestamp = endDate.timeIntervalSince1970
+        guard
+            startTimestamp.isFinite,
+            endTimestamp.isFinite,
+            startTimestamp > 0,
+            endTimestamp >= startTimestamp
+        else {
+            return nil
+        }
+
+        self.startTimestamp = startTimestamp
+        self.endTimestamp = endTimestamp
+    }
+
+    var dates: (start: Date, end: Date)? {
+        guard
+            startTimestamp.isFinite,
+            endTimestamp.isFinite,
+            startTimestamp > 0,
+            endTimestamp >= startTimestamp
+        else {
+            return nil
+        }
+
+        return (
+            Date(timeIntervalSince1970: startTimestamp),
+            Date(timeIntervalSince1970: endTimestamp)
+        )
+    }
+}
+
+enum TripRecordingDateIndex {
+    private static let storageKey = "tripRecordingDateIndex"
+
+    static func load() -> [Int: TripRecordingDateRange] {
+        guard
+            let data = UserDefaults.standard.data(forKey: storageKey),
+            let stored = try? JSONDecoder().decode([String: TripRecordingDateRange].self, from: data)
+        else {
+            return [:]
+        }
+
+        return stored.reduce(into: [:]) { result, entry in
+            guard let identifier = Int(entry.key), identifier > 0 else { return }
+            result[identifier] = entry.value
+        }
+    }
+
+    static func save(_ index: [Int: TripRecordingDateRange]) {
+        let stored = Dictionary(
+            uniqueKeysWithValues: index.map { (String($0.key), $0.value) }
+        )
+        guard let data = try? JSONEncoder().encode(stored) else { return }
+        UserDefaults.standard.set(data, forKey: storageKey)
+    }
+
+    static func set(_ range: TripRecordingDateRange?, for identifier: Int) {
+        guard identifier > 0 else { return }
+        var index = load()
+        index[identifier] = range
+        save(index)
+    }
+
+    static func remove(_ identifiers: [Int]) {
+        guard !identifiers.isEmpty else { return }
+        var index = load()
+        identifiers.forEach { index.removeValue(forKey: $0) }
+        save(index)
     }
 }
 
@@ -1853,6 +1922,10 @@ final class TripBatchUploadCoordinator:
     private var didFinish =
         false
 
+    @available(iOS 16.2, *)
+    private var uploadActivity:
+        Activity<SimRaRecordingAttributes>?
+
     // MARK: Upload
 
     func upload(
@@ -1916,7 +1989,74 @@ final class TripBatchUploadCoordinator:
         isUploading =
             true
 
+        startUploadActivity()
         uploadNext()
+    }
+
+    private func startUploadActivity() {
+        guard #available(iOS 16.2, *),
+              ActivityAuthorizationInfo().areActivitiesEnabled
+        else {
+            return
+        }
+
+        let state = SimRaRecordingAttributes.ContentState(
+            uploadProgress: 0,
+            uploadCompletedCount: 0,
+            uploadTotalCount: totalCount,
+            uploadFailureCount: 0,
+            uploadFinished: false
+        )
+        let content = ActivityContent(
+            state: state,
+            staleDate: .now.addingTimeInterval(60)
+        )
+
+        do {
+            uploadActivity = try Activity<SimRaRecordingAttributes>.request(
+                attributes: SimRaRecordingAttributes(
+                    tripId: 0,
+                    bikeTypeId: 0,
+                    startDate: .now
+                ),
+                content: content,
+                pushType: nil
+            )
+        } catch {
+            uploadActivity = nil
+        }
+    }
+
+    private func updateUploadActivity(finished: Bool = false) {
+        guard #available(iOS 16.2, *),
+              let activity = uploadActivity
+        else {
+            return
+        }
+
+        let state = SimRaRecordingAttributes.ContentState(
+            uploadProgress: progress,
+            uploadCompletedCount: completedCount,
+            uploadTotalCount: totalCount,
+            uploadFailureCount: failureCount,
+            uploadFinished: finished
+        )
+        let content = ActivityContent(
+            state: state,
+            staleDate: finished ? nil : .now.addingTimeInterval(60)
+        )
+
+        Task {
+            if finished {
+                await activity.end(
+                    content,
+                    dismissalPolicy: .after(.now.addingTimeInterval(5 * 60))
+                )
+                uploadActivity = nil
+            } else {
+                await activity.update(content)
+            }
+        }
     }
 
     // MARK: Error
@@ -1998,6 +2138,8 @@ final class TripBatchUploadCoordinator:
                 totalCount
             )
             : 0
+
+        updateUploadActivity()
     }
 
     // MARK: Next
@@ -2067,6 +2209,8 @@ final class TripBatchUploadCoordinator:
             totalCount > 0
             ? 1
             : 0
+
+        updateUploadActivity(finished: true)
 
         if failureCount == 0 {
 
