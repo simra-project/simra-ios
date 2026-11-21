@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>regions</key>
+	<array>
+		<string>Veuillez choisir</string>
+		<string>Berlin/Potsdam</string>
+		<string>Londres (inactif)</string>
+		<string>Autre</string>
+		<string>Bern</string>
+		<string>Pforzheim/Enzkreis</string>
+		<string>Augsburg</string>
+		<string>Bochum</string>
+		<string>Stuttgart</string>
+	</array>
+	<key>locales</key>
+	<array>
+		<string>UNKNOWN</string>
+		<string>Berlin</string>
+		<string>London</string>
+		<string>other</string>
+		<string>Bern</string>
+		<string>Pforzheim</string>
+		<string>Augsburg</string>
+		<string>Bochum</string>
+		<string>Stuttgart</string>
+	</array>
+	<key>ages</key>
+	<array>
+		<string>Veuillez choisir</string>
+		<string>après 2004</string>
+		<string>2000-2004</string>
+		<string>1995-1999</string>
+		<string>1990-1994</string>
+		<string>1985-1989</string>
+		<string>1980-1984</string>
+		<string>1975-1979</string>
+		<string>1970-1974</string>
+		<string>1965-1969</string>
+		<string>1960-1964</string>
+		<string>1955-1959</string>
+		<string>1950-1954</string>
+		<string>avant 1950</string>
+	</array>
+	<key>sexes</key>
+	<array>
+		<string>Veuillez choisir</string>
+		<string>homme</string>
+		<string>femme</string>
+		<string>divers</string>
+	</array>
+	<key>experiences</key>
+	<array>
+		<string>Veuillez choisir</string>
+		<string>plus de 10 ans</string>
+		<string>5 à 10 ans</string>
+		<string>2 à 4 ans</string>
+		<string>moins de 2 ans</string>
+	</array>
+	<key>bikeTypes</key>
+	<array>
+		<string>(non sélectionné)</string>
+		<string>Vélo de ville ou VTC</string>
+		<string>Vélo de route</string>
+		<string>Vélo électrique</string>
+		<string>Vélo couché</string>
+		<string>Vélo cargo</string>
+		<string>Tandem</string>
+		<string>VTT</string>
+		<string>Autre</string>
+	</array>
+	<key>positions</key>
+	<array>
+		<string>Poche de pantalon</string>
+		<string>Guidon</string>
+		<string>Poche de veste</string>
+		<string>En main</string>
+		<string>Panier / Sacoche</string>
+		<string>Sac à dos, etc.</string>
+		<string>Autre (préciser en commentaire)</string>
+	</array>
+	<key>incidents</key>
+	<array>
+		<string>Rien</string>
+		<string>Dépassement serré</string>
+		<string>Véhicule qui se gare ou démarre</string>
+		<string>Coupure de trajectoire en tournant</string>
+		<string>Véhicule arrivant en face</string>
+		<string>Véhicule collé derrière</string>
+		<string>Portière ouverte de justesse</string>
+		<string>Évitement d’obstacle (ex. : un chien)</string>
+		<string>Autre</string>
+	</array>
+</dict>
+</plist>

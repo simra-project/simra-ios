@@ -1,15 +1,4 @@
-//
-//  NewsItem.swift
-//  SimRa
-//
-//  Created by Emil Pauls on 27.08.26.
-//  Copyright © 2026 Mobile Cloud Computing an der Fakultät IV (Elektrotechnik und Informatik) der TU Berlin. All rights reserved.
-//
-
-
 import SwiftUI
-
-// MARK: - Datenmodell für News-Zeilen
 
 struct NewsItem: Identifiable {
     let id = UUID()
@@ -17,53 +6,60 @@ struct NewsItem: Identifiable {
     let isHighlighted: Bool
 }
 
-// MARK: - SwiftUI View
-
 struct NewsView: View {
     @State private var newsItems: [NewsItem] = []
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            LazyVStack(alignment: .leading, spacing: 14) {
                 if newsItems.isEmpty {
-                    Text(NSLocalizedString("No news available", comment: "No news available"))
-                        .foregroundColor(.secondary)
-                        .padding(.top, 20)
+                    ContentUnavailableView(
+                        NSLocalizedString("No news available", comment: "No news available"),
+                        systemImage: "newspaper",
+                        description: Text(NSLocalizedString("Check back later for updates from SimRa.", comment: "Empty news description"))
+                    )
+                    .padding(.top, 32)
                 } else {
                     ForEach(newsItems) { item in
-                        Text(item.text)
-                            .font(.system(size: 17, weight: .semibold))
-                            .foregroundColor(item.isHighlighted ? .red : .primary)
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
+                        HStack(alignment: .top, spacing: 12) {
+                            Image(systemName: item.isHighlighted ? "star.fill" : "circle.fill")
+                                .font(.caption)
+                                .foregroundStyle(item.isHighlighted ? .orange : .secondary)
+                                .padding(.top, 5)
+                            Text(item.text)
+                                .font(.body)
+                                .foregroundStyle(item.isHighlighted ? .primary : .secondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        .padding(14)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
                     }
                 }
             }
             .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .navigationTitle(NSLocalizedString("News", comment: "News"))
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear(perform: loadNews)
+        .task {
+            AppDelegate.shared().news.refresh()
+            loadNews()
+            AppDelegate.shared().news.seen()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .serverNewsDidUpdate)) { _ in
+            loadNews()
+        }
     }
 
-    // Parst die Zeilen aus AppDelegate.news.newsLines exakt wie im alten NewsVC
     private func loadNews() {
-        let lines = AppDelegate.shared().news.newsLines
-        guard !lines.isEmpty else { return }
-
-        var parsedItems: [NewsItem] = []
-        
-        for line in lines {
-            if line.hasPrefix("-") || line.hasPrefix("i") {
-                let text = String(line.dropFirst())
-                parsedItems.append(NewsItem(text: text, isHighlighted: false))
-            } else if line.hasPrefix("*") {
-                let text = String(line.dropFirst())
-                parsedItems.append(NewsItem(text: text, isHighlighted: true))
-            }
+        let news = AppDelegate.shared().news
+        newsItems = news.newsLines.compactMap { line in
+            guard let marker = line.first else { return nil }
+            guard ["-", "i", "*"].contains(String(marker)) else { return nil }
+            let text = String(line.dropFirst()).trimmingCharacters(in: .whitespaces)
+            guard !text.isEmpty else { return nil }
+            return NewsItem(text: text, isHighlighted: marker == "*")
         }
-        
-        self.newsItems = parsedItems
+        news.seen()
     }
 }
